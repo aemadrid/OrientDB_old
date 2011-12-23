@@ -2,8 +2,79 @@
 title: Download
 layout: default
 ---
-<div class="page-header">
-  <h1>
-    Download
-  </h1>
-</div>
+<h2>
+  <a name="Introduction" id="Introduction"></a>Introduction<a href="#Introduction" class="section_anchor"></a>
+</h2>
+<p>
+  Once you've download OrientDB follow the <a href="installation.html">Installation instructions</a>.
+</p>
+<h2>
+  <a name="Full_distribution" id="Full_distribution"></a>Full distribution<a href="#Full_distribution" class="section_anchor"></a>
+</h2>
+<h3>
+  <a name="Official_distribution" id="Official_distribution"></a>Official distribution<a href="#Official_distribution" class="section_anchor"></a>
+</h3>
+<p>
+  Download <strong>latest official release</strong> at <a href="http://code.google.com/p/orient/downloads/list" rel="nofollow">this page</a>.
+</p>
+<h3>
+  <a name="Last_stable_release" id="Last_stable_release"></a>Last stable release<a href="#Last_stable_release" class="section_anchor"></a>
+</h3>
+<p>
+  This is the suggested download if want to install it in production and need a stable release. These packages don't contain the "demo" database. To create it just run the test suite with "ant test".
+</p>
+<ul>
+  <li>Download directory <a href="http://www.orientechnologies.com/listing/m2/com/orientechnologies/orientdb/1.0rc6/" rel="nofollow">OrientDB 1.0rc6 stable</a>
+  </li>
+  <li style="list-style: none">
+    <ul>
+      <li>Direct download for <strong>ZIP</strong>: <a href="http://www.orientechnologies.com/listing/m2/com/orientechnologies/orientdb/1.0rc6/orientdb-1.0rc6-distribution.zip" rel="nofollow">http://www.orientechnologies.com/listing/m2/com/orientechnologies/orientdb/1.0rc6/orientdb-1.0rc6-distribution.zip</a>
+      </li>
+      <li>Direct download for <strong>TAR-GZ</strong>: <a href="http://www.orientechnologies.com/listing/m2/com/orientechnologies/orientdb/1.0rc6/orientdb-1.0rc6-distribution.tar.gz" rel="nofollow">http://www.orientechnologies.com/listing/m2/com/orientechnologies/orientdb/1.0rc6/orientdb-1.0rc6-distribution.tar.gz</a>
+      </li>
+      <li>Direct download for <strong>TAR-BZ2</strong>: <a href="http://www.orientechnologies.com/listing/m2/com/orientechnologies/orientdb/1.0rc6/orientdb-1.0rc6-distribution.tar.bz2" rel="nofollow">http://www.orientechnologies.com/listing/m2/com/orientechnologies/orientdb/1.0rc6/orientdb-1.0rc6-distribution.tar.bz2</a>
+      </li>
+    </ul>
+  </li>
+</ul>
+<h3>
+  <a name="Latest_Snapshot" id="Latest_Snapshot"></a>Latest Snapshot<a href="#Latest_Snapshot" class="section_anchor"></a>
+</h3>
+<p>
+  This is the suggested download if want to have and use the last version with all the new features and bugs fixed. Snapshot builds always compile and pass all the test cases. These packages don't contain the "demo" database. To create it just run the test suite with "ant test".
+</p>
+<ul>
+  <li>
+    <strong>Last SNAPSHOT</strong> directory: to get latest changes and improvements. Download the <a href="http://www.orientechnologies.com/listing/m2/com/orientechnologies/orientdb/1.0rc7-SNAPSHOT/" rel="nofollow">last snapshot</a>
+  </li>
+</ul>
+<h3>
+  <a name="From_continuous_integration" id="From_continuous_integration"></a>From continuous integration<a href="#From_continuous_integration" class="section_anchor"></a>
+</h3>
+<p>
+  This is the place where you can always find the last version automatically compiled from the SVN trunk: <a href="http://datastorm.com.ua/jenkins/job/orient-svn-maven/" rel="nofollow">http://datastorm.com.ua/jenkins/job/orient-svn-maven/</a>
+</p>
+<h2>
+  <a name="Via_MAVEN_repository" id="Via_MAVEN_repository"></a>Via MAVEN repository<a href="#Via_MAVEN_repository" class="section_anchor"></a>
+</h2>
+<p>
+  If you want to use OrientDB through Java the best and easy way is through Apache Maven. If you want to use the client/server version you need the <a href="#Full_distribution">Full distribution</a>.
+</p>
+<p>
+  Add this snippet in your pom.xml file:
+</p>
+<h3>
+  <a name="Maven_repository" id="Maven_repository"></a>Maven repository<a href="#Maven_repository" class="section_anchor"></a>
+</h3>
+<pre class="prettyprint"><span class="tag">&lt;repository&gt;</span><span class="pln"><br>&nbsp; </span><span class="tag">&lt;id&gt;</span><span class="pln">orientechnologies-repository</span><span class="tag">&lt;/id&gt;</span><span class="pln"><br>&nbsp; </span><span class="tag">&lt;name&gt;</span><span class="pln">Orient Technologies Maven2 Repository</span><span class="tag">&lt;/name&gt;</span><span class="pln"><br>&nbsp; </span><span class="tag">&lt;url&gt;</span><span class="pln">http://www.orientechnologies.com/listing/m2</span><span class="tag">&lt;/url&gt;</span><span class="pln"><br>&nbsp; </span><span class="tag">&lt;snapshots&gt;</span><span class="pln"><br>&nbsp; &nbsp; </span><span class="tag">&lt;enabled&gt;</span><span class="pln">true</span><span class="tag">&lt;/enabled&gt;</span><span class="pln"><br>&nbsp; &nbsp; </span><span class="tag">&lt;updatePolicy&gt;</span><span class="pln">always</span><span class="tag">&lt;/updatePolicy&gt;</span><span class="pln"><br>&nbsp; </span><span class="tag">&lt;/snapshots&gt;</span><span class="pln"><br></span><span class="tag">&lt;/repository&gt;</span></pre>
+<h3>
+  <a name="Dependencies" id="Dependencies"></a>Dependencies<a href="#Dependencies" class="section_anchor"></a>
+</h3>
+<h3>
+  <a name="Last_stable" id="Last_stable"></a>Last stable<a href="#Last_stable" class="section_anchor"></a>
+</h3>
+<pre class="prettyprint"><span class="tag">&lt;dependency&gt;</span><span class="pln"><br>&nbsp; </span><span class="tag">&lt;groupId&gt;</span><span class="pln">com.orientechnologies</span><span class="tag">&lt;/groupId&gt;</span><span class="pln"><br>&nbsp; </span><span class="tag">&lt;artifactId&gt;</span><span class="pln">orient-commons</span><span class="tag">&lt;/artifactId&gt;</span><span class="pln"><br>&nbsp; </span><span class="tag">&lt;version&gt;</span><span class="pln">1.0rc6</span><span class="tag">&lt;/version&gt;</span><span class="pln"><br></span><span class="tag">&lt;/dependency&gt;</span><span class="pln"><br></span><span class="tag">&lt;dependency&gt;</span><span class="pln"><br>&nbsp; </span><span class="tag">&lt;groupId&gt;</span><span class="pln">com.orientechnologies</span><span class="tag">&lt;/groupId&gt;</span><span class="pln"><br>&nbsp; </span><span class="tag">&lt;artifactId&gt;</span><span class="pln">orientdb-core</span><span class="tag">&lt;/artifactId&gt;</span><span class="pln"><br>&nbsp; </span><span class="tag">&lt;version&gt;</span><span class="pln">1.0rc6</span><span class="tag">&lt;/version&gt;</span><span class="pln"><br></span><span class="tag">&lt;/dependency&gt;</span></pre>
+<h3>
+  <a name="Last_snapshot_(compiles_and_pass_all_the_test_cases)"></a>Last snapshot (compiles and pass all the test cases)<a href="#Last_snapshot_(compiles_and_pass_all_the_test_cases)" class="section_anchor"></a>
+</h3>
+<pre class="prettyprint"><span class="tag">&lt;dependency&gt;</span><span class="pln"><br>&nbsp; </span><span class="tag">&lt;groupId&gt;</span><span class="pln">com.orientechnologies</span><span class="tag">&lt;/groupId&gt;</span><span class="pln"><br>&nbsp; </span><span class="tag">&lt;artifactId&gt;</span><span class="pln">orient-commons</span><span class="tag">&lt;/artifactId&gt;</span><span class="pln"><br>&nbsp; </span><span class="tag">&lt;version&gt;</span><span class="pln">1.0rc7-SNAPSHOT</span><span class="tag">&lt;/version&gt;</span><span class="pln"><br></span><span class="tag">&lt;/dependency&gt;</span><span class="pln"><br></span><span class="tag">&lt;dependency&gt;</span><span class="pln"><br>&nbsp; </span><span class="tag">&lt;groupId&gt;</span><span class="pln">com.orientechnologies</span><span class="tag">&lt;/groupId&gt;</span><span class="pln"><br>&nbsp; </span><span class="tag">&lt;artifactId&gt;</span><span class="pln">orientdb-core</span><span class="tag">&lt;/artifactId&gt;</span><span class="pln"><br>&nbsp; </span><span class="tag">&lt;version&gt;</span><span class="pln">1.0rc7-SNAPSHOT</span><span class="tag">&lt;/version&gt;</span><span class="pln"><br></span><span class="tag">&lt;/dependency&gt;</span></pre>

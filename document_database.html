@@ -16,7 +16,7 @@ no_page_header: true
 <p>
   The Document Database can be used in schema-less mode. Have a look at this example:
 </p>
-<pre class="prettyprint">
+<pre class="prettyprint language-java">
   // OPEN THE DATABASE
   ODatabaseDocumentTx db = new ODatabaseDocumentTx("remote:localhost/petshop").open("admin", "admin");
 
@@ -40,7 +40,7 @@ no_page_header: true
 <p>
   One of most common use cases is to reuse the database, avoiding to create it every time. It's also the typical scenario of the Web applications.
 </p>
-<pre class="prettyprint">
+<pre class="prettyprint language-java">
   // OPEN THE DATABASE
   ODatabaseDocumentTx db= ODatabaseDocumentPool.global().acquire("remote:localhost/petshop", "admin", "admin");
 
@@ -99,7 +99,7 @@ no_page_header: true
 <h4>
   <a name="In_local_filesystem" id="In_local_filesystem"></a>In local filesystem<a href="#In_local_filesystem" class="section_anchor"></a>
 </h4>
-<pre class="prettyprint">
+<pre class="prettyprint language-java">
     ODatabaseDocumentTx db = new ODatabaseDocumentTx ("local:/tmp/databases/petshop").create();
 </pre>
 <h4>
@@ -108,13 +108,13 @@ no_page_header: true
 <p>
   To create a database in a remote server you need the user/password of the remote OrientDB Server instance. By default the "root" user is created. Check this in the file config/orientdb-server-config.xml, where you will also find the password.
 </p>
-<pre class="prettyprint">
+<pre class="prettyprint language-java">
   new OServerAdmin("remote:petshop").connect("root", "kjhsdjfsdh128438ejhj").createDatabase(null).close();
 </pre>
 <h3>
   <a name="Open_a_database" id="Open_a_database"></a>Open a database<a href="#Open_a_database" class="section_anchor"></a>
 </h3>
-<pre class="prettyprint">
+<pre class="prettyprint language-java">
   ODatabaseDocumentTx db = new ODatabaseDocumentTx ("remote:localhost/petshop").open("admin", "admin");
 </pre>
 <p>
@@ -126,7 +126,7 @@ no_page_header: true
 <p>
   To get the reference to the current user use:
 </p>
-<pre class="prettyprint">
+<pre class="prettyprint language-java">
   OUser user = db.getUser();
 </pre>
 <h3>
@@ -135,7 +135,7 @@ no_page_header: true
 <p>
   Once finished remember to close the database to free precious resources.
 </p>
-<pre class="prettyprint">
+<pre class="prettyprint language-java">
   db.close();
 </pre>
 <h2>
@@ -144,7 +144,7 @@ no_page_header: true
 <p>
   ODocument instances can be saved by calling the save() method against the object itself. Note that the behaviour depends on the running transaction, if any. See <a href="transactions.html">Transactions</a>.
 </p>
-<pre class="prettyprint">
+<pre class="prettyprint language-java">
 ODocument animal = new ODocument(db, "Animal");
 animal.field( "name", "Gaudi" );
 animal.field( "location", "Madrid" );
@@ -153,27 +153,27 @@ animal.save();
 <h2>
   <a name="Browse_all_the_documents_in_a_cluster" id="Browse_all_the_documents_in_a_cluster"></a>Browse all the documents in a cluster<a href="#Browse_all_the_documents_in_a_cluster" class="section_anchor"></a>
 </h2>
-<pre class="prettyprint">
+<pre class="prettyprint language-java">
 for (ODocument doc : database.browseCluster("CityCars")) {
   System.out.println( doc.field("model") );
 </pre>
 <h2>
   <a name="Browse_all_the_records_of_a_class" id="Browse_all_the_records_of_a_class"></a>Browse all the records of a class<a href="#Browse_all_the_records_of_a_class" class="section_anchor"></a>
 </h2>
-<pre class="prettyprint">
+<pre class="prettyprint language-java">
 for (ODocument animal : database.browseClass("Animal")) {
   System.out.println( animal.field( "name" ) );
 </pre>
 <h2>
   <a name="Count_records_of_a_class" id="Count_records_of_a_class"></a>Count records of a class<a href="#Count_records_of_a_class" class="section_anchor"></a>
 </h2>
-<pre class="prettyprint">
+<pre class="prettyprint language-java">
 long cars = database.countClass("Car");
 </pre>
 <h2>
   <a name="Count_records_of_a_cluster" id="Count_records_of_a_cluster"></a>Count records of a cluster<a href="#Count_records_of_a_cluster" class="section_anchor"></a>
 </h2>
-<pre class="prettyprint">
+<pre class="prettyprint language-java">
 long cityCars = database.countCluster("CityCar");
 </pre>
 <h2>
@@ -200,7 +200,7 @@ long cityCars = database.countCluster("CityCar");
 <p>
   Example:
 </p>
-<pre class="prettyprint">
+<pre class="prettyprint language-java">
 List<ODocument> result = database.query(new ONativeSynchQuery<ODocument, OQueryContextNativeSchema<ODocument>>
    (database, "Person", new OQueryContextNativeSchema<ODocument>()) {
                         @Override
@@ -222,7 +222,7 @@ List<ODocument> result = database.query(new ONativeSynchQuery<ODocument, OQueryC
 <p>
   Example of a SQL query:
 </p>
-<pre class="prettyprint">
+<pre class="prettyprint language-java">
 List<ODocument> result = db.query(
   new OSQLSynchQuery<ODocument>("select * from Animal where ID = 10 and name like 'G%'"));
 </pre>
@@ -238,14 +238,14 @@ List<ODocument> result = db.query(
 <p>
   Example of positional parameters:
 </p>
-<pre class="prettyprint">
+<pre class="prettyprint language-java">
 OSQLSynchQuery<ODocument> query = new OSQLSynchQuery<ODocument>("select from Profile where name = ? and surname = ?");
 List<ODocument> result = database.command(query).execute("Barack", "Obama");
 </pre>
 <p>
   Example of named parameters:
 </p>
-<pre class="prettyprint">
+<pre class="prettyprint language-java">
 OSQLSynchQuery<ODocument> query = new OSQLSynchQuery<ODocument>("select from Profile where name = :name and surname = :surname");
 Map<String,Object> params = new HashMap<String,Object>();
 params.put("name", "Barack");
@@ -259,7 +259,7 @@ List<ODocument> result = database.command(query).execute(params);
 <p>
   To execute SQL commands use the <tt>command()</tt> method passing a OCommandSQL object:
 </p>
-<pre class="prettyprint">
+<pre class="prettyprint language-java">
 int recordsUpdated = db.command(
   new OCommandSQL("update Animal set sold = false")).execute();
 </pre>
@@ -272,7 +272,7 @@ int recordsUpdated = db.command(
 <p>
   Any persistent document can be updated using the Java API then calling the db.save() method, or by calling save() method against the document to synchronize the changes to the repository. Behaviour depends on the transaction begun if any. See <a href="transactions.html">Transactions</a>.
 </p>
-<pre class="prettyprint">
+<pre class="prettyprint language-java">
 animal.field( "location", "Nairobi" );
 animal.save();
 </pre>
@@ -282,7 +282,7 @@ animal.save();
 <p>
   Example of how to increase the price of all the animals by 5%:
 </p>
-<pre class="prettyprint">
+<pre class="prettyprint language-java">
 for (ODocument animal : database.browseClass("Animal")) {
   animal.field( "price", animal.field( "price" ) * 105 / 100 );
   animal.save();
@@ -294,13 +294,13 @@ for (ODocument animal : database.browseClass("Animal")) {
 <p>
   To delete a document call the delete() method against the document instance loaded. Behaviour depends by the transaction begun if any. See <a href="transactions.html">Transactions</a>.
 </p>
-<pre class="prettyprint">
+<pre class="prettyprint language-java">
 animal.delete();
 </pre>
 <p>
   Example of deletion of all the documents of class "Animal".
 </p>
-<pre class="prettyprint">
+<pre class="prettyprint language-java">
 for (ODocument animal : database.browseClass("Animal"))
   animal.delete();
 </pre>

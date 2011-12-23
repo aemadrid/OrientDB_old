@@ -1,10 +1,12 @@
-{% unless page.no_page_header %}
+{% if page.no_page_header %}
+<!-- Page Header Include EXCLUDED [{{ page.no_page_header }}] -->
+{% else %}
 <!-- Page Header Include START -->
 <div class="page-header">
   <h1>
     {{ page.title }}
-    {% if title_extra %}<small>{% page.title_extra %}</small>{% endif %}
+    {% if title_extra %}<small>{{ page.title_extra }}</small>{% endif %}
   </h1>
 </div>
 <!-- Page Header Include END -->
-{% endunless %}
+{% endif %}
