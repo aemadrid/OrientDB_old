@@ -33,12 +33,14 @@ body {
 }
 
 /* Styles you shouldn't keep as they are for displaying this base example only */
+/*
 .content .span10,
 .content .span4 {
   min-height: 500px;
 }
+*/
 /* Give a quick and non-cross-browser friendly divider */
-.content .span4 {
+.content .sidebar {
   margin-left: 0;
   padding-left: 19px;
   border-left: 1px solid #eee;
@@ -46,4 +48,42 @@ body {
 
 .topbar .btn {
   border: 0;
+}
+
+/* Topbar Logo */
+div.topbar a.brand {
+  background:url("../images/orient_db_topbar.png") 20px 0;
+  background-repeat:no-repeat;
+  width:96px;
+  height:41px;
+  padding-bottom: 0;
+  padding-top: 0;
+}
+div.topbar a.brand span {
+  display:none;
+}
+/* Home */
+#home-title-row {
+  height: 220px;
+  margin-bottom: 14px;
+}
+#home-title-row div {
+  position: absolute;
+  left: 280px;
+  width: 600px;
+}
+#home-title-row div h1 {
+  background:url("../images/orient_db.png") 0 0;
+  background-repeat:no-repeat;
+  width:540px;
+  height:110px;
+}
+#home-title-row div h1 span{
+  display: none;
+}
+
+#logo_sun {
+	position: relative;
+	z-index: 10;
+	top: 0;
 }
