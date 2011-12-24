@@ -1,0 +1,207 @@
+---
+title: Gremlin
+layout: default
+---
+
+ <p><img src="http://github.com/tinkerpop/gremlin/raw/master/doc/images/gremlin-logo.png"></p>
+<ul>
+<li><a href="#Introduction">Introduction</a></li>
+<li><a href="#Get_Started">Get Started</a></li>
+<li><a href="#Open_the_graph_database">Open the graph database</a></li>
+<ul>
+<li><a href="#Working_with_local_database">Working with local database</a></li>
+<li><a href="#Working_with_remote_database">Working with remote database</a></li>
+<li><a href="#Working_with_in-memory_database">Working with in-memory database</a></li>
+<li><a href="#Use_the_security">Use the security</a></li>
+</ul>
+<li><a href="#Create_a_new_Vertex">Create a new Vertex</a></li>
+<li><a href="#Create_an_edge">Create an edge</a></li>
+<li><a href="#Retrieve_a_vertex">Retrieve a vertex</a></li>
+<ul><li><a href="#Get_all_the_vertices">Get all the vertices</a></li></ul>
+<li><a href="#Retrieve_an_edge">Retrieve an edge</a></li>
+<ul><li><a href="#Get_all_the_edges">Get all the edges</a></li></ul>
+<li><a href="#Traversal">Traversal</a></li>
+<ul>
+<li><a href="#Basic_Traversal">Basic Traversal</a></li>
+<li><a href="#Filter_results">Filter results</a></li>
+</ul>
+<li><a href="#Close_the_database">Close the database</a></li>
+<li><a href="#Create_complex_paths">Create complex paths</a></li>
+<li><a href="#Passing_input_parameters">Passing input parameters</a></li>
+<li><a href="#Declaring_output">Declaring output</a></li>
+<li><a href="#Conclusions">Conclusions</a></li>
+</ul><h1>
+<a name="Introduction"></a>Introduction<a href="#Introduction" class="section_anchor"></a>
+</h1>
+<p>Gremlin is a language specialized to work with <a href="https://github.com/tinkerpop/gremlin/wiki/Defining-a-Property-Graph" rel="nofollow">Property Graphs</a>. Gremlin is part of <a href="http://www.tinkerpop.com" rel="nofollow">TinkerPop</a> Open Source products. For more information: </p>
+<ul>
+<li>
+<a href="https://github.com/tinkerpop/gremlin/wiki" rel="nofollow">Gremlin WiKi</a> </li>
+<li>
+<a href="https://github.com/tinkerpop/blueprints/wiki/OrientDB-Implementation" rel="nofollow">OrientDB adapter to use it inside Gremlin</a> </li>
+<li>
+<a href="graph_database_tinkerpop.html">OrientDB implementation of TinkerPop Blueprints</a> </li>
+</ul><p>To know more about Gremlin and <a href="http://www.tinkerpop.com" rel="nofollow">TinkerPop</a>'s products subscribe to the <a href="http://groups.google.com/forum/#!forum/gremlin-users" rel="nofollow">Gremlin Group</a>. </p>
+<h1>
+<a name="Get_Started"></a>Get Started<a href="#Get_Started" class="section_anchor"></a>
+</h1>
+<p>Launch the <strong>gremlin.sh</strong> (or gremlin.bat on Windows OS) console script located in <strong>bin</strong> directory: </p>
+<pre class="prettyprint">&gt; gremlin.bat
+
+         \,,,/
+         (o o)
+-----oOOo-(_)-oOOo-----</pre>
+<h1>
+<a name="Open_the_graph_database"></a>Open the graph database<a href="#Open_the_graph_database" class="section_anchor"></a>
+</h1>
+<p>Before to play with Gremlin you need a valid <strong><a href="graph_database_tinkerpop.html#Work_with_GraphDB">OrientGraph</a></strong> instance that points to a OrientDB database. To know all the database types look at <a href="concepts.html#Storage">Storage types</a>. </p>
+<p>When you're working with a local or memory database if the database not exists it's created automatically. Using the remote connection you need to create the database on the target server before to use it. This is due to security restrictions. </p>
+<p>Once created the <strong><a href="graph_database_tinkerpop.html#Work_with_GraphDB">OrientGraph</a></strong> instance with a proper URL is necessary to assign it to a variable. Gremlin is written in Groovy, so it supports all the Groovy syntax and both can be mixed to create very powerful scripts! </p>
+<p>Example with a local database (see below for more information about it): </p>
+<pre class="prettyprint">gremlin&gt; g = new OrientGraph("local:/home/gremlin/db/demo");
+==&gt;orientgraph[local:/home/gremlin/db/demo]</pre>
+<p>Some useful links: </p>
+<ul>
+<li>
+<a href="https://github.com/tinkerpop/gremlin/wiki/Gremlin-Methods" rel="nofollow">All Gremlin methods</a> </li>
+<li>
+<a href="https://github.com/tinkerpop/gremlin/wiki/Gremlin-Steps" rel="nofollow">All available steps</a> </li>
+</ul><h2>
+<a name="Working_with_local_database"></a>Working with local database<a href="#Working_with_local_database" class="section_anchor"></a>
+</h2>
+<p>This is the most used mode. The console opens and locks the database for exclusive use. Doesn't require to start a OrientDB Server. </p>
+<pre class="prettyprint">gremlin&gt; g = new OrientGraph("local:/home/gremlin/db/demo");
+==&gt;orientgraph[local:/home/gremlin/db/demo]</pre>
+<h2>
+<a name="Working_with_remote_database"></a>Working with remote database<a href="#Working_with_remote_database" class="section_anchor"></a>
+</h2>
+<p>Open a database on a remote server. Assure the server is up and running. To start the server just launch <strong>server.sh</strong> (or server.bat on Windows OS) script. For more information look at <a href="db_server.html">OrientDB Server</a> </p>
+<pre class="prettyprint">gremlin&gt; g = new OrientGraph("remote:localhost/demo");
+==&gt;orientgraph[remote:localhost/demo]</pre>
+<h2>
+<a name="Working_with_in-memory_database"></a>Working with in-memory database<a href="#Working_with_in-memory_database" class="section_anchor"></a>
+</h2>
+<p>In this mode the database is volatile and all the changes will be not persistent. Use this in cluster configuration (the database life is assured by the cluster itself) or just for test. </p>
+<pre class="prettyprint">gremlin&gt; g = new OrientGraph("memory:demo");
+==&gt;orientgraph[memory:demo]</pre>
+<h2>
+<a name="Use_the_security"></a>Use the security<a href="#Use_the_security" class="section_anchor"></a>
+</h2>
+<p>OrientDB supports the security by creating multiple users and roles to associate privileges. To know more look at <a href="security.html">Security</a>. To open the graph database with a different user than default pass user and password as additional parameters: </p>
+<pre class="prettyprint">gremlin&gt; g = new OrientGraph("memory:demo", "reader", "reader");
+==&gt;orientgraph[memory:demo]</pre>
+<h1>
+<a name="Create_a_new_Vertex"></a>Create a new Vertex<a href="#Create_a_new_Vertex" class="section_anchor"></a>
+</h1>
+<p>To create a new vertex use the <strong>addVertex()</strong> method. The vertex will be created and the unique id will be displayed as return value. </p>
+<pre class="prettyprint">g.addVertex();
+==&gt;v[#5:0]</pre>
+<h1>
+<a name="Create_an_edge"></a>Create an edge<a href="#Create_an_edge" class="section_anchor"></a>
+</h1>
+<p>To create a new edge between two vertices use the <strong>addEdge(v1, v2, label)</strong> method. The edge will be created with the label specified. </p>
+<p>In the example below 2 vertices are created and assigned to a variable (Gremlin is based on Groovy), then an edge is created between them. </p>
+<pre class="prettyprint">gremlin&gt; v1 = g.addVertex();
+==&gt;v[#5:0]
+
+gremlin&gt; v2 = g.addVertex();
+==&gt;v[#5:1]
+
+gremlin&gt; e = g.addEdge(v1, v2, 'friend');
+==&gt;e[#6:0][#5:0-friend-&gt;#5:1]</pre>
+<h1>
+<a name="Retrieve_a_vertex"></a>Retrieve a vertex<a href="#Retrieve_a_vertex" class="section_anchor"></a>
+</h1>
+<p>To retrieve a vertex by its ID, use the <strong>v(id)</strong> method passing the <a href="concepts.html#RecordId">RecordId</a> as argument (with or without the prefix '#'). This example retrieves the first vertex created in the upon example. </p>
+<pre class="prettyprint">gremlin&gt; g.v('5:0')
+==&gt;v[#5:0]</pre>
+<h2>
+<a name="Get_all_the_vertices"></a>Get all the vertices<a href="#Get_all_the_vertices" class="section_anchor"></a>
+</h2>
+<p>To retrieve all the vertices in the opened graph use <strong>.V</strong> (V in upper-case): </p>
+<pre class="prettyprint">gremlin&gt; g.V
+==&gt;v[#5:0]
+==&gt;v[#5:1]</pre>
+<h1>
+<a name="Retrieve_an_edge"></a>Retrieve an edge<a href="#Retrieve_an_edge" class="section_anchor"></a>
+</h1>
+<p>Retrieving an edge it's very similar to Retrieve_a_vertex, use the <strong>e(id)</strong> method passing the <a href="concepts.html#RecordId">RecordId</a> as argument (with or without the prefix '#'). This example retrieves the first edge created in the upon example. </p>
+<pre class="prettyprint">gremlin&gt; g.e('6:0')
+==&gt;e[#6:0][#5:0-friend-&gt;#5:1]</pre>
+<h2>
+<a name="Get_all_the_edges"></a>Get all the edges<a href="#Get_all_the_edges" class="section_anchor"></a>
+</h2>
+<p>To retrieve all the edges in the opened graph use <strong>.E</strong> (E in upper-case): </p>
+<pre class="prettyprint">gremlin&gt; g.E
+==&gt;e[#6:0][#5:0-friend-&gt;#5:1]</pre>
+<h1>
+<a name="Traversal"></a>Traversal<a href="#Traversal" class="section_anchor"></a>
+</h1>
+<p>The power of Gremlin is on traversal. Once you have a graph loaded in your database you can traverse it in many ways. </p>
+<h2>
+<a name="Basic_Traversal"></a>Basic Traversal<a href="#Basic_Traversal" class="section_anchor"></a>
+</h2>
+<p>To display all the outgoing edges of the first vertex just created postpone the <strong>.outE</strong> at the vertex. Example: </p>
+<pre class="prettyprint">gremlin&gt; v1.outE
+==&gt;e[#6:0][#5:0-friend-&gt;#5:1]</pre>
+<p>And to display all the incoming edges of the second vertex created in the previous examples postpone the <strong>.inE</strong> at the vertex. Example: </p>
+<pre class="prettyprint">gremlin&gt; v2.inE
+==&gt;e[#6:0][#5:0-friend-&gt;#5:1]</pre>
+<p>In this case the edge is the same because it's the outgoing of 5:0 and the goes up to 5:1 where is the incoming edge. </p>
+<p>For more information look at the <a href="https://github.com/tinkerpop/gremlin/wiki/Basic-Graph-Traversals" rel="nofollow">Basic Traversal with Gremlin</a>. </p>
+<h2>
+<a name="Filter_results"></a>Filter results<a href="#Filter_results" class="section_anchor"></a>
+</h2>
+<p>This examples returns all the outgoing edges of all the vertices with label equals to 'friend'. </p>
+<pre class="prettyprint">gremlin&gt; g.V.outE{it['label']=='friend'}
+==&gt;e[#6:0][#5:0-friend-&gt;#5:1]</pre>
+<h1>
+<a name="Close_the_database"></a>Close the database<a href="#Close_the_database" class="section_anchor"></a>
+</h1>
+<p>To close a graph use the <strong>shutdown()</strong> method: </p>
+<pre class="prettyprint">gremlin&gt; g.shutdown()
+==&gt;null</pre>
+<p>This is not strictly necessary because OrientDB always closes the database when the Gremlin console quits. </p>
+<h1>
+<a name="Create_complex_paths"></a>Create complex paths<a href="#Create_complex_paths" class="section_anchor"></a>
+</h1>
+<p>Gremlin allows to concatenate expressions to create more complex traversal in a single line: </p>
+<pre class="prettyprint">v1.outE.inV</pre>
+<p>Of course this could be much more complex. Below an examples with the graph taken from the official documentation: </p>
+<pre class="prettyprint">g = new OrientGraph('memory:test')
+
+// calculate basic collaborative filtering for vertex 1
+m = [:]
+g.v(1).out('likes').in('likes').out('likes').groupCount(m)
+m.sort{a,b -&gt; a.value &lt;=&gt; b.value}
+
+// calculate the primary eigenvector (eigenvector centrality) of a graph
+m = [:]; c = 0;
+g.V.out.groupCount(m).loop(2){c++ &lt; 1000}
+m.sort{a,b -&gt; a.value &lt;=&gt; b.value}</pre>
+<h1>
+<a name="Passing_input_parameters"></a>Passing input parameters<a href="#Passing_input_parameters" class="section_anchor"></a>
+</h1>
+<p>Some Gremlin expressions require declaration of input parameters to be run. This is the case, for example, of bound variables, as described in <a href="https://github.com/tinkerpop/gremlin/wiki/Using-Gremlin-through-Java" rel="nofollow">JSR223 Gremlin Script Engine</a>. OrientDB has enabled a mechanism to pass variables to a Gremlin pipeline declared in a command as described below: </p>
+<pre class="prettyprint">Map&lt;String, Object&gt; params = new HashMap&lt;String, Object&gt;();
+params.put("map1", new HashMap());
+params.put("map2", new HashMap());
+db.command(new OCommandSQL("select gremlin('
+current.as('id').outE.label.groupCount(map1).optional('id').sideEffect{map2=it.map();map2+=map1;}
+')")).execute(params);</pre>
+<h1>
+<a name="Declaring_output"></a>Declaring output<a href="#Declaring_output" class="section_anchor"></a>
+</h1>
+<p>In the simplest case, the output of the last step (<a href="https://github.com/tinkerpop/gremlin/wiki/Gremlin-Steps" rel="nofollow">https://github.com/tinkerpop/gremlin/wiki/Gremlin-Steps</a>) in the Gremlin pipeline corresponds to the output of the overall Gremlin expression. However, it is possible to instruct the Gremlin engine to consider any of the input variables as output. This can be declared as: </p>
+<pre class="prettyprint">Map&lt;String, Object&gt; params = new HashMap&lt;String, Object&gt;();
+params.put("map1", new HashMap());
+params.put("map2", new HashMap());
+params.put("output", "map2");
+db.command(new OCommandSQL("select gremlin('
+current.as('id').outE.label.groupCount(map1).optional('id').sideEffect{map2=it.map();map2+=map1;}
+')")).execute(params);</pre>
+<p>There are more possibilities to define the output in Gremlin pipelines so this mechanism is expected to be extended in the future. Please, contact OrientDB mailing list to discuss customized outputs. </p>
+<h1>
+<a name="Conclusions"></a>Conclusions<a href="#Conclusions" class="section_anchor"></a>
+</h1>
+<p>Now you learned how to use Gremlin on top of OrientDB the best place to go in deep with this powerful language is the <a href="https://github.com/tinkerpop/gremlin/wiki" rel="nofollow">Gremlin WiKi</a>. </p>

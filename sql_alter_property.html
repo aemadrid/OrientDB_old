@@ -1,0 +1,53 @@
+---
+title: Alter Property
+layout: default
+---
+
+ <h1>
+<a name="Alter_Property"></a>Alter Property<a href="#Alter_Property" class="section_anchor"></a>
+</h1>
+<p>The <strong>SQL Alter Property</strong> command alters a class's property in the schema. </p>
+<h2>
+<a name="Syntax"></a>Syntax<a href="#Syntax" class="section_anchor"></a>
+</h2>
+<p><tt>ALTER PROPERTY &lt;class&gt;.&lt;property&gt; &lt;attribute-name&gt; &lt;attribute-value&gt;</tt> </p>
+<p>Where: </p>
+<ul>
+<li>
+<strong>class</strong> is the class owner of the property to change </li>
+<li>
+<strong>property</strong> is the property name to change </li>
+<li>
+<strong>attribute-name</strong>, is the attribute name to alter </li>
+<li>
+<strong>attribute-value</strong>, is the new attribute value to set </li>
+</ul><p>Supported attribute names are: </p>
+<ul>
+<li>
+<strong>LINKEDCLASS</strong>, the linked class name. Accepts a string as value </li>
+<li>
+<strong>LINKEDTYPE</strong>, the linked type name between those supported: Boolean, Integer, Short, Long, Float, Double, Datetime, String, Binary, Embedded, EmbeddedList, EmbeddedSet, EmbeddedMap, Link, LinkList, LinkSet, LinkMap, Byte, Transient, Date. Accepts a string as value </li>
+<li>
+<strong>MIN</strong>, the minimum value as constraint. Accepts strings, numbers or dates as value </li>
+<li>
+<strong>MANDATORY</strong>, true if the property is mandatory. Accepts "true" or "false" </li>
+<li>
+<strong>MAX</strong>, the maximum value as constraint. Accepts strings, numbers or dates as value </li>
+<li>
+<strong>NAME</strong>, the class name. Accepts a string as value </li>
+<li>
+<strong>NOTNULL</strong>, the property can't be null. Accepts "true" or "false" </li>
+<li>
+<strong>REGEXP</strong> the regular expression as constraint. Accepts a string as value </li>
+<li>
+<strong>TYPE</strong>, the type between those supported: Boolean, Integer, Short, Long, Float, Double, Datetime, String, Binary, Embedded, EmbeddedList, EmbeddedSet, EmbeddedMap, Link, LinkList, LinkSet, LinkMap, Byte, Transient, Date. Accepts a string as value </li>
+</ul><h2>
+<a name="Examples"></a>Examples<a href="#Examples" class="section_anchor"></a>
+</h2>
+<p>Change the name of the property 'age' in class 'Account' in 'born': </p>
+<p><tt>ALTER PROPERTY Account.age NAME born</tt> </p>
+<p>Set a property as mandatory: </p>
+<p><tt>ALTER PROPERTY Account.age MANDATORY true</tt> </p>
+<p>To create a property use the <a href="sql_create_property.html">Create Property</a> command, to remove a property use the <a href="sql_remove_property.html">Drop Property</a> command. </p>
+<p>To know more about other SQL commands look at <a href="sql.html">SQL commands</a>. </p>
+<p>This is a command of the Orient console. To know all the commands go to <a href="console_commands.html">Console commands</a>. </p>

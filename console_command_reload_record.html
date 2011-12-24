@@ -1,0 +1,29 @@
+---
+title: Reload Record
+layout: default
+---
+
+ <h1>
+<a name="Reload_record"></a>Reload record<a href="#Reload_record" class="section_anchor"></a>
+</h1>
+<p>Reloads a record by its record-id from the current database ignoring the cache. This is useful when external applications change the record and you need to see latest update. </p>
+<h2>
+<a name="Syntax"></a>Syntax<a href="#Syntax" class="section_anchor"></a>
+</h2>
+<p><tt>reload record &lt;record-id&gt;</tt> </p>
+<p>Where: </p>
+<ul><li>record-id      The unique Record Id of the record to reload. If you don't have the Record Id execute a query first </li></ul><h2>
+<a name="Example"></a>Example<a href="#Example" class="section_anchor"></a>
+</h2>
+<pre class="prettyprint">&gt; reload record 5:5
+
+--------------------------------------------------
+Class: Person   id: 5:5   v.0
+--------------------------------------------------
+              parent : Person@5:4{parent:null,children:[Person@5:5, Person@5:6],name:Barack,surname:Obama,city:City@-6:2}
+            children : null                
+                name : Malia Ann           
+             surname : Obama               
+                city : null                
+--------------------------------------------------</pre>
+<p>This is a command of the Orient console. To know all the commands go to <a href="console_commands.html">Console commands</a>. </p>

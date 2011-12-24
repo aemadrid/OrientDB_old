@@ -3,3 +3,7 @@
 _site
 .DS_Store
 .rvmrc
+_generated
+_site/_generated
+_original
+_site/_original

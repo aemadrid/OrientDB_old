@@ -1,0 +1,33 @@
+---
+title: Dictionary Remove
+layout: default
+---
+
+ <h1>
+<a name="Dictionary_remove"></a>Dictionary remove<a href="#Dictionary_remove" class="section_anchor"></a>
+</h1>
+<p>Remove the association from the database dictionary.  </p>
+<h2>
+<a name="Syntax"></a>Syntax<a href="#Syntax" class="section_anchor"></a>
+</h2>
+<p><tt>dictionary remove &lt;key&gt;</tt> </p>
+<p>Where: </p>
+<ul><li>key            The key to remove </li></ul><h2>
+<a name="Example"></a>Example<a href="#Example" class="section_anchor"></a>
+</h2>
+<pre class="prettyprint">&gt; dictionary remove obama
+
+Entry removed from the dictionary. Last value of entry was: 
+--------------------------------------------------
+Class: Person   id: 5:4   v.1
+--------------------------------------------------
+              parent : null
+            children : [Person@5:5{parent:Person@5:4,children:null,name:Malia Ann,surname:Obama,city:null}, Person@5:6{parent:Person@5:4,children:null
+,name:Natasha,surname:Obama,city:null}]
+                name : Barack
+             surname : Obama
+                city : City@-6:2{name:Honolulu}
+--------------------------------------------------</pre>
+<p>To know all the keys stored in the database dictionary use the <a href="console_command_dictionary_keys.html">dictionary keys</a> command. </p>
+<p>For complete index (and dictionary) guide look at <a href="indexes.html">Index guide</a>. </p>
+<p>This is a command of the Orient console. To know all the commands go to <a href="console_commands.html">Console commands</a>. </p>

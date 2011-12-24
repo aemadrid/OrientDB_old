@@ -1,0 +1,42 @@
+---
+title: Clusters
+layout: default
+---
+
+ <h1>
+<a name="Clusters"></a>Clusters<a href="#Clusters" class="section_anchor"></a>
+</h1>
+<p>Display all the clusters configured in the current database. </p>
+<h2>
+<a name="Syntax"></a>Syntax<a href="#Syntax" class="section_anchor"></a>
+</h2>
+<p><tt>clusters</tt> </p>
+<h2>
+<a name="Example"></a>Example<a href="#Example" class="section_anchor"></a>
+</h2>
+<pre class="prettyprint">&gt; clusters
+
+CLUSTERS:
+--------------------+------+--------------------+-----------+
+NAME                |  ID  | TYPE               | ELEMENTS  |
+--------------------+------+--------------------+-----------+
+metadata            |     0|Physical            |        11 |
+index               |     1|Physical            |         0 |
+default             |     2|Physical            |       779 |
+csv                 |     3|Physical            |      1000 |
+binary              |     4|Physical            |      1001 |
+person              |     5|Physical            |         7 |
+animal              |     6|Physical            |         5 |
+animalrace          |    -2|Logical             |         0 |
+animaltype          |    -3|Logical             |         1 |
+orderitem           |    -4|Logical             |         0 |
+order               |    -5|Logical             |         0 |
+city                |    -6|Logical             |         3 |
+--------------------+------+--------------------+-----------+
+TOTAL                                                  2807 |
+------------------------------------------------------------+</pre>
+<h2>
+<a name="See_also"></a>See also<a href="#See_also" class="section_anchor"></a>
+</h2>
+<p>To create a new cluster in the current database use the command <a href="console_command_create_cluster.html">create cluster</a>. </p>
+<p>This is a command of the Orient console. To know all the commands go to <a href="console_commands.html">Console commands</a>. </p>

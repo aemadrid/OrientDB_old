@@ -1,0 +1,21 @@
+---
+title: TinkerPop Blueprints Graph Database performance tuning
+layout: default
+---
+
+ <p></p>
+<ul>
+<li><a href="#Massive_Insertion">Massive Insertion</a></li>
+<li><a href="#Transaction_mode">Transaction mode</a></li>
+</ul><p>This guide is specific for the <a href="graph_database_tinkerpop.html">TinkerPop Blueprints Graph Database</a>. Please be sure to read the generic guide to the <a href="performance_tuning.html">Performance Tuning</a>. </p>
+<h1>
+<a name="Massive_Insertion"></a>Massive Insertion<a href="#Massive_Insertion" class="section_anchor"></a>
+</h1>
+<p>See <a href="performance_tuning.html#Massive_Insertion">Generic improvement on massive insertion</a>. </p>
+<h1>
+<a name="Transaction_mode"></a>Transaction mode<a href="#Transaction_mode" class="section_anchor"></a>
+</h1>
+<p>By default Blueprints API works with the Transaction mode setted to AUTOMATIC that means every single operation begins and commits a transaction. This could be VERY expensive and unnecessary. By setting the property <strong>blueprints.graph.txMode</strong> to 1 the default Transaction mode is MANUAL: every single operation will be stored immediately to the disk avoiding the more expensive Transaction context. Example: </p>
+<pre class="prettyprint">java ... -Dblueprints.graph.txMode=1 ...</pre>
+<p>or </p>
+<pre class="prettyprint">OGlobalConfiguration.BLUEPRINTS_TX_MODE.setValue(1);</pre>

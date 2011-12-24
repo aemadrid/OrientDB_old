@@ -1,0 +1,210 @@
+---
+title: Supported types
+layout: default
+---
+
+ <h1>
+<a name="Introduction"></a>Introduction<a href="#Introduction" class="section_anchor"></a>
+</h1>
+<p>OrientDB supports several types natively. Below the complete table </p>
+<p></p>
+<table class="wikitable">
+<tr>
+<td style="border: 1px solid #ccc; padding: 5px;"> <strong>Type</strong> </td>
+<td style="border: 1px solid #ccc; padding: 5px;"> <strong>Description</strong> </td>
+<td style="border: 1px solid #ccc; padding: 5px;"> <strong>Java type</strong> </td>
+<td style="border: 1px solid #ccc; padding: 5px;"> <strong>Size in storage (in bytes)</strong> </td>
+<td style="border: 1px solid #ccc; padding: 5px;"> <strong>Minimum</strong> </td>
+<td style="border: 1px solid #ccc; padding: 5px;"> <strong>Maximum</strong> </td>
+<td style="border: 1px solid #ccc; padding: 5px;"> <strong>Auto-conversion from/to</strong> </td>
+<td style="border: 1px solid #ccc; padding: 5px;"> <strong>JSON format</strong> </td>
+</tr>
+<tr>
+<td style="border: 1px solid #ccc; padding: 5px;"> String </td>
+<td style="border: 1px solid #ccc; padding: 5px;"> Any string as alphanumeric sequence of chars </td>
+<td style="border: 1px solid #ccc; padding: 5px;"> java.lang.String </td>
+<td style="border: 1px solid #ccc; padding: 5px;"> variable 0-100,000 </td>
+<td style="border: 1px solid #ccc; padding: 5px;"> - </td>
+<td style="border: 1px solid #ccc; padding: 5px;"> - </td>
+<td style="border: 1px solid #ccc; padding: 5px;"> - </td>
+<td style="border: 1px solid #ccc; padding: 5px;"> Test </td>
+</tr>
+<tr>
+<td style="border: 1px solid #ccc; padding: 5px;"> Byte </td>
+<td style="border: 1px solid #ccc; padding: 5px;"> Single byte. Useful to store small integers with range -128 to +127 </td>
+<td style="border: 1px solid #ccc; padding: 5px;"> java.lang.Byte or byte </td>
+<td style="border: 1px solid #ccc; padding: 5px;"> variable 0-4 </td>
+<td style="border: 1px solid #ccc; padding: 5px;"> -128 </td>
+<td style="border: 1px solid #ccc; padding: 5px;"> +127 </td>
+<td style="border: 1px solid #ccc; padding: 5px;"> Any Number, String </td>
+<td style="border: 1px solid #ccc; padding: 5px;"> 0 </td>
+</tr>
+<tr>
+<td style="border: 1px solid #ccc; padding: 5px;"> Short </td>
+<td style="border: 1px solid #ccc; padding: 5px;"> Small integers with range -32,768 to 32,767 </td>
+<td style="border: 1px solid #ccc; padding: 5px;"> java.lang.Short or short </td>
+<td style="border: 1px solid #ccc; padding: 5px;"> variable 0-6 (it's transformed in String) </td>
+<td style="border: 1px solid #ccc; padding: 5px;"> -32,768 </td>
+<td style="border: 1px solid #ccc; padding: 5px;"> 32,767 </td>
+<td style="border: 1px solid #ccc; padding: 5px;"> Any Number, String </td>
+<td style="border: 1px solid #ccc; padding: 5px;"> 10000 </td>
+</tr>
+<tr>
+<td style="border: 1px solid #ccc; padding: 5px;"> Integer </td>
+<td style="border: 1px solid #ccc; padding: 5px;"> Integers with range -2,147,483,648 to +2,147,483,647 </td>
+<td style="border: 1px solid #ccc; padding: 5px;"> java.lang.Integer or int </td>
+<td style="border: 1px solid #ccc; padding: 5px;"> variable 0-11 (it's transformed in String) </td>
+<td style="border: 1px solid #ccc; padding: 5px;"> -2,147,483,648 </td>
+<td style="border: 1px solid #ccc; padding: 5px;"> +2,147,483,647 </td>
+<td style="border: 1px solid #ccc; padding: 5px;"> Any Number, String </td>
+<td style="border: 1px solid #ccc; padding: 5px;"> 1000000 </td>
+</tr>
+<tr>
+<td style="border: 1px solid #ccc; padding: 5px;"> Long </td>
+<td style="border: 1px solid #ccc; padding: 5px;"> Big integers with range -9,223,372,036,854,775,808 to +9,223,372,036,854,775,807 </td>
+<td style="border: 1px solid #ccc; padding: 5px;"> java.lang.Long or long </td>
+<td style="border: 1px solid #ccc; padding: 5px;"> variable 0-20 (it's transformed in String) </td>
+<td style="border: 1px solid #ccc; padding: 5px;"> -9,223,372,036,854,775,808 </td>
+<td style="border: 1px solid #ccc; padding: 5px;"> +9,223,372,036,854,775,807 </td>
+<td style="border: 1px solid #ccc; padding: 5px;"> Any Number, String </td>
+<td style="border: 1px solid #ccc; padding: 5px;"> 1000000000 </td>
+</tr>
+<tr>
+<td style="border: 1px solid #ccc; padding: 5px;"> Float </td>
+<td style="border: 1px solid #ccc; padding: 5px;"> Decimal numbers </td>
+<td style="border: 1px solid #ccc; padding: 5px;"> java.lang.Float or float </td>
+<td style="border: 1px solid #ccc; padding: 5px;"> variable 0-? (it's transformed in String) </td>
+<td style="border: 1px solid #ccc; padding: 5px;"> 1.4e-45f </td>
+<td style="border: 1px solid #ccc; padding: 5px;"> 3.4028235e+38f </td>
+<td style="border: 1px solid #ccc; padding: 5px;"> Any Number, String </td>
+<td style="border: 1px solid #ccc; padding: 5px;"> 100000,33333 </td>
+</tr>
+<tr>
+<td style="border: 1px solid #ccc; padding: 5px;"> Double </td>
+<td style="border: 1px solid #ccc; padding: 5px;"> Decimal numbers with high precision </td>
+<td style="border: 1px solid #ccc; padding: 5px;"> java.lang.Double or double </td>
+<td style="border: 1px solid #ccc; padding: 5px;"> variable 0-? (it's transformed in String) </td>
+<td style="border: 1px solid #ccc; padding: 5px;"> 4.9e-324 </td>
+<td style="border: 1px solid #ccc; padding: 5px;"> 1.7976931348623157e+308 </td>
+<td style="border: 1px solid #ccc; padding: 5px;"> Any Number, String </td>
+<td style="border: 1px solid #ccc; padding: 5px;"> 10000000000,33333333 </td>
+</tr>
+<tr>
+<td style="border: 1px solid #ccc; padding: 5px;"> Boolean </td>
+<td style="border: 1px solid #ccc; padding: 5px;"> Handles only the values <i>True</i> or <i>False</i> </td>
+<td style="border: 1px solid #ccc; padding: 5px;"> java.lang.Boolean or boolean </td>
+<td style="border: 1px solid #ccc; padding: 5px;"> 1 </td>
+<td style="border: 1px solid #ccc; padding: 5px;"> 0 </td>
+<td style="border: 1px solid #ccc; padding: 5px;"> 1 </td>
+<td style="border: 1px solid #ccc; padding: 5px;"> String </td>
+<td style="border: 1px solid #ccc; padding: 5px;"> true </td>
+</tr>
+<tr>
+<td style="border: 1px solid #ccc; padding: 5px;"> Date </td>
+<td style="border: 1px solid #ccc; padding: 5px;"> Any date as year, month and day </td>
+<td style="border: 1px solid #ccc; padding: 5px;"> java.util.Date </td>
+<td style="border: 1px solid #ccc; padding: 5px;"> variable  </td>
+<td style="border: 1px solid #ccc; padding: 5px;"> - </td>
+<td style="border: 1px solid #ccc; padding: 5px;"> - </td>
+<td style="border: 1px solid #ccc; padding: 5px;"> Date, Long, String </td>
+<td style="border: 1px solid #ccc; padding: 5px;"> - </td>
+</tr>
+<tr>
+<td style="border: 1px solid #ccc; padding: 5px;"> Datetime </td>
+<td style="border: 1px solid #ccc; padding: 5px;"> Any date with the precision up to milliseconds </td>
+<td style="border: 1px solid #ccc; padding: 5px;"> java.util.Date </td>
+<td style="border: 1px solid #ccc; padding: 5px;"> variable  </td>
+<td style="border: 1px solid #ccc; padding: 5px;"> - </td>
+<td style="border: 1px solid #ccc; padding: 5px;"> - </td>
+<td style="border: 1px solid #ccc; padding: 5px;"> Date, Long, String </td>
+</tr>
+<tr>
+<td style="border: 1px solid #ccc; padding: 5px;"> Binary </td>
+<td style="border: 1px solid #ccc; padding: 5px;"> Can contain any value as byte array </td>
+<td style="border: 1px solid #ccc; padding: 5px;"> <tt>byte[]</tt> </td>
+<td style="border: 1px solid #ccc; padding: 5px;"> variable </td>
+<td style="border: 1px solid #ccc; padding: 5px;"> 0 </td>
+<td style="border: 1px solid #ccc; padding: 5px;"> 2,147,483,647 </td>
+<td style="border: 1px solid #ccc; padding: 5px;"> String </td>
+<td style="border: 1px solid #ccc; padding: 5px;"> </td>
+</tr>
+<tr>
+<td style="border: 1px solid #ccc; padding: 5px;"> Link </td>
+<td style="border: 1px solid #ccc; padding: 5px;"> Link to another Record. It's a common <a href="concepts.html#One-to-One">One-to-One relationship</a>. Only the <a href="concepts.html#RecordID">RecordId</a> is stored </td>
+<td style="border: 1px solid #ccc; padding: 5px;"> <tt>ORecord&lt;?&gt; instance</tt> </td>
+<td style="border: 1px solid #ccc; padding: 5px;"> 0-24 variable (it's transformed in String) </td>
+<td style="border: 1px solid #ccc; padding: 5px;"> -1:-1 </td>
+<td style="border: 1px solid #ccc; padding: 5px;"> 32767:9223372036854775807 </td>
+<td style="border: 1px solid #ccc; padding: 5px;"> String </td>
+<td style="border: 1px solid #ccc; padding: 5px;"> #10:3 </td>
+</tr>
+<tr>
+<td style="border: 1px solid #ccc; padding: 5px;"> Link list </td>
+<td style="border: 1px solid #ccc; padding: 5px;"> Links to other Records. It's a common <a href="concepts.html#One-to-Many">One-to-Many relationship</a>. Only the <a href="concepts.html#RecordID">RecordId</a>s are stored </td>
+<td style="border: 1px solid #ccc; padding: 5px;"> <tt>List&lt;? extends ORecord&lt;?&gt;&gt;</tt> </td>
+<td style="border: 1px solid #ccc; padding: 5px;"> variable </td>
+<td style="border: 1px solid #ccc; padding: 5px;"> 0 </td>
+<td style="border: 1px solid #ccc; padding: 5px;"> 41,000,000 items </td>
+<td style="border: 1px solid #ccc; padding: 5px;"> Collection&lt;? extends ORecord&lt;?&gt;&gt;, String </td>
+<td style="border: 1px solid #ccc; padding: 5px;"> <tt>[#10:3, #10:4]</tt> </td>
+</tr>
+<tr>
+<td style="border: 1px solid #ccc; padding: 5px;"> Link set </td>
+<td style="border: 1px solid #ccc; padding: 5px;"> Links to other Records. It's a common <a href="concepts.html#One-to-Many">One-to-Many relationship</a>. Only the <a href="concepts.html#RecordID">RecordId</a>s are stored </td>
+<td style="border: 1px solid #ccc; padding: 5px;"> <tt>Set&lt;? extends ORecord&lt;?&gt;&gt;</tt> </td>
+<td style="border: 1px solid #ccc; padding: 5px;"> variable </td>
+<td style="border: 1px solid #ccc; padding: 5px;"> 0 </td>
+<td style="border: 1px solid #ccc; padding: 5px;"> 41,000,000 items </td>
+<td style="border: 1px solid #ccc; padding: 5px;"> Collection&lt;? extends ORecord&lt;?&gt;&gt;, String </td>
+<td style="border: 1px solid #ccc; padding: 5px;"> <tt>[#10:3, #10:4]</tt> </td>
+</tr>
+<tr>
+<td style="border: 1px solid #ccc; padding: 5px;"> Link map </td>
+<td style="border: 1px solid #ccc; padding: 5px;"> Links to other Records as value of the entries, while keys can only be Strings. It's a common <a href="concepts.html#One-to-Many">One-to-Many relationship</a>. Only the <a href="concepts.html#RecordID">RecordId</a>s are stored </td>
+<td style="border: 1px solid #ccc; padding: 5px;"> <tt>Map&lt;String, ? extends ORecord&lt;?&gt;&gt;</tt> </td>
+<td style="border: 1px solid #ccc; padding: 5px;"> variable </td>
+<td style="border: 1px solid #ccc; padding: 5px;"> 0 </td>
+<td style="border: 1px solid #ccc; padding: 5px;"> 41,000,000 items </td>
+<td style="border: 1px solid #ccc; padding: 5px;"> String </td>
+<td style="border: 1px solid #ccc; padding: 5px;"> { 'name' : '#10:3' } </td>
+</tr>
+<tr>
+<td style="border: 1px solid #ccc; padding: 5px;"> Embedded </td>
+<td style="border: 1px solid #ccc; padding: 5px;"> The Record is contained inside the owner. The contained Record has no <a href="concepts.html#RecordID">RecordId</a> </td>
+<td style="border: 1px solid #ccc; padding: 5px;"> <tt>ORecord&lt;?&gt; instance</tt> </td>
+<td style="border: 1px solid #ccc; padding: 5px;"> variable (it's transformed in String) </td>
+<td style="border: 1px solid #ccc; padding: 5px;"> - </td>
+<td style="border: 1px solid #ccc; padding: 5px;"> - </td>
+<td style="border: 1px solid #ccc; padding: 5px;"> ORecord&lt;?&gt; </td>
+</tr>
+<tr>
+<td style="border: 1px solid #ccc; padding: 5px;"> Embedded list </td>
+<td style="border: 1px solid #ccc; padding: 5px;"> The Records are contained inside the owner. The contained Records have no <a href="concepts.html#RecordID">RecordId</a>s and are reachable only by navigating the owner Record </td>
+<td style="border: 1px solid #ccc; padding: 5px;"> <tt>List&lt;Object&gt;</tt> </td>
+<td style="border: 1px solid #ccc; padding: 5px;"> variable </td>
+<td style="border: 1px solid #ccc; padding: 5px;"> 0 </td>
+<td style="border: 1px solid #ccc; padding: 5px;"> 41,000,000 items </td>
+<td style="border: 1px solid #ccc; padding: 5px;"> String </td>
+<td style="border: 1px solid #ccc; padding: 5px;"> <tt>[10, 20, 30]</tt> </td>
+</tr>
+<tr>
+<td style="border: 1px solid #ccc; padding: 5px;"> Embedded set </td>
+<td style="border: 1px solid #ccc; padding: 5px;"> The Records are contained inside the owner. The contained Records have no <a href="concepts.html#RecordID">RecordId</a>s and are reachable only by navigating the owner Record </td>
+<td style="border: 1px solid #ccc; padding: 5px;"> <tt>Set&lt;Object&gt;</tt> </td>
+<td style="border: 1px solid #ccc; padding: 5px;"> variable </td>
+<td style="border: 1px solid #ccc; padding: 5px;"> 0 </td>
+<td style="border: 1px solid #ccc; padding: 5px;"> 41,000,000 items </td>
+<td style="border: 1px solid #ccc; padding: 5px;"> Collection&lt;? extends ORecord&lt;?&gt;&gt;, String </td>
+<td style="border: 1px solid #ccc; padding: 5px;"> <tt>['this', 'is', 'a', 'test']</tt> </td>
+</tr>
+<tr>
+<td style="border: 1px solid #ccc; padding: 5px;"> Embedded map </td>
+<td style="border: 1px solid #ccc; padding: 5px;"> The Records are contained inside the owner as values of the entries, while the keys can only be Strings. The contained Records have no <a href="concepts.html#RecordID">RecordId</a>s and are reachable only by navigating the owner Record </td>
+<td style="border: 1px solid #ccc; padding: 5px;"> <tt>Map&lt;String, ?&gt;</tt> </td>
+<td style="border: 1px solid #ccc; padding: 5px;"> variable </td>
+<td style="border: 1px solid #ccc; padding: 5px;"> 0 </td>
+<td style="border: 1px solid #ccc; padding: 5px;"> 41,000,000 items </td>
+<td style="border: 1px solid #ccc; padding: 5px;"> Collection&lt;? extends ORecord&lt;?&gt;&gt;, String </td>
+<td style="border: 1px solid #ccc; padding: 5px;"> { 'name' : 'Luca' } </td>
+</tr>
+</table>

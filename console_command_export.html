@@ -1,0 +1,39 @@
+---
+title: Export database
+layout: default
+---
+
+ <h1>
+<a name="Export_database"></a>Export database<a href="#Export_database" class="section_anchor"></a>
+</h1>
+<p>Export the current opened database to a file. The exported file is in <a href="http://en.wikipedia.org/wiki/JSON" rel="nofollow">JSON</a> format using the <a href="export_format.html">Export format</a>. By default the file is compressed using the GZIP algorithm. The Export/Import commands allow to migrate between engine releases without loosing data. If you receive an error about the database version, export the database using the same version of OrientDB that has generated the database. </p>
+<p>Then <a href="console_command_import.html">Import</a> it with the new one. The database will be imported and will be ready to be used. </p>
+<h2>
+<a name="Syntax"></a>Syntax<a href="#Syntax" class="section_anchor"></a>
+</h2>
+<p><tt>export database &lt;output-file&gt;</tt> </p>
+<p>Where: </p>
+<ul><li>output-file    Output file path </li></ul><h2>
+<a name="Example"></a>Example<a href="#Example" class="section_anchor"></a>
+</h2>
+<pre class="prettyprint">&gt; export database C:\temp\petshop.export
+Exporting current database to: C:\temp\petshop.export...
+
+Exporting database info...OK
+Exporting dictionary...OK
+Exporting schema...OK
+Exporting clusters...
+- Exporting cluster 'metadata' (records=11) -&gt; ...........OK
+- Exporting cluster 'index' (records=0) -&gt; OK
+- Exporting cluster 'default' (records=779) -&gt; OK
+- Exporting cluster 'csv' (records=1000) -&gt; OK
+- Exporting cluster 'binary' (records=1001) -&gt; OK
+- Exporting cluster 'person' (records=7) -&gt; OK
+- Exporting cluster 'animal' (records=5) -&gt; OK
+- Exporting cluster 'animalrace' (records=0) -&gt; OK
+- Exporting cluster 'animaltype' (records=1) -&gt; OK
+- Exporting cluster 'orderitem' (records=0) -&gt; OK
+- Exporting cluster 'order' (records=0) -&gt; OK
+- Exporting cluster 'city' (records=3) -&gt; OK
+Export of database completed.</pre>
+<p>This is a command of the Orient console. To know all the commands go to <a href="console_commands.html">Console commands</a>. </p>

@@ -1,0 +1,72 @@
+---
+title: Embed the Server
+layout: default
+---
+
+ <h1>
+<a name="Introduction"></a>Introduction<a href="#Introduction" class="section_anchor"></a>
+</h1>
+<p>Embedding an OrientDB Server inside a Java application has several advantages and interesting features: </p>
+<ul>
+<li>You can use the <a href="http://code.google.com/p/orient/wiki/ConsoleCommands" rel="nofollow">Console</a> to control it </li>
+<li>You can use the <a href="http://code.google.com/p/orient/wiki/OrientDB_Studio" rel="nofollow">OrientDB Studio</a> </li>
+<li>Java application that runs embedded with the server can bypass the remote connection and use the database directly with <a href="http://code.google.com/p/orient/wiki/Concepts#Database_URL" rel="nofollow">local mode</a>. </li>
+</ul><p>To embed an OrientDB Server inside a Java application you have to create the OServer object and use a valid configuration for it. </p>
+<h2>
+<a name="Use_an_embedded_configuration"></a>Use an embedded configuration<a href="#Use_an_embedded_configuration" class="section_anchor"></a>
+</h2>
+<pre class="prettyprint">import com.orientechnologies.orient.server.OServerMain;
+
+public class OrientDBEmbeddable {
+
+ public static void main(String[] args) throws Exception {
+  OServerMain.create().startup(
+   "&lt;?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?&gt;"
+   + "&lt;orient-server&gt;"
+   + "&lt;network&gt;"
+   + "&lt;protocols&gt;"
+   + "&lt;protocol name=\"binary\" implementation=\"com.orientechnologies.orient.server.network.protocol.binary.ONetworkProtocolBinary\"/&gt;"
+   + "&lt;protocol name=\"http\" implementation=\"com.orientechnologies.orient.server.network.protocol.http.ONetworkProtocolHttpDb\"/&gt;"
+   + "&lt;/protocols&gt;"
+   + "&lt;listeners&gt;"
+   + "&lt;listener ip-address=\"0.0.0.0\" port-range=\"2424-2430\" protocol=\"binary\"/&gt;"
+   + "&lt;listener ip-address=\"0.0.0.0\" port-range=\"2480-2490\" protocol=\"http\"/&gt;"
+   + "&lt;/listeners&gt;"
+   + "&lt;/network&gt;"
+   + "&lt;users&gt;"
+   + "&lt;user name=\"root\" password=\"ThisIsA_TEST\" resources=\"*\"/&gt;"
+   + "&lt;/users&gt;"
+   + "&lt;properties&gt;"
+   + "&lt;entry name=\"orientdb.www.path\" value=\"C:/work/dev/orientechnologies/orientdb/releases/1.0rc1-SNAPSHOT/www/\"/&gt;"
+   + "&lt;entry name=\"orientdb.config.file\" value=\"C:/work/dev/orientechnologies/orientdb/releases/1.0rc1-SNAPSHOT/config/orientdb-server-config.xml\"/&gt;"
+   + "&lt;entry name=\"server.cache.staticResources\" value=\"false\"/&gt;"
+   + "&lt;entry name=\"log.console.level\" value=\"info\"/&gt;" + "&lt;entry name=\"log.file.level\" value=\"fine\"/&gt;"
+   + "&lt;/properties&gt;" + "&lt;/orient-server&gt;");
+	}
+}</pre>
+<h2>
+<a name="Use_custom_file_for_configuration"></a>Use custom file for configuration<a href="#Use_custom_file_for_configuration" class="section_anchor"></a>
+</h2>
+<pre class="prettyprint">import com.orientechnologies.orient.server.OServerMain;
+
+public class OrientDBEmbeddable {
+
+ public static void main(String[] args) throws Exception {
+  OServerMain.create().startup(new File("/usr/local/temp/db.config"));
+ }
+}</pre>
+<h2>
+<a name="Shutdown"></a>Shutdown<a href="#Shutdown" class="section_anchor"></a>
+</h2>
+<p>OrientDB Server creates some threads internally as non-daemon threads, so they runs even if the main application exists. Use the OServer.shutdown() method to shutdown the server in soft way: </p>
+<pre class="prettyprint">import com.orientechnologies.orient.server.OServerMain;
+
+public class OrientDBEmbeddable {
+
+ public static void main(String[] args) throws Exception {
+  OServer server = OServerMain.create();
+  server.startup(new File("/usr/local/temp/db.config"));
+  ...
+  server.shutdown();
+ }
+}</pre>

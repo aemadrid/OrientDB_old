@@ -1,312 +1,229 @@
 ---
 title: Document Database
-title_extra: '<small>the base of the <a href="object_database.html">ObjectDatabase</a> and <a href="key_value_server.html">Key/Value Server</a></small>'
 layout: default
-no_page_header: true
 ---
-<div class="page-header">
-  <h1>
-    Document Database
-    <small>the base of the <a href="object_database.html">ObjectDatabase</a> and <a href="key_value_server.html">Key/Value Server</a></small>
-  </h1>
-</div>
+
+ <p><img src="http://www.orientechnologies.com/images/orient_db_small.png"></p>
+<p></p>
+<ul>
+<li><a href="#Introduction">Introduction</a></li>
+<ul>
+<li><a href="#Connection_Pool">Connection Pool</a></li>
+<li><a href="#OrientDB_Studio">OrientDB Studio</a></li>
+<li><a href="#Database_URL">Database URL</a></li>
+<li><a href="#Multi-threading">Multi-threading</a></li>
+<li><a href="#Work_in_schema-full_mode">Work in schema-full mode</a></li>
+<li><a href="#Inheritance">Inheritance</a></li>
+</ul>
+<li><a href="#Use_the_database">Use the database</a></li>
+<ul>
+<li><a href="#Create_a_new_database">Create a new database</a></li>
+<ul>
+<li><a href="#In_local_filesystem">In local filesystem</a></li>
+<li><a href="#On_a_remote_server">On a remote server</a></li>
+</ul>
+<li><a href="#Open_a_database">Open a database</a></li>
+<li><a href="#Current_user">Current user</a></li>
+<li><a href="#Close_the_database">Close the database</a></li>
+</ul>
+<li><a href="#Create_a_new_document">Create a new document</a></li>
+<li><a href="#Browse_all_the_documents_in_a_cluster">Browse all the documents in a cluster</a></li>
+<li><a href="#Browse_all_the_records_of_a_class">Browse all the records of a class</a></li>
+<li><a href="#Count_records_of_a_class">Count records of a class</a></li>
+<li><a href="#Count_records_of_a_cluster">Count records of a cluster</a></li>
+<li><a href="#Execute_a_query">Execute a query</a></li>
+<ul>
+<li><a href="#Native_query">Native query</a></li>
+<li><a href="#SQL_query">SQL query</a></li>
+<ul>
+<li><a href="#Prepared_query">Prepared query</a></li>
+<li><a href="#SQL_Commands">SQL Commands</a></li>
+</ul>
+</ul>
+<li><a href="#Update_a_document">Update a document</a></li>
+<li><a href="#Delete_a_document">Delete a document</a></li>
+<li><a href="#Javadoc">Javadoc</a></li>
+</ul><h1>
+<a name="Introduction"></a>Introduction<a href="#Introduction" class="section_anchor"></a>
+</h1>
+<p>The Orient Document DB is the base of <a href="object_database.html">ObjectDatabase</a> and <a href="key_value_server.html">Key/Value Server</a>. </p>
+<p>The Document Database can be used in schema-less mode. Have a look at this example: </p>
+<pre class="prettyprint">// OPEN THE DATABASE
+ODatabaseDocumentTx db = new ODatabaseDocumentTx("remote:localhost/petshop").open("admin", "admin");
+
+// CREATE A NEW DOCUMENT AND FILL IT
+ODocument doc = new ODocument(db, "Person");
+doc.field( "name", "Luke" );
+doc.field( "surname", "Skywalker" );
+doc.field( "city", new ODocument(db, "City").field("name","Rome").field("country", "Italy") );
+              
+// SAVE THE DOCUMENT
+doc.save();
+
+db.close();</pre>
+<p>This is the very first example. While the code is pretty clear and easy to understand please note that we haven't declared the type "Person" before now. When an ODocument instance is saved, the declared type "Person" will be created without constraints. </p>
 <h2>
-  <a name="Introduction" id="Introduction"></a>Introduction<a href="#Introduction" class="section_anchor"></a>
+<a name="Connection_Pool"></a>Connection Pool<a href="#Connection_Pool" class="section_anchor"></a>
 </h2>
-<p>
-  The Document Database can be used in schema-less mode. Have a look at this example:
-</p>
-<pre class="prettyprint language-java">
-  // OPEN THE DATABASE
-  ODatabaseDocumentTx db = new ODatabaseDocumentTx("remote:localhost/petshop").open("admin", "admin");
+<p>One of most common use cases is to reuse the database,  avoiding to create it every time. It's also the typical scenario of the Web applications. </p>
+<pre class="prettyprint">// OPEN THE DATABASE
+ODatabaseDocumentTx db= ODatabaseDocumentPool.global().acquire("remote:localhost/petshop", "admin", "admin");
 
-  // CREATE A NEW DOCUMENT AND FILL IT
-  ODocument doc = new ODocument(db, "Person");
-  doc.field( "name", "Luke" );
-  doc.field( "surname", "Skywalker" );
-  doc.field( "city", new ODocument(db, "City").field("name","Rome").field("country", "Italy") );
+...
 
-  // SAVE THE DOCUMENT
-  doc.save();
-
-  db.close();
-</pre>
-<p>
-  This is the very first example. While the code is pretty clear and easy to understand please note that we haven't declared the type "Person" before now. When an ODocument instance is saved, the declared type "Person" will be created without constraints.
-</p>
-<h3>
-  <a name="Connection_Pool" id="Connection_Pool"></a>Connection Pool<a href="#Connection_Pool" class="section_anchor"></a>
-</h3>
-<p>
-  One of most common use cases is to reuse the database, avoiding to create it every time. It's also the typical scenario of the Web applications.
-</p>
-<pre class="prettyprint language-java">
-  // OPEN THE DATABASE
-  ODatabaseDocumentTx db= ODatabaseDocumentPool.global().acquire("remote:localhost/petshop", "admin", "admin");
-
-  ...
-
-  db.close();
-</pre>
-<p>
-  The close() method doesn't close the database but releases it to the owner pool. It can be reused in the future.
-</p>
-<h3>
-  <a name="OrientDB_Studio" id="OrientDB_Studio"></a>OrientDB Studio<a href="#OrientDB_Studio" class="section_anchor"></a>
-</h3>
-<p>
-  To work with the database try the <a href="orientdb_studio.html">OrientDB Studio</a>.
-</p>
-<h3>
-  <a name="Database_URL" id="Database_URL"></a>Database URL<a href="#Database_URL" class="section_anchor"></a>
-</h3>
-<p>
-  In the example above a database of type Database Object Transactional has been created using the storage: remote:localhost/petshop. This address is a <a href="https://secure.wikimedia.org/wikipedia/en/wiki/Uniform_Resource_Locator" rel="nofollow">URL</a>. To know more about database and storage types go to <a href="concepts.html#Database_URL">Database URL</a>.
-</p>
-<p>
-  In this case the storage resides on the same computer as the client, but we're using the <strong>remote</strong> storage type. For this reason we need an Orient Server instance to be up and running. If we opened the database directly by using the <strong>local</strong> storage type such as "local:/usr/local/database/petshop/petshop", the data will be stored in the /usr/local/database/petshop folder on the local file system.
-</p>
-<h3>
-  <a name="Multi-threading" id="Multi-threading"></a>Multi-threading<a href="#Multi-threading" class="section_anchor"></a>
-</h3>
-<p>
-  The ODatabaseDocumentTx class is non thread-safe. For this reason use different ODatabaseDocumentTx instances by multiple threads. They will share a local cache once transactions are committed.
-</p>
-<h3>
-  <a name="Work_in_schema-full_mode" id="Work_in_schema-full_mode"></a>Work in schema-full mode<a href="#Work_in_schema-full_mode" class="section_anchor"></a>
-</h3>
-<p>
-  In the schema-full mode you need to declare the classes you're using. Each class contains one or multiple properties. This mode is similar to the classic Relational DBMS approach where you need to create tables before to store records. To work in schema-full mode take a look at the <a href="java_schema_api.html">Schema APIs</a> page.
-</p>
-<h3>
-  <a name="Inheritance" id="Inheritance"></a>Inheritance<a href="#Inheritance" class="section_anchor"></a>
-</h3>
-<p>
-  Starting from the release 0.9.19 OrientDB supports <a href="inheritance.html">Inheritance</a>.
-</p>
+db.close();</pre>
+<p>The close() method doesn't close the database but releases it to the owner pool. It can be reused in the future. </p>
 <h2>
-  <a name="Use_the_database" id="Use_the_database"></a>Use the database<a href="#Use_the_database" class="section_anchor"></a>
+<a name="OrientDB_Studio"></a>OrientDB Studio<a href="#OrientDB_Studio" class="section_anchor"></a>
 </h2>
-<p>
-  If you want to connect to a remote database using a OrientDB Server instance, you need to include the orientdb-client.jar in your classpath
-</p>
-<p>
-  Before using a database you need to either open an existing database or create a new one.
-</p>
-<h3>
-  <a name="Create_a_new_database" id="Create_a_new_database"></a>Create a new database<a href="#Create_a_new_database" class="section_anchor"></a>
-</h3>
-<h4>
-  <a name="In_local_filesystem" id="In_local_filesystem"></a>In local filesystem<a href="#In_local_filesystem" class="section_anchor"></a>
-</h4>
-<pre class="prettyprint language-java">
-    ODatabaseDocumentTx db = new ODatabaseDocumentTx ("local:/tmp/databases/petshop").create();
-</pre>
-<h4>
-  <a name="On_a_remote_server" id="On_a_remote_server"></a>On a remote server<a href="#On_a_remote_server" class="section_anchor"></a>
-</h4>
-<p>
-  To create a database in a remote server you need the user/password of the remote OrientDB Server instance. By default the "root" user is created. Check this in the file config/orientdb-server-config.xml, where you will also find the password.
-</p>
-<pre class="prettyprint language-java">
-  new OServerAdmin("remote:petshop").connect("root", "kjhsdjfsdh128438ejhj").createDatabase(null).close();
-</pre>
-<h3>
-  <a name="Open_a_database" id="Open_a_database"></a>Open a database<a href="#Open_a_database" class="section_anchor"></a>
-</h3>
-<pre class="prettyprint language-java">
-  ODatabaseDocumentTx db = new ODatabaseDocumentTx ("remote:localhost/petshop").open("admin", "admin");
-</pre>
-<p>
-  The database instance will share the connection versus the storage. if it's a "local" storage, then all the database instances will be synchronized on it. If it's a "remote" storage then the network connection will be shared among all the database instances.
-</p>
-<h3>
-  <a name="Current_user" id="Current_user"></a>Current user<a href="#Current_user" class="section_anchor"></a>
-</h3>
-<p>
-  To get the reference to the current user use:
-</p>
-<pre class="prettyprint language-java">
-  OUser user = db.getUser();
-</pre>
-<h3>
-  <a name="Close_the_database" id="Close_the_database"></a>Close the database<a href="#Close_the_database" class="section_anchor"></a>
-</h3>
-<p>
-  Once finished remember to close the database to free precious resources.
-</p>
-<pre class="prettyprint language-java">
-  db.close();
-</pre>
+<p>To work with the database try the <a href="orient_db_studio.html">OrientDB Studio</a>. </p>
 <h2>
-  <a name="Create_a_new_document" id="Create_a_new_document"></a>Create a new document<a href="#Create_a_new_document" class="section_anchor"></a>
+<a name="Database_URL"></a>Database URL<a href="#Database_URL" class="section_anchor"></a>
 </h2>
-<p>
-  ODocument instances can be saved by calling the save() method against the object itself. Note that the behaviour depends on the running transaction, if any. See <a href="transactions.html">Transactions</a>.
-</p>
-<pre class="prettyprint language-java">
-ODocument animal = new ODocument(db, "Animal");
+<p>In the example above a database of type Database Object Transactional has been created using the storage: remote:localhost/petshop. This address is a <a href="https://secure.wikimedia.org/wikipedia/en/wiki/Uniform_Resource_Locator" rel="nofollow">URL</a>. To know more about database and storage types go to <a href="concepts.html#Database_URL">Database URL</a>. </p>
+<p>In this case the storage resides on the same computer as the client, but we're using the <strong>remote</strong> storage type. For this reason we need an Orient Server instance to be up and running. If we opened the database directly by using the <strong>local</strong> storage type such as "local:/usr/local/database/petshop/petshop", the data will be stored in the /usr/local/database/petshop folder on the local file system. </p>
+<h2>
+<a name="Multi-threading"></a>Multi-threading<a href="#Multi-threading" class="section_anchor"></a>
+</h2>
+<p>The ODatabaseDocumentTx class is non thread-safe. For this reason use different ODatabaseDocumentTx instances by multiple threads. They will share a local cache once transactions are committed. </p>
+<h2>
+<a name="Work_in_schema-full_mode"></a>Work in schema-full mode<a href="#Work_in_schema-full_mode" class="section_anchor"></a>
+</h2>
+<p>In the schema-full mode you need to declare the classes you're using. Each class contains one or multiple properties. This mode is similar to the classic Relational DBMS approach where you need to create tables before to store records. To work in schema-full mode take a look at the <a href="java_schema_api.html">Schema APIs</a> page. </p>
+<h2>
+<a name="Inheritance"></a>Inheritance<a href="#Inheritance" class="section_anchor"></a>
+</h2>
+<p>Starting from the release 0.9.19 OrientDB supports <a href="inheritance.html">Inheritance</a>. </p>
+<h1>
+<a name="Use_the_database"></a>Use the database<a href="#Use_the_database" class="section_anchor"></a>
+</h1>
+<p>If you want to connect to a remote database using a OrientDB Server instance, you need to include the orientdb-client.jar in your classpath </p>
+<p>Before using a database you need to either open an existing database or create a new one. </p>
+<h2>
+<a name="Create_a_new_database"></a>Create a new database<a href="#Create_a_new_database" class="section_anchor"></a>
+</h2>
+<h3>
+<a name="In_local_filesystem"></a>In local filesystem<a href="#In_local_filesystem" class="section_anchor"></a>
+</h3>
+<pre class="prettyprint">ODatabaseDocumentTx db = new ODatabaseDocumentTx ("local:/tmp/databases/petshop").create();</pre>
+<h3>
+<a name="On_a_remote_server"></a>On a remote server<a href="#On_a_remote_server" class="section_anchor"></a>
+</h3>
+<p>To create a database in a remote server you need the user/password of the remote OrientDB Server instance. By default the "root" user is created. Check this in the file config/orientdb-server-config.xml, where you will also find the password. </p>
+<pre class="prettyprint">new OServerAdmin("remote:petshop").connect("root", "kjhsdjfsdh128438ejhj").createDatabase(null).close();</pre>
+<h2>
+<a name="Open_a_database"></a>Open a database<a href="#Open_a_database" class="section_anchor"></a>
+</h2>
+<pre class="prettyprint">ODatabaseDocumentTx db = new ODatabaseDocumentTx ("remote:localhost/petshop").open("admin", "admin");</pre>
+<p>The database instance will share the connection versus the storage. if it's a "local" storage, then all the database instances will be synchronized on it. If it's a "remote" storage then the network connection will be shared among all the database instances. </p>
+<h2>
+<a name="Current_user"></a>Current user<a href="#Current_user" class="section_anchor"></a>
+</h2>
+<p>To get the reference to the current user use: </p>
+<pre class="prettyprint">OUser user = db.getUser();</pre>
+<h2>
+<a name="Close_the_database"></a>Close the database<a href="#Close_the_database" class="section_anchor"></a>
+</h2>
+<p>Once finished remember to close the database to free precious resources. </p>
+<pre class="prettyprint">db.close();</pre>
+<h1>
+<a name="Create_a_new_document"></a>Create a new document<a href="#Create_a_new_document" class="section_anchor"></a>
+</h1>
+<p>ODocument instances can be saved by calling the save() method against the object itself. Note that the behaviour depends on the running transaction, if any. See <a href="transactions.html">Transactions</a>. </p>
+<pre class="prettyprint">ODocument animal = new ODocument(db, "Animal");
 animal.field( "name", "Gaudi" );
 animal.field( "location", "Madrid" );
-animal.save();
-</pre>
-<h2>
-  <a name="Browse_all_the_documents_in_a_cluster" id="Browse_all_the_documents_in_a_cluster"></a>Browse all the documents in a cluster<a href="#Browse_all_the_documents_in_a_cluster" class="section_anchor"></a>
-</h2>
-<pre class="prettyprint language-java">
-for (ODocument doc : database.browseCluster("CityCars")) {
-  System.out.println( doc.field("model") );
-</pre>
-<h2>
-  <a name="Browse_all_the_records_of_a_class" id="Browse_all_the_records_of_a_class"></a>Browse all the records of a class<a href="#Browse_all_the_records_of_a_class" class="section_anchor"></a>
-</h2>
-<pre class="prettyprint language-java">
-for (ODocument animal : database.browseClass("Animal")) {
-  System.out.println( animal.field( "name" ) );
-</pre>
-<h2>
-  <a name="Count_records_of_a_class" id="Count_records_of_a_class"></a>Count records of a class<a href="#Count_records_of_a_class" class="section_anchor"></a>
-</h2>
-<pre class="prettyprint language-java">
-long cars = database.countClass("Car");
-</pre>
-<h2>
-  <a name="Count_records_of_a_cluster" id="Count_records_of_a_cluster"></a>Count records of a cluster<a href="#Count_records_of_a_cluster" class="section_anchor"></a>
-</h2>
-<pre class="prettyprint language-java">
-long cityCars = database.countCluster("CityCar");
-</pre>
-<h2>
-  <a name="Execute_a_query" id="Execute_a_query"></a>Execute a query<a href="#Execute_a_query" class="section_anchor"></a>
-</h2>
-<p>
-  Orient supports two kinds of queries:
-</p>
+animal.save();</pre>
+<h1>
+<a name="Browse_all_the_documents_in_a_cluster"></a>Browse all the documents in a cluster<a href="#Browse_all_the_documents_in_a_cluster" class="section_anchor"></a>
+</h1>
+<pre class="prettyprint">for (ODocument doc : database.browseCluster("CityCars")) {
+  System.out.println( doc.field("model") );</pre>
+<h1>
+<a name="Browse_all_the_records_of_a_class"></a>Browse all the records of a class<a href="#Browse_all_the_records_of_a_class" class="section_anchor"></a>
+</h1>
+<pre class="prettyprint">for (ODocument animal : database.browseClass("Animal")) {
+  System.out.println( animal.field( "name" ) );</pre>
+<h1>
+<a name="Count_records_of_a_class"></a>Count records of a class<a href="#Count_records_of_a_class" class="section_anchor"></a>
+</h1>
+<pre class="prettyprint">long cars = database.countClass("Car");</pre>
+<h1>
+<a name="Count_records_of_a_cluster"></a>Count records of a cluster<a href="#Count_records_of_a_cluster" class="section_anchor"></a>
+</h1>
+<pre class="prettyprint">long cityCars = database.countCluster("CityCar");</pre>
+<h1>
+<a name="Execute_a_query"></a>Execute a query<a href="#Execute_a_query" class="section_anchor"></a>
+</h1>
+<p>Orient supports two kinds of queries: </p>
 <ul>
-  <li>Native
-  </li>
-  <li>SQL
-  </li>
-</ul>
-<h3>
-  <a name="Native_query" id="Native_query"></a>Native query<a href="#Native_query" class="section_anchor"></a>
-</h3>
-<p>
-  Native queries are written in Java code. They are pretty fast since the JVM compiles it as for the rest of application. Bear in mind that field names are case-sensitive. For the class names, case sensitivity doesn't hold so you can write them in any case.
-</p>
-<p>
-  Unfortunately at current release Native Queries don't support all the operators of SQL queries and don't use Indexes when present.
-</p>
-<p>
-  Example:
-</p>
-<pre class="prettyprint language-java">
-List<ODocument> result = database.query(new ONativeSynchQuery<ODocument, OQueryContextNativeSchema<ODocument>>
-   (database, "Person", new OQueryContextNativeSchema<ODocument>()) {
-                        @Override
-                        public boolean filter(OQueryContextNativeSchema<ODocument> iRecord) {
-                                return iRecord.field("city").field("name").eq("Rome").and().
+<li>Native </li>
+<li>SQL </li>
+</ul><h2>
+<a name="Native_query"></a>Native query<a href="#Native_query" class="section_anchor"></a>
+</h2>
+<p>Native queries are written in Java code. They are pretty fast since the JVM compiles it as for the rest of application. Bear in mind that field names are case-sensitive. For the class names, case sensitivity doesn't hold so you can write them in any case. </p>
+<p>Unfortunately at current release Native Queries don't support all the operators of SQL queries and don't use Indexes when present. </p>
+<p>Example: </p>
+<pre class="prettyprint">List&lt;ODocument&gt; result = database.query(new ONativeSynchQuery&lt;ODocument, OQueryContextNativeSchema&lt;ODocument&gt;&gt;
+   (database, "Person", new OQueryContextNativeSchema&lt;ODocument&gt;()) {
+			@Override
+			public boolean filter(OQueryContextNativeSchema&lt;ODocument&gt; iRecord) {
+				return iRecord.field("city").field("name").eq("Rome").and().
                                   field("name").like("G%").go();
-                        };
-                });
-</pre>
+			};
+		});</pre>
+<h2>
+<a name="SQL_query"></a>SQL query<a href="#SQL_query" class="section_anchor"></a>
+</h2>
+<p>Although OrientDB is part of the NoSQL database community, it supports a subset of SQL that allows it to process links to documents and graphs. </p>
+<p>To know more about the SQL syntax supported go to: <a href="sql_query.html">SQL Query</a>. </p>
+<p>Example of a SQL query: </p>
+<pre class="prettyprint">List&lt;ODocument&gt; result = db.query(
+  new OSQLSynchQuery&lt;ODocument&gt;("select * from Animal where ID = 10 and name like 'G%'"));</pre>
 <h3>
-  <a name="SQL_query" id="SQL_query"></a>SQL query<a href="#SQL_query" class="section_anchor"></a>
+<a name="Prepared_query"></a>Prepared query<a href="#Prepared_query" class="section_anchor"></a>
 </h3>
-<p>
-  Although OrientDB is part of the NoSQL database community, it supports a subset of SQL that allows it to process links to documents and graphs.
-</p>
-<p>
-  To know more about the SQL syntax supported go to: <a href="sql_query.html">SQL Query</a>.
-</p>
-<p>
-  Example of a SQL query:
-</p>
-<pre class="prettyprint language-java">
-List<ODocument> result = db.query(
-  new OSQLSynchQuery<ODocument>("select * from Animal where ID = 10 and name like 'G%'"));
-</pre>
-<h4>
-  <a name="Prepared_query" id="Prepared_query"></a>Prepared query<a href="#Prepared_query" class="section_anchor"></a>
-</h4>
-<p>
-  Prepared query are quite similar to the Prepared Statement of JDBC. Prepared queries are pre-parsed so on multiple execution of the same query are faster than classic SQL queries. Furthermore the pre-parsing doesn't allow SQL Injection.
-</p>
-<p>
-  Prepared query uses two kinds of markers to substitute parameters on execution: <strong><tt>?</tt>, as positional parameter</strong> <tt>:&lt;par&gt;</tt>, named parameter
-</p>
-<p>
-  Example of positional parameters:
-</p>
-<pre class="prettyprint language-java">
-OSQLSynchQuery<ODocument> query = new OSQLSynchQuery<ODocument>("select from Profile where name = ? and surname = ?");
-List<ODocument> result = database.command(query).execute("Barack", "Obama");
-</pre>
-<p>
-  Example of named parameters:
-</p>
-<pre class="prettyprint language-java">
-OSQLSynchQuery<ODocument> query = new OSQLSynchQuery<ODocument>("select from Profile where name = :name and surname = :surname");
-Map<String,Object> params = new HashMap<String,Object>();
+<p>Prepared query are quite similar to the Prepared Statement of JDBC. Prepared queries are pre-parsed so on multiple execution of the same query are faster than classic SQL queries. Furthermore the pre-parsing doesn't allow SQL Injection. </p>
+<p>Prepared query uses two kinds of markers to substitute parameters on execution: <strong> <tt>?</tt>, as positional parameter </strong> <tt>:&lt;par&gt;</tt>, named parameter </p>
+<p>Example of positional parameters: </p>
+<pre class="prettyprint">OSQLSynchQuery&lt;ODocument&gt; query = new OSQLSynchQuery&lt;ODocument&gt;("select from Profile where name = ? and surname = ?");
+List&lt;ODocument&gt; result = database.command(query).execute("Barack", "Obama");</pre>
+<p>Example of named parameters: </p>
+<pre class="prettyprint">OSQLSynchQuery&lt;ODocument&gt; query = new OSQLSynchQuery&lt;ODocument&gt;("select from Profile where name = :name and surname = :surname");
+Map&lt;String,Object&gt; params = new HashMap&lt;String,Object&gt;();
 params.put("name", "Barack");
 params.put("surname", "Obama");
 
-List<ODocument> result = database.command(query).execute(params);
-</pre>
-<h4>
-  <a name="SQL_Commands" id="SQL_Commands"></a>SQL Commands<a href="#SQL_Commands" class="section_anchor"></a>
-</h4>
-<p>
-  To execute SQL commands use the <tt>command()</tt> method passing a OCommandSQL object:
-</p>
-<pre class="prettyprint language-java">
-int recordsUpdated = db.command(
-  new OCommandSQL("update Animal set sold = false")).execute();
-</pre>
-<p>
-  See all the <a href="sql.html">SQL Commands</a>.
-</p>
-<h2>
-  <a name="Update_a_document" id="Update_a_document"></a>Update a document<a href="#Update_a_document" class="section_anchor"></a>
-</h2>
-<p>
-  Any persistent document can be updated using the Java API then calling the db.save() method, or by calling save() method against the document to synchronize the changes to the repository. Behaviour depends on the transaction begun if any. See <a href="transactions.html">Transactions</a>.
-</p>
-<pre class="prettyprint language-java">
-animal.field( "location", "Nairobi" );
-animal.save();
-</pre>
-<p>
-  Orient will update only the fields really changed.
-</p>
-<p>
-  Example of how to increase the price of all the animals by 5%:
-</p>
-<pre class="prettyprint language-java">
-for (ODocument animal : database.browseClass("Animal")) {
+List&lt;ODocument&gt; result = database.command(query).execute(params);</pre>
+<h3>
+<a name="SQL_Commands"></a>SQL Commands<a href="#SQL_Commands" class="section_anchor"></a>
+</h3>
+<p>To execute SQL commands use the <tt>command()</tt> method passing a OCommandSQL object: </p>
+<pre class="prettyprint">int recordsUpdated = db.command(
+  new OCommandSQL("update Animal set sold = false")).execute();</pre>
+<p>See all the <a href="sql.html">SQL Commands</a>. </p>
+<h1>
+<a name="Update_a_document"></a>Update a document<a href="#Update_a_document" class="section_anchor"></a>
+</h1>
+<p>Any persistent document can be updated using the Java API then calling the db.save() method, or by calling save() method against the document to synchronize the changes to the repository. Behaviour depends on the transaction begun if any. See <a href="transactions.html">Transactions</a>. </p>
+<pre class="prettyprint">animal.field( "location", "Nairobi" );
+animal.save();</pre>
+<p>Orient will update only the fields really changed. </p>
+<p>Example of how to increase the price of all the animals by 5%: </p>
+<pre class="prettyprint">for (ODocument animal : database.browseClass("Animal")) {
   animal.field( "price", animal.field( "price" ) * 105 / 100 );
   animal.save();
-}
-</pre>
-<h2>
-  <a name="Delete_a_document" id="Delete_a_document"></a>Delete a document<a href="#Delete_a_document" class="section_anchor"></a>
-</h2>
-<p>
-  To delete a document call the delete() method against the document instance loaded. Behaviour depends by the transaction begun if any. See <a href="transactions.html">Transactions</a>.
-</p>
-<pre class="prettyprint language-java">
-animal.delete();
-</pre>
-<p>
-  Example of deletion of all the documents of class "Animal".
-</p>
-<pre class="prettyprint language-java">
-for (ODocument animal : database.browseClass("Animal"))
-  animal.delete();
-</pre>
-<h2>
-  <a name="Javadoc" id="Javadoc"></a>Javadoc<a href="#Javadoc" class="section_anchor"></a>
-</h2>
-<p>
-  <a href="http://www.orientechnologies.com/releases/latest/javadoc/index.html" rel="nofollow">JavaDoc</a>
-</p>
+}</pre>
+<h1>
+<a name="Delete_a_document"></a>Delete a document<a href="#Delete_a_document" class="section_anchor"></a>
+</h1>
+<p>To delete a document call the delete() method against the document instance loaded. Behaviour depends by the transaction begun if any. See <a href="transactions.html">Transactions</a>. </p>
+<pre class="prettyprint">animal.delete();</pre>
+<p>Example of deletion of all the documents of class "Animal". </p>
+<pre class="prettyprint">for (ODocument animal : database.browseClass("Animal"))
+  animal.delete();</pre>
+<h1>
+<a name="Javadoc"></a>Javadoc<a href="#Javadoc" class="section_anchor"></a>
+</h1>
+<p><a href="http://www.orientechnologies.com/releases/latest/javadoc/index.html" rel="nofollow">JavaDoc</a> </p>

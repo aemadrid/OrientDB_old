@@ -1,0 +1,47 @@
+---
+title: Config
+layout: default
+---
+
+ <h1>
+<a name="Config"></a>Config<a href="#Config" class="section_anchor"></a>
+</h1>
+<p>Displays the configuration where the opened database is located (local or remote) </p>
+<h2>
+<a name="Syntax"></a>Syntax<a href="#Syntax" class="section_anchor"></a>
+</h2>
+<p><tt>config</tt> </p>
+<h2>
+<a name="Example"></a>Example<a href="#Example" class="section_anchor"></a>
+</h2>
+<pre class="prettyprint">&gt; config
+
+REMOTE SERVER CONFIGURATION:
++------------------------------------+--------------------------------+
+| NAME                               | VALUE                          |
++------------------------------------+--------------------------------+
+| treemap.lazyUpdates                = 300                            |
+| db.cache.enabled                   = false                          |
+| file.mmap.forceRetry               = 5                              |
+| treemap.optimizeEntryPointsFactor  = 1.0                            |
+| storage.keepOpen                   = true                           |
+| treemap.loadFactor                 = 0.7                            |
+| file.mmap.maxMemory                = 110000000                      |
+| network.http.maxLength             = 10000                          |
+| storage.cache.size                 = 5000                           |
+| treemap.nodePageSize               = 1024                           |
+| network.timeout                    = 10000                          |
+| file.mmap.forceDelay               = 500                            |
+| profiler.enabled                   = false                          |
+| network.socketBufferSize           = 32768                          |
+| treemap.optimizeThreshold          = 50000                          |
+| file.mmap.blockSize                = 300000                         |
+| network.retryDelay                 = 500                            |
+| network.retry                      = 5                              |
+| treemap.entryPoints                = 30                             |
++------------------------------------+--------------------------------+</pre>
+<h2>
+<a name="See_also"></a>See also<a href="#See_also" class="section_anchor"></a>
+</h2>
+<p>To change a configuration value use the <a href="console_command_config_set.html">config set</a>. </p>
+<p>This is a command of the Orient console. To know all the commands go to <a href="console_commands.html">Console commands</a>. </p>

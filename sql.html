@@ -2,3 +2,35 @@
 title: SQL
 layout: default
 ---
+
+ <p>Althought OrientDB is a NoSQL dbms, it supports SQL as language to execute queries and commands. The choice was made for the main reason that developers already know SQL and they feel more comfortable if start to use something familiar. </p>
+<p>Many SQL commands share the <a href="sql_where.html">WHERE conditions</a>. In these examples the SQL keyworks are in uppercase but OrientDB ignore the case when parses. </p>
+<p>Bear in mind that field names are case-sensitive. If you have a class MyClass with a field named 'id', than sql statement <tt>SELECT FROM MyClass WHERE ID = 1</tt> will always return an empty result set. For the class names, case sensitivity doesn't hold so you can write them in any register. </p>
+<ul>
+<li>
+<a href="sql_where.html">SQL expression syntax</a> - <a href="sql_where.html#Operators">Operators</a> - <a href="sql_where.html#Functions">Functions</a> </li>
+<li>
+<a href="sql_query.html">SQL Select</a> used as command and for queries </li>
+<li>
+<a href="sql_insert.html">SQL Insert</a> to insert new records </li>
+<li>
+<a href="sql_update.html">SQL Update</a> to update one or more records </li>
+<li>
+<a href="sql_delete.html">SQL Delete</a> to delete one or more records </li>
+<li>
+<a href="sql_truncate_class.html">Truncate Class</a>, <a href="sql_truncate_cluster.html">Truncate Cluster</a>, <a href="sql_truncate_record.html">Truncate Record</a> </li>
+<li>
+<a href="sql_grant.html">SQL Grant</a> and <a href="sql_revoke.html">SQL Revoke</a> </li>
+<li>
+<a href="sql_create_class.html">Create Class</a>, <a href="sql_alter_class.html">Alter Class</a>, <a href="sql_remove_class.html">Drop Class</a>, <a href="sql_create_property.html">Create Property</a>, <a href="sql_alter_property.html">Alter Property</a>, <a href="sql_remove_property.html">Drop Property</a> </li>
+<li>
+<a href="sql_create_index.html">Create Index</a>, <a href="sql_rebuild_index.html">Rebuild Index</a>, <a href="sql_remove_index.html">Drop Index</a> </li>
+<li>
+<a href="sql_create_link.html">Create Link</a> </li>
+<li>
+<a href="sql_find_references.html">SQL Find References</a> </li>
+<li>
+<a href="sql_alter_database.html">Alter Database</a>, <a href="sql_alter_cluster.html">Alter Cluster</a> </li>
+<li>
+<a href="pagination.html">Pagination</a> </li>
+</ul>

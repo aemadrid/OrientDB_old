@@ -1,0 +1,25 @@
+---
+title: Declare Intent
+layout: default
+---
+
+ <h1>
+<a name="Declare_intent"></a>Declare intent<a href="#Declare_intent" class="section_anchor"></a>
+</h1>
+<p>Declare an intent on current database. Intents are a way to tell to OrientDB what you're going to do. </p>
+<h2>
+<a name="Syntax"></a>Syntax<a href="#Syntax" class="section_anchor"></a>
+</h2>
+<pre class="prettyprint">declare intent &lt;intent-name&gt;</pre>
+<p>Where: </p>
+<ul>
+<li>intent-name  The name of the intent. "null" means remove the current intent. Supported ones are: </li>
+<ul>
+<li>massiveinsert </li>
+<li>massiveread </li>
+</ul>
+</ul><h2>
+<a name="Example"></a>Example<a href="#Example" class="section_anchor"></a>
+</h2>
+<pre class="prettyprint">&gt; declare intent massiveinsert</pre>
+<p>This is a command of the Orient console. To know all the commands go to <a href="console_commands.html">Console commands</a>. </p>

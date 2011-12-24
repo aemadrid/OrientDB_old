@@ -1,0 +1,41 @@
+---
+title: Full text indexes
+layout: default
+---
+
+ <h1>
+<a name="Create_Index"></a>Create Index<a href="#Create_Index" class="section_anchor"></a>
+</h1>
+<p>The <strong>SQL Create Index</strong> command creates an index on a property defined in the schema.  </p>
+<p>Indexes can be: </p>
+<ul>
+<li>
+<strong>unique</strong>, doesn't allow duplicated </li>
+<li>
+<strong>not unique</strong>, allows duplicates </li>
+<li>
+<strong>full-text</strong>, by indexing any single word of the text. It's used in query with the operator <a href="sql_where.html#Operators">CONTAINSTEXT</a> </li>
+</ul><h2>
+<a name="Syntax"></a>Syntax<a href="#Syntax" class="section_anchor"></a>
+</h2>
+<pre class="prettyprint">CREATE INDEX &lt;name&gt; [ON &lt;class-name&gt; (prop-names)] &lt;type&gt; [&lt;key-type&gt;]</pre>
+<p>Where: </p>
+<ul>
+<li>
+<strong>name</strong> logical name of index. Can be <strong><tt>&lt;class&gt;.&lt;property&gt;</tt></strong> to create an automatic index bound to a schema property. In this case <strong>class</strong> is the class of the schema and <strong>property</strong>, is the property created into the class. Notice that in another case index name can't contain '.' symbol </li>
+<li>
+<strong>class-name</strong> name of class that automatic index created for. Class with such name must already exist in database </li>
+<li>
+<strong>prop-names</strong> comma-separated list of properties that this automatic index is created for. Property with such name must already exist in schema </li>
+<li>
+<strong>type</strong>, between 'unique', 'notunique' and 'fulltext' </li>
+<li>
+<strong>key-type</strong>, is the type of key (Optional). On automatic indexes is auto-determined by reading the target schema property where the index is created. If not specified for manual indexes, at run-time during the first insertion the type will be auto determined by reading the type of the class. </li>
+</ul><h2>
+<a name="Examples"></a>Examples<a href="#Examples" class="section_anchor"></a>
+</h2>
+<pre class="prettyprint">CREATE INDEX users.Id unique</pre>
+<p>For more information look at <a href="sql_create_index.html">Create index command</a>. </p>
+<p>For complete index guide look at <a href="indexes.html">Index guide</a>. </p>
+<p>To know more about other SQL commands look at <a href="sql.html">SQL commands</a>. </p>
+<p>This is a command of the Orient console. To know all the commands go to <a href="console_commands.html">Console commands</a>. </p>

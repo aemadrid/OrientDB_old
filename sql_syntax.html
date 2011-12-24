@@ -1,0 +1,234 @@
+---
+title: Syntax
+layout: default
+---
+
+ <pre class="prettyprint">DOCUMENT START
+TOKENS
+&lt;DEFAULT&gt; SKIP : {
+" "
+| "\t"
+| "\n"
+| "\r"
+}
+
+/* reserved words */&lt;DEFAULT&gt; TOKEN : {
+&lt;SELECT: ("s" | "S") ("e" | "E") ("l" | "L") ("e" | "E") ("c" | "C") ("t" | "T")&gt;
+| &lt;INSERT: ("i" | "I") ("n" | "N") ("s" | "S") ("e" | "E") ("r" | "R") ("t" | "T")&gt;
+| &lt;UPDATE: ("u" | "U") ("p" | "P") ("d" | "D") ("a" | "A") ("t" | "T") ("e" | "E")&gt;
+| &lt;DELETE: ("d" | "D") ("e" | "E") ("l" | "L") ("e" | "E") ("t" | "T") ("e" | "E")&gt;
+| &lt;FROM: ("f" | "F") ("r" | "R") ("o" | "O") ("m" | "M")&gt;
+| &lt;WHERE: ("w" | "W") ("h" | "H") ("e" | "E") ("r" | "R") ("e" | "E")&gt;
+| &lt;INTO: ("i" | "I") ("n" | "N") ("t" | "T") ("o" | "O")&gt;
+| &lt;VALUES: ("v" | "V") ("a" | "A") ("l" | "L") ("u" | "U") ("e" | "E") ("s" | "S")&gt;
+| &lt;SET: ("s" | "S") ("e" | "E") ("t" | "T")&gt;
+| &lt;ADD: ("a" | "A") ("d" | "D") ("d" | "D")&gt;
+| &lt;REMOVE: ("r" | "R") ("e" | "E") ("m" | "M") ("o" | "O") ("v" | "V") ("e" | "E")&gt;
+| &lt;AND: ("a" | "A") ("n" | "N") ("d" | "D")&gt;
+| &lt;OR: ("o" | "O") ("r" | "R")&gt;
+| &lt;NULL: ("N" | "n") ("U" | "u") ("L" | "l") ("L" | "l")&gt;
+| &lt;ORDER: ("o" | "O") ("r" | "R") ("d" | "D") ("e" | "E") ("r" | "R")&gt;
+| &lt;BY: ("b" | "B") ("y" | "Y")&gt;
+| &lt;LIMIT: ("l" | "L") ("i" | "I") ("m" | "M") ("i" | "I") ("t" | "T")&gt;
+| &lt;RANGE: ("r" | "R") ("a" | "A") ("n" | "N") ("g" | "G") ("e" | "E")&gt;
+| &lt;ASC: ("a" | "A") ("s" | "S") ("c" | "C")&gt;
+| &lt;AS: ("a" | "A") ("s" | "S")&gt;
+| &lt;DESC: ("d" | "D") ("e" | "E") ("s" | "S") ("c" | "C")&gt;
+| &lt;THIS: "@this"&gt;
+| &lt;RECORD_ATTRIBUTE: &lt;RID_ATTR&gt; | &lt;CLASS_ATTR&gt; | &lt;VERSION_ATTR&gt; | &lt;SIZE_ATTR&gt; | &lt;TYPE_ATTR&gt;&gt;
+| &lt;#RID_ATTR: "@rid"&gt;
+| &lt;#CLASS_ATTR: "@class"&gt;
+| &lt;#VERSION_ATTR: "@version"&gt;
+| &lt;#SIZE_ATTR: "@size"&gt;
+| &lt;#TYPE_ATTR: "@type"&gt;
+}
+
+/* LITERALS */&lt;DEFAULT&gt; TOKEN : {
+&lt;INTEGER_LITERAL: &lt;DECIMAL_LITERAL&gt; (["l","L"])? | &lt;HEX_LITERAL&gt; (["l","L"])? | &lt;OCTAL_LITERAL&gt; (["l","L"])?&gt;
+| &lt;#DECIMAL_LITERAL: ["1"-"9"] (["0"-"9"])*&gt;
+| &lt;#HEX_LITERAL: "0" ["x","X"] (["0"-"9","a"-"f","A"-"F"])+&gt;
+| &lt;#OCTAL_LITERAL: "0" (["0"-"7"])*&gt;
+| &lt;FLOATING_POINT_LITERAL: &lt;DECIMAL_FLOATING_POINT_LITERAL&gt; | &lt;HEXADECIMAL_FLOATING_POINT_LITERAL&gt;&gt;
+| &lt;#DECIMAL_FLOATING_POINT_LITERAL: (["0"-"9"])+ "." (["0"-"9"])* (&lt;DECIMAL_EXPONENT&gt;)? (["f","F","d","D"])? | "." (["0"-"9"])+ (&lt;DECIMAL_EXPONENT&gt;)? (["f","F","d","D"])? | (["0"-"9"])+ &lt;DECIMAL_EXPONENT&gt; (["f","F","d","D"])? | (["0"-"9"])+ (&lt;DECIMAL_EXPONENT&gt;)? ["f","F","d","D"]&gt;
+| &lt;#DECIMAL_EXPONENT: ["e","E"] (["+","-"])? (["0"-"9"])+&gt;
+| &lt;#HEXADECIMAL_FLOATING_POINT_LITERAL: "0" ["x","X"] (["0"-"9","a"-"f","A"-"F"])+ (".")? &lt;HEXADECIMAL_EXPONENT&gt; (["f","F","d","D"])? | "0" ["x","X"] (["0"-"9","a"-"f","A"-"F"])* "." (["0"-"9","a"-"f","A"-"F"])+ &lt;HEXADECIMAL_EXPONENT&gt; (["f","F","d","D"])?&gt;
+| &lt;#HEXADECIMAL_EXPONENT: ["p","P"] (["+","-"])? (["0"-"9"])+&gt;
+| &lt;CHARACTER_LITERAL: "\'" (~["\'","\\","\n","\r"] | "\\" (["n","t","b","r","f","\\","\'","\""] | ["0"-"7"] (["0"-"7"])? | ["0"-"3"] ["0"-"7"] ["0"-"7"])) "\'"&gt;
+| &lt;STRING_LITERAL: "\"" (~["\"","\\","\n","\r"] | "\\" (["n","t","b","r","f","\\","\'","\""] | ["0"-"7"] (["0"-"7"])? | ["0"-"3"] ["0"-"7"] ["0"-"7"]))* "\"" | "\'" (~["\'","\\","\n","\r"] | "\\" (["n","t","b","r","f","\\","\'","\""] | ["0"-"7"] (["0"-"7"])? | ["0"-"3"] ["0"-"7"] ["0"-"7"]))* "\'"&gt;
+}
+
+/* SEPARATORS */&lt;DEFAULT&gt; TOKEN : {
+&lt;LPAREN: "("&gt;
+| &lt;RPAREN: ")"&gt;
+| &lt;LBRACE: "{"&gt;
+| &lt;RBRACE: "}"&gt;
+| &lt;LBRACKET: "["&gt;
+| &lt;RBRACKET: "]"&gt;
+| &lt;SEMICOLON: ";"&gt;
+| &lt;COMMA: ","&gt;
+| &lt;DOT: "."&gt;
+| &lt;AT: "@"&gt;
+}
+
+/* OPERATORS */&lt;DEFAULT&gt; TOKEN : {
+&lt;EQ: "="&gt;
+| &lt;LT: "&lt;"&gt;
+| &lt;GT: "&gt;"&gt;
+| &lt;BANG: "!"&gt;
+| &lt;TILDE: "~"&gt;
+| &lt;HOOK: "?"&gt;
+| &lt;COLON: ":"&gt;
+| &lt;LE: "&lt;="&gt;
+| &lt;GE: "&gt;="&gt;
+| &lt;NE: "!="&gt;
+| &lt;NEQ: "&lt;&gt;"&gt;
+| &lt;SC_OR: "||"&gt;
+| &lt;SC_AND: "&amp;&amp;"&gt;
+| &lt;INCR: "++"&gt;
+| &lt;DECR: "--"&gt;
+| &lt;PLUS: "+"&gt;
+| &lt;MINUS: "-"&gt;
+| &lt;STAR: "*"&gt;
+| &lt;SLASH: "/"&gt;
+| &lt;BIT_AND: "&amp;"&gt;
+| &lt;BIT_OR: "|"&gt;
+| &lt;XOR: "^"&gt;
+| &lt;REM: "%"&gt;
+| &lt;LSHIFT: "&lt;&lt;"&gt;
+| &lt;PLUSASSIGN: "+="&gt;
+| &lt;MINUSASSIGN: "-="&gt;
+| &lt;STARASSIGN: "*="&gt;
+| &lt;SLASHASSIGN: "/="&gt;
+| &lt;ANDASSIGN: "&amp;="&gt;
+| &lt;ORASSIGN: "|="&gt;
+| &lt;XORASSIGN: "^="&gt;
+| &lt;REMASSIGN: "%="&gt;
+| &lt;LSHIFTASSIGN: "&lt;&lt;="&gt;
+| &lt;RSIGNEDSHIFTASSIGN: "&gt;&gt;="&gt;
+| &lt;RUNSIGNEDSHIFTASSIGN: "&gt;&gt;&gt;="&gt;
+| &lt;ELLIPSIS: "..."&gt;
+| &lt;NOT: ("N" | "n") ("O" | "o") ("T" | "t")&gt;
+| &lt;LIKE: ("L" | "l") ("I" | "i") ("K" | "k") ("E" | "e")&gt;
+| &lt;IS: "is" | "IS" | "Is" | "iS"&gt;
+| &lt;IN: "in" | "IN" | "In" | "iN"&gt;
+| &lt;BETWEEN: ("B" | "b") ("E" | "e") ("T" | "t") ("W" | "w") ("E" | "e") ("E" | "e") ("N" | "n")&gt;
+| &lt;CONTAINS: ("C" | "c") ("O" | "o") ("N" | "n") ("T" | "t") ("A" | "a") ("I" | "i") ("N" | "n") ("S" | "s")&gt;
+| &lt;CONTAINSALL: ("C" | "c") ("O" | "o") ("N" | "n") ("T" | "t") ("A" | "a") ("I" | "i") ("N" | "n") ("S" | "s") ("A" | "a") ("L" | "l") ("L" | "l")&gt;
+| &lt;CONTAINSKEY: ("C" | "c") ("O" | "o") ("N" | "n") ("T" | "t") ("A" | "a") ("I" | "i") ("N" | "n") ("S" | "s") ("K" | "k") ("E" | "e") ("Y" | "y")&gt;
+| &lt;CONTAINSVALUE: ("C" | "c") ("O" | "o") ("N" | "n") ("T" | "t") ("A" | "a") ("I" | "i") ("N" | "n") ("S" | "s") ("V" | "v") ("A" | "a") ("L" | "l") ("U" | "u") ("E" | "e")&gt;
+| &lt;CONTAINSTEXT: ("C" | "c") ("O" | "o") ("N" | "n") ("T" | "t") ("A" | "a") ("I" | "i") ("N" | "n") ("S" | "s") ("T" | "t") ("E" | "e") ("X" | "x") ("T" | "t")&gt;
+| &lt;MATCHES: ("M" | "m") ("A" | "a") ("T" | "t") ("C" | "c") ("H" | "h") ("E" | "e") ("S" | "s")&gt;
+| &lt;TRAVERSE: ("T" | "t") ("R" | "r") ("A" | "a") ("V" | "v") ("E" | "e") ("R" | "r") ("S" | "s") ("E" | "e")&gt;
+}
+
+&lt;DEFAULT&gt; TOKEN : {
+&lt;IDENTIFIER: &lt;LETTER&gt; (&lt;PART_LETTER&gt;)*&gt;
+| &lt;#LETTER: ["A"-"Z","_","a"-"z"]&gt;
+| &lt;#PART_LETTER: ["0"-"9","A"-"Z","_","a"-"z"]&gt;
+}
+
+NON-TERMINALS
+	Rid	:=	"#" &lt;INTEGER_LITERAL&gt; &lt;COLON&gt; &lt;INTEGER_LITERAL&gt;
+		|	&lt;INTEGER_LITERAL&gt; &lt;COLON&gt; &lt;INTEGER_LITERAL&gt;
+/** Root production. */	OrientGrammar	:=	Statement &lt;EOF&gt;
+	Statement	:=	( SelectStatement | DeleteStatement | InsertStatement | UpdateStatement )
+	SelectStatement	:=	&lt;SELECT&gt; ( Projection )? &lt;FROM&gt; FromClause ( &lt;WHERE&gt; WhereClause )? ( OrderBy )? ( Limit )? ( Range )?
+	DeleteStatement	:=	&lt;DELETE&gt; &lt;FROM&gt; &lt;IDENTIFIER&gt; ( &lt;WHERE&gt; WhereClause )?
+	UpdateStatement	:=	&lt;UPDATE&gt; ( &lt;IDENTIFIER&gt; | Cluster | IndexIdentifier ) ( ( &lt;SET&gt; UpdateItem ( "," UpdateItem )* ) ) ( &lt;WHERE&gt; WhereClause )?
+	UpdateItem	:=	&lt;IDENTIFIER&gt; &lt;EQ&gt; ( &lt;NULL&gt; | &lt;STRING_LITERAL&gt; | Rid | &lt;INTEGER_LITERAL&gt; | &lt;FLOATING_POINT_LITERAL&gt; | &lt;CHARACTER_LITERAL&gt; | &lt;LBRACKET&gt; Rid ( "," Rid )* &lt;RBRACKET&gt; )
+	UpdateAddItem	:=	&lt;IDENTIFIER&gt; &lt;EQ&gt; ( &lt;STRING_LITERAL&gt; | Rid | &lt;INTEGER_LITERAL&gt; | &lt;FLOATING_POINT_LITERAL&gt; | &lt;CHARACTER_LITERAL&gt; | &lt;LBRACKET&gt; Rid ( "," Rid )* &lt;RBRACKET&gt; )
+	InsertStatement	:=	&lt;INSERT&gt; &lt;INTO&gt; ( &lt;IDENTIFIER&gt; | Cluster ) &lt;LPAREN&gt; &lt;IDENTIFIER&gt; ( "," &lt;IDENTIFIER&gt; ) &lt;RPAREN&gt; &lt;VALUES&gt; &lt;LPAREN&gt; InsertExpression ( "," InsertExpression ) &lt;RPAREN&gt;
+	InsertExpression	:=	&lt;NULL&gt;
+		|	&lt;STRING_LITERAL&gt;
+		|	&lt;INTEGER_LITERAL&gt;
+		|	&lt;FLOATING_POINT_LITERAL&gt;
+		|	Rid
+		|	&lt;CHARACTER_LITERAL&gt;
+		|	&lt;LBRACKET&gt; Rid ( "," Rid )* &lt;RBRACKET&gt;
+	InputParameter	:=	"?"
+	Projection	:=	ProjectionItem ( "," ProjectionItem )*
+	ProjectionItem	:=	"*"
+		|	( ( &lt;NULL&gt; | &lt;INTEGER_LITERAL&gt; | &lt;STRING_LITERAL&gt; | &lt;FLOATING_POINT_LITERAL&gt; | &lt;CHARACTER_LITERAL&gt; | FunctionCall | DottedIdentifier | RecordAttribute | ThisOperation | InputParameter ) ( &lt;AS&gt; Alias )? )
+	FilterItem	:=	&lt;NULL&gt;
+		|	Any
+		|	All
+		|	&lt;INTEGER_LITERAL&gt;
+		|	&lt;STRING_LITERAL&gt;
+		|	&lt;FLOATING_POINT_LITERAL&gt;
+		|	&lt;CHARACTER_LITERAL&gt;
+		|	FunctionCall
+		|	DottedIdentifier
+		|	RecordAttribute
+		|	ThisOperation
+		|	InputParameter
+	Alias	:=	&lt;IDENTIFIER&gt;
+	Any	:=	"any()"
+	All	:=	"all()"
+	RecordAttribute	:=	&lt;RECORD_ATTRIBUTE&gt;
+	ThisOperation	:=	&lt;THIS&gt; ( FieldOperator )*
+	FunctionCall	:=	&lt;IDENTIFIER&gt; &lt;LPAREN&gt; ( "*" | ( FilterItem ( "," FilterItem )* ) ) &lt;RPAREN&gt; ( FieldOperator )*
+	FieldOperator	:=	( &lt;DOT&gt; &lt;IDENTIFIER&gt; &lt;LPAREN&gt; ( FilterItem ( "," FilterItem )* )? &lt;RPAREN&gt; )
+		|	( "[" &lt;STRING_LITERAL&gt; "]" )
+	DottedIdentifier	:=	&lt;IDENTIFIER&gt; ( "[" WhereClause "]" )+
+		|	&lt;IDENTIFIER&gt; ( FieldOperator )+
+		|	&lt;IDENTIFIER&gt; ( &lt;DOT&gt; DottedIdentifier )?
+	FromClause	:=	FromItem
+	FromItem	:=	Rid
+		|	&lt;LBRACKET&gt; Rid ( "," Rid )* &lt;RBRACKET&gt;
+		|	Cluster
+		|	IndexIdentifier
+		|	&lt;IDENTIFIER&gt;
+	Cluster	:=	"cluster:" &lt;IDENTIFIER&gt;
+	IndexIdentifier	:=	"index:" &lt;IDENTIFIER&gt;
+	WhereClause	:=	OrBlock
+	OrBlock	:=	AndBlock ( &lt;OR&gt; AndBlock )*
+	AndBlock	:=	( NotBlock ) ( &lt;AND&gt; ( NotBlock ) )*
+	NotBlock	:=	( &lt;NOT&gt; )? ( ConditionBlock | ParenthesisBlock )
+	ParenthesisBlock	:=	&lt;LPAREN&gt; OrBlock &lt;RPAREN&gt;
+	ConditionBlock	:=	TraverseCondition
+		|	IsNotNullCondition
+		|	IsNullCondition
+		|	BinaryCondition
+		|	BetweenCondition
+		|	ContainsCondition
+		|	ContainsTextCondition
+		|	MatchesCondition
+	CompareOperator	:=	EqualsCompareOperator
+		|	LtOperator
+		|	GtOperator
+		|	NeOperator
+		|	NeqOperator
+		|	GeOperator
+		|	LeOperator
+		|	InOperator
+		|	NotInOperator
+		|	LikeOperator
+		|	ContainsKeyOperator
+		|	ContainsValueOperator
+	LtOperator	:=	&lt;LT&gt;
+	GtOperator	:=	&lt;GT&gt;
+	NeOperator	:=	&lt;NE&gt;
+	NeqOperator	:=	&lt;NEQ&gt;
+	GeOperator	:=	&lt;GE&gt;
+	LeOperator	:=	&lt;LE&gt;
+	InOperator	:=	&lt;IN&gt;
+	NotInOperator	:=	&lt;NOT&gt; &lt;IN&gt;
+	LikeOperator	:=	&lt;LIKE&gt;
+	ContainsKeyOperator	:=	&lt;CONTAINSKEY&gt;
+	ContainsValueOperator	:=	&lt;CONTAINSVALUE&gt;
+	EqualsCompareOperator	:=	&lt;EQ&gt;
+	BinaryCondition	:=	FilterItem CompareOperator ( Rid | FilterItem )
+	BetweenCondition	:=	FilterItem &lt;BETWEEN&gt; FilterItem &lt;AND&gt; FilterItem
+	IsNullCondition	:=	FilterItem &lt;IS&gt; &lt;NULL&gt;
+	IsNotNullCondition	:=	FilterItem &lt;IS&gt; &lt;NOT&gt; &lt;NULL&gt;
+	ContainsCondition	:=	FilterItem &lt;CONTAINS&gt; &lt;LPAREN&gt; OrBlock &lt;RPAREN&gt;
+	ContainsAllCondition	:=	FilterItem &lt;CONTAINSALL&gt; &lt;LPAREN&gt; OrBlock &lt;RPAREN&gt;
+	ContainsTextCondition	:=	FilterItem &lt;CONTAINSTEXT&gt; ( &lt;STRING_LITERAL&gt; | DottedIdentifier )
+	MatchesCondition	:=	FilterItem &lt;MATCHES&gt; &lt;STRING_LITERAL&gt;
+	TraverseCondition	:=	&lt;TRAVERSE&gt; ( &lt;LPAREN&gt; &lt;INTEGER_LITERAL&gt; ( "," &lt;INTEGER_LITERAL&gt; ( "," TraverseFields )? )? &lt;RPAREN&gt; )? &lt;LPAREN&gt; OrBlock &lt;RPAREN&gt;
+	TraverseFields	:=	&lt;STRING_LITERAL&gt;
+	OrderBy	:=	&lt;ORDER&gt; &lt;BY&gt; &lt;IDENTIFIER&gt; ( "," &lt;IDENTIFIER&gt; )* ( &lt;DESC&gt; | &lt;ASC&gt; )?
+	Limit	:=	&lt;LIMIT&gt; &lt;INTEGER_LITERAL&gt;
+	Range	:=	&lt;RANGE&gt; Rid ( "," Rid )?
+
+DOCUMENT END</pre>

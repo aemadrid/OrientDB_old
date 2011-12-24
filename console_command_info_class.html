@@ -1,0 +1,33 @@
+---
+title: Info Class
+layout: default
+---
+
+ <h1>
+<a name="Info_class"></a>Info class<a href="#Info_class" class="section_anchor"></a>
+</h1>
+<p>Display all the information about the selected class </p>
+<h2>
+<a name="Syntax"></a>Syntax<a href="#Syntax" class="section_anchor"></a>
+</h2>
+<p><tt>info class &lt;class-name&gt;</tt> </p>
+<h2>
+<a name="Example"></a>Example<a href="#Example" class="section_anchor"></a>
+</h2>
+<pre class="prettyprint">&gt; info class profile
+
+Class................: Profile (id=4)
+Default cluster......: profile (id=10)
+Supported cluster ids: [10]
+Properties:
+-------------------------------+----+-------------+-------------------------------+-----------+-----------+----------+------+------+
+ NAME                          | ID | TYPE        | LINKED TYPE/CLASS             | INDEX     | MANDATORY | NOT NULL | MIN  | MAX  |
+-------------------------------+----+-------------+-------------------------------+-----------+-----------+----------+------+------+
+ lastAccessOn                  |  5 | DATETIME    | null                          |           | false     | false    | 2010-01-01 00:00:00|      |
+ registeredOn                  |  4 | DATETIME    | null                          |           | false     | false    | 2010-01-01 00:00:00|      |
+ nick                          |  3 | STRING      | null                          |           | false     | false    | 3    | 30   |
+ name                          |  2 | STRING      | null                          | NOTUNIQUE | false     | false    | 3    | 30   |
+ surname                       |  1 | STRING      | null                          |           | false     | false    | 3    | 30   |
+ photo                         |  0 | TRANSIENT   | null                          |           | false     | false    |      |      |
+-------------------------------+----+-------------+-------------------------------+-----------+-----------+----------+------+------+</pre>
+<p>This is a command of the Orient console. To know all the commands go to <a href="console_commands.html">Console commands</a>. </p>
