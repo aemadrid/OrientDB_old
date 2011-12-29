@@ -68,8 +68,7 @@ div.topbar a.brand span {
   margin-bottom: 14px;
 }
 #home-title-row div {
-  position: absolute;
-  left: 280px;
+  float: right;
   width: 600px;
 }
 #home-title-row div h1 {
@@ -83,7 +82,5 @@ div.topbar a.brand span {
 }
 
 #logo_sun {
-	position: relative;
-	z-index: 10;
-	top: 0;
+	float: left;
 }
