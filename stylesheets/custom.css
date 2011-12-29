@@ -8,9 +8,13 @@ body {
 .container > footer p {
   text-align: center; /* center align it with the container */
 }
+/*
 .container {
-  width: 820px; /* downsize our container to make the content feel a bit tighter and more cohesive. NOTE: this removes two full columns from the grid, meaning you only go to 14 columns and not 16. */
+  width: 820px; */
+/* downsize our container to make the content feel a bit tighter and more cohesive. NOTE: this removes two full columns from the grid, meaning you only go to 14 columns and not 16. *//*
+
 }
+*/
 
 /* The white background content wrapper */
 .content {
@@ -67,20 +71,15 @@ div.topbar a.brand span {
   height: 220px;
   margin-bottom: 14px;
 }
-#home-title-row div {
-  float: right;
-  width: 600px;
+#home-title-row div.one-third {
+  text-align: center;
 }
-#home-title-row div h1 {
+#home-title-row h1 {
   background:url("../images/orient_db.png") 0 0;
   background-repeat:no-repeat;
   width:540px;
   height:110px;
 }
-#home-title-row div h1 span{
+#home-title-row h1 span{
   display: none;
-}
-
-#logo_sun {
-	float: left;
 }

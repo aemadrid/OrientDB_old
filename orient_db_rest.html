@@ -20,6 +20,8 @@ layout: default
 <li><a href="#GET_-_Class">GET - Class</a></li>
 <li><a href="#POST_-_Class">POST - Class</a></li>
 </ul>
+<li><a href="#Property">Property</a></li>
+<ul><li><a href="#POST_-_Property">POST - Property</a></li></ul>
 <li><a href="#Cluster">Cluster</a></li>
 <ul><li><a href="#GET_-_Cluster">GET - Cluster</a></li></ul>
 <li><a href="#Command">Command</a></li>
@@ -57,9 +59,9 @@ layout: default
 <li><a href="#Server">Server</a></li>
 <ul><li><a href="#GET_-_Server">GET - Server</a></li></ul>
 </ul>
-</ul><h1>
+</ul><h2>
 <a name="Introduction"></a>Introduction<a href="#Introduction" class="section_anchor"></a>
-</h1>
+</h2>
 <p>OrientDB RESTful HTTP protocol allows to talk with a <a href="db_server.html">OrientDB Server instance</a> using the <a href="http://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol" rel="nofollow">HTTP protocol</a>. OrientDB supports also a highly optimized <a href="network_binary_protocol.html">Binary protocol</a> for superior performances. </p>
 <p>Language binding that use REST protocol: </p>
 <ul>
@@ -67,9 +69,9 @@ layout: default
 <strong><a href="https://github.com/emehrkay/Compass" rel="nofollow">Python</a></strong> </li>
 <li>
 <strong><a href="http://code.google.com/p/orient/wiki/JavascriptAPI" rel="nofollow">Javascript</a></strong> </li>
-</ul><h2>
+</ul><h3>
 <a name="Methods"></a>Methods<a href="#Methods" class="section_anchor"></a>
-</h2>
+</h3>
 <p>This protocol uses the four methods of the HTTP protocol: </p>
 <ul>
 <li>
@@ -80,9 +82,9 @@ layout: default
 <strong>PUT</strong>, to change values into the database </li>
 <li>
 <strong>DELETE</strong>, to delete values from the database </li>
-</ul><h2>
+</ul><h3>
 <a name="Syntax"></a>Syntax<a href="#Syntax" class="section_anchor"></a>
-</h2>
+</h3>
 <p>The REST syntax used is the same for all the four HTTP methods: </p>
 <p>Syntax: <tt>http://&lt;server&gt;:&lt;port&gt;/&lt;command&gt;/[&lt;database&gt;/&lt;arguments&gt;]</tt> </p>
 <p>Results are always in <a href="http://en.wikipedia.org/wiki/JSON" rel="nofollow">JSON</a> format. To specify an inner object is a document, the attribute <tt>@type : 'd'</tt> is needed. Example: </p>
@@ -99,25 +101,25 @@ layout: default
 <ul>
 <li>Server commands, such as to know server statistics and to create a new database </li>
 <li>Database commands, all the commands against a database </li>
-</ul><h2>
+</ul><h3>
 <a name="Authentication_and_security"></a>Authentication and security<a href="#Authentication_and_security" class="section_anchor"></a>
-</h2>
+</h3>
 <p>All the commands (but the <a href="#Disconnect">Disconnect</a>) need a valid authentication before to get executed. The OrientDB Server checks if the Authorization HTTP header is present, otherwise answers with a request of authentication (HTTP error code: 401). </p>
 <p>The HTTP client (or the Internet Browser) must send user and password using the HTTP Base authentication. Password is encoded using Base64 algorithm. Please note that if you want to enchrypt the password using a safe mode take in consideration to use SSL connections. </p>
 <p>Server commands use the realm "OrientDB Server", while the database commands use a realm per database in this form: <tt>"OrientDB db-&lt;database&gt;"</tt>, where <tt>&lt;database&gt;</tt> is the database name. In this way the Browser/HTTP client can reuse user and password inserted multiple times until the session expires or the "Disconnect" is called. </p>
-<h1>
-<a name="HTTP_commands"></a>HTTP commands<a href="#HTTP_commands" class="section_anchor"></a>
-</h1>
 <h2>
-<a name="Connect"></a>Connect<a href="#Connect" class="section_anchor"></a>
+<a name="HTTP_commands"></a>HTTP commands<a href="#HTTP_commands" class="section_anchor"></a>
 </h2>
 <h3>
-<a name="GET_-_Connect"></a>GET - Connect<a href="#GET_-_Connect" class="section_anchor"></a>
+<a name="Connect"></a>Connect<a href="#Connect" class="section_anchor"></a>
 </h3>
-<p>Syntax: <tt>http://&lt;server&gt;:[&lt;port&gt;]/connect/&lt;database&gt;</tt> </p>
 <h4>
-<a name="Example"></a>Example<a href="#Example" class="section_anchor"></a>
+<a name="GET_-_Connect"></a>GET - Connect<a href="#GET_-_Connect" class="section_anchor"></a>
 </h4>
+<p>Syntax: <tt>http://&lt;server&gt;:[&lt;port&gt;]/connect/&lt;database&gt;</tt> </p>
+<h5>
+<a name="Example"></a>Example<a href="#Example" class="section_anchor"></a>
+</h5>
 <p>HTTP GET request: <tt>http://localhost:2480/connect/demo</tt> HTTP response: </p>
 <pre class="prettyprint">{"classes": [
     {
@@ -126,18 +128,18 @@ layout: default
       "clusters": [3], 
       "defaultCluster": 3, "records": 0}, 
 ...</pre>
-<h2>
-<a name="Class"></a>Class<a href="#Class" class="section_anchor"></a>
-</h2>
 <h3>
-<a name="GET_-_Class"></a>GET - Class<a href="#GET_-_Class" class="section_anchor"></a>
+<a name="Class"></a>Class<a href="#Class" class="section_anchor"></a>
 </h3>
+<h4>
+<a name="GET_-_Class"></a>GET - Class<a href="#GET_-_Class" class="section_anchor"></a>
+</h4>
 <p>Browse the records of the requested class. </p>
 <p>Syntax: <tt>http://&lt;server&gt;:[&lt;port&gt;]/class/&lt;database&gt;/&lt;class-name&gt;[/&lt;limit&gt;]</tt> </p>
 <p>Where <tt>&lt;limit&gt;</tt> is optional and tells the maximum of records to load. Default is 20. </p>
-<h4>
+<h5>
 <a name="Example"></a>Example<a href="#Example" class="section_anchor"></a>
-</h4>
+</h5>
 <p>HTTP GET request: <tt>http://localhost:2480/class/demo/Address</tt> HTTP response: </p>
 <pre class="prettyprint">{ "schema": {
     "id": 5, 
@@ -152,27 +154,88 @@ layout: default
       "city": "12:0"
     }
 ...</pre>
-<h3>
+<h4>
 <a name="POST_-_Class"></a>POST - Class<a href="#POST_-_Class" class="section_anchor"></a>
-</h3>
+</h4>
 <p>Create a new class. Returns the id of the new class created. </p>
 <p>Syntax: <tt>http://&lt;server&gt;:[&lt;port&gt;]/class/&lt;database&gt;/&lt;class-name&gt;</tt> </p>
-<h4>
+<h5>
 <a name="Example"></a>Example<a href="#Example" class="section_anchor"></a>
-</h4>
+</h5>
 <p>HTTP POST request: <tt>http://localhost:2480/class/demo/Address2</tt> HTTP response: <tt>9</tt> </p>
-<h2>
-<a name="Cluster"></a>Cluster<a href="#Cluster" class="section_anchor"></a>
-</h2>
 <h3>
-<a name="GET_-_Cluster"></a>GET - Cluster<a href="#GET_-_Cluster" class="section_anchor"></a>
+<a name="Property"></a>Property<a href="#Property" class="section_anchor"></a>
 </h3>
+<h4>
+<a name="POST_-_Property"></a>POST - Property<a href="#POST_-_Property" class="section_anchor"></a>
+</h4>
+<p>Create one ore more properties into a given class. Returns the number of properties of the class. </p>
+<p><strong>Single property creation</strong><br> Syntax: <tt>http://&lt;server&gt;:[&lt;port&gt;]/property/&lt;database&gt;/&lt;class-name&gt;/&lt;property-name&gt;/[&lt;property-type&gt;]</tt> </p>
+<p>Creates a property named <tt>&lt;property-name&gt;</tt> in <tt>&lt;class-name&gt;</tt>. If <tt>&lt;property-type&gt;</tt> is not specified the property will be created as STRING. <br><br><strong>Multiple property creation</strong><br> Syntax: <tt>http://&lt;server&gt;:[&lt;port&gt;]/property/&lt;database&gt;/&lt;class-name&gt;/</tt><br><i>Requires a JSON document post request content</i>: </p>
+<pre class="prettyprint">{
+    "fieldName": {
+        "propertyType": "&lt;property-type&gt;"
+    },
+    "fieldName": {
+        "propertyType": "LINK",
+        "linkedClass": "&lt;linked-class&gt;"
+    },
+    "fieldName": {
+        "propertyType": "&lt;LINKMAP|LINKLIST|LINKSET&gt;",
+        "linkedClass": "&lt;linked-class&gt;"
+    },
+    "fieldName": {
+        "propertyType": "&lt;LINKMAP|LINKLIST|LINKSET&gt;",
+        "linkedType": "&lt;linked-type&gt;"
+    }
+}</pre>
+<p><br><br></p>
+<h5>
+<a name="Example"></a>Example<a href="#Example" class="section_anchor"></a>
+</h5>
+<p><i>Single property</i>: </p>
+<p>String Property Example:<br> HTTP POST request: <tt>http://localhost:2480/class/demo/simpleField</tt><br> HTTP response: <tt>1</tt> </p>
+<p>Type Property Example:<br> HTTP POST request: <tt>http://localhost:2480/class/demo/dateField/DATE</tt><br> HTTP response: <tt>1</tt> </p>
+<p>Link Property Example:<br> HTTP POST request: <tt>http://localhost:2480/class/demo/linkField/LINK/Person</tt><br> HTTP response: <tt>1</tt><br></p>
+<p><i>Multiple properties</i>:<br> HTTP POST request: <tt>http://localhost:2480/class/demo/</tt><br> HTTP POST content:<br></p>
+<pre class="prettyprint">{
+    "name": {
+        "propertyType": "STRING"
+    },
+    "father": {
+        "propertyType": "LINK",
+        "linkedClass": "Person"
+    },
+    "addresses": {
+        "propertyType": "LINKMAP",
+        "linkedClass": "Address"
+    },
+    "examsRatings": {
+        "propertyType": "LINKMAP",
+        "linkedType": "INTEGER"
+    }
+    "events": {
+        "propertyType": "LINKLIST",
+        "linkedType": "DATE"
+    }
+    "family": {
+        "propertyType": "LINKLIST",
+        "linkedClass": "Person"
+    }
+...</pre>
+<p>HTTP response: <tt>6</tt> </p>
+<h3>
+<a name="Cluster"></a>Cluster<a href="#Cluster" class="section_anchor"></a>
+</h3>
+<h4>
+<a name="GET_-_Cluster"></a>GET - Cluster<a href="#GET_-_Cluster" class="section_anchor"></a>
+</h4>
 <p>Browse the records of the requested cluster. </p>
 <p>Syntax: <tt>http://&lt;server&gt;:[&lt;port&gt;]/cluster/&lt;database&gt;/&lt;class-name&gt;[/&lt;limit&gt;]</tt> </p>
 <p>Where <tt>&lt;limit&gt;</tt> is optional and tells the maximum of records to load. Default is 20. </p>
-<h4>
+<h5>
 <a name="Example"></a>Example<a href="#Example" class="section_anchor"></a>
-</h4>
+</h5>
 <p>HTTP GET request: <tt>http://localhost:2480/cluster/demo/Address</tt> HTTP response: </p>
 <pre class="prettyprint">{ "schema": {
     "id": 5, 
@@ -187,36 +250,36 @@ layout: default
       "city": "12:0"
     }
 ...</pre>
-<h2>
-<a name="Command"></a>Command<a href="#Command" class="section_anchor"></a>
-</h2>
 <h3>
-<a name="POST_-_Command"></a>POST - Command<a href="#POST_-_Command" class="section_anchor"></a>
+<a name="Command"></a>Command<a href="#Command" class="section_anchor"></a>
 </h3>
+<h4>
+<a name="POST_-_Command"></a>POST - Command<a href="#POST_-_Command" class="section_anchor"></a>
+</h4>
 <p>Execute a SQL command against the database. Returns the records affected or the list of records for queries. In the future other languages will be supported. </p>
 <p>Syntax: <tt>http://&lt;server&gt;:[&lt;port&gt;]/command/&lt;database&gt;/sql[/&lt;command-text&gt;]</tt> </p>
 <blockquote>
 <tt>content: &lt;command-text&gt;</tt> 
 </blockquote>
-<h4>
+<h5>
 <a name="Example"></a>Example<a href="#Example" class="section_anchor"></a>
-</h4>
+</h5>
 <p>HTTP POST request: <tt>http://localhost:2480/command/demo/sql</tt> </p>
 <blockquote>
 <tt>content: update Profile set online = false</tt> 
 </blockquote>HTTP response: <tt>10</tt> <p>Or the same: </p>
 <p>HTTP POST request: <tt>http://localhost:2480/command/demo/sql/update Profile set online = false</tt> HTTP response: <tt>10</tt> </p>
-<h2>
-<a name="Database"></a>Database<a href="#Database" class="section_anchor"></a>
-</h2>
 <h3>
-<a name="GET_-_Database"></a>GET - Database<a href="#GET_-_Database" class="section_anchor"></a>
+<a name="Database"></a>Database<a href="#Database" class="section_anchor"></a>
 </h3>
+<h4>
+<a name="GET_-_Database"></a>GET - Database<a href="#GET_-_Database" class="section_anchor"></a>
+</h4>
 <p>Retrieve all the information about a database. </p>
 <p>Syntax: <tt>http://&lt;server&gt;:[&lt;port&gt;]/database/&lt;database&gt;</tt> </p>
-<h4>
+<h5>
 <a name="Example"></a>Example<a href="#Example" class="section_anchor"></a>
-</h4>
+</h5>
 <p>HTTP GET request: <tt>http://localhost:2480/database/demo</tt> HTTP response: </p>
 <pre class="prettyprint">{"classes": [
     {
@@ -231,17 +294,17 @@ layout: default
       "defaultCluster": 4, "records": 0}, 
     {
 ...</pre>
-<h3>
+<h4>
 <a name="POST_-_Database"></a>POST - Database<a href="#POST_-_Database" class="section_anchor"></a>
-</h3>
+</h4>
 <p>Create a new database. Requires additional authentication to the server. </p>
 <p>Syntax: <tt>http://&lt;server&gt;:[&lt;port&gt;]/database/&lt;databaseName&gt;/&lt;type&gt;</tt> <br>Storage allowed types: </p>
 <ul>
 <li>'local' for disk-based database </li>
 <li>'memory' for in memory only database.  </li>
-</ul><h4>
+</ul><h5>
 <a name="Example"></a>Example<a href="#Example" class="section_anchor"></a>
-</h4>
+</h5>
 <p>HTTP POST request: <tt>http://localhost:2480/database/demo2/local</tt> HTTP response: </p>
 <pre class="prettyprint">{"classes": [
     {
@@ -256,30 +319,30 @@ layout: default
       "defaultCluster": 4, "records": 0}, 
     {
 ...</pre>
-<h2>
-<a name="Export"></a>Export<a href="#Export" class="section_anchor"></a>
-</h2>
 <h3>
-<a name="GET_-_Export"></a>GET - Export<a href="#GET_-_Export" class="section_anchor"></a>
+<a name="Export"></a>Export<a href="#Export" class="section_anchor"></a>
 </h3>
+<h4>
+<a name="GET_-_Export"></a>GET - Export<a href="#GET_-_Export" class="section_anchor"></a>
+</h4>
 <p>Exports a gzip file that contains the database JSON export. </p>
 <p>Syntax: <tt>http://&lt;server&gt;:[&lt;port&gt;]/export/&lt;database&gt;</tt> </p>
-<h4>
+<h5>
 <a name="Example"></a>Example<a href="#Example" class="section_anchor"></a>
-</h4>
+</h5>
 <p>HTTP GET request: <tt>http://localhost:2480/export/demo2</tt> HTTP response: demo2.gzip file </p>
-<h2>
-<a name="Import"></a>Import<a href="#Import" class="section_anchor"></a>
-</h2>
 <h3>
-<a name="POST_-_Import"></a>POST - Import<a href="#POST_-_Import" class="section_anchor"></a>
+<a name="Import"></a>Import<a href="#Import" class="section_anchor"></a>
 </h3>
+<h4>
+<a name="POST_-_Import"></a>POST - Import<a href="#POST_-_Import" class="section_anchor"></a>
+</h4>
 <p>Imports a database from an uploaded JSON text file. </p>
 <p>Syntax: <tt>http://&lt;server&gt;:[&lt;port&gt;]/export/&lt;database&gt;</tt> </p>
 <p><strong>Important</strong>: Connect required: the connection with the selected database must be already established </p>
-<h4>
+<h5>
 <a name="Example"></a>Example<a href="#Example" class="section_anchor"></a>
-</h4>
+</h5>
 <p>HTTP POST request: <tt>http://localhost:2480/import/</tt><br> HTTP response: returns a JSON object containing the result text<br><i>Success</i>: </p>
 <pre class="prettyprint">{
 "responseText": "Database imported correctly"
@@ -288,28 +351,28 @@ layout: default
 <pre class="prettyprint">{
 "responseText": "Error message"
 }</pre>
-<h2>
+<h3>
 <a name="Disconnect"></a>Disconnect<a href="#Disconnect" class="section_anchor"></a>
-</h2>
-<h3>
-<a name="GET_-_Disconnect"></a>GET - Disconnect<a href="#GET_-_Disconnect" class="section_anchor"></a>
 </h3>
-<p>Syntax: <tt>http://&lt;server&gt;:[&lt;port&gt;]/disconnect</tt> </p>
 <h4>
-<a name="Example"></a>Example<a href="#Example" class="section_anchor"></a>
+<a name="GET_-_Disconnect"></a>GET - Disconnect<a href="#GET_-_Disconnect" class="section_anchor"></a>
 </h4>
+<p>Syntax: <tt>http://&lt;server&gt;:[&lt;port&gt;]/disconnect</tt> </p>
+<h5>
+<a name="Example"></a>Example<a href="#Example" class="section_anchor"></a>
+</h5>
 <p>HTTP GET request: <tt>http://localhost:2480/disconnect</tt> HTTP response: empty. </p>
-<h2>
-<a name="Document"></a>Document<a href="#Document" class="section_anchor"></a>
-</h2>
 <h3>
-<a name="GET_-_Document"></a>GET - Document<a href="#GET_-_Document" class="section_anchor"></a>
+<a name="Document"></a>Document<a href="#Document" class="section_anchor"></a>
 </h3>
+<h4>
+<a name="GET_-_Document"></a>GET - Document<a href="#GET_-_Document" class="section_anchor"></a>
+</h4>
 <p>Retrieve a document. </p>
 <p>Syntax: <tt>http://&lt;server&gt;:[&lt;port&gt;]/document/&lt;database&gt;/&lt;record-id&gt;[/&lt;fetchPlan&gt;]</tt><br> See <a href="http://code.google.com/p/orient/wiki/FetchingStrategies" rel="nofollow">Fetching Strategies</a> </p>
-<h4>
+<h5>
 <a name="Example"></a>Example<a href="#Example" class="section_anchor"></a>
-</h4>
+</h5>
 <p>HTTP GET request: <tt>http://localhost:2480/document/demo/9:0</tt> HTTP response: </p>
 <pre class="prettyprint">{
   "_id": "9:0", 
@@ -325,14 +388,14 @@ layout: default
   "sex": "male", 
   "online": true
 }</pre>
-<h3>
+<h4>
 <a name="POST_-_Document"></a>POST - Document<a href="#POST_-_Document" class="section_anchor"></a>
-</h3>
+</h4>
 <p>Create a new document. Returns the Record-id assigned. </p>
 <p>Syntax: <tt>http://&lt;server&gt;:[&lt;port&gt;]/document/&lt;database&gt;/&lt;record-id&gt;</tt> </p>
-<h4>
+<h5>
 <a name="Example"></a>Example<a href="#Example" class="section_anchor"></a>
-</h4>
+</h5>
 <p>HTTP POST request: <tt>http://localhost:2480/document/demo</tt> </p>
 <pre class="prettyprint">content: 
 {
@@ -348,14 +411,14 @@ layout: default
   "online": true
 }</pre>
 <p>HTTP response: <tt>9:11</tt> </p>
-<h3>
+<h4>
 <a name="PUT_-_Document"></a>PUT - Document<a href="#PUT_-_Document" class="section_anchor"></a>
-</h3>
+</h4>
 <p>Update a document. </p>
 <p>Syntax: <tt>http://&lt;server&gt;:[&lt;port&gt;]/document/&lt;database&gt;/&lt;record-id&gt;</tt> </p>
-<h4>
+<h5>
 <a name="Example"></a>Example<a href="#Example" class="section_anchor"></a>
-</h4>
+</h5>
 <p>HTTP PUT request: <tt>http://localhost:2480/document/demo/9:0</tt> </p>
 <pre class="prettyprint">content: 
 {
@@ -371,26 +434,26 @@ layout: default
   "online": true
 }</pre>
 <p>HTTP response: empty </p>
-<h3>
+<h4>
 <a name="DELETE_-_Document"></a>DELETE - Document<a href="#DELETE_-_Document" class="section_anchor"></a>
-</h3>
+</h4>
 <p>Delete a document. </p>
 <p>Syntax: <tt>http://&lt;server&gt;:[&lt;port&gt;]/document/&lt;database&gt;/&lt;record-id&gt;</tt> </p>
-<h4>
+<h5>
 <a name="Example"></a>Example<a href="#Example" class="section_anchor"></a>
-</h4>
+</h5>
 <p>HTTP GET request: <tt>http://localhost:2480/document/demo/9:0</tt> HTTP response: empty </p>
-<h2>
-<a name="Document_By_Class"></a>Document By Class<a href="#Document_By_Class" class="section_anchor"></a>
-</h2>
 <h3>
-<a name="GET_Document_by_Class"></a>GET Document by Class<a href="#GET_Document_by_Class" class="section_anchor"></a>
+<a name="Document_By_Class"></a>Document By Class<a href="#Document_By_Class" class="section_anchor"></a>
 </h3>
+<h4>
+<a name="GET_Document_by_Class"></a>GET Document by Class<a href="#GET_Document_by_Class" class="section_anchor"></a>
+</h4>
 <p>Retrieve a document by cluster name and record position. </p>
 <p>Syntax: <tt>http://&lt;server&gt;:[&lt;port&gt;]/documentbyclass/&lt;database&gt;/&lt;class-name&gt;/&lt;record-position&gt;[/fetchPlan]</tt><br> See <a href="http://code.google.com/p/orient/wiki/FetchingStrategies" rel="nofollow">Fetching Strategies</a> </p>
-<h4>
+<h5>
 <a name="Example"></a>Example<a href="#Example" class="section_anchor"></a>
-</h4>
+</h5>
 <p>HTTP GET request: <tt>http://localhost:2480/document/demo/Profile/0</tt> HTTP response: </p>
 <pre class="prettyprint">{
   "_id": "9:0", 
@@ -406,17 +469,17 @@ layout: default
   "sex": "male", 
   "online": true
 }</pre>
-<h2>
-<a name="Storage"></a>Storage<a href="#Storage" class="section_anchor"></a>
-</h2>
 <h3>
-<a name="GET_-_Storage"></a>GET - Storage<a href="#GET_-_Storage" class="section_anchor"></a>
+<a name="Storage"></a>Storage<a href="#Storage" class="section_anchor"></a>
 </h3>
+<h4>
+<a name="GET_-_Storage"></a>GET - Storage<a href="#GET_-_Storage" class="section_anchor"></a>
+</h4>
 <p>Retrieve information about storage space. </p>
 <p>Syntax: <tt>http://&lt;server&gt;:[&lt;port&gt;]/allocation</tt> </p>
-<h4>
+<h5>
 <a name="Example"></a>Example<a href="#Example" class="section_anchor"></a>
-</h4>
+</h5>
 <p>HTTP GET request: <tt>http://localhost:2480/allocation</tt> HTTP response: </p>
 <pre class="prettyprint">{
   "size": 61910, 
@@ -431,31 +494,31 @@ layout: default
   "holesSize": 14251, 
   "holesSizePercent": 24
 }</pre>
-<h2>
-<a name="Index"></a>Index<a href="#Index" class="section_anchor"></a>
-</h2>
-<p><i>NOTE: Every single new database has the default manual index called "dictionary".</i> </p>
 <h3>
-<a name="GET_-_Index"></a>GET - Index<a href="#GET_-_Index" class="section_anchor"></a>
+<a name="Index"></a>Index<a href="#Index" class="section_anchor"></a>
 </h3>
+<p><i>NOTE: Every single new database has the default manual index called "dictionary".</i> </p>
+<h4>
+<a name="GET_-_Index"></a>GET - Index<a href="#GET_-_Index" class="section_anchor"></a>
+</h4>
 <p>Retrieve a record looking into the index. </p>
 <p>Syntax: <tt>http://&lt;server&gt;:[&lt;port&gt;]/index/&lt;index-name&gt;/&lt;key&gt;</tt> </p>
-<h4>
+<h5>
 <a name="Example"></a>Example<a href="#Example" class="section_anchor"></a>
-</h4>
+</h5>
 <p>HTTP GET request: <tt>http://localhost:2480/dictionary/test</tt> HTTP response: </p>
 <pre class="prettyprint">{
   "name" : "Jay",
   "surname" : "Miner"
 }</pre>
-<h3>
+<h4>
 <a name="PUT_-_Index"></a>PUT - Index<a href="#PUT_-_Index" class="section_anchor"></a>
-</h3>
+</h4>
 <p>Create or modify an index entry. </p>
 <p>Syntax: <tt>http://&lt;server&gt;:[&lt;port&gt;]/index/&lt;index-name&gt;/&lt;key&gt;</tt> </p>
-<h4>
+<h5>
 <a name="Example"></a>Example<a href="#Example" class="section_anchor"></a>
-</h4>
+</h5>
 <p>HTTP PUT request: <tt>http://localhost:2480/dictionary/test</tt> </p>
 <pre class="prettyprint">content: 
 {
@@ -463,26 +526,26 @@ layout: default
   "surname" : "Miner"
 }</pre>
 <p>HTTP response: No response. </p>
-<h3>
+<h4>
 <a name="DELETE_-_Index"></a>DELETE - Index<a href="#DELETE_-_Index" class="section_anchor"></a>
-</h3>
+</h4>
 <p>Remove an index entry. </p>
 <p>Syntax: <tt>http://&lt;server&gt;:[&lt;port&gt;]/index/&lt;index-name&gt;/&lt;key&gt;</tt> </p>
-<h4>
+<h5>
 <a name="Example"></a>Example<a href="#Example" class="section_anchor"></a>
-</h4>
+</h5>
 <p>HTTP DELETE request: <tt>http://localhost:2480/dictionary/test</tt> HTTP response: No response. </p>
-<h2>
-<a name="Query"></a>Query<a href="#Query" class="section_anchor"></a>
-</h2>
 <h3>
-<a name="GET_-_Query"></a>GET - Query<a href="#GET_-_Query" class="section_anchor"></a>
+<a name="Query"></a>Query<a href="#Query" class="section_anchor"></a>
 </h3>
+<h4>
+<a name="GET_-_Query"></a>GET - Query<a href="#GET_-_Query" class="section_anchor"></a>
+</h4>
 <p>Execute a query against the database. Query means only SQL SELECT command. It's idempotent and can't change the database. Remember that in IE6 the URL can be maximum of 2,083 characters. Other browsers supports major length, but if you want to stay compatible with all limit to 2,083 characters. </p>
 <p>Syntax: <tt>http://&lt;server&gt;:[&lt;port&gt;]/query/&lt;database&gt;/sql/&lt;query-text&gt;[/&lt;limit&gt;][/&lt;fetchPlan&gt;]</tt><br> See <a href="http://code.google.com/p/orient/wiki/FetchingStrategies" rel="nofollow">Fetching Strategies</a> </p>
-<h4>
+<h5>
 <a name="Example"></a>Example<a href="#Example" class="section_anchor"></a>
-</h4>
+</h5>
 <p>HTTP GET request: <tt>http://localhost:2480/query/demo/sql/select from Profile</tt> </p>
 <p>HTTP response: </p>
 <pre class="prettyprint">{ "result": [
@@ -504,17 +567,17 @@ layout: default
 }] }</pre>
 <p>The same query with the limit to maximum 20 results using the fetch plan <strong>:-1 that means load all recursively: </strong></p>
 <p>HTTP GET request: <tt>http://localhost:2480/query/demo/sql/select from Profile/20/*:-1</tt> </p>
-<h2>
-<a name="Server"></a>Server<a href="#Server" class="section_anchor"></a>
-</h2>
 <h3>
-<a name="GET_-_Server"></a>GET - Server<a href="#GET_-_Server" class="section_anchor"></a>
+<a name="Server"></a>Server<a href="#Server" class="section_anchor"></a>
 </h3>
+<h4>
+<a name="GET_-_Server"></a>GET - Server<a href="#GET_-_Server" class="section_anchor"></a>
+</h4>
 <p>Retrieve information about the connected OrientDB Server. Requires additional authentication to the server. </p>
 <p>Syntax: <tt>http://&lt;server&gt;:[&lt;port&gt;]/server</tt> </p>
-<h4>
+<h5>
 <a name="Example"></a>Example<a href="#Example" class="section_anchor"></a>
-</h4>
+</h5>
 <p>HTTP GET request: <tt>http://localhost:2480/server</tt> HTTP response: </p>
 <pre class="prettyprint">{
   "connections": [{

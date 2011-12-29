@@ -4,18 +4,18 @@ layout: default
 ---
 
  <p>SQL command to search all records that contains a link to a given record id in the entire database or a subset of specified class and cluster. Returns a set of record ids. </p>
-<h1>
+<h2>
 <a name="Syntax"></a>Syntax<a href="#Syntax" class="section_anchor"></a>
-</h1>
+</h2>
 <p><tt>FIND REFERENCES &lt;rid&gt; [class-list]</tt> </p>
 <ul>
 <li>
 <strong>rid</strong>, required, the record id to search. Available since 1.0rc1. </li>
 <li>
 <strong>class-list</strong> list of specific class or cluster, separated by commas, you want to execute the search in. </li>
-</ul><h1>
+</ul><h2>
 <a name="Examples"></a>Examples<a href="#Examples" class="section_anchor"></a>
-</h1>
+</h2>
 <p>Get all the records that contains a link to 5:0 </p>
 <p><tt>find references 5:0</tt> </p>
 <p>Result example: </p>

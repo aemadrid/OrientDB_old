@@ -15,28 +15,28 @@ layout: default
 <li><a href="#Installation">Installation</a></li>
 <li><a href="#Configuration">Configuration</a></li>
 <li><a href="#Run">Run</a></li>
-</ul><hr><h1>
+</ul><hr><h2>
 <a name="Introduction"></a>Introduction<a href="#Introduction" class="section_anchor"></a>
-</h1>
-<h2>
+</h2>
+<h3>
 <a name="Rexster"></a>Rexster<a href="#Rexster" class="section_anchor"></a>
-</h2>
+</h3>
 <p><a href="https://github.com/tinkerpop/rexster/wiki/" rel="nofollow">Rexster</a> provides a RESTful shell to any Blueprints-complaint graph database. This HTTP web service provides: a set of standard low-level GET, POST, and DELETE methods, a flexible extension model which allows plug-in like development for external services (such as ad-hoc graph queries through Gremlin), and a browser-based interface called The Dog House. </p>
-<h2>
+<h3>
 <a name="OrientDB"></a>OrientDB GraphEd<a href="#OrientDB" class="section_anchor"></a>
-</h2>
+</h3>
 <p>The OrientDB Graph Edition, aka "Graph(Ed)", contains <a href="http://www.orientechnologies.com/orient-db.htm" rel="nofollow">OrientDB</a> server integrated with latest release of the <a href="http://www.tinkerpop.com" rel="nofollow">TinkerPop</a> Open Source technology stack as explained in <a href="http://code.google.com/p/orient/wiki/GraphEdTutorial" rel="nofollow">GraphEd Tutorial</a>. A graph database hosted in the GraphEd OrientDB server can be configured in Rexster and then accessed using the standard RESTful interface powered by the Rexster web server. </p>
-<hr><h1>
+<hr><h2>
 <a name="Installation"></a>Installation<a href="#Installation" class="section_anchor"></a>
-</h1>
+</h2>
 <p>You can get the latest stable release of Rexster at the <a href="https://github.com/tinkerpop/rexster/downloads" rel="nofollow">Download Page</a> (when writing the latest stable release is <i>0.4.1</i>) or you can build a snapshot by executing the following <a href="http://git-scm.com/" rel="nofollow">Git</a> and <a href="http://maven.apache.org/" rel="nofollow">Maven</a> commands: </p>
 <pre class="prettyprint">git clone https://github.com/tinkerpop/rexster.git
 cd rexster
 mvn clean install</pre>
 <p>Rexster is distributed as a zip file (also the building process creates a zip file) hence the installation consist in unzipping the archive in a directory of your choice. In the following sections, such directory is referred to as <i>$REXSTER_HOME</i>.<br> After unzipping the archive, you should copy <i>orient-client.jar</i> and <i>orient-enterprise.jar</i> in <i>$REXSTER_HOME/target/rexster-0.5-SNAPSHOT-standalone/lib</i> picking the same release used in the Rexster distribution you have installed (for example Rexster 0.5-SNAPSHOT uses OrientDB 1.0rc3).<br> You can find more details about Rexster installation at the <a href="https://github.com/tinkerpop/rexster/wiki/Getting-Started" rel="nofollow">Getting Started page</a>. </p>
-<hr><h1>
+<hr><h2>
 <a name="Configuration"></a>Configuration<a href="#Configuration" class="section_anchor"></a>
-</h1>
+</h2>
 <p>Rexster configuration file <i>rexster.xml</i> is used to configure parameters such as: TCP ports used by Rexster server modules to listen for incoming connections; character set supported by the Rexster REST requests and responses; connection parameters of graph instances. In order to configure Rexster to connect to your OrientDB graph, locate the <i>rexster.xml</i> in the Rexster directory (in the O.5-SNAPSHOT version, it is at <i>$REXSTER_HOME/target/rexster-0.5-SNAPSHOT-standalone/bin</i>) and add the following snippet of code: </p>
 <pre class="prettyprint">&lt;rexster&gt;
   ...
@@ -79,9 +79,9 @@ if exist "%%a\bin\rexster-start.bat" set TARGET=%%a
 cd %TARGET%\bin\
 call rexster-start.bat -webroot target/%TARGET%/bin/public %* -configuration D:\rexster-0.5-SNAPSHOT\target\rexster-0.5-SNAPSHOT-standalone\bin\rexster.xml</pre>
 <p>You can find more details about Rexster configuration at the <a href="https://github.com/tinkerpop/rexster/wiki/Rexster-Configuration" rel="nofollow">Rexster Configuration page</a>. </p>
-<hr><h1>
+<hr><h2>
 <a name="Run"></a>Run<a href="#Run" class="section_anchor"></a>
-</h1>
+</h2>
 <p><strong>Note: <font color="RED">only Rexster 0.5-SNAPSHOT and further releases work with OrientDB GraphEd</font></strong><br> In this section we present a step-by-step guide to Rexster-ify an OrientDB graph.<br> We assume that: </p>
 <ul>
 <li>you created a Blueprints enabled graph called <i>orientGraph</i> using the class <tt>com.tinkerpop.blueprints.pgm.impls.orientdb.OrientGraph</tt> </li>

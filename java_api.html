@@ -3,158 +3,158 @@ title: Java APIs
 layout: default
 ---
 
- <h1>
+ <h2>
 <a name="Java_APIs"></a>Java APIs<a href="#Java_APIs" class="section_anchor"></a>
-</h1>
-<p>OrientDB is written 100% in Java. You can use the native Java APIs without any driver or adapter. </p>
-<h2>
-<a name="Which_library_do_I_use?"></a>Which library do I use?<a href="#Which_library_do_I_use?" class="section_anchor"></a>
 </h2>
+<p>OrientDB is written 100% in Java. You can use the native Java APIs without any driver or adapter. </p>
+<h3>
+<a name="Which_library_do_I_use?"></a>Which library do I use?<a href="#Which_library_do_I_use?" class="section_anchor"></a>
+</h3>
 <p>OrientDB comes with some jar files contained in the lib directory </p>
-<table class="wikitable">
+<table class="zebra-striped bordered-table">
 <tr>
-<td style="border: 1px solid #ccc; padding: 5px;"> <strong>JAR name</strong> </td>
-<td style="border: 1px solid #ccc; padding: 5px;"> <strong>Description</strong> </td>
-<td style="border: 1px solid #ccc; padding: 5px;"> <strong>When required?</strong> </td>
+<td> <strong>JAR name</strong> </td>
+<td> <strong>Description</strong> </td>
+<td> <strong>When required?</strong> </td>
 </tr>
 <tr>
-<td style="border: 1px solid #ccc; padding: 5px;">orient-commons-<strong></strong>.jar</td>
-<td style="border: 1px solid #ccc; padding: 5px;">Library with some utility classes that are not part of OrientDB itself but usable with any kind of project</td>
-<td style="border: 1px solid #ccc; padding: 5px;">Always</td>
+<td>orient-commons-<strong></strong>.jar</td>
+<td>Library with some utility classes that are not part of OrientDB itself but usable with any kind of project</td>
+<td>Always</td>
 </tr>
 <tr>
-<td style="border: 1px solid #ccc; padding: 5px;">orientdb-core-<strong></strong>.jar</td>
-<td style="border: 1px solid #ccc; padding: 5px;">Core library</td>
-<td style="border: 1px solid #ccc; padding: 5px;">Always</td>
+<td>orientdb-core-<strong></strong>.jar</td>
+<td>Core library</td>
+<td>Always</td>
 </tr>
 <tr>
-<td style="border: 1px solid #ccc; padding: 5px;">orientdb-client-<strong></strong>.jar</td>
-<td style="border: 1px solid #ccc; padding: 5px;">Remote client</td>
-<td style="border: 1px solid #ccc; padding: 5px;">When your application talks with a remote server</td>
+<td>orientdb-client-<strong></strong>.jar</td>
+<td>Remote client</td>
+<td>When your application talks with a remote server</td>
 </tr>
 <tr>
-<td style="border: 1px solid #ccc; padding: 5px;">orientdb-enterprise-<strong></strong>.jar</td>
-<td style="border: 1px solid #ccc; padding: 5px;">Base package with the protocol and network classes shared by client and server</td>
-<td style="border: 1px solid #ccc; padding: 5px;">When your application talks with a remote server</td>
+<td>orientdb-enterprise-<strong></strong>.jar</td>
+<td>Base package with the protocol and network classes shared by client and server</td>
+<td>When your application talks with a remote server</td>
 </tr>
 <tr>
-<td style="border: 1px solid #ccc; padding: 5px;">orientdb-server-<strong></strong>.jar</td>
-<td style="border: 1px solid #ccc; padding: 5px;">Server component</td>
-<td style="border: 1px solid #ccc; padding: 5px;">Never, it's used by the server component</td>
+<td>orientdb-server-<strong></strong>.jar</td>
+<td>Server component</td>
+<td>Never, it's used by the server component</td>
 </tr>
 <tr>
-<td style="border: 1px solid #ccc; padding: 5px;">orientdb-tools-<strong></strong>.jar</td>
-<td style="border: 1px solid #ccc; padding: 5px;">Contain the console and console commands</td>
-<td style="border: 1px solid #ccc; padding: 5px;">Never, unless you want to execute console command directly by your application. Used by the console application</td>
+<td>orientdb-tools-<strong></strong>.jar</td>
+<td>Contain the console and console commands</td>
+<td>Never, unless you want to execute console command directly by your application. Used by the console application</td>
 </tr>
 </table><p>First of all need to choose the database type to use by checking what you need: </p>
-<h2>
+<h3>
 <a name="JavaDoc"></a>JavaDoc<a href="#JavaDoc" class="section_anchor"></a>
-</h2>
+</h3>
 <p>Browse the <a href="http://www.orientechnologies.com/releases/latest/javadoc/index.html" rel="nofollow">Orient DB API JavaDoc</a>. </p>
 <p><img src="http://www.orientechnologies.com/images/orientdb-api-stack.png"></p>
-<h2>
+<h3>
 <a name="Database_types"></a>Database types<a href="#Database_types" class="section_anchor"></a>
-</h2>
+</h3>
 <p></p>
-<table class="wikitable">
+<table class="zebra-striped bordered-table">
 <tr>
-<td style="border: 1px solid #ccc; padding: 5px;"> <strong>Type</strong> </td>
-<td style="border: 1px solid #ccc; padding: 5px;"> <strong>Use this if</strong> </td>
-<td style="border: 1px solid #ccc; padding: 5px;"> <strong>Description</strong> </td>
-<td style="border: 1px solid #ccc; padding: 5px;"> <strong>Java class</strong> </td>
-<td style="border: 1px solid #ccc; padding: 5px;"> <strong>Query</strong> </td>
-<td style="border: 1px solid #ccc; padding: 5px;"> <strong>Dictionary</strong> </td>
-<td style="border: 1px solid #ccc; padding: 5px;"> <strong>Schema Less</strong> </td>
-<td style="border: 1px solid #ccc; padding: 5px;"> <strong>Schema full</strong> </td>
-<td style="border: 1px solid #ccc; padding: 5px;"> <strong>Speed</strong> <tt>*</tt>
+<td> <strong>Type</strong> </td>
+<td> <strong>Use this if</strong> </td>
+<td> <strong>Description</strong> </td>
+<td> <strong>Java class</strong> </td>
+<td> <strong>Query</strong> </td>
+<td> <strong>Dictionary</strong> </td>
+<td> <strong>Schema Less</strong> </td>
+<td> <strong>Schema full</strong> </td>
+<td> <strong>Speed</strong> <tt>*</tt>
 </td>
 </tr>
 <tr>
-<td style="border: 1px solid #ccc; padding: 5px;"> <a href="object_database.html">Object Database</a> </td>
-<td style="border: 1px solid #ccc; padding: 5px;">If you need a full <strong>Object Oriented</strong> abstraction that binds all the database entities to <strong>POJO</strong> (Plain Old Java Object)</td>
-<td style="border: 1px solid #ccc; padding: 5px;">The higher level database. Able to store and retrieve POJOs transparently. Under the hood, it uses the Document Database to store object information. Can be used in schema-less or schema-based modes</td>
-<td style="border: 1px solid #ccc; padding: 5px;"> <a href="http://www.orientechnologies.com/releases/latest/javadoc/index.html?com/orientechnologies/orient/core/db/document/ODatabaseDocumentTx.html" rel="nofollow">ODatabaseObjectTx</a> </td>
-<td style="border: 1px solid #ccc; padding: 5px;"> Yes </td>
-<td style="border: 1px solid #ccc; padding: 5px;"> Yes </td>
-<td style="border: 1px solid #ccc; padding: 5px;"> Yes </td>
-<td style="border: 1px solid #ccc; padding: 5px;"> Yes </td>
-<td style="border: 1px solid #ccc; padding: 5px;"> 40% </td>
+<td> <a href="object_database.html">Object Database</a> </td>
+<td>If you need a full <strong>Object Oriented</strong> abstraction that binds all the database entities to <strong>POJO</strong> (Plain Old Java Object)</td>
+<td>The higher level database. Able to store and retrieve POJOs transparently. Under the hood, it uses the Document Database to store object information. Can be used in schema-less or schema-based modes</td>
+<td> <a href="http://www.orientechnologies.com/releases/latest/javadoc/index.html?com/orientechnologies/orient/core/db/document/ODatabaseDocumentTx.html" rel="nofollow">ODatabaseObjectTx</a> </td>
+<td> Yes </td>
+<td> Yes </td>
+<td> Yes </td>
+<td> Yes </td>
+<td> 40% </td>
 </tr>
 <tr>
-<td style="border: 1px solid #ccc; padding: 5px;"> <a href="graph_database_tinkerpop.html">TinkerPop Graph Database</a>
+<td> <a href="graph_database_tinkerpop.html">TinkerPop Graph Database</a>
 </td>
-<td style="border: 1px solid #ccc; padding: 5px;">If you work with <strong>graphs</strong> and want your code <strong>portable</strong> across <strong>TinkerPop Blueprints</strong> implementations</td>
-<td style="border: 1px solid #ccc; padding: 5px;">The bridge to use OrientDB with all <a href="http://www.tinkerpop.com" rel="nofollow">TinkerPop technologies</a>
+<td>If you work with <strong>graphs</strong> and want your code <strong>portable</strong> across <strong>TinkerPop Blueprints</strong> implementations</td>
+<td>The bridge to use OrientDB with all <a href="http://www.tinkerpop.com" rel="nofollow">TinkerPop technologies</a>
 </td>
-<td style="border: 1px solid #ccc; padding: 5px;"> OrientGraph</td>
-<td style="border: 1px solid #ccc; padding: 5px;"> Yes </td>
-<td style="border: 1px solid #ccc; padding: 5px;"> Yes </td>
-<td style="border: 1px solid #ccc; padding: 5px;"> Yes </td>
-<td style="border: 1px solid #ccc; padding: 5px;"> Yes </td>
-<td style="border: 1px solid #ccc; padding: 5px;"> 45% </td>
+<td> OrientGraph</td>
+<td> Yes </td>
+<td> Yes </td>
+<td> Yes </td>
+<td> Yes </td>
+<td> 45% </td>
 </tr>
 <tr>
-<td style="border: 1px solid #ccc; padding: 5px;"> <a href="graph_database_native.html">High-Level Graph Database</a>
+<td> <a href="graph_database_native.html">High-Level Graph Database</a>
 </td>
-<td style="border: 1px solid #ccc; padding: 5px;">Will be <strong>deprecated</strong> in future releases. Use <a href="graph_database_raw.html">GraphDatabaseRaw</a> or <a href="graph_database_tinkerpop.html">GraphDatabaseTinkerpop</a>  instead.</td>
-<td style="border: 1px solid #ccc; padding: 5px;">The high level GraphDB API uses OGraphVertex and OGraphEdge classes.</td>
-<td style="border: 1px solid #ccc; padding: 5px;"><a href="http://www.orientechnologies.com/releases/latest/javadoc/index.html?com/orientechnologies/orient/core/db/document/ODatabaseDocumentTx.html" rel="nofollow">ODatabaseGraphTx</a></td>
-<td style="border: 1px solid #ccc; padding: 5px;"> Yes </td>
-<td style="border: 1px solid #ccc; padding: 5px;"> Yes </td>
-<td style="border: 1px solid #ccc; padding: 5px;"> Yes </td>
-<td style="border: 1px solid #ccc; padding: 5px;"> Yes </td>
-<td style="border: 1px solid #ccc; padding: 5px;"> 55% </td>
+<td>Will be <strong>deprecated</strong> in future releases. Use <a href="graph_database_raw.html">GraphDatabaseRaw</a> or <a href="graph_database_tinkerpop.html">GraphDatabaseTinkerpop</a>  instead.</td>
+<td>The high level GraphDB API uses OGraphVertex and OGraphEdge classes.</td>
+<td><a href="http://www.orientechnologies.com/releases/latest/javadoc/index.html?com/orientechnologies/orient/core/db/document/ODatabaseDocumentTx.html" rel="nofollow">ODatabaseGraphTx</a></td>
+<td> Yes </td>
+<td> Yes </td>
+<td> Yes </td>
+<td> Yes </td>
+<td> 55% </td>
 </tr>
 <tr>
-<td style="border: 1px solid #ccc; padding: 5px;"> <a href="graph_database_raw.html">Raw Graph Database</a>
+<td> <a href="graph_database_raw.html">Raw Graph Database</a>
 </td>
-<td style="border: 1px solid #ccc; padding: 5px;">If you work with <strong>graphs</strong> and need maximum <strong>performance</strong>.</td>
-<td style="border: 1px solid #ccc; padding: 5px;">The lower level of GraphDB API. Directly uses ODocument objects.</td>
-<td style="border: 1px solid #ccc; padding: 5px;"><a href="http://www.orientechnologies.com/releases/latest/javadoc/index.html?com/orientechnologies/orient/core/db/document/ODatabaseDocumentTx.html" rel="nofollow">OGraphDatabase</a></td>
-<td style="border: 1px solid #ccc; padding: 5px;"> Yes </td>
-<td style="border: 1px solid #ccc; padding: 5px;"> Yes </td>
-<td style="border: 1px solid #ccc; padding: 5px;"> Yes </td>
-<td style="border: 1px solid #ccc; padding: 5px;"> Yes </td>
-<td style="border: 1px solid #ccc; padding: 5px;"> 70% </td>
+<td>If you work with <strong>graphs</strong> and need maximum <strong>performance</strong>.</td>
+<td>The lower level of GraphDB API. Directly uses ODocument objects.</td>
+<td><a href="http://www.orientechnologies.com/releases/latest/javadoc/index.html?com/orientechnologies/orient/core/db/document/ODatabaseDocumentTx.html" rel="nofollow">OGraphDatabase</a></td>
+<td> Yes </td>
+<td> Yes </td>
+<td> Yes </td>
+<td> Yes </td>
+<td> 70% </td>
 </tr>
 <tr>
-<td style="border: 1px solid #ccc; padding: 5px;"> <a href="document_database.html">Document Database</a>
+<td> <a href="document_database.html">Document Database</a>
 </td>
-<td style="border: 1px solid #ccc; padding: 5px;">if you need <strong>high performance</strong> and/or work with <strong>schema-less structures</strong>.</td>
-<td style="border: 1px solid #ccc; padding: 5px;">Handles records as documents. Documents are comprised of fields. Fields can be any of the types supported. Does not need a Java domain POJO, as required for the Object Database. Can be used as schema-less or schema-base modes </td>
-<td style="border: 1px solid #ccc; padding: 5px;"> <a href="http://www.orientechnologies.com/releases/latest/javadoc/index.html?com/orientechnologies/orient/core/db/document/ODatabaseDocumentTx.html" rel="nofollow">ODatabaseDocumentTx</a> </td>
-<td style="border: 1px solid #ccc; padding: 5px;"> Yes </td>
-<td style="border: 1px solid #ccc; padding: 5px;"> Yes </td>
-<td style="border: 1px solid #ccc; padding: 5px;"> Yes </td>
-<td style="border: 1px solid #ccc; padding: 5px;"> Yes </td>
-<td style="border: 1px solid #ccc; padding: 5px;"> 70% </td>
+<td>if you need <strong>high performance</strong> and/or work with <strong>schema-less structures</strong>.</td>
+<td>Handles records as documents. Documents are comprised of fields. Fields can be any of the types supported. Does not need a Java domain POJO, as required for the Object Database. Can be used as schema-less or schema-base modes </td>
+<td> <a href="http://www.orientechnologies.com/releases/latest/javadoc/index.html?com/orientechnologies/orient/core/db/document/ODatabaseDocumentTx.html" rel="nofollow">ODatabaseDocumentTx</a> </td>
+<td> Yes </td>
+<td> Yes </td>
+<td> Yes </td>
+<td> Yes </td>
+<td> 70% </td>
 </tr>
 <tr>
-<td style="border: 1px solid #ccc; padding: 5px;"> Flat Database</td>
-<td style="border: 1px solid #ccc; padding: 5px;">If you need <strong>maximum performance</strong> at the cost of having all records represented merely  as Strings</td>
-<td style="border: 1px solid #ccc; padding: 5px;">Flat record database that manages string contents. No Query capability at all, just direct access to records as strings</td>
-<td style="border: 1px solid #ccc; padding: 5px;"><a href="http://www.orientechnologies.com/releases/latest/javadoc/index.html?com/orientechnologies/orient/core/db/document/ODatabaseDocumentTx.html" rel="nofollow">ODatabaseFlat</a></td>
-<td style="border: 1px solid #ccc; padding: 5px;"> No </td>
-<td style="border: 1px solid #ccc; padding: 5px;"> Yes </td>
-<td style="border: 1px solid #ccc; padding: 5px;"> Yes </td>
-<td style="border: 1px solid #ccc; padding: 5px;"> No </td>
-<td style="border: 1px solid #ccc; padding: 5px;"> 100% </td>
+<td> Flat Database</td>
+<td>If you need <strong>maximum performance</strong> at the cost of having all records represented merely  as Strings</td>
+<td>Flat record database that manages string contents. No Query capability at all, just direct access to records as strings</td>
+<td><a href="http://www.orientechnologies.com/releases/latest/javadoc/index.html?com/orientechnologies/orient/core/db/document/ODatabaseDocumentTx.html" rel="nofollow">ODatabaseFlat</a></td>
+<td> No </td>
+<td> Yes </td>
+<td> Yes </td>
+<td> No </td>
+<td> 100% </td>
 </tr>
 </table><p><tt>*</tt> Speed comparison for generic CRUD operations such as query, insertion, update and deletion. Larger is better. 100% is fastest. In general the price of a high level of abstraction is a speed penalty, but remember that Orient is orders of magnitude faster than the classic RDBMS. So using the Object Database gives you a high level of abstraction with much less code to develop and mantain. </p>
-<h2>
+<h3>
 <a name="Engines"></a>Engines<a href="#Engines" class="section_anchor"></a>
-</h2>
+</h3>
 <p>OrientDB supports pluggable engines. The engine is the first part of the <a href="concepts.html#Database_URL">database URL</a>. By default the "local" and "memory" are self-registered, while the "remote" requires to link the orient-client.jar library in your classpath. </p>
-<h2>
+<h3>
 <a name="Multi-threading"></a>Multi-threading<a href="#Multi-threading" class="section_anchor"></a>
-</h2>
+</h3>
 <p>None of the database classes are thread-safe. For this reason use different Database instances in each thread. The local client cache is shared between all threads. When your client is connected to a remote OrientDB Server instance it is always best to work inside a <a href="transactions.html">transaction</a>. In this way local changes will only be transmitted at commit time while transactions continue to see local changes. For more information: <a href="java_multi_threading.html">Multi Threading</a>. </p>
-<h2>
+<h3>
 <a name="Schema_APIs"></a>Schema APIs<a href="#Schema_APIs" class="section_anchor"></a>
-</h2>
+</h3>
 <p>If you are using a database that supports a schema (see the table above), check the <a href="java_schema_api.html">Schema APIs</a> page. Schema APIs are common to all databases that support this feature. </p>
-<h2>
+<h3>
 <a name="Hooks"></a>Hooks<a href="#Hooks" class="section_anchor"></a>
-</h2>
+</h3>
 <p>Starting from v. 0.9.16 OrientDB supports <strong>hooks</strong>. Hook works like a trigger. Hook lets the user application intercept internal events. See <a href="hook.html">Hook API</a>. </p>

@@ -29,9 +29,9 @@ layout: default
 <li><a href="#Change_database_name">Change database name</a></li>
 <li><a href="#Setting_return_type">Setting return type</a></li>
 <li><a href="#Errors">Errors</a></li>
-</ul><h1>
+</ul><h2>
 <a name="Introduction"></a>Introduction<a href="#Introduction" class="section_anchor"></a>
-</h1>
+</h2>
 <p>This API wraps the most common use cases in database usage. All parameters required by methods or constructor are Strings. This library works on top of <a href="orient_db_rest.html">HTTP RESTful protocol</a>. Available since release 0.9.25.<br><i>Note: Due to cross-domain XMLHttpRequest restriction this API works, for now, only placed in the server deployment</i> </p>
 <p>The full source code is available here: <strong><a href="http://code.google.com/p/orient/source/browse/trunk/server/src/site/js/orientdb-api.js" rel="nofollow">oriendb-api.js</a></strong>. </p>
 <p>Example: </p>
@@ -44,28 +44,28 @@ if (queryResult["result"].length == 0){
       commandResult = database.executeCommand('update Address set street = \'Via test 1\' where city.country.name = \'Italy\'');
 }
 database.close();</pre>
-<h1>
+<h2>
 <a name="ODatabase_object"></a>ODatabase object<a href="#ODatabase_object" class="section_anchor"></a>
-</h1>
+</h2>
 <p>ODatabase object requires server URL and database name: </p>
 <p>Syntax: <tt>new ODatabase(http://&lt;host&gt;:&lt;port&gt;/&lt;databaseName&gt;)</tt> </p>
 <p>Example: </p>
 <pre class="prettyprint">var orientServer = new ODatabase('http://localhost:2480/demo');</pre>
 <p>Once created database instance is ready to be used. Every method return the operation result when it succeeded, null elsewhere. <br> In case of null result the database instance will have the error message obtainable by the <a href="#Errors">getErrorMessage()</a> method. </p>
-<h1>
-<a name="Open"></a>Open<a href="#Open" class="section_anchor"></a>
-</h1>
-<p>Method that connects to the server, it returns database information in JSON format.<br></p>
 <h2>
-<a name="Browser_Authentication"></a>Browser Authentication<a href="#Browser_Authentication" class="section_anchor"></a>
+<a name="Open"></a>Open<a href="#Open" class="section_anchor"></a>
 </h2>
+<p>Method that connects to the server, it returns database information in JSON format.<br></p>
+<h3>
+<a name="Browser_Authentication"></a>Browser Authentication<a href="#Browser_Authentication" class="section_anchor"></a>
+</h3>
 <p>Syntax: <tt>&lt;databaseInstance&gt;.open()</tt><br><i>Note: This implementation asks to the browser to provide user and password.</i> </p>
 <p>Example: </p>
 <pre class="prettyprint">orientServer = new ODatabase('http://localhost:2480/demo');
 databaseInfo = orientServer.open();</pre>
-<h2>
+<h3>
 <a name="Javascript_Authentication"></a>Javascript Authentication<a href="#Javascript_Authentication" class="section_anchor"></a>
-</h2>
+</h3>
 <p>Syntax: <tt>&lt;databaseInstance&gt;.open(username,userpassword)</tt> </p>
 <p>Example: </p>
 <pre class="prettyprint">orientServer = new ODatabase('http://localhost:2480/demo');
@@ -156,9 +156,9 @@ databaseInfo = orientServer.open('admin','admin');</pre>
     ]
   }
 }</pre>
-<h1>
+<h2>
 <a name="Query"></a>Query<a href="#Query" class="section_anchor"></a>
-</h1>
+</h2>
 <p>Method that executes the query, it returns query results in JSON format. </p>
 <p>Syntax: <tt>&lt;databaseInstance&gt;.query(&lt;queryText&gt;,[limit],[fetchPlan])</tt><br><i>Note: limit and fetchPlan are optional</i><br> See <a href="http://code.google.com/p/orient/wiki/FetchingStrategies" rel="nofollow">Fetching Strategies</a> </p>
 <p>Simple Example: </p>
@@ -249,9 +249,9 @@ databaseInfo = orientServer.open('admin','admin');</pre>
     }
   ]
 }</pre>
-<h1>
+<h2>
 <a name="Execute_Command"></a>Execute Command<a href="#Execute_Command" class="section_anchor"></a>
-</h1>
+</h2>
 <p>Method that executes arbitrary commands, it returns command result in text format. </p>
 <p>Syntax: <tt>&lt;databaseInstance&gt;.executeCommand(&lt;commandText&gt;)</tt> </p>
 <p>Example 1 (insert): </p>
@@ -263,9 +263,9 @@ databaseInfo = orientServer.open('admin','admin');</pre>
 <p>Return Example 2 (records deleted): </p>
 <pre class="prettyprint">5</pre>
 <p><i>Note: Delete example works also with update command</i> </p>
-<h1>
+<h2>
 <a name="Load"></a>Load<a href="#Load" class="section_anchor"></a>
-</h1>
+</h2>
 <p>Method that loads a record from the record ID, it returns the record informations in JSON format. </p>
 <p>Syntax: <tt>&lt;databaseInstance&gt;.load(&lt;recordID&gt;,[fetchPlan])</tt><br><i>Note: fetchPlan is optional</i><br> See <a href="http://code.google.com/p/orient/wiki/FetchingStrategies" rel="nofollow">Fetching Strategies</a> </p>
 <p>Simple Example: </p>
@@ -292,9 +292,9 @@ databaseInfo = orientServer.open('admin','admin');</pre>
           }
       }
     }</pre>
-<h1>
+<h2>
 <a name="Class_Info"></a>Class Info<a href="#Class_Info" class="section_anchor"></a>
-</h1>
+</h2>
 <p>Method that retrieves information of a class, it returns the class informations in JSON format. </p>
 <p>Syntax: <tt>&lt;databaseInstance&gt;.classInfo(&lt;className&gt;)</tt> </p>
 <p>Example: </p>
@@ -317,9 +317,9 @@ databaseInfo = orientServer.open('admin','admin');</pre>
     }
   ]
 }</pre>
-<h1>
+<h2>
 <a name="Browse_Cluster"></a>Browse Cluster<a href="#Browse_Cluster" class="section_anchor"></a>
-</h1>
+</h2>
 <p>Method that retrieves information of a cluster, it returns the class informations in JSON format. </p>
 <p>Syntax: <tt>&lt;databaseInstance&gt;.browseCluster(&lt;className&gt;)</tt> </p>
 <p>Example: </p>
@@ -342,9 +342,9 @@ databaseInfo = orientServer.open('admin','admin');</pre>
     }
   ]
 }</pre>
-<h1>
+<h2>
 <a name="Server_Information"></a>Server Information<a href="#Server_Information" class="section_anchor"></a>
-</h1>
+</h2>
 <p>Method that retrieves server informations, it returns the server informations in JSON format.<br><i>Note: Server information needs <a href="security.html#OrientDB_Server_security">root</a> username and password.</i> </p>
 <p>Syntax: <tt>&lt;databaseInstance&gt;.serverInfo()</tt> </p>
 <p>Example: </p>
@@ -394,9 +394,9 @@ databaseInfo = orientServer.open('admin','admin');</pre>
       }
     ]
 }</pre>
-<h1>
+<h2>
 <a name="Schema"></a>Schema<a href="#Schema" class="section_anchor"></a>
-</h1>
+</h2>
 <p>Method that retrieves database Schema, it returns an array of classes (JSON parsed Object). </p>
 <p>Syntax: <tt>&lt;databaseInstance&gt;.schema()</tt> </p>
 <p>Example: </p>
@@ -433,12 +433,12 @@ databaseInfo = orientServer.open('admin','admin');</pre>
   ]}, 
 ]
 }</pre>
-<h1>
-<a name="Security"></a>Security<a href="#Security" class="section_anchor"></a>
-</h1>
 <h2>
-<a name="Roles"></a>Roles<a href="#Roles" class="section_anchor"></a>
+<a name="Security"></a>Security<a href="#Security" class="section_anchor"></a>
 </h2>
+<h3>
+<a name="Roles"></a>Roles<a href="#Roles" class="section_anchor"></a>
+</h3>
 <p>Method that retrieves database Security Roles, it returns an array of Roles (JSON parsed Object). </p>
 <p>Syntax: <tt>&lt;databaseInstance&gt;.securityRoles()</tt> </p>
 <p>Example: </p>
@@ -471,9 +471,9 @@ databaseInfo = orientServer.open('admin','admin');</pre>
 }
 ]
 }</pre>
-<h2>
+<h3>
 <a name="Users"></a>Users<a href="#Users" class="section_anchor"></a>
-</h2>
+</h3>
 <p>Method that retrieves database Security Users, it returns an array of Users (JSON parsed Object). </p>
 <p>Syntax: <tt>&lt;databaseInstance&gt;.securityUsers()</tt> </p>
 <p>Example: </p>
@@ -485,30 +485,30 @@ databaseInfo = orientServer.open('admin','admin');</pre>
     {"name": "writer", "roles": "[writer]"}
   ]
 }</pre>
-<h1>
+<h2>
 <a name="Close"></a>Close<a href="#Close" class="section_anchor"></a>
-</h1>
+</h2>
 <p>Method that disconnects from the server. </p>
 <p>Syntax: <tt>&lt;databaseInstance&gt;.close()</tt> </p>
 <p>Example: </p>
 <pre class="prettyprint">orientServer.close();</pre>
-<h1>
+<h2>
 <a name="Change_server_URL"></a>Change server URL<a href="#Change_server_URL" class="section_anchor"></a>
-</h1>
+</h2>
 <p>Method that changes server URL in the database instance.<br> You'll need to call the <a href="#Open">open</a> method to reconnect to the new server. </p>
 <p>Syntax: <tt>&lt;databaseInstance&gt;.setDatabaseUrl(&lt;newDatabaseUrl&gt;)</tt> </p>
 <p>Example: </p>
 <pre class="prettyprint">orientServer.setDatabaseUrl('http://localhost:3040')</pre>
-<h1>
+<h2>
 <a name="Change_database_name"></a>Change database name<a href="#Change_database_name" class="section_anchor"></a>
-</h1>
+</h2>
 <p>Method that changes database name in the database instance.<br> You'll need to call the <a href="#Open">open</a> method to reconnect to the new database. </p>
 <p>Syntax: <tt>&lt;databaseInstance&gt;.setDatabaseName(&lt;newDatabaseName&gt;)</tt> </p>
 <p>Example: </p>
 <pre class="prettyprint">orientServer.setDatabaseName('demo2');</pre>
-<h1>
+<h2>
 <a name="Setting_return_type"></a>Setting return type<a href="#Setting_return_type" class="section_anchor"></a>
-</h1>
+</h2>
 <p>This API allows you to chose the return type, Javascript Object or JSON plain text. Default return is Javascript Object. </p>
 <p><strong>Important</strong>: the javascript object is not always the evaluation of JSON plain text: for each document (identified by its Record ID) the JSON file contains only one expanded object, all other references are just its Record ID as String, so the API will reconstruct the real structure by re-linking all references to the matching javascript object. </p>
 <p>Syntax: <tt>orientServer.setEvalResponse(&lt;boolean&gt;)</tt> </p>
@@ -517,9 +517,9 @@ databaseInfo = orientServer.open('admin','admin');</pre>
 <p>Return types will be Javascript Objects. </p>
 <pre class="prettyprint">orientServer.setEvalResponse(false);</pre>
 <p>Return types will be JSON plain text. </p>
-<h1>
+<h2>
 <a name="Errors"></a>Errors<a href="#Errors" class="section_anchor"></a>
-</h1>
+</h2>
 <p>In case of errors the error message will be stored inside the database instance, retrievable by getErrorMessage() method. </p>
 <p>Syntax: <tt>&lt;databaseInstance&gt;.getErrorMessage()</tt> </p>
 <p>Example: </p>

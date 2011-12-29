@@ -38,9 +38,9 @@ layout: default
 <li><a href="#GREMLIN_command">GREMLIN command</a></li>
 </ul>
 <li><a href="#Conclusion">Conclusion</a></li>
-</ul><h1>
+</ul><h2>
 <a name="Introduction"></a>Introduction<a href="#Introduction" class="section_anchor"></a>
-</h1>
+</h2>
 <p>The Graph Edition, also called "Graph(Ed)", contains <a href="http://www.orientechnologies.com/orient-db.htm" rel="nofollow">OrientDB</a> server integrated with latest release of the <a href="http://www.tinkerpop.com" rel="nofollow">TinkerPop</a> Open Source technology stack: </p>
 <ul>
 <li>
@@ -50,20 +50,20 @@ layout: default
 <li>
 <a href="http://pipes.tinkerpop.com" rel="nofollow">Pipes</a> is a graph-based data flow framework for Java 1.6+. A process graph is composed of a set of process vertices connected to one another by a set of communication edges. Pipes supports the splitting, merging, and transformation of data from input to output. </li>
 </ul><p>No more pains when work with <a href="http://www.tinkerpop.com" rel="nofollow">TinkerPop</a> stuff on top of OrientDB. This integration allows (finally!) to use both the power of OrientDB SQL engine and <a href="gremlin.html">GREMLIN</a> language. You can finally have the best of both worlds! </p>
-<h1>
-<a name="Download"></a>Download<a href="#Download" class="section_anchor"></a>
-</h1>
-<p>Download the last version at the <a href="http://code.google.com/p/orient/downloads/list" rel="nofollow">Download Page</a> and select the file called <strong><tt>orientdb-graphed*.zip</tt></strong>, example: <i>orientdb-graphed-1.0rc3</i>. </p>
-<h1>
-<a name="Installation"></a>Installation<a href="#Installation" class="section_anchor"></a>
-</h1>
-<p>To install it, just extract the contents of ZIP archive into a folder on your PC. </p>
 <h2>
-<a name="Requirements"></a>Requirements<a href="#Requirements" class="section_anchor"></a>
+<a name="Download"></a>Download<a href="#Download" class="section_anchor"></a>
 </h2>
+<p>Download the last version at the <a href="http://code.google.com/p/orient/downloads/list" rel="nofollow">Download Page</a> and select the file called <strong><tt>orientdb-graphed*.zip</tt></strong>, example: <i>orientdb-graphed-1.0rc3</i>. </p>
+<h2>
+<a name="Installation"></a>Installation<a href="#Installation" class="section_anchor"></a>
+</h2>
+<p>To install it, just extract the contents of ZIP archive into a folder on your PC. </p>
 <h3>
-<a name="Operating_System"></a>Operating System<a href="#Operating_System" class="section_anchor"></a>
+<a name="Requirements"></a>Requirements<a href="#Requirements" class="section_anchor"></a>
 </h3>
+<h4>
+<a name="Operating_System"></a>Operating System<a href="#Operating_System" class="section_anchor"></a>
+</h4>
 <p>OrientDB runs on every operating system that has an implementation of Java Virtual Machine (JVM). These include: </p>
 <ul>
 <li>All Linux distributions </li>
@@ -72,9 +72,9 @@ layout: default
 <li>Sun Solaris </li>
 <li>HP-UX </li>
 <li>IBM AIX </li>
-</ul><h3>
+</ul><h4>
 <a name="Java_Runtime_Environment"></a>Java Runtime Environment<a href="#Java_Runtime_Environment" class="section_anchor"></a>
-</h3>
+</h4>
 <p>OrientDB requires Java SE 6 to be installed in order to deploy the Server component. Client applications can be written using Java SE 5. </p>
 <p>You can check which version of Java SE you have installed by typing "java -version" in a command shell (or a command prompt for Windows users): </p>
 <pre class="prettyprint">&gt; java -version
@@ -83,12 +83,12 @@ java version "1.6.0_20"
 Java(TM) SE Runtime Environment (build 1.6.0_20-b02)
 Java HotSpot(TM) Client VM (build 16.3-b01, mixed mode, sharing)</pre>
 <p>To know more follow the <a href="installation.html">Installation</a> of OrientDB server. </p>
-<h1>
-<a name="Run!"></a>Run!<a href="#Run!" class="section_anchor"></a>
-</h1>
 <h2>
-<a name="Starting_the_server"></a>Starting the server<a href="#Starting_the_server" class="section_anchor"></a>
+<a name="Run!"></a>Run!<a href="#Run!" class="section_anchor"></a>
 </h2>
+<h3>
+<a name="Starting_the_server"></a>Starting the server<a href="#Starting_the_server" class="section_anchor"></a>
+</h3>
 <p>To start OrientDB server, go to the bin folder and run script <strong>server.sh</strong> for Unix-like operating system, or <strong>server.bat</strong> for Windows. You may have to set the execute permission on the script file before running it. </p>
 <pre class="prettyprint">          .
          .`        `
@@ -124,9 +124,9 @@ Java HotSpot(TM) Client VM (build 16.3-b01, mixed mode, sharing)</pre>
 2011-07-15 04:29:07:653 INFO [OServer] OrientDB Server v1.0rc3 is active.
 2011-07-15 04:29:10:653 WARN [ODistributedServerManager] Current node is the new cluster Leader of distributed nodes
 2011-07-15 04:29:10:655 INFO [ODistributedServerDiscoveryListener] Listening for distributed nodes on IP multicast /235.1.1.1:2424</pre>
-<h2>
+<h3>
 <a name="Running_the_console"></a>Running the console<a href="#Running_the_console" class="section_anchor"></a>
-</h2>
+</h3>
 <p>Once OrientDB is installed on your system, you can open the console by double-clicking on <strong>console</strong> script or by executing it from a command shell. The output should be like this: </p>
 <pre class="prettyprint">OrientDB console v.1.0rc3 www.orientechnologies.com
 Type 'help' to display all the commands supported.
@@ -142,9 +142,9 @@ AVAILABLE COMMANDS:
 ...
 * help                Print this help
 * exit                Close the console</pre>
-<h2>
+<h3>
 <a name="Connect_to_the_tinkerpop_database"></a>Connect to the tinkerpop database<a href="#Connect_to_the_tinkerpop_database" class="section_anchor"></a>
-</h2>
+</h3>
 <p>You can now open the "tinkerpop" database shipped with the OrientDB Graph Edition by using the <a href="console_command_connect.html">connect</a> command: </p>
 <pre class="prettyprint">connect remote:localhost/tinkerpop admin admin</pre>
 <p>This will open the database located on the server just started using the administrator account. To know more about security look at <a href="security.html">Security</a>. </p>
@@ -197,9 +197,9 @@ INDEXES:
 ----------------------------------------------------------------------------+</pre>
 <p>A lot of stuff! This database has been loaded with the input file taken from <a href="http://www.tinkerpop.com" rel="nofollow">TinkerPop</a> project <a href="https://raw.github.com/tinkerpop/blueprints/master/blueprints-test/src/main/resources/com/tinkerpop/blueprints/pgm/util/graphml/graph-example-2.xml" rel="nofollow">graph-example-2.xml</a>. </p>
 <p>The more relevant things are that we've 809 Vertices and 8049 Edges so it's a good training to get acquainted with GraphDBs. </p>
-<h2>
+<h3>
 <a name="Execute_the_first_GREMLIN_script"></a>Execute the first GREMLIN script<a href="#Execute_the_first_GREMLIN_script" class="section_anchor"></a>
-</h2>
+</h3>
 <p>To execute <a href="gremlin.html">GREMLIN</a> scripts you can use the gremlin console (gremlin.sh/gremlin.bat) or OrientDB console by prefixing "gremlin" at the statement. Example to retrieve the first 10 vertices: </p>
 <pre class="prettyprint">&gt; gremlin g.V[0..9]
 
@@ -211,62 +211,62 @@ Script executed in 0,049000 sec(s).</pre>
 <iframe width="425" height="344" frameborder="0" src="http://www.gmodules.com/gadgets/ifr?url=http%3A%2F%2Fgoogle-code-project-hosting-gadgets.googlecode.com%2Fsvn%2Fbuild%2Fprod%2Fvideo%2FgcVideo.xml&amp;up_video=http%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3D5wpTtEBK4-E&amp;parent=%2F%2Fcode.google.com%2Fhosting&amp;container=code">
 </iframe>
  </p>
-<h1>
-<a name="OrientDB_Studio"></a>OrientDB Studio<a href="#OrientDB_Studio" class="section_anchor"></a>
-</h1>
 <h2>
-<a name="Login"></a>Login<a href="#Login" class="section_anchor"></a>
+<a name="OrientDB_Studio"></a>OrientDB Studio<a href="#OrientDB_Studio" class="section_anchor"></a>
 </h2>
+<h3>
+<a name="Login"></a>Login<a href="#Login" class="section_anchor"></a>
+</h3>
 <p>Open a Web Browser and point it to <strong><tt>http://localhost:2480</tt></strong>. At login page select "tinkerpop" as database and "admin" as user and "admin" as password: </p>
 <p><img src="http://www.orientechnologies.com/images/graphed-tutorial-login.png"></p>
 <p>Once logged in the first page is the database description. You'll find  809 records in <strong>OGraphVertex</strong> class and 8,049 records in <strong>OGraphEdge</strong> class. </p>
 <p><img src="http://www.orientechnologies.com/images/graphed-tutorial-db.png"></p>
-<h2>
+<h3>
 <a name="Query"></a>Query<a href="#Query" class="section_anchor"></a>
-</h2>
+</h3>
 <p>Click on the <strong>OGraphVertex</strong> class and then press the "<strong>Query</strong>" button. </p>
 <p><img src="http://www.orientechnologies.com/images/graphed-tutorial-query.png"></p>
 <p>These are all the vertices present in the current database in form of raw records. You can edit directly the fields of any records, press ENTER button, and the record/vertex/edge will be saved in a flash.  </p>
-<h2>
+<h3>
 <a name="Graph_display"></a>Graph display<a href="#Graph_display" class="section_anchor"></a>
-</h2>
+</h3>
 <p>Now select the record #5:7 (the first column of the result set always contains the <a href="http://code.google.com/p/orient/wiki/Concepts#RecordID" rel="nofollow">Record Id</a>) and press the "<strong>Graph</strong>" button. This function displays the selected record as a graph. This is the output: </p>
 <p><img src="http://www.orientechnologies.com/images/graphed-tutorial-graph.png"></p>
-<h2>
+<h3>
 <a name="GREMLIN()_SQL_function"></a>GREMLIN() SQL function<a href="#GREMLIN()_SQL_function" class="section_anchor"></a>
-</h2>
+</h3>
 <p>Now go back again into the "<strong>Query</strong>" tab to try the power of the integration between <a href="gremlin.html">GREMLIN</a> and OrientDB SQL engine. Type this text as query text: </p>
 <pre class="prettyprint">SELECT GREMLIN( 'current.out[0..3]' ) from V limit 2</pre>
 <p>"<strong>V</strong>" it's an implicit alias for <strong>OGraphVertex</strong> class and "<strong>E</strong>" for <strong>OGraphEdge</strong>. This simplify queries against graph elements. "<strong>current</strong>" variable in the <a href="gremlin.html">GREMLIN</a> script stands for the current record retrieved by the SQL query. This is the output: </p>
 <p><img src="http://www.orientechnologies.com/images/graphed-tutorial-query2.png"></p>
-<h2>
+<h3>
 <a name="Command"></a>Command<a href="#Command" class="section_anchor"></a>
-</h2>
+</h3>
 <p>If you want to use raw <a href="gremlin.html">GREMLIN</a> click on the "<strong>Command</strong>" tab, select <strong>GREMLIN</strong> as language and type this text: </p>
 <pre class="prettyprint">g.V[0..9]</pre>
 <p>That means "From the current Graph (<strong>g</strong> variable), get all the vertices (<strong>V</strong>) but return only the first 10. </p>
 <p><img src="http://www.orientechnologies.com/images/graphed-tutorial-command.png"></p>
 <p>In this case raw <a href="gremlin.html">GREMLIN</a> engine will be called. </p>
-<h1>
-<a name="Java_API"></a>Java API<a href="#Java_API" class="section_anchor"></a>
-</h1>
 <h2>
-<a name="GREMLIN()_function"></a>GREMLIN() function<a href="#GREMLIN()_function" class="section_anchor"></a>
+<a name="Java_API"></a>Java API<a href="#Java_API" class="section_anchor"></a>
 </h2>
+<h3>
+<a name="GREMLIN()_function"></a>GREMLIN() function<a href="#GREMLIN()_function" class="section_anchor"></a>
+</h3>
 <p>This function enriches the OrientDB's SQL language to execute a <a href="gremlin.html">GREMLIN</a> statement for projections. </p>
 <p>Example: retrieve the first 3 out edges of the first 2 vertexes: </p>
 <pre class="prettyprint">List&lt;ODocument&gt; resultset = db.query(new OSQLSynchQuery("SELECT GREMLIN( 'current.out[0..3]' ) as value from V limit 2"));</pre>
 <p>The <a href="gremlin.html">GREMLIN</a> result will be contained inside the "value" field of the document retrieved. </p>
 <pre class="prettyprint">resultset.get(0).field( "value" );</pre>
-<h2>
+<h3>
 <a name="GREMLIN_command"></a>GREMLIN command<a href="#GREMLIN_command" class="section_anchor"></a>
-</h2>
+</h3>
 <p>The OCommandGremlin is a new class to execute <a href="gremlin.html">GREMLIN</a> script. The usage is the same of SQL commands: </p>
 <pre class="prettyprint">db.command(new OCommandGremlin("g.V[0..10]")).execute();</pre>
 <p>Where "<strong>g</strong>" is the variable that represents the current database. </p>
-<h1>
+<h2>
 <a name="Conclusion"></a>Conclusion<a href="#Conclusion" class="section_anchor"></a>
-</h1>
+</h2>
 <p>To continue learning OrientDB Graph Edition look at these links: </p>
 <ul>
 <li>

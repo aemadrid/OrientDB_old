@@ -16,18 +16,18 @@ layout: default
 </ul>
 <li><a href="#Register_the_filter">Register the filter</a></li>
 </ul>
-</ul><h1>
+</ul><h2>
 <a name="Introduction"></a>Introduction<a href="#Introduction" class="section_anchor"></a>
-</h1>
+</h2>
 <p>The database instances are not thread-safe, so each thread needs a own instance. All the database instances will share the same connection to the storage for the same URL. For more information look at <a href="java_multi_threading.html">Java Multi threads and databases</a>. </p>
 <p>Java WebApp runs inside a Servlet container with a pool of threads that work the requests. </p>
 <p>There are mainly 2 solutions: </p>
 <ul>
 <li>Manual control of the database instances from <strong>Servlets</strong> (or any other server-side technology like Apache Struts Actions, Spring MVC, etc.) </li>
 <li>Automatic control using <strong>Servlet Filters</strong> </li>
-</ul><h1>
+</ul><h2>
 <a name="Manual_control"></a>Manual control<a href="#Manual_control" class="section_anchor"></a>
-</h1>
+</h2>
 <pre class="prettyprint">package com.orientechnologies.test;
 import javax.servlet.*;
 
@@ -47,17 +47,17 @@ public class Example extends HttpServlet {
     }    
   }
 }</pre>
-<h1>
+<h2>
 <a name="Automatic_control_using_Servlet_Filters"></a>Automatic control using Servlet Filters<a href="#Automatic_control_using_Servlet_Filters" class="section_anchor"></a>
-</h1>
+</h2>
 <p>Servlets are the best way to automatise database control inside WebApps. The trick is to create a Filter that get a database from the pool and binds it in current ThreadLocal before to execute the Servlet code. Once returned the ThreadLocal is cleared and database released to the pool. </p>
 <p><a href="http://www.oracle.com/technetwork/java/javaee/servlet/index.html" rel="nofollow">JaveEE Servlets</a> </p>
-<h2>
-<a name="Create_a_Filter_class"></a>Create a Filter class<a href="#Create_a_Filter_class" class="section_anchor"></a>
-</h2>
 <h3>
-<a name="Create_a_database_instance_per_request"></a>Create a database instance per request<a href="#Create_a_database_instance_per_request" class="section_anchor"></a>
+<a name="Create_a_Filter_class"></a>Create a Filter class<a href="#Create_a_Filter_class" class="section_anchor"></a>
 </h3>
+<h4>
+<a name="Create_a_database_instance_per_request"></a>Create a database instance per request<a href="#Create_a_database_instance_per_request" class="section_anchor"></a>
+</h4>
 <p>In this example a new database instance is created per request, opened and at the end closed. </p>
 <pre class="prettyprint">package com.orientechnologies.test;
 import javax.servlet.*;
@@ -74,9 +74,9 @@ public class OrientDBFilter implements Filter {
       }
   }
 }</pre>
-<h3>
+<h4>
 <a name="Use_the_database_pool"></a>Use the database pool<a href="#Use_the_database_pool" class="section_anchor"></a>
-</h3>
+</h4>
 <p>In this example the database pool is used. </p>
 <pre class="prettyprint">package com.orientechnologies.test;
 import javax.servlet.*;
@@ -97,9 +97,9 @@ public class OrientDBFilter implements Filter {
       ODatabaseDocumentPool.global().close();
   }
 }</pre>
-<h2>
+<h3>
 <a name="Register_the_filter"></a>Register the filter<a href="#Register_the_filter" class="section_anchor"></a>
-</h2>
+</h3>
 <p>Now we've create the filter class it needs to be registered in the <strong>web.xml</strong> file: </p>
 <pre class="prettyprint">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
 &lt;web-app xmlns="http://java.sun.com/xml/ns/j2ee"

@@ -3,18 +3,18 @@ title: Embed the Server
 layout: default
 ---
 
- <h1>
+ <h2>
 <a name="Introduction"></a>Introduction<a href="#Introduction" class="section_anchor"></a>
-</h1>
+</h2>
 <p>Embedding an OrientDB Server inside a Java application has several advantages and interesting features: </p>
 <ul>
 <li>You can use the <a href="http://code.google.com/p/orient/wiki/ConsoleCommands" rel="nofollow">Console</a> to control it </li>
 <li>You can use the <a href="http://code.google.com/p/orient/wiki/OrientDB_Studio" rel="nofollow">OrientDB Studio</a> </li>
 <li>Java application that runs embedded with the server can bypass the remote connection and use the database directly with <a href="http://code.google.com/p/orient/wiki/Concepts#Database_URL" rel="nofollow">local mode</a>. </li>
 </ul><p>To embed an OrientDB Server inside a Java application you have to create the OServer object and use a valid configuration for it. </p>
-<h2>
+<h3>
 <a name="Use_an_embedded_configuration"></a>Use an embedded configuration<a href="#Use_an_embedded_configuration" class="section_anchor"></a>
-</h2>
+</h3>
 <pre class="prettyprint">import com.orientechnologies.orient.server.OServerMain;
 
 public class OrientDBEmbeddable {
@@ -44,9 +44,9 @@ public class OrientDBEmbeddable {
    + "&lt;/properties&gt;" + "&lt;/orient-server&gt;");
 	}
 }</pre>
-<h2>
+<h3>
 <a name="Use_custom_file_for_configuration"></a>Use custom file for configuration<a href="#Use_custom_file_for_configuration" class="section_anchor"></a>
-</h2>
+</h3>
 <pre class="prettyprint">import com.orientechnologies.orient.server.OServerMain;
 
 public class OrientDBEmbeddable {
@@ -55,9 +55,9 @@ public class OrientDBEmbeddable {
   OServerMain.create().startup(new File("/usr/local/temp/db.config"));
  }
 }</pre>
-<h2>
+<h3>
 <a name="Shutdown"></a>Shutdown<a href="#Shutdown" class="section_anchor"></a>
-</h2>
+</h3>
 <p>OrientDB Server creates some threads internally as non-daemon threads, so they runs even if the main application exists. Use the OServer.shutdown() method to shutdown the server in soft way: </p>
 <pre class="prettyprint">import com.orientechnologies.orient.server.OServerMain;
 

@@ -51,9 +51,9 @@ layout: default
 </ul>
 <li><a href="#Special_use_of_LINKSET_types">Special use of LINKSET types</a></li>
 <ul><li><a href="#Tree_node_binary_structure">Tree node binary structure</a></li></ul>
-</ul><h1>
+</ul><h2>
 <a name="Introduction"></a>Introduction<a href="#Introduction" class="section_anchor"></a>
-</h1>
+</h2>
 <p>The OrientDB binary protocol is the fastest way to interface a client application to an OrientDB Server instance. The aim of this page is to provide a starting point from which to build a language binding, maintaining high-performance. </p>
 <p>If you'd like to develop a new binding, please take a look to the available ones before starting a new project from scratch </p>
 <ul>
@@ -70,13 +70,13 @@ layout: default
 <li>Client side: <a href="http://code.google.com/p/orient/source/browse/trunk/client/src/main/java/com/orientechnologies/orient/client/remote/OStorageRemote.java" rel="nofollow">OStorageRemote.java</a> </li>
 <li>Server side: <a href="http://code.google.com/p/orient/source/browse/trunk/server/src/main/java/com/orientechnologies/orient/server/network/protocol/binary/ONetworkProtocolBinary.java" rel="nofollow">ONetworkProtocolBinary.java</a> </li>
 <li>Protocol constants: <a href="http://code.google.com/p/orient/source/browse/trunk/enterprise/src/main/java/com/orientechnologies/orient/enterprise/channel/binary/OChannelBinaryProtocol.java" rel="nofollow">OChannelBinaryProtocol.java</a> </li>
-</ul><h2>
+</ul><h3>
 <a name="Connection"></a>Connection<a href="#Connection" class="section_anchor"></a>
-</h2>
+</h3>
 <p><i>(Since 0.9.24-SNAPSHOT Nov 25th 2010)</i> Once connected, the server sends a short number (2 byte) containing the binary protocol number. The client should check that it supports that version of the protocol. Every time the protocol changes the version is incremented. </p>
-<h2>
+<h3>
 <a name="Getting_started"></a>Getting started<a href="#Getting_started" class="section_anchor"></a>
-</h2>
+</h3>
 <p>After the connection has been established, a client can <a href="#CONNECT">Connect</a> to the server or request the opening of a database <a href="#DB_OPEN">Database Open</a>. Currently, only TCP/IP raw sockets are supported. For this operation use socket APIs appropriate to the language you're using. After the <a href="#CONNECT">Connect</a> and <a href="#DB_OPEN">Database Open</a> all the client's requests are sent to the server until the client closes the socket. When the socket is closed, OrientDB Server instance frees resources the used for the connection. </p>
 <p>The first operation following the socket-level connection must be one of: </p>
 <ul>
@@ -85,15 +85,15 @@ layout: default
 <li>
 <a href="#DB_OPEN">Database Open</a> to open an existing database </li>
 </ul><p>In both cases a <a href="#Session-Id">Session-Id</a> is sent back to the client. The server assigns a unique Session-Id to the client. This value must be used for all further operations against the server.  </p>
-<h2>
+<h3>
 <a name="Session-Id"></a>Session-Id<a href="#Session-Id" class="section_anchor"></a>
-</h2>
+</h3>
 <p>All the operations that follow the open/connect must contain, as the first parameter, the client <strong>Session-Id</strong> (as Integer, 4 bytes) and it will be sent back on completion of the request just after the result field. </p>
 <p><i>NOTE: In order to create a new server-side connection, the client must send a negative number into the open/connect calls.</i> </p>
 <p>This <strong>Session-Id</strong> can be used into the client to keep track of the requests if it handles multiple session bound to the same connection. In this way the client can implement a sharing policy to save resources. This requires that the client implementation handle the response returned and dispatch it to the correct caller thread. </p>
-<h1>
+<h2>
 <a name="Enable_debug_messages_on_protocol"></a>Enable debug messages on protocol<a href="#Enable_debug_messages_on_protocol" class="section_anchor"></a>
-</h1>
+</h2>
 <p>To make the development of a new client easier it's strongly suggested to activate debug mode on the binary channel. To activate this, edit the file orientdb-server-config.xml and configure the new parameter "network.binary.debug" on the "binary" or "distributed" listener. E.g.: </p>
 <pre class="prettyprint">  ...
   &lt;listener protocol="distributed" port-range="2424-2430"
@@ -104,9 +104,9 @@ layout: default
   &lt;/listener&gt;
   ...</pre>
 <p>In the log file (or the console if you have configured the orientdb-server-log.properties file) all the packets received will be printed. </p>
-<h1>
+<h2>
 <a name="Exchange"></a>Exchange<a href="#Exchange" class="section_anchor"></a>
-</h1>
+</h2>
 <p>This is the typical exchange of messages between client and server sides: </p>
 <pre class="prettyprint">+------+                    +------+
 |Client|                    |Server|
@@ -127,78 +127,78 @@ layout: default
    +--------------------------&gt;|
    | TCP/IP Socket close       |
    +--------------------------&gt;|</pre>
-<h1>
+<h2>
 <a name="Network_message_format"></a>Network message format<a href="#Network_message_format" class="section_anchor"></a>
-</h1>
+</h2>
 <p>In explaining the network messages these conventions will be used: </p>
-<ul><li>fields are bracketed by parenthesis and contain the name and the type separated by ':'. E.g. <tt>(length:int)</tt> </li></ul><h1>
+<ul><li>fields are bracketed by parenthesis and contain the name and the type separated by ':'. E.g. <tt>(length:int)</tt> </li></ul><h2>
 <a name="Supported_types"></a>Supported types<a href="#Supported_types" class="section_anchor"></a>
-</h1>
+</h2>
 <p>The network protocol supports different types of information: </p>
-<table class="wikitable">
+<table class="zebra-striped bordered-table">
 <tr>
-<td style="border: 1px solid #ccc; padding: 5px;"> <strong>Type</strong> </td>
-<td style="border: 1px solid #ccc; padding: 5px;"> <strong>Minimum length in bytes</strong> </td>
-<td style="border: 1px solid #ccc; padding: 5px;"> <strong>Maximum length in bytes</strong> </td>
-<td style="border: 1px solid #ccc; padding: 5px;"> <strong>Notes</strong> </td>
-<td style="border: 1px solid #ccc; padding: 5px;"> <strong>Example</strong> </td>
+<td> <strong>Type</strong> </td>
+<td> <strong>Minimum length in bytes</strong> </td>
+<td> <strong>Maximum length in bytes</strong> </td>
+<td> <strong>Notes</strong> </td>
+<td> <strong>Example</strong> </td>
 </tr>
 <tr>
-<td style="border: 1px solid #ccc; padding: 5px;"> <strong>byte</strong> </td>
-<td style="border: 1px solid #ccc; padding: 5px;">1</td>
-<td style="border: 1px solid #ccc; padding: 5px;">1</td>
-<td style="border: 1px solid #ccc; padding: 5px;">Single byte, used to store small numbers and booleans</td>
-<td style="border: 1px solid #ccc; padding: 5px;">1</td>
+<td> <strong>byte</strong> </td>
+<td>1</td>
+<td>1</td>
+<td>Single byte, used to store small numbers and booleans</td>
+<td>1</td>
 </tr>
 <tr>
-<td style="border: 1px solid #ccc; padding: 5px;"> <strong>short</strong> </td>
-<td style="border: 1px solid #ccc; padding: 5px;">2</td>
-<td style="border: 1px solid #ccc; padding: 5px;">2</td>
-<td style="border: 1px solid #ccc; padding: 5px;">Signed short type</td>
-<td style="border: 1px solid #ccc; padding: 5px;">01</td>
+<td> <strong>short</strong> </td>
+<td>2</td>
+<td>2</td>
+<td>Signed short type</td>
+<td>01</td>
 </tr>
 <tr>
-<td style="border: 1px solid #ccc; padding: 5px;"> <strong>int</strong> </td>
-<td style="border: 1px solid #ccc; padding: 5px;">4</td>
-<td style="border: 1px solid #ccc; padding: 5px;">4</td>
-<td style="border: 1px solid #ccc; padding: 5px;">Signed integer type</td>
-<td style="border: 1px solid #ccc; padding: 5px;">0001</td>
+<td> <strong>int</strong> </td>
+<td>4</td>
+<td>4</td>
+<td>Signed integer type</td>
+<td>0001</td>
 </tr>
 <tr>
-<td style="border: 1px solid #ccc; padding: 5px;"> <strong>bytes</strong> </td>
-<td style="border: 1px solid #ccc; padding: 5px;">4</td>
-<td style="border: 1px solid #ccc; padding: 5px;">N</td>
-<td style="border: 1px solid #ccc; padding: 5px;">Used for binary data. The format is <tt>(length:int)[(content:&lt;length&gt; bytes)]</tt>
+<td> <strong>bytes</strong> </td>
+<td>4</td>
+<td>N</td>
+<td>Used for binary data. The format is <tt>(length:int)[(content:&lt;length&gt; bytes)]</tt>
 </td>
-<td style="border: 1px solid #ccc; padding: 5px;"><tt>000511111</tt></td>
+<td><tt>000511111</tt></td>
 </tr>
 <tr>
-<td style="border: 1px solid #ccc; padding: 5px;"> <strong>string</strong> </td>
-<td style="border: 1px solid #ccc; padding: 5px;">4</td>
-<td style="border: 1px solid #ccc; padding: 5px;">N</td>
-<td style="border: 1px solid #ccc; padding: 5px;">Used for text messages.The format is: <tt>(length:int)[(content:&lt;length&gt; bytes)]</tt>
+<td> <strong>string</strong> </td>
+<td>4</td>
+<td>N</td>
+<td>Used for text messages.The format is: <tt>(length:int)[(content:&lt;length&gt; bytes)]</tt>
 </td>
-<td style="border: 1px solid #ccc; padding: 5px;"><tt>0005Hello</tt></td>
+<td><tt>0005Hello</tt></td>
 </tr>
 <tr>
-<td style="border: 1px solid #ccc; padding: 5px;"> <strong>record</strong> </td>
-<td style="border: 1px solid #ccc; padding: 5px;">2</td>
-<td style="border: 1px solid #ccc; padding: 5px;">N</td>
-<td style="border: 1px solid #ccc; padding: 5px;">An entire record serialized. The format depends if a RID is passed or an entire record with its content. In case of null record then -2 as short is passed. In case of RID -3 is passes as short and then the RID: <tt>(-3:short)(cluster-id:short)(cluster-position:long)</tt>. In case of record: <tt>(0:short)(record-type:byte)(cluster-id:short)(cluster-position:long)(record-version:int)(record-content:bytes)</tt>
+<td> <strong>record</strong> </td>
+<td>2</td>
+<td>N</td>
+<td>An entire record serialized. The format depends if a RID is passed or an entire record with its content. In case of null record then -2 as short is passed. In case of RID -3 is passes as short and then the RID: <tt>(-3:short)(cluster-id:short)(cluster-position:long)</tt>. In case of record: <tt>(0:short)(record-type:byte)(cluster-id:short)(cluster-position:long)(record-version:int)(record-content:bytes)</tt>
 </td>
-<td style="border: 1px solid #ccc; padding: 5px;"></td>
+<td></td>
 </tr>
 <tr>
-<td style="border: 1px solid #ccc; padding: 5px;"> <strong>strings</strong> </td>
-<td style="border: 1px solid #ccc; padding: 5px;">4</td>
-<td style="border: 1px solid #ccc; padding: 5px;">N</td>
-<td style="border: 1px solid #ccc; padding: 5px;">Used for multiple text messages. The format is: <tt>(length:int)[(Nth-string:string)]</tt>
+<td> <strong>strings</strong> </td>
+<td>4</td>
+<td>N</td>
+<td>Used for multiple text messages. The format is: <tt>(length:int)[(Nth-string:string)]</tt>
 </td>
-<td style="border: 1px solid #ccc; padding: 5px;"><tt>00020005Hello0007World!</tt></td>
+<td><tt>00020005Hello0007World!</tt></td>
 </tr>
-</table><h1>
+</table><h2>
 <a name="Record_format"></a>Record format<a href="#Record_format" class="section_anchor"></a>
-</h1>
+</h2>
 <p>Documents are exchanged with the server component in a proprietary format (as a string) derived from JSON, but more compact. The string retrieved from the storage could be filled with spaces. This is due to the oversize feature if is setted. Just ignore the tailing spaces. </p>
 <p>These the rules: </p>
 <ul>
@@ -248,9 +248,9 @@ max:,linkedClass:,linkedType:17,index:#)]</pre>
 <pre class="prettyprint">ORole@name:"reader",inheritedRole:,mode:0,rules:{"database":2,"database.cluster.internal":2,"database.cluster.orole":2,"database.cluster.ouser":2,
 "database.class.*":2,"database.cluster.*":2,"database.query":2,"database.command":2,
 "database.hook.record":2}</pre>
-<h1>
+<h2>
 <a name="Request"></a>Request<a href="#Request" class="section_anchor"></a>
-</h1>
+</h2>
 <p>Each request has own format depending of the operation requested. The operation requested is indicated in the first byte: </p>
 <ul>
 <li>
@@ -259,203 +259,203 @@ max:,linkedClass:,linkedType:17,index:#)]</pre>
 <strong>4 bytes</strong> for the <a href="#Session-Id">Session-Id</a> number as Integer </li>
 <li>
 <strong>N bytes</strong> = message content based on the operation type </li>
-</ul><h2>
+</ul><h3>
 <a name="Operation_types"></a>Operation types<a href="#Operation_types" class="section_anchor"></a>
-</h2>
+</h3>
 <p></p>
-<table class="wikitable">
+<table class="zebra-striped bordered-table">
 <tr>
-<td style="border: 1px solid #ccc; padding: 5px;"> <strong>Command</strong> </td>
-<td style="border: 1px solid #ccc; padding: 5px;"> <strong>Value as byte</strong> </td>
-<td style="border: 1px solid #ccc; padding: 5px;"> <strong>Require authentication?</strong> </td>
-<td style="border: 1px solid #ccc; padding: 5px;"> <strong>Description</strong> </td>
-<td style="border: 1px solid #ccc; padding: 5px;"> Since </td>
+<td> <strong>Command</strong> </td>
+<td> <strong>Value as byte</strong> </td>
+<td> <strong>Require authentication?</strong> </td>
+<td> <strong>Description</strong> </td>
+<td> Since </td>
 </tr>
 <tr>
-<td style="border: 1px solid #ccc; padding: 5px;">SHUTDOWN              </td>
-<td style="border: 1px solid #ccc; padding: 5px;">1</td>
-<td style="border: 1px solid #ccc; padding: 5px;">Server (CONNECT operation)</td>
-<td style="border: 1px solid #ccc; padding: 5px;"> Shut down the server </td>
-<td style="border: 1px solid #ccc; padding: 5px;"> </td>
+<td>SHUTDOWN              </td>
+<td>1</td>
+<td>Server (CONNECT operation)</td>
+<td> Shut down the server </td>
+<td> </td>
 </tr>
 <tr>
-<td style="border: 1px solid #ccc; padding: 5px;">CONNECT               </td>
-<td style="border: 1px solid #ccc; padding: 5px;">2</td>
-<td style="border: 1px solid #ccc; padding: 5px;"> </td>
-<td style="border: 1px solid #ccc; padding: 5px;"> First operation to access to server commands </td>
-<td style="border: 1px solid #ccc; padding: 5px;"> </td>
+<td>CONNECT               </td>
+<td>2</td>
+<td> </td>
+<td> First operation to access to server commands </td>
+<td> </td>
 </tr>
 <tr>
-<td style="border: 1px solid #ccc; padding: 5px;">DB_OPEN               </td>
-<td style="border: 1px solid #ccc; padding: 5px;">3</td>
-<td style="border: 1px solid #ccc; padding: 5px;"> </td>
-<td style="border: 1px solid #ccc; padding: 5px;"> First operation to access to the database </td>
-<td style="border: 1px solid #ccc; padding: 5px;"> </td>
+<td>DB_OPEN               </td>
+<td>3</td>
+<td> </td>
+<td> First operation to access to the database </td>
+<td> </td>
 </tr>
 <tr>
-<td style="border: 1px solid #ccc; padding: 5px;">DB_CREATE             </td>
-<td style="border: 1px solid #ccc; padding: 5px;">4</td>
-<td style="border: 1px solid #ccc; padding: 5px;"> </td>
-<td style="border: 1px solid #ccc; padding: 5px;"> </td>
-<td style="border: 1px solid #ccc; padding: 5px;"> </td>
+<td>DB_CREATE             </td>
+<td>4</td>
+<td> </td>
+<td> </td>
+<td> </td>
 </tr>
 <tr>
-<td style="border: 1px solid #ccc; padding: 5px;">DB_CLOSE              </td>
-<td style="border: 1px solid #ccc; padding: 5px;">5</td>
-<td style="border: 1px solid #ccc; padding: 5px;">Database (DB_OPEN operation)</td>
-<td style="border: 1px solid #ccc; padding: 5px;"> </td>
-<td style="border: 1px solid #ccc; padding: 5px;"> </td>
+<td>DB_CLOSE              </td>
+<td>5</td>
+<td>Database (DB_OPEN operation)</td>
+<td> </td>
+<td> </td>
 </tr>
 <tr>
-<td style="border: 1px solid #ccc; padding: 5px;">DB_EXIST              </td>
-<td style="border: 1px solid #ccc; padding: 5px;">6</td>
-<td style="border: 1px solid #ccc; padding: 5px;">Server (CONNECT operation)</td>
-<td style="border: 1px solid #ccc; padding: 5px;"> </td>
-<td style="border: 1px solid #ccc; padding: 5px;"> </td>
+<td>DB_EXIST              </td>
+<td>6</td>
+<td>Server (CONNECT operation)</td>
+<td> </td>
+<td> </td>
 </tr>
 <tr>
-<td style="border: 1px solid #ccc; padding: 5px;">DB_DELETE             </td>
-<td style="border: 1px solid #ccc; padding: 5px;">7</td>
-<td style="border: 1px solid #ccc; padding: 5px;">Server (CONNECT operation)</td>
-<td style="border: 1px solid #ccc; padding: 5px;"> </td>
-<td style="border: 1px solid #ccc; padding: 5px;"> </td>
+<td>DB_DELETE             </td>
+<td>7</td>
+<td>Server (CONNECT operation)</td>
+<td> </td>
+<td> </td>
 </tr>
 <tr>
-<td style="border: 1px solid #ccc; padding: 5px;">DB_SIZE               </td>
-<td style="border: 1px solid #ccc; padding: 5px;">8</td>
-<td style="border: 1px solid #ccc; padding: 5px;">Database (DB_OPEN operation)</td>
-<td style="border: 1px solid #ccc; padding: 5px;"> Returns the database size in bytes</td>
-<td style="border: 1px solid #ccc; padding: 5px;"> 0.9.25 </td>
+<td>DB_SIZE               </td>
+<td>8</td>
+<td>Database (DB_OPEN operation)</td>
+<td> Returns the database size in bytes</td>
+<td> 0.9.25 </td>
 </tr>
 <tr>
-<td style="border: 1px solid #ccc; padding: 5px;">DB_COUNTRECORDS       </td>
-<td style="border: 1px solid #ccc; padding: 5px;">9</td>
-<td style="border: 1px solid #ccc; padding: 5px;">Database (DB_OPEN operation)</td>
-<td style="border: 1px solid #ccc; padding: 5px;"> Returns the total number of records in the database </td>
-<td style="border: 1px solid #ccc; padding: 5px;"> 0.9.25 </td>
+<td>DB_COUNTRECORDS       </td>
+<td>9</td>
+<td>Database (DB_OPEN operation)</td>
+<td> Returns the total number of records in the database </td>
+<td> 0.9.25 </td>
 </tr>
 <tr>
-<td style="border: 1px solid #ccc; padding: 5px;">DATACLUSTER_ADD       </td>
-<td style="border: 1px solid #ccc; padding: 5px;">10</td>
-<td style="border: 1px solid #ccc; padding: 5px;">Database (DB_OPEN operation)</td>
-<td style="border: 1px solid #ccc; padding: 5px;"> </td>
-<td style="border: 1px solid #ccc; padding: 5px;"> </td>
+<td>DATACLUSTER_ADD       </td>
+<td>10</td>
+<td>Database (DB_OPEN operation)</td>
+<td> </td>
+<td> </td>
 </tr>
 <tr>
-<td style="border: 1px solid #ccc; padding: 5px;">DATACLUSTER_REMOVE    </td>
-<td style="border: 1px solid #ccc; padding: 5px;">11</td>
-<td style="border: 1px solid #ccc; padding: 5px;">Database (DB_OPEN operation)</td>
-<td style="border: 1px solid #ccc; padding: 5px;"> </td>
-<td style="border: 1px solid #ccc; padding: 5px;"> </td>
+<td>DATACLUSTER_REMOVE    </td>
+<td>11</td>
+<td>Database (DB_OPEN operation)</td>
+<td> </td>
+<td> </td>
 </tr>
 <tr>
-<td style="border: 1px solid #ccc; padding: 5px;">DATACLUSTER_COUNT     </td>
-<td style="border: 1px solid #ccc; padding: 5px;">12</td>
-<td style="border: 1px solid #ccc; padding: 5px;">Database (DB_OPEN operation)</td>
-<td style="border: 1px solid #ccc; padding: 5px;"> </td>
-<td style="border: 1px solid #ccc; padding: 5px;"> </td>
+<td>DATACLUSTER_COUNT     </td>
+<td>12</td>
+<td>Database (DB_OPEN operation)</td>
+<td> </td>
+<td> </td>
 </tr>
 <tr>
-<td style="border: 1px solid #ccc; padding: 5px;">DATACLUSTER_DATARANGE </td>
-<td style="border: 1px solid #ccc; padding: 5px;">13</td>
-<td style="border: 1px solid #ccc; padding: 5px;">Database (DB_OPEN operation)</td>
-<td style="border: 1px solid #ccc; padding: 5px;"> </td>
-<td style="border: 1px solid #ccc; padding: 5px;"> </td>
+<td>DATACLUSTER_DATARANGE </td>
+<td>13</td>
+<td>Database (DB_OPEN operation)</td>
+<td> </td>
+<td> </td>
 </tr>
 <tr>
-<td style="border: 1px solid #ccc; padding: 5px;">DATASEGMENT_ADD       </td>
-<td style="border: 1px solid #ccc; padding: 5px;">20</td>
-<td style="border: 1px solid #ccc; padding: 5px;">Database (DB_OPEN operation)</td>
-<td style="border: 1px solid #ccc; padding: 5px;"> </td>
-<td style="border: 1px solid #ccc; padding: 5px;"> </td>
+<td>DATASEGMENT_ADD       </td>
+<td>20</td>
+<td>Database (DB_OPEN operation)</td>
+<td> </td>
+<td> </td>
 </tr>
 <tr>
-<td style="border: 1px solid #ccc; padding: 5px;">DATASEGMENT_REMOVE    </td>
-<td style="border: 1px solid #ccc; padding: 5px;">21</td>
-<td style="border: 1px solid #ccc; padding: 5px;">Database (DB_OPEN operation)</td>
-<td style="border: 1px solid #ccc; padding: 5px;"> </td>
-<td style="border: 1px solid #ccc; padding: 5px;"> </td>
+<td>DATASEGMENT_REMOVE    </td>
+<td>21</td>
+<td>Database (DB_OPEN operation)</td>
+<td> </td>
+<td> </td>
 </tr>
 <tr>
-<td style="border: 1px solid #ccc; padding: 5px;">RECORD_LOAD           </td>
-<td style="border: 1px solid #ccc; padding: 5px;">30</td>
-<td style="border: 1px solid #ccc; padding: 5px;">Database (DB_OPEN operation)</td>
-<td style="border: 1px solid #ccc; padding: 5px;"> </td>
-<td style="border: 1px solid #ccc; padding: 5px;"> </td>
+<td>RECORD_LOAD           </td>
+<td>30</td>
+<td>Database (DB_OPEN operation)</td>
+<td> </td>
+<td> </td>
 </tr>
 <tr>
-<td style="border: 1px solid #ccc; padding: 5px;">RECORD_CREATE         </td>
-<td style="border: 1px solid #ccc; padding: 5px;">31</td>
-<td style="border: 1px solid #ccc; padding: 5px;">Database (DB_OPEN operation)</td>
-<td style="border: 1px solid #ccc; padding: 5px;"> </td>
-<td style="border: 1px solid #ccc; padding: 5px;"> </td>
+<td>RECORD_CREATE         </td>
+<td>31</td>
+<td>Database (DB_OPEN operation)</td>
+<td> </td>
+<td> </td>
 </tr>
 <tr>
-<td style="border: 1px solid #ccc; padding: 5px;">RECORD_UPDATE         </td>
-<td style="border: 1px solid #ccc; padding: 5px;">32</td>
-<td style="border: 1px solid #ccc; padding: 5px;">Database (DB_OPEN operation)</td>
-<td style="border: 1px solid #ccc; padding: 5px;"> </td>
-<td style="border: 1px solid #ccc; padding: 5px;"> </td>
+<td>RECORD_UPDATE         </td>
+<td>32</td>
+<td>Database (DB_OPEN operation)</td>
+<td> </td>
+<td> </td>
 </tr>
 <tr>
-<td style="border: 1px solid #ccc; padding: 5px;">RECORD_DELETE         </td>
-<td style="border: 1px solid #ccc; padding: 5px;">33</td>
-<td style="border: 1px solid #ccc; padding: 5px;">Database (DB_OPEN operation)</td>
-<td style="border: 1px solid #ccc; padding: 5px;"> </td>
-<td style="border: 1px solid #ccc; padding: 5px;"> </td>
+<td>RECORD_DELETE         </td>
+<td>33</td>
+<td>Database (DB_OPEN operation)</td>
+<td> </td>
+<td> </td>
 </tr>
 <tr>
-<td style="border: 1px solid #ccc; padding: 5px;">COUNT                 </td>
-<td style="border: 1px solid #ccc; padding: 5px;">40</td>
-<td style="border: 1px solid #ccc; padding: 5px;">Database (DB_OPEN operation)</td>
-<td style="border: 1px solid #ccc; padding: 5px;"> </td>
-<td style="border: 1px solid #ccc; padding: 5px;"> </td>
+<td>COUNT                 </td>
+<td>40</td>
+<td>Database (DB_OPEN operation)</td>
+<td> </td>
+<td> </td>
 </tr>
 <tr>
-<td style="border: 1px solid #ccc; padding: 5px;">COMMAND               </td>
-<td style="border: 1px solid #ccc; padding: 5px;">41</td>
-<td style="border: 1px solid #ccc; padding: 5px;">Database (DB_OPEN operation)</td>
-<td style="border: 1px solid #ccc; padding: 5px;"> </td>
-<td style="border: 1px solid #ccc; padding: 5px;"> </td>
+<td>COMMAND               </td>
+<td>41</td>
+<td>Database (DB_OPEN operation)</td>
+<td> </td>
+<td> </td>
 </tr>
 <tr>
-<td style="border: 1px solid #ccc; padding: 5px;">TX_COMMIT             </td>
-<td style="border: 1px solid #ccc; padding: 5px;">60</td>
-<td style="border: 1px solid #ccc; padding: 5px;">Database (DB_OPEN operation)</td>
-<td style="border: 1px solid #ccc; padding: 5px;"> </td>
-<td style="border: 1px solid #ccc; padding: 5px;"> </td>
+<td>TX_COMMIT             </td>
+<td>60</td>
+<td>Database (DB_OPEN operation)</td>
+<td> </td>
+<td> </td>
 </tr>
 <tr>
-<td style="border: 1px solid #ccc; padding: 5px;">CONFIG_GET            </td>
-<td style="border: 1px solid #ccc; padding: 5px;">70</td>
-<td style="border: 1px solid #ccc; padding: 5px;">Server (CONNECT operation)</td>
-<td style="border: 1px solid #ccc; padding: 5px;"> </td>
-<td style="border: 1px solid #ccc; padding: 5px;"> </td>
+<td>CONFIG_GET            </td>
+<td>70</td>
+<td>Server (CONNECT operation)</td>
+<td> </td>
+<td> </td>
 </tr>
 <tr>
-<td style="border: 1px solid #ccc; padding: 5px;">CONFIG_SET            </td>
-<td style="border: 1px solid #ccc; padding: 5px;">71</td>
-<td style="border: 1px solid #ccc; padding: 5px;">Server (CONNECT operation)</td>
-<td style="border: 1px solid #ccc; padding: 5px;"> </td>
-<td style="border: 1px solid #ccc; padding: 5px;"> </td>
+<td>CONFIG_SET            </td>
+<td>71</td>
+<td>Server (CONNECT operation)</td>
+<td> </td>
+<td> </td>
 </tr>
 <tr>
-<td style="border: 1px solid #ccc; padding: 5px;">CONFIG_LIST           </td>
-<td style="border: 1px solid #ccc; padding: 5px;">72</td>
-<td style="border: 1px solid #ccc; padding: 5px;">Server (CONNECT operation)</td>
-<td style="border: 1px solid #ccc; padding: 5px;"> </td>
-<td style="border: 1px solid #ccc; padding: 5px;"> </td>
+<td>CONFIG_LIST           </td>
+<td>72</td>
+<td>Server (CONNECT operation)</td>
+<td> </td>
+<td> </td>
 </tr>
 <tr>
-<td style="border: 1px solid #ccc; padding: 5px;">DB_RELOAD             </td>
-<td style="border: 1px solid #ccc; padding: 5px;">73</td>
-<td style="border: 1px solid #ccc; padding: 5px;">Server (CONNECT operation)</td>
-<td style="border: 1px solid #ccc; padding: 5px;"> </td>
-<td style="border: 1px solid #ccc; padding: 5px;"> </td>
+<td>DB_RELOAD             </td>
+<td>73</td>
+<td>Server (CONNECT operation)</td>
+<td> </td>
+<td> </td>
 </tr>
-</table><h1>
+</table><h2>
 <a name="Response"></a>Response<a href="#Response" class="section_anchor"></a>
-</h1>
+</h2>
 <ul>
 <li>
 <strong>1 byte</strong>: Success status of the request if succeeded or failed (0=OK, 1=ERROR) </li>
@@ -463,49 +463,49 @@ max:,linkedClass:,linkedType:17,index:#)]</pre>
 <strong>4 bytes</strong>: <a href="#Session-Id">Session-Id</a> (Integer) </li>
 <li>
 <strong>N bytes</strong>: Message content depending on the operation requested </li>
-</ul><h2>
+</ul><h3>
 <a name="Statuses"></a>Statuses<a href="#Statuses" class="section_anchor"></a>
-</h2>
+</h3>
 <p>Every time the client sends a request, it should read the one-byte response status that indicates OK or ERROR. This first byte changes the following response.  </p>
 <pre class="prettyprint"> * OK                     = 0;
  * ERROR                  = 1;</pre>
-<h2>
+<h3>
 <a name="Errors"></a>Errors<a href="#Errors" class="section_anchor"></a>
-</h2>
+</h3>
 <p>The format is: <tt>[(1)(exception-class:string)(exception-message:string)]*(0)</tt> </p>
 <p>The pairs <tt>exception-class</tt> and <tt>exception-message</tt> continue while the following byte is 1. A 0 in this position indicates that no more data follows. </p>
 <p>E.g. (parentheses are used here just to separate fields to make this easier to read: they are not present in the server response): </p>
 <pre class="prettyprint">(1)(com.orientechnologies.orient.core.exception.OStorageException)(Can't open the storage 'demo')(0)</pre>
 <p>Example of 2 depth-levels exception: </p>
 <pre class="prettyprint">(1)(com.orientechnologies.orient.core.exception.OStorageException)(Can't open the storage 'demo')(1)(com.orientechnologies.orient.core.exception.OStorageException)(File not found)(0)</pre>
-<h1>
-<a name="Operations"></a>Operations<a href="#Operations" class="section_anchor"></a>
-</h1>
-<p>This section explains the <strong>request</strong> and <strong>response</strong> messages of all suported operations. </p>
 <h2>
-<a name="SHUTDOWN"></a>SHUTDOWN<a href="#SHUTDOWN" class="section_anchor"></a>
+<a name="Operations"></a>Operations<a href="#Operations" class="section_anchor"></a>
 </h2>
+<p>This section explains the <strong>request</strong> and <strong>response</strong> messages of all suported operations. </p>
+<h3>
+<a name="SHUTDOWN"></a>SHUTDOWN<a href="#SHUTDOWN" class="section_anchor"></a>
+</h3>
 <p>Shut down the server. Requires "shutdown" permission to be set in <strong>orientdb-server-config.xml</strong> file. </p>
 <pre class="prettyprint">Request:  (user-name:string)(user-password:string)
 Response: empty</pre>
 <p>Typically the credentials are those of the OrientDB server administrator. This is not the same as the <strong>admin</strong> user for individual databases. </p>
-<h2>
+<h3>
 <a name="CONNECT"></a>CONNECT<a href="#CONNECT" class="section_anchor"></a>
-</h2>
+</h3>
 <p>This is the first operation requested by the client when it needs to work with the server instance. It returns the session id of the client. </p>
 <pre class="prettyprint">Request:  (user-password:string)(user-password:string)
 Response: (session-id:int)</pre>
 <p>Typically the credentials are those of the OrientDB server administrator. This is not the same as the <strong>admin</strong> user for individual databases. It returns the <a href="#Session-Id">Session-Id</a> to being reused for all the next calls. </p>
-<h2>
+<h3>
 <a name="DB_OPEN"></a>DB_OPEN<a href="#DB_OPEN" class="section_anchor"></a>
-</h2>
+</h3>
 <p>This is the first operation the client should call. It opens a database on the remote OrientDB Server. Returns the <a href="#Session-Id">Session-Id</a> to being reused for all the next calls and the list of configured <a href="concepts.html#Cluster">clusters</a>. </p>
 <pre class="prettyprint">Request:  (database-name:string)(user-name:string)(user-password:string)
 Response: (session-id:int)(num-of-clusters:int)[(cluster-name:string)(cluster-id:int)(cluster-type:string)](cluster-config:bytes)</pre>
 <p>cluster-config is always null unless you're running in a server clustered configuration. </p>
-<h2>
+<h3>
 <a name="DB_CREATE"></a>DB_CREATE<a href="#DB_CREATE" class="section_anchor"></a>
-</h2>
+</h3>
 <p>Creates a database in the remote OrientDB server instance </p>
 <pre class="prettyprint">Request:  (database-name:string)(database-type:string)
 Response: empty</pre>
@@ -515,45 +515,45 @@ Response: empty</pre>
 <li>memory, as a volatile database </li>
 </ul><blockquote>NB. It doesn't make sense to use "remote" in this context 
 </blockquote>
-<h2>
+<h3>
 <a name="DB_CLOSE"></a>DB_CLOSE<a href="#DB_CLOSE" class="section_anchor"></a>
-</h2>
+</h3>
 <p>Closes the database and the network connection to the OrientDB Server instance. No return is expected. The socket is also closed. </p>
 <pre class="prettyprint">Request:  empty
 Response: empty</pre>
-<h2>
+<h3>
 <a name="DB_EXIST"></a>DB_EXIST<a href="#DB_EXIST" class="section_anchor"></a>
-</h2>
+</h3>
 <p>Asks if a database exists in the OrientDB Server instance. It returns true (non-zero) or false (zero). </p>
 <pre class="prettyprint">Request:  (database-name:string) &lt;-- before 1.0rc1 this was empty
 Response: (result:byte)</pre>
-<h2>
+<h3>
 <a name="DB_RELOAD"></a>DB_RELOAD<a href="#DB_RELOAD" class="section_anchor"></a>
-</h2>
+</h3>
 <p>Reloads database information. Available since 1.0rc4. </p>
 <pre class="prettyprint">Request:  empty
 Response:(num-of-clusters:int)[(cluster-name:string)(cluster-id:int)(cluster-type:string)]</pre>
-<h2>
+<h3>
 <a name="DB_DELETE"></a>DB_DELETE<a href="#DB_DELETE" class="section_anchor"></a>
-</h2>
+</h3>
 <p>Removes a database from the OrientDB Server instance. It returns true if has been deleted (non-zero) or false (zero). </p>
 <pre class="prettyprint">Request:  (database-name:string)
 Response: (result:byte)</pre>
-<h2>
+<h3>
 <a name="DB_SIZE"></a>DB_SIZE<a href="#DB_SIZE" class="section_anchor"></a>
-</h2>
+</h3>
 <p>Asks for the size of a database in the OrientDB Server instance. </p>
 <pre class="prettyprint">Request:  empty
 Response: (size:long)</pre>
-<h2>
+<h3>
 <a name="DB_COUNTRECORDS"></a>DB_COUNTRECORDS<a href="#DB_COUNTRECORDS" class="section_anchor"></a>
-</h2>
+</h3>
 <p>Asks for the number of records in a database in the OrientDB Server instance. </p>
 <pre class="prettyprint">Request:  empty
 Response: (count:long)</pre>
-<h2>
+<h3>
 <a name="DATACLUSTER_ADD"></a>DATACLUSTER_ADD<a href="#DATACLUSTER_ADD" class="section_anchor"></a>
-</h2>
+</h3>
 <p>Add a new data segment. </p>
 <p>If type is "PHYSICAL": </p>
 <pre class="prettyprint">Request:  (type:string)(string:name)(file-name:string)(initial-size:int)</pre>
@@ -562,34 +562,34 @@ Response: (count:long)</pre>
 <p>In all cases: </p>
 <pre class="prettyprint">Response: (new-cluster-number:short)</pre>
 <p>Where: type is one of "PHYSICAL", "LOGICAL" or "MEMORY". You can pass -1 to initial-size, in this case the default value of 1MB it's used. The initial-size parameter is expressed in bytes. </p>
-<h2>
+<h3>
 <a name="DATACLUSTER_REMOVE"></a>DATACLUSTER_REMOVE<a href="#DATACLUSTER_REMOVE" class="section_anchor"></a>
-</h2>
+</h3>
 <p>Remove a cluster. </p>
 <pre class="prettyprint">Request:  (cluster-number:short)
 Response: (result:byte)</pre>
-<h2>
+<h3>
 <a name="DATACLUSTER_COUNT"></a>DATACLUSTER_COUNT<a href="#DATACLUSTER_COUNT" class="section_anchor"></a>
-</h2>
+</h3>
 <p>Returns the number o clusters. </p>
 <pre class="prettyprint">Request:  (cluster-count:short)[(cluster-number:short)]
 Response: (cluster-count:long)</pre>
-<h2>
+<h3>
 <a name="DATACLUSTER_DATARANGE"></a>DATACLUSTER_DATARANGE<a href="#DATACLUSTER_DATARANGE" class="section_anchor"></a>
-</h2>
+</h3>
 <pre class="prettyprint">Request:  (cluster-number:short)
 Response: (begin:long)(end:long)</pre>
-<h2>
+<h3>
 <a name="DATASEGMENT_ADD"></a>DATASEGMENT_ADD<a href="#DATASEGMENT_ADD" class="section_anchor"></a>
-</h2>
+</h3>
 <p>Add a new data segment. NB. Not yet implemented. </p>
-<h2>
+<h3>
 <a name="DATASEGMENT_REMOVE"></a>DATASEGMENT_REMOVE<a href="#DATASEGMENT_REMOVE" class="section_anchor"></a>
-</h2>
+</h3>
 <p>Remove a data segment. NB. Not yet implemented. </p>
-<h2>
+<h3>
 <a name="RECORD_LOAD"></a>RECORD_LOAD<a href="#RECORD_LOAD" class="section_anchor"></a>
-</h2>
+</h3>
 <p>Load a record by <a href="concepts.html#RecordID">RecordID</a>, according to a <a href="fetching_strategies.html">fetch plan</a> </p>
 <pre class="prettyprint">Request:  (cluster-id:short)(cluster-position:long)(fetch-plan:string)
 Response: [(status:byte)[(record-content:bytes)(record-version:int)(record-type:byte)]*]+</pre>
@@ -611,9 +611,9 @@ Response: [(status:byte)[(record-content:bytes)(record-version:int)(record-type:
 <li>'f': flat data </li>
 <li>'d': document </li>
 </ul>
-</ul><h2>
+</ul><h3>
 <a name="RECORD_CREATE"></a>RECORD_CREATE<a href="#RECORD_CREATE" class="section_anchor"></a>
-</h2>
+</h3>
 <p>Create a new record. Returns the position in the cluster of the new record. </p>
 <pre class="prettyprint">Request:  (cluster-id:short)(record-content:bytes)(record-type:byte)
 Response: (cluster-position:long)</pre>
@@ -622,9 +622,9 @@ Response: (cluster-position:long)</pre>
 <li>'b': raw bytes </li>
 <li>'f': flat data </li>
 <li>'d': document </li>
-</ul><h2>
+</ul><h3>
 <a name="RECORD_UPDATE"></a>RECORD_UPDATE<a href="#RECORD_UPDATE" class="section_anchor"></a>
-</h2>
+</h3>
 <p>Update a record. Returns the new record's version. </p>
 <pre class="prettyprint">Request:  (cluster-id:short)(cluster-position:long)(record-content:bytes)(record-version:int)(record-type:byte)
 Response: (record-version:int)</pre>
@@ -639,22 +639,22 @@ Response: (record-version:int)</pre>
 <li>'-2': Document update, no version control nor increment. </li>
 <li>'-3': Used internal in transaction rollback (version decrement). </li>
 <li>'&gt;-1': Standard document update (version control). </li>
-</ul><h2>
+</ul><h3>
 <a name="RECORD_DELETE"></a>RECORD_DELETE<a href="#RECORD_DELETE" class="section_anchor"></a>
-</h2>
+</h3>
 <p>Delete a record by its <a href="concepts.html#RecordID">RecordID</a>. During the optimistic transaction the record will be deleted only if the versions match. Returns true if has been deleted otherwise false. </p>
 <pre class="prettyprint">Request:  (cluster-id:short)(cluster-position:long)(record-version:int)
 Response: (status:byte)</pre>
 <p>N.B. The status returned is always 1. </p>
-<h2>
+<h3>
 <a name="COUNT"></a>COUNT<a href="#COUNT" class="section_anchor"></a>
-</h2>
+</h3>
 <p>Returns the number of records contained in the requested cluster. </p>
 <pre class="prettyprint">Request:  (cluster-name:string)
 Response: (record-count:long)</pre>
-<h2>
+<h3>
 <a name="COMMAND"></a>COMMAND<a href="#COMMAND" class="section_anchor"></a>
-</h2>
+</h3>
 <p>Executes remote commands: </p>
 <pre class="prettyprint">Request:  (mode:byte)(command-serialized:bytes)
 Response: [(status:byte)[(content:?)]*]+</pre>
@@ -695,9 +695,9 @@ Response: [(status:byte)[(content:?)]*]+</pre>
 <strong>fetchplan</strong>: used only for select queries, otherwise empty </li>
 <li>
 <strong>serialized-params</strong>: used to parametrise query. Send 0:int to disable </li>
-</ul><h2>
+</ul><h3>
 <a name="TX_COMMIT"></a>TX_COMMIT<a href="#TX_COMMIT" class="section_anchor"></a>
-</h2>
+</h3>
 <p>Commits a transaction. This operation flushes all the pending changes to the server side. </p>
 <pre class="prettyprint">Request:  (tx-id:int)(using-tx-log:byte)[(operation-type:byte)(cluster-id:short)(cluster-position:long)(record-type:byte)&lt;record-content&gt;]*(0-byte indicating end-of-records)
 Response: (created-record-count:int)[(client-specified-cluster-id:short)(client-specified-cluster-position:long)(created-cluster-id:short)(created-cluster-position:long)]*(updated-record-count:int)[(updated-cluster-id:short)(updated-cluster-position:long)(new-record-version:int)]*</pre>
@@ -723,9 +723,9 @@ Response: (created-record-count:int)[(client-specified-cluster-id:short)(client-
 </ul>
 </ul><p>This response contains two parts: a map of 'temporary' client-generated record ids to 'real' server-provided record ids for each CREATED record, and a  map of UPDATED record ids to update record-versions. </p>
 <p>Look at <a href="transactions.html#Optimistic_Transaction">Optimistic Transaction</a> to know how temporary <a href="concepts.html#RecordID">RecordID</a>s are managed. </p>
-<h1>
+<h2>
 <a name="Special_use_of_LINKSET_types"></a>Special use of LINKSET types<a href="#Special_use_of_LINKSET_types" class="section_anchor"></a>
-</h1>
+</h2>
 <p>Starting from 1.0rc8-SNAPSHOT OrientDB can transform collections of links from the classic mode: </p>
 <p><tt>[#10:3,#10:4,#10:5]</tt> </p>
 <p>to: </p>
@@ -735,9 +735,9 @@ Response: (created-record-count:int)[(client-specified-cluster-id:short)(client-
 <p>You can disable this behaviour by setting  </p>
 <p><strong>mvrbtree.ridBinaryThreshold</strong> = -1 </p>
 <p>Where <strong>mvrbtree.ridBinaryThreshold</strong> is the threshold where OrientDB will use the tree instead of plain collection (as before). -1 means "hey, never use the new mode but leave all as before". </p>
-<h2>
+<h3>
 <a name="Tree_node_binary_structure"></a>Tree node binary structure<a href="#Tree_node_binary_structure" class="section_anchor"></a>
-</h2>
+</h3>
 <p>To improve performance this structure is managed in binary form. Below how is made: </p>
 <pre class="prettyprint">+-----------+-----------+--------+------------+----------+-----------+---------------------+
 | TREE SIZE | NODE SIZE | COLOR .| PARENT RID | LEFT RID | RIGHT RID | RID LIST .......... |

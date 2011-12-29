@@ -32,9 +32,9 @@ layout: default
 <li><a href="#SQL_query">SQL query</a></li>
 <ul><li><a href="#SQL_Commands">SQL Commands</a></li></ul>
 </ul>
-</ul><h1>
+</ul><h2>
 <a name="Introduction"></a>Introduction<a href="#Introduction" class="section_anchor"></a>
-</h1>
+</h2>
 <p>The Orient Object DB works on top of the <a href="document_database.html">Document Database</a> and it's able to treat Java objects without the use of pre-processor, byte enhancer or Proxy classes. It uses the simpler way: the Java Reflection. Please consider that the Java reflection in modern Java Virtual Machines is really fast and the discovering of Java meta data is made at first time. Future implementation could use the byte-code enhancement techniques in addition. </p>
 <p>Read more about the <a href="object2_record_java_binding.html">Binding between Java Objects and Records</a>. </p>
 <p>Quick example of usage: </p>
@@ -52,9 +52,9 @@ City rome = new City("Rome", new Country("Italy"));
 account.getAddresses().add(new Address("Residence", rome, "Piazza Navona, 1"));
 
 db.save( account );</pre>
-<h2>
+<h3>
 <a name="Connection_Pool"></a>Connection Pool<a href="#Connection_Pool" class="section_anchor"></a>
-</h2>
+</h3>
 <p>One of most common use case is to reuse the database avoiding to create it every time. It's also the typical scenario of the Web applications. </p>
 <pre class="prettyprint">// OPEN THE DATABASE
 ODatabaseObjectTx db= ODatabaseObjectPool.global().acquire("remote:localhost/petshop", "admin", "admin");
@@ -63,18 +63,18 @@ ODatabaseObjectTx db= ODatabaseObjectPool.global().acquire("remote:localhost/pet
 
 db.close();</pre>
 <p>The close() method doesn't close the database but release it to the owner pool. It could be reused in the future. </p>
-<h2>
+<h3>
 <a name="Database_URL"></a>Database URL<a href="#Database_URL" class="section_anchor"></a>
-</h2>
+</h3>
 <p>In the example above a database of type Database Object Transactional has been created using the storage: remote:localhost/petshop. This address is a <a href="http://it.wikipedia.org/wiki/Uniform_Resource_Locator" rel="nofollow">URL</a>. To know more about database and storage types go to <a href="concepts.html#Database_URL">Database URL</a>. </p>
 <p>In this case the storage resides in the same computer of the client, but we're using the <strong>remote</strong> storage type. For this reason we need a Orient Server instance up and running. If we would open the database directly bypassing the server we had to use the <strong>local</strong> storage type such as "local:/usr/local/database/petshop/petshop" where, in this case, the storage was located in the /usr/local/database/petshop folder on the local file system. </p>
-<h2>
+<h3>
 <a name="Multi-threading"></a>Multi-threading<a href="#Multi-threading" class="section_anchor"></a>
-</h2>
+</h3>
 <p>The ODatabaseObjectTx class is non thread-safe. For this reason use different ODatabaseObjectTx instances by multiple threads. They will share local cache once transactions are committed. </p>
-<h2>
+<h3>
 <a name="Inheritance"></a>Inheritance<a href="#Inheritance" class="section_anchor"></a>
-</h2>
+</h3>
 <p>Starting from the release 0.9.19 OrientDB supports the <a href="inheritance.html">Inheritance</a>. Using the <a href="object_database.html">ObjectDatabase</a> the inheritance of Documents fully matches the Java inheritance. </p>
 <p>Example: </p>
 <pre class="prettyprint">public class Account {
@@ -87,9 +87,9 @@ public class Company extends Account {
 <p>When you save a Company object, OrientDB will save the object as unique Document in the cluster specified for Company class. When you search between all the Account instances with: </p>
 <pre class="prettyprint">SELECT FROM account</pre>
 <p>The search will find all the Account and Company documents that satisfy the query. </p>
-<h1>
+<h2>
 <a name="Use_the_database"></a>Use the database<a href="#Use_the_database" class="section_anchor"></a>
-</h1>
+</h2>
 <p>If you want to connect to a remote database using a OrientDB Server instance, you need to link the orient-client.jar in your classpath and to register the <a href="http://code.google.com/p/orient/wiki/JavaAPI#Engines" rel="nofollow">Remote Engine</a> in your client application by calling: </p>
 <pre class="prettyprint">Orient.instance().registerEngine(new OEngineRemote());</pre>
 <p>Before to use a database you need to open it: </p>
@@ -99,13 +99,13 @@ public class Company extends Account {
 <pre class="prettyprint">OUser user = db.getUser();</pre>
 <p>Once finished remember to close the database to free precious resources. </p>
 <pre class="prettyprint">db.close();</pre>
-<h1>
-<a name="Working_with_POJO"></a>Working with POJO<a href="#Working_with_POJO" class="section_anchor"></a>
-</h1>
-<p>Please read the <a href="object2_record_java_binding.html">POJO binding guide</a> containing all the information about the management of POJO. </p>
 <h2>
-<a name="Work_in_schema-less_mode"></a>Work in schema-less mode<a href="#Work_in_schema-less_mode" class="section_anchor"></a>
+<a name="Working_with_POJO"></a>Working with POJO<a href="#Working_with_POJO" class="section_anchor"></a>
 </h2>
+<p>Please read the <a href="object2_record_java_binding.html">POJO binding guide</a> containing all the information about the management of POJO. </p>
+<h3>
+<a name="Work_in_schema-less_mode"></a>Work in schema-less mode<a href="#Work_in_schema-less_mode" class="section_anchor"></a>
+</h3>
 <p>The Object Database can be used totally in schema-less mode. Take a look to this example: </p>
 <pre class="prettyprint">ODatabaseObject db = new ODatabaseObjectTx("remote:localhost/petshop").open("admin", "admin");
 
@@ -117,39 +117,39 @@ p.setCity( new City( "Rome", "Italy" ) );
 db.save( p );
 db.close();</pre>
 <p>This is the very first example. While the code it's pretty clear and easy to understand please note that we don't have declared the type "Person" before now. However Orient has been able to recognize the new object and save it in persistent way. </p>
-<h2>
+<h3>
 <a name="Work_in_schema-full_mode"></a>Work in schema-full mode<a href="#Work_in_schema-full_mode" class="section_anchor"></a>
-</h2>
+</h3>
 <p>In the schema-full mode you need to declare the classes you're using. Each class contains one or multiple properties. This mode is similar to the classic Relational DBMS approach where you need to create tables before to store records. To work in schema-full mode take a look to the <a href="java_schema_api.html">Schema APIs</a> page. </p>
-<h2>
+<h3>
 <a name="Create_a_new_object"></a>Create a new object<a href="#Create_a_new_object" class="section_anchor"></a>
-</h2>
+</h3>
 <p>Any Java object can be saved by calling the db.save() method. Note that the behaviour depends by the transaction begun if any. See <a href="transactions.html">Transactions</a>. </p>
 <pre class="prettyprint">Animal animal = new Animal();
 animal.setName( "Gaudi" );
 animal.setLocation( "Madrid" );
 db.save( animal );</pre>
-<h2>
+<h3>
 <a name="Browse_all_the_records_in_a_cluster"></a>Browse all the records in a cluster<a href="#Browse_all_the_records_in_a_cluster" class="section_anchor"></a>
-</h2>
+</h3>
 <pre class="prettyprint">for (Object o : database.browseCluster("CityCars")) {
   System.out.println( ((Car) o).getModel() );</pre>
-<h2>
+<h3>
 <a name="Browse_all_the_records_of_a_class"></a>Browse all the records of a class<a href="#Browse_all_the_records_of_a_class" class="section_anchor"></a>
-</h2>
+</h3>
 <pre class="prettyprint">for (Animal animal : database.browseClass(Animal.class)) {
   System.out.println( animal.getName() );</pre>
-<h2>
+<h3>
 <a name="Count_records_of_a_class"></a>Count records of a class<a href="#Count_records_of_a_class" class="section_anchor"></a>
-</h2>
+</h3>
 <pre class="prettyprint">long cars = database.countClass("Car");</pre>
-<h2>
+<h3>
 <a name="Count_records_of_a_cluster"></a>Count records of a cluster<a href="#Count_records_of_a_cluster" class="section_anchor"></a>
-</h2>
+</h3>
 <pre class="prettyprint">long cityCars = database.countCluster("CityCar");</pre>
-<h2>
+<h3>
 <a name="Update_an_object"></a>Update an object<a href="#Update_an_object" class="section_anchor"></a>
-</h2>
+</h3>
 <p>Any persistent object can be updated using the Java language and then calling the db.save() method to synchronize the changes to the repository. Behaviour depends by the transaction begun if any. See <a href="transactions.html">Transactions</a>. </p>
 <pre class="prettyprint">animal.setLocation( "Nairobi" );
 db.save( animal );</pre>
@@ -159,24 +159,24 @@ db.save( animal );</pre>
   animal.setPrice(animal.getPrice() * 105 / 100);
   database.save(animal);
 }</pre>
-<h2>
+<h3>
 <a name="Delete_an_object"></a>Delete an object<a href="#Delete_an_object" class="section_anchor"></a>
-</h2>
+</h3>
 <p>To delete an object call the db.delete() method. Behaviour depends by the transaction begun if any. See <a href="transactions.html">Transactions</a>. </p>
 <pre class="prettyprint">db.delete( animal );</pre>
 <p>Example of deletion of all the objects of class "Animal". </p>
 <pre class="prettyprint">for (Animal animal : database.browseClass(Animal.class))
   database.delete(animal);</pre>
-<h1>
+<h2>
 <a name="Execute_a_query"></a>Execute a query<a href="#Execute_a_query" class="section_anchor"></a>
-</h1>
+</h2>
 <p>Orient supports two kinds of queries: </p>
 <ul>
 <li>Native </li>
 <li>SQL </li>
-</ul><h2>
+</ul><h3>
 <a name="Native_query"></a>Native query<a href="#Native_query" class="section_anchor"></a>
-</h2>
+</h3>
 <p>Native queries are written in Java code. They are pretty fast since the JVM compiles it as for the rest of application. </p>
 <p>Example: </p>
 <pre class="prettyprint">List&lt;ODocument&gt; result = db.getUnderlying().command(
@@ -187,17 +187,17 @@ db.save( animal );</pre>
       return iRecord.field("city").field("name").eq("Rome").and().field("name").like("G%").go();
     };
   }).execute();</pre>
-<h2>
+<h3>
 <a name="SQL_query"></a>SQL query<a href="#SQL_query" class="section_anchor"></a>
-</h2>
+</h3>
 <p>Although OrientDB is part of NoSQL databases, supports the SQL engine, or at least a subset of it with such extensions to work with objects and graphs. </p>
 <p>To know more about the SQL syntax supported go to: <a href="sql_query.html">SQL Query</a>. </p>
 <p>Example: </p>
 <pre class="prettyprint">List&lt;Animal&gt; result = db.query(
   new OSQLSynchQuery&lt;Animal&gt;("select * from Animal where ID = 10 and name like 'G%'"));</pre>
-<h3>
+<h4>
 <a name="SQL_Commands"></a>SQL Commands<a href="#SQL_Commands" class="section_anchor"></a>
-</h3>
+</h4>
 <p>To execute SQL commands use the <tt>command()</tt> method passing a OCommandSQL object: </p>
 <pre class="prettyprint">int recordsUpdated = db.command(
   new OCommandSQL("update Animal set sold = false")).execute();</pre>

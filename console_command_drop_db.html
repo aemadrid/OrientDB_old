@@ -3,13 +3,13 @@ title: Drop Database
 layout: default
 ---
 
- <h1>
+ <h2>
 <a name="Drop_Database"></a>Drop Database<a href="#Drop_Database" class="section_anchor"></a>
-</h1>
-<p>The <strong>Drop Database</strong> command definitely deletes a database. If a database is open and no database name is used, then the current database will be deleted. <i>NOTE: Unless you've made backups there is no way to restore a deleted database.</i> </p>
-<h2>
-<a name="Syntax"></a>Syntax<a href="#Syntax" class="section_anchor"></a>
 </h2>
+<p>The <strong>Drop Database</strong> command definitely deletes a database. If a database is open and no database name is used, then the current database will be deleted. <i>NOTE: Unless you've made backups there is no way to restore a deleted database.</i> </p>
+<h3>
+<a name="Syntax"></a>Syntax<a href="#Syntax" class="section_anchor"></a>
+</h3>
 <p>For database opened using "local" protocol: </p>
 <pre class="prettyprint">DROP DATABASE</pre>
 <p>To remove a database hosted in a remote OrientDB Server you need the credential to do it at the target OrientDB server: </p>
@@ -22,9 +22,9 @@ layout: default
 <strong>server-username</strong> is the name of the server's user with privileges to drop the database </li>
 <li>
 <strong>server-userpassword</strong> is the password of the server's user </li>
-</ul><h2>
+</ul><h3>
 <a name="Examples"></a>Examples<a href="#Examples" class="section_anchor"></a>
-</h2>
+</h3>
 <p>Delete the current local database: </p>
 <pre class="prettyprint">DROP DATABASE</pre>
 <p>Delete the remote database "demo" hosted on localhost: </p>

@@ -4,9 +4,9 @@ layout: default
 ---
 
  <p>Orient supports the SQL language to execute queries against the engine. Look at the <a href="sql_where.html#Operators">operators</a> and <a href="sql_where.html#Functions">functions</a>. </p>
-<h1>
+<h2>
 <a name="Syntax"></a>Syntax<a href="#Syntax" class="section_anchor"></a>
-</h1>
+</h2>
 <p><tt>SELECT [&lt;Projections&gt;] FROM &lt;Target&gt; [WHERE &lt;Condition&gt;*] [ORDER BY &lt;Fields&gt;* [ASC|DESC]*] [LIMIT &lt;MaxRecords&gt;]</tt> </p>
 <ul>
 <li>
@@ -20,9 +20,9 @@ layout: default
 <li>
 <strong>LIMIT</strong> sets the maximum record the query can return </li>
 </ul><p><i>NOTE: Starting from 1.0rc7 the <strong>RANGE</strong> keyword has been removed. To execute range queries use the BETWEEN operator against @rid as explained  in <a href="pagination.html">Pagination</a>.</i> </p>
-<h2>
+<h3>
 <a name="Projections"></a>Projections<a href="#Projections" class="section_anchor"></a>
-</h2>
+</h3>
 <p>In the standard SQL projections are mandatory, but in OrientDB if omitted the entire record is returned, namely the equivalent of "<tt>*</tt>" keyword, but the record's identity and version are preserved. Example: </p>
 <pre class="prettyprint">SELECT FROM Account</pre>
 <p>By using the wildcard <tt>*</tt> the fields retrieved will be the same but the RID and version will be lost: </p>
@@ -41,9 +41,9 @@ layout: default
 <p>To override the field name use <tt>AS</tt>. Example: </p>
 <pre class="prettyprint">SELECT max(incoming) AS incoming, max(cost) AS costs FROM Balance</pre>
 <p>Projections are available since 0.9.25. </p>
-<h1>
+<h2>
 <a name="Examples"></a>Examples<a href="#Examples" class="section_anchor"></a>
-</h1>
+</h2>
 <p>Get all the records of type 'Person' where the name starts with 'Luk': </p>
 <p><tt>select * from Person where name like 'Luk%'</tt> </p>
 <p>or </p>

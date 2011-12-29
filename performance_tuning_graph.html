@@ -8,12 +8,12 @@ layout: default
 <li><a href="#Massive_Insertion">Massive Insertion</a></li>
 <ul><li><a href="#Cache_management">Cache management</a></li></ul>
 </ul><p>This guide is specific for the Graph Database. Please be sure to read the generic guide to the <a href="performance_tuning.html">Performance Tuning</a>. </p>
-<h1>
-<a name="Massive_Insertion"></a>Massive Insertion<a href="#Massive_Insertion" class="section_anchor"></a>
-</h1>
-<p>See <a href="performance_tuning.html#Massive_Insertion">Generic improvement on massive insertion</a>. </p>
 <h2>
-<a name="Cache_management"></a>Cache management<a href="#Cache_management" class="section_anchor"></a>
+<a name="Massive_Insertion"></a>Massive Insertion<a href="#Massive_Insertion" class="section_anchor"></a>
 </h2>
+<p>See <a href="performance_tuning.html#Massive_Insertion">Generic improvement on massive insertion</a>. </p>
+<h3>
+<a name="Cache_management"></a>Cache management<a href="#Cache_management" class="section_anchor"></a>
+</h3>
 <p>Graph Database, by default, caches the most used elements. For massive insertion is strongly suggested to disable cache to avoid to keep all the element in memory. <a href="performance_tuning.html#Use_the_Massive_Insert_intent">Massive Insert Intent</a> automatically sets it to false. </p>
 <pre class="prettyprint">graph.setRetainObjects(false);</pre>

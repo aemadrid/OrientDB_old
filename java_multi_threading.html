@@ -3,9 +3,9 @@ title: Multi Threading
 layout: default
 ---
 
- <h1>
+ <h2>
 <a name="Introduction"></a>Introduction<a href="#Introduction" class="section_anchor"></a>
-</h1>
+</h2>
 <p>OrientDB supports multi-threads access to the database. <tt>ODatabase*</tt> instances are not thread-safe, so you've to get <i>an instance per thread</i> and each database instance can be used <i>only in one thread per time</i>. </p>
 <p>Multiple database instances points to the same storage by using the same URL. In this case Storage is thread-save and orchestrates requests from different <tt>ODatabase*</tt> instances. </p>
 <pre class="prettyprint">ODatabaseDocument1------+
@@ -27,9 +27,9 @@ database1.save(rec1); // force saving in database1 no matter where the record ca
 
 rec2.field("name", "Luke");
 database2.save(rec2); // force saving in database2 no matter where the record came from</pre>
-<h1>
+<h2>
 <a name="Manual_control"></a>Manual control<a href="#Manual_control" class="section_anchor"></a>
-</h1>
+</h2>
 <p>Beware when you reuse database instances from different threads or then a thread handle multiple databases. In this case you can override the current database by calling this manually: </p>
 <pre class="prettyprint">ODatabaseRecordThreadLocal.INSTANCE.set( database );</pre>
 <p>Where database is the current database instance. Example: </p>

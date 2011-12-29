@@ -4,12 +4,12 @@ layout: default
 ---
 
  <p>Installation needs you have downloaded OrientDB before. If you haven't an OrientDB distribution goto <a href="download.html">Download</a>. </p>
-<h1>
-<a name="Installation_requirements"></a>Installation requirements<a href="#Installation_requirements" class="section_anchor"></a>
-</h1>
 <h2>
-<a name="Operating_System"></a>Operating System<a href="#Operating_System" class="section_anchor"></a>
+<a name="Installation_requirements"></a>Installation requirements<a href="#Installation_requirements" class="section_anchor"></a>
 </h2>
+<h3>
+<a name="Operating_System"></a>Operating System<a href="#Operating_System" class="section_anchor"></a>
+</h3>
 <p>OrientDB runs on every operating system that has an implementation of Java Virtual Machine (JVM). These include: </p>
 <ul>
 <li>All Linux distributions </li>
@@ -18,9 +18,9 @@ layout: default
 <li>Sun Solaris </li>
 <li>HP-UX </li>
 <li>IBM AIX </li>
-</ul><h2>
+</ul><h3>
 <a name="Java_Runtime_Environment"></a>Java Runtime Environment<a href="#Java_Runtime_Environment" class="section_anchor"></a>
-</h2>
+</h3>
 <p>OrientDB requires Java SE 6 to be installed in order to deploy the Server component. Client applications can be written using Java SE 5. </p>
 <p>You can check which version of Java SE you have installed by typing "java -version" in a command shell (or a command prompt for Windows users): </p>
 <pre class="prettyprint">&gt; java -version
@@ -28,57 +28,57 @@ layout: default
 java version "1.6.0_20"
 Java(TM) SE Runtime Environment (build 1.6.0_20-b02)
 Java HotSpot(TM) Client VM (build 16.3-b01, mixed mode, sharing)</pre>
-<h1>
-<a name="Installation"></a>Installation<a href="#Installation" class="section_anchor"></a>
-</h1>
 <h2>
-<a name="Regular_distribution"></a>Regular distribution<a href="#Regular_distribution" class="section_anchor"></a>
+<a name="Installation"></a>Installation<a href="#Installation" class="section_anchor"></a>
 </h2>
+<h3>
+<a name="Regular_distribution"></a>Regular distribution<a href="#Regular_distribution" class="section_anchor"></a>
+</h3>
 <p>Orient is distributed in a ZIP file. You can download the latest version at the <a href="download.html">Download Page</a>. To install, just extract the contents of ZIP archive into a folder on your PC. </p>
-<h3>
+<h4>
 <a name="Contents_of_the_archive"></a>Contents of the archive<a href="#Contents_of_the_archive" class="section_anchor"></a>
-</h3>
+</h4>
 <p>The Orient distribution contains the following folders: </p>
-<table class="wikitable">
+<table class="zebra-striped bordered-table">
 <tr>
-<td style="border: 1px solid #ccc; padding: 5px;"> <strong>Folder</strong> </td>
-<td style="border: 1px solid #ccc; padding: 5px;"> <strong>Description</strong> </td>
+<td> <strong>Folder</strong> </td>
+<td> <strong>Description</strong> </td>
 </tr>
 <tr>
-<td style="border: 1px solid #ccc; padding: 5px;"> benchmarks </td>
-<td style="border: 1px solid #ccc; padding: 5px;"> Set of performance tests </td>
+<td> benchmarks </td>
+<td> Set of performance tests </td>
 </tr>
 <tr>
-<td style="border: 1px solid #ccc; padding: 5px;"> bin </td>
-<td style="border: 1px solid #ccc; padding: 5px;"> Scripts to run Orient server and console </td>
+<td> bin </td>
+<td> Scripts to run Orient server and console </td>
 </tr>
 <tr>
-<td style="border: 1px solid #ccc; padding: 5px;"> config </td>
-<td style="border: 1px solid #ccc; padding: 5px;"> Configuration files </td>
+<td> config </td>
+<td> Configuration files </td>
 </tr>
 <tr>
-<td style="border: 1px solid #ccc; padding: 5px;"> databases </td>
-<td style="border: 1px solid #ccc; padding: 5px;"> Default place to store databases </td>
+<td> databases </td>
+<td> Default place to store databases </td>
 </tr>
 <tr>
-<td style="border: 1px solid #ccc; padding: 5px;"> lib </td>
-<td style="border: 1px solid #ccc; padding: 5px;"> Compiled Java archives with OrientDB </td>
+<td> lib </td>
+<td> Compiled Java archives with OrientDB </td>
 </tr>
 <tr>
-<td style="border: 1px solid #ccc; padding: 5px;"> log </td>
-<td style="border: 1px solid #ccc; padding: 5px;"> Server log files </td>
+<td> log </td>
+<td> Server log files </td>
 </tr>
 <tr>
-<td style="border: 1px solid #ccc; padding: 5px;"> www </td>
-<td style="border: 1px solid #ccc; padding: 5px;"> A local mirror of a web site used by <a href="key_value_server.html">Orient KeyValue Server</a> </td>
+<td> www </td>
+<td> A local mirror of a web site used by <a href="key_value_server.html">Orient KeyValue Server</a> </td>
 </tr>
-</table><h3>
+</table><h4>
 <a name="Starting_the_server"></a>Starting the server<a href="#Starting_the_server" class="section_anchor"></a>
-</h3>
+</h4>
 <p>To start OrientDB server, go to the <tt>bin</tt> folder and run script <tt>server.sh</tt> for Unix-like operating system, or <tt>server.bat</tt> for Windows. You may have to set the execute permission on the script file before running it. </p>
-<h3>
+<h4>
 <a name="Running_the_console"></a>Running the console<a href="#Running_the_console" class="section_anchor"></a>
-</h3>
+</h4>
 <p>Once Orient is installed on your system, you can open the console by double-clicking on <strong>console</strong> script or by executing it from a command shell. The output should be like this: </p>
 <pre class="prettyprint">ORIENT database v.0.9.3 www.orientechnologies.com
 Type 'help' to display all the commands supported

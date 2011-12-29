@@ -3,9 +3,9 @@ title: Full text indexes
 layout: default
 ---
 
- <h1>
+ <h2>
 <a name="Create_Index"></a>Create Index<a href="#Create_Index" class="section_anchor"></a>
-</h1>
+</h2>
 <p>The <strong>SQL Create Index</strong> command creates an index on a property defined in the schema.  </p>
 <p>Indexes can be: </p>
 <ul>
@@ -15,9 +15,9 @@ layout: default
 <strong>not unique</strong>, allows duplicates </li>
 <li>
 <strong>full-text</strong>, by indexing any single word of the text. It's used in query with the operator <a href="sql_where.html#Operators">CONTAINSTEXT</a> </li>
-</ul><h2>
+</ul><h3>
 <a name="Syntax"></a>Syntax<a href="#Syntax" class="section_anchor"></a>
-</h2>
+</h3>
 <pre class="prettyprint">CREATE INDEX &lt;name&gt; [ON &lt;class-name&gt; (prop-names)] &lt;type&gt; [&lt;key-type&gt;]</pre>
 <p>Where: </p>
 <ul>
@@ -31,9 +31,9 @@ layout: default
 <strong>type</strong>, between 'unique', 'notunique' and 'fulltext' </li>
 <li>
 <strong>key-type</strong>, is the type of key (Optional). On automatic indexes is auto-determined by reading the target schema property where the index is created. If not specified for manual indexes, at run-time during the first insertion the type will be auto determined by reading the type of the class. </li>
-</ul><h2>
+</ul><h3>
 <a name="Examples"></a>Examples<a href="#Examples" class="section_anchor"></a>
-</h2>
+</h3>
 <pre class="prettyprint">CREATE INDEX users.Id unique</pre>
 <p>For more information look at <a href="sql_create_index.html">Create index command</a>. </p>
 <p>For complete index guide look at <a href="indexes.html">Index guide</a>. </p>

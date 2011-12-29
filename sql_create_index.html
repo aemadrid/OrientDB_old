@@ -12,9 +12,9 @@ layout: default
 <strong>NOTUNIQUE</strong>, allows duplicates </li>
 <li>
 <strong>FULLTEXT</strong>, by indexing any single word of the text. It's used in query with the operator <a href="sql_where.html#Operators">CONTAINSTEXT</a> </li>
-</ul><h2>
+</ul><h3>
 <a name="Syntax"></a>Syntax<a href="#Syntax" class="section_anchor"></a>
-</h2>
+</h3>
 <pre class="prettyprint">CREATE INDEX &lt;name&gt; [ON &lt;class-name&gt; (prop-names)] &lt;type&gt; [&lt;key-type&gt;]</pre>
 <p>Where: </p>
 <ul>
@@ -23,21 +23,25 @@ layout: default
 <li>
 <strong>class-name</strong> name of class that automatic index created for. Class with such name must already exist in database </li>
 <li>
-<strong>prop-names</strong> comma-separated list of properties that this automatic index is created for. Property with such name must already exist in schema </li>
+<strong>prop-names</strong> comma-separated list of properties that this automatic index is created for. Property with such name must already exist in schema. If property belongs to one of the Map types (LINKMAP, EMBEDDEDMAP) you can specify will be keys or values used for index generation. Use "by key" or "by value" expressions for that, if nothing will be specified keys will be used during index creation.   </li>
 <li>
 <strong>type</strong>, between 'unique', 'notunique' and 'fulltext' </li>
 <li>
 <strong>key-type</strong>, is the type of key (Optional). On automatic indexes is auto-determined by reading the target schema property where the index is created. If not specified for manual indexes, at run-time during the first insertion the type will be auto determined by reading the type of the class. In case of creation composite index it is a comma separated list of types. </li>
 </ul><p>If "<strong>ON</strong>" and <strong>key-type</strong> sections both exist database validate types of specified properties. And if types of properties not equals to types specified in <strong>key-type</strong> list, exception will be thrown. </p>
 <p>List of key types can be used for creation manual composite indexes, but such indexes don't have fully support yet. </p>
-<h2>
+<h3>
 <a name="Examples"></a>Examples<a href="#Examples" class="section_anchor"></a>
-</h2>
+</h3>
 <p>Examples of non-automatic index to store dates manually: </p>
 <pre class="prettyprint">CREATE INDEX mostRecentRecords unique date</pre>
 <p>Examples of automatic index bound to the property "id" of class "User": </p>
 <pre class="prettyprint">CREATE PROPERTY User.id STRING
 CREATE INDEX User.id UNIQUE</pre>
+<p>Examples of index for "thumbs" property of class "Movie".    </p>
+<pre class="prettyprint">CREATE INDEX thumbsAuthor ON Movie (thumbs) unique;
+CREATE INDEX thumbsAuthor ON Movie (thumbs by key) unique; 
+CREATE INDEX thumbsValue ON Movie (thumbs by value) unique; </pre>
 <p>Composite index example: </p>
 <pre class="prettyprint">CREATE PROPERTY Book.author STRING
 CREATE PROPERTY Book.title STRING

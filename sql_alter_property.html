@@ -3,13 +3,13 @@ title: Alter Property
 layout: default
 ---
 
- <h1>
+ <h2>
 <a name="Alter_Property"></a>Alter Property<a href="#Alter_Property" class="section_anchor"></a>
-</h1>
-<p>The <strong>SQL Alter Property</strong> command alters a class's property in the schema. </p>
-<h2>
-<a name="Syntax"></a>Syntax<a href="#Syntax" class="section_anchor"></a>
 </h2>
+<p>The <strong>SQL Alter Property</strong> command alters a class's property in the schema. </p>
+<h3>
+<a name="Syntax"></a>Syntax<a href="#Syntax" class="section_anchor"></a>
+</h3>
 <p><tt>ALTER PROPERTY &lt;class&gt;.&lt;property&gt; &lt;attribute-name&gt; &lt;attribute-value&gt;</tt> </p>
 <p>Where: </p>
 <ul>
@@ -41,9 +41,9 @@ layout: default
 <strong>REGEXP</strong> the regular expression as constraint. Accepts a string as value </li>
 <li>
 <strong>TYPE</strong>, the type between those supported: Boolean, Integer, Short, Long, Float, Double, Datetime, String, Binary, Embedded, EmbeddedList, EmbeddedSet, EmbeddedMap, Link, LinkList, LinkSet, LinkMap, Byte, Transient, Date. Accepts a string as value </li>
-</ul><h2>
+</ul><h3>
 <a name="Examples"></a>Examples<a href="#Examples" class="section_anchor"></a>
-</h2>
+</h3>
 <p>Change the name of the property 'age' in class 'Account' in 'born': </p>
 <p><tt>ALTER PROPERTY Account.age NAME born</tt> </p>
 <p>Set a property as mandatory: </p>

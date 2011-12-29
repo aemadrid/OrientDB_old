@@ -3,13 +3,13 @@ title: Create Property
 layout: default
 ---
 
- <h1>
+ <h2>
 <a name="Create_Property"></a>Create Property<a href="#Create_Property" class="section_anchor"></a>
-</h1>
-<p>The <strong>SQL Create Property</strong> command creates a new property in the schema. You need to create the class before. </p>
-<h2>
-<a name="Syntax"></a>Syntax<a href="#Syntax" class="section_anchor"></a>
 </h2>
+<p>The <strong>SQL Create Property</strong> command creates a new property in the schema. You need to create the class before. </p>
+<h3>
+<a name="Syntax"></a>Syntax<a href="#Syntax" class="section_anchor"></a>
+</h3>
 <p><tt>CREATE PROPERTY &lt;class&gt;.&lt;property&gt; &lt;type&gt; [&lt;linked-type&gt;|&lt;linked-class&gt;]</tt> </p>
 <p>Where: </p>
 <ul>
@@ -87,9 +87,9 @@ layout: default
 </ul>
 <li>
 <strong>linked-class</strong>, the contained class in containers (see above). </li>
-</ul><h2>
+</ul><h3>
 <a name="Examples"></a>Examples<a href="#Examples" class="section_anchor"></a>
-</h2>
+</h3>
 <p>Create the property 'name' of type 'STRING' in class 'User': </p>
 <p><tt>CREATE PROPERTY user.name STRING</tt> </p>
 <p>Create a list of Strings as property 'tags' of type 'EMBEDDEDLIST' in class 'Profile'. The linked type is 'STRING': </p>

@@ -13,15 +13,15 @@ layout: default
 <li><a href="#At_run-time">At run-time</a></li>
 </ul>
 </ul></ul><p>OrientDB uses the Java Logging framework bundled with the Java Virtual Machine. </p>
-<h2>
+<h3>
 <a name="Install_Log_formatter"></a>Install Log formatter<a href="#Install_Log_formatter" class="section_anchor"></a>
-</h2>
+</h3>
 <p>OrientDB Server uses own LogFormatter. To use the same by your application call: </p>
 <pre class="prettyprint">OLogManager.installCustomFormatter();</pre>
 <p>Before 1.0rc2 the custom LogFormatter was installed automatically. </p>
-<h2>
+<h3>
 <a name="Configuration_file"></a>Configuration file<a href="#Configuration_file" class="section_anchor"></a>
-</h2>
+</h3>
 <p>The logging strategies and policies can be configured using a file following the Java syntax: <a href="http://www.javapractices.com/topic/TopicAction.do?Id=143" rel="nofollow">Java Logging configuration</a>. </p>
 <p>Example taken from  orient-server.properties: </p>
 <pre class="prettyprint"># Specify the handlers to create in the root logger
@@ -53,9 +53,9 @@ java.util.logging.FileHandler.limit=10000000
 java.util.logging.FileHandler.count=10</pre>
 <p>To tell to the JVM where the properties file is placed you need to set the <i>"java.util.logging.config.file"</i> system property to it. Example: </p>
 <pre class="prettyprint">&gt; java -Djava.util.logging.config.file=mylog.properties ...</pre>
-<h2>
+<h3>
 <a name="Set_the_logging_level"></a>Set the logging level<a href="#Set_the_logging_level" class="section_anchor"></a>
-</h2>
+</h3>
 <p>To change the logging level without modify the logging configuration just set the <i>"orient.log.level"</i> system variable to the requested level. Supported levels are those contained in the JRE class <a href="http://java.sun.com/j2se/1.5.0/docs/api/java/util/logging/Level.html" rel="nofollow">java.util.logging.Level</a>: </p>
 <ul>
 <li>SEVERE (highest value) </li>
@@ -65,15 +65,15 @@ java.util.logging.FileHandler.count=10</pre>
 <li>FINE </li>
 <li>FINER </li>
 <li>FINEST (lowest value) </li>
-</ul><h3>
+</ul><h4>
 <a name="At_startup"></a>At startup<a href="#At_startup" class="section_anchor"></a>
-</h3>
+</h4>
 <p>Set the system property <i>"orient.log.level"</i> to the level you want using the -D parameter of java. </p>
 <p>Example: </p>
 <pre class="prettyprint">&gt; java -Dorient.log.level=FINE ...</pre>
-<h3>
+<h4>
 <a name="At_run-time"></a>At run-time<a href="#At_run-time" class="section_anchor"></a>
-</h3>
+</h4>
 <p>The system variable can be setted at startup using the <tt>System.setProperty()</tt> API. Example: </p>
 <pre class="prettyprint">public void main(String[] args){
   System.setProperty("orient.log.level", "FINE");

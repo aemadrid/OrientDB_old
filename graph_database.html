@@ -10,9 +10,9 @@ layout: default
 <li><a href="#How_is_it_implemented?">How is it implemented?</a></li>
 <li><a href="#Manipulate_graphs_as_documents">Manipulate graphs as documents</a></li>
 <li><a href="#SQL">SQL</a></li>
-</ul><h1>
+</ul><h2>
 <a name="Introduction"></a>Introduction<a href="#Introduction" class="section_anchor"></a>
-</h1>
+</h2>
 <p>OrientDB is a Document-Graph DBMS because has the features of both Document DBMS and Graph DBMS. This section explores the Graph capabilities of OrientDB. </p>
 <p>NOTE: <i>If you plan to use OrientDB as pure Graph Database look at the <a href="graph_ed_tutorial.html">Graph(Ed) tutorial</a>. </i></p>
 <p>The principal feature of a GraphDB is the ability to handle relationships. A GraphDB can traverse thousands of edges at a fraction of the cost of the Relational JOINs because relationships are direct links between document/nodes. </p>
@@ -45,9 +45,9 @@ Kelly</pre>
 <pre class="prettyprint">&gt; SELECT GREMLIN("current.out") FROM Animal where name = 'Gaudì'
 
 Kelly</pre>
-<h1>
+<h2>
 <a name="Usage"></a>Usage<a href="#Usage" class="section_anchor"></a>
-</h1>
+</h2>
 <p>You can work with graphs using three approaches:  </p>
 <ul>
 <li>
@@ -56,9 +56,9 @@ Kelly</pre>
 <strong><a href="graph_database_native.html">GraphDatabaseNative</a></strong>: Native APIs, built on top of core engine (will be deprecated in next release) </li>
 <li>
 <strong><a href="graph_database_tinkerpop.html">GraphDatabaseTinkerpop</a></strong>: APIs, using all the technologies buil on top of it such as Gremlin language and Pipes </li>
-</ul><h1>
+</ul><h2>
 <a name="How_is_it_implemented?"></a>How is it implemented?<a href="#How_is_it_implemented?" class="section_anchor"></a>
-</h1>
+</h2>
 <pre class="prettyprint">+--------------+                                       +--------------+
 |              | out       * +------------+ out     in |              |
 |              |------------&gt;| OGraphEdge |-----------&gt;|              |
@@ -84,13 +84,13 @@ Kelly</pre>
 <li>
 <a href="https://github.com/tinkerpop/blueprints/blob/master/blueprints-core/src/main/java/com/tinkerpop/blueprints/pgm/Edge.java" rel="nofollow">Edge</a> is a wrapper of <strong><a href="http://code.google.com/p/orient/source/browse/trunk/core/src/main/java/com/orientechnologies/orient/core/db/graph/OGraphEdge.java" rel="nofollow">OGraphEdge</a></strong> </li>
 <li>The "label" is stored as "label" property of the OGraphVertex and OGraphEdge </li>
-</ul><h1>
+</ul><h2>
 <a name="Manipulate_graphs_as_documents"></a>Manipulate graphs as documents<a href="#Manipulate_graphs_as_documents" class="section_anchor"></a>
-</h1>
+</h2>
 <p>Since the graph model has been built on top of OrientDB, you can use all the OrientDB features to manipulate graphs even without the graph API. </p>
-<h1>
+<h2>
 <a name="SQL"></a>SQL<a href="#SQL" class="section_anchor"></a>
-</h1>
+</h2>
 <p>Simple query against vertexes: </p>
 <pre class="prettyprint">SELECT FROM V WHERE out CONTAINS ( label = 'knows' )</pre>
 <p>Retrieves all the vertices connected to the outgoing edges. </p>
