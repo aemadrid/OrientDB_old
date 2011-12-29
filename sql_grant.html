@@ -2,41 +2,90 @@
 title: Grant
 layout: default
 ---
-
- <p>The <strong>SQL Grant</strong> command change the permission of a role granting the access to one or more resources. </p>
+<p>
+  The <strong>SQL Grant</strong> command change the permission of a
+  role granting the access to one or more resources.
+</p>
 <h3>
-<a name="Syntax"></a>Syntax<a href="#Syntax" class="section_anchor"></a>
+  <a name="Syntax" id="Syntax"></a>Syntax<a href="#Syntax" class=
+  "section_anchor"></a>
 </h3>
-<p><tt>GRANT &lt;permission&gt; ON &lt;resource&gt; TO &lt;role&gt;</tt> </p>
-<p>Where: </p>
+<p>
+  <tt>GRANT &lt;permission&gt; ON &lt;resource&gt; TO
+  &lt;role&gt;</tt>
+</p>
+<p>
+  Where:
+</p>
 <ul>
-<li>
-<strong>permission</strong> can be: </li>
-<ul>
-<li>NONE, no permission </li>
-<li>CREATE, to create the indicated resource </li>
-<li>READ, to read the indicated resource </li>
-<li>UPDATE, to update the indicated resource </li>
-<li>DELETE, to delete the indicated resource </li>
-<li>ALL, all permissions </li>
+  <li>
+    <strong>permission</strong> can be:
+  </li>
+  <li style="list-style: none">
+    <ul>
+      <li>NONE, no permission
+      </li>
+      <li>CREATE, to create the indicated resource
+      </li>
+      <li>READ, to read the indicated resource
+      </li>
+      <li>UPDATE, to update the indicated resource
+      </li>
+      <li>DELETE, to delete the indicated resource
+      </li>
+      <li>ALL, all permissions
+      </li>
+    </ul>
+  </li>
+  <li>
+    <strong>resource</strong>, the target resource where to change
+    the permissions
+  </li>
+  <li style="list-style: none">
+    <ul>
+      <li>database, as the access to the whole database
+      </li>
+      <li>database.class, as the access to the records contained in
+      a class. Use <tt>*</tt> to indicate all the classes
+      </li>
+      <li>database.cluster, as the access to the records contained
+      in a cluster. Use <tt>*</tt> to indicate all the clusters
+      </li>
+      <li>database.query, as the ability to execute query (READ is
+      enought)
+      </li>
+      <li>database.command, as the ability to execute SQL commands.
+      CREATE is for <a href="sql_insert.html">SQL INSERT</a>, READ
+      is for <a href="sql_query.html">SQL SELECT</a>, UPDATE for
+      <a href="sql_update.html">SQL UPDATE</a> and DELETE is for
+      <a href="sql_delete.html">SQL DELETE</a>
+      </li>
+      <li>database.config, as the ability to access to the
+      configuration. Valid permissions are READ and UPDATE
+      </li>
+      <li>database.hook.record, as the ability to set hooks
+      </li>
+      <li>server.admin, as the ability to access to the server
+      resources
+      </li>
+    </ul>
+  </li>
+  <li>
+    <strong>role</strong>, the role name
+  </li>
 </ul>
-<li>
-<strong>resource</strong>, the target resource where to change the permissions </li>
-<ul>
-<li>database, as the access to the whole database </li>
-<li>database.class, as the access to the records contained in a class. Use <tt>*</tt> to indicate all the classes </li>
-<li>database.cluster, as the access to the records contained in a cluster. Use <tt>*</tt> to indicate all the clusters </li>
-<li>database.query, as the ability to execute query (READ is enought) </li>
-<li>database.command, as the ability to execute SQL commands. CREATE is for <a href="sql_insert.html">SQL INSERT</a>, READ is for <a href="sql_query.html">SQL SELECT</a>, UPDATE for <a href="sql_update.html">SQL UPDATE</a> and DELETE is for <a href="sql_delete.html">SQL DELETE</a> </li>
-<li>database.config, as the ability to access to the configuration. Valid permissions are READ and UPDATE </li>
-<li>database.hook.record, as the ability to set hooks </li>
-<li>server.admin, as the ability to access to the server resources </li>
-</ul>
-<li>
-<strong>role</strong>, the role name </li>
-</ul><h3>
-<a name="Examples"></a>Examples<a href="#Examples" class="section_anchor"></a>
+<h3>
+  <a name="Examples" id="Examples"></a>Examples<a href="#Examples"
+  class="section_anchor"></a>
 </h3>
-<p>Grant the permission to <i>update</i> any records in <i>cluster Account</i> to the <i>role "backoffice"</i>. </p>
-<p><tt>GRANT update ON database.cluster.Account TO backoffice</tt> </p>
-<p>To know more about other SQL commands look at <a href="sql.html">SQL commands</a>. </p>
+<p>
+  Grant the permission to <i>update</i> any records in <i>cluster
+  Account</i> to the <i>role "backoffice"</i>.
+</p>
+<p>
+  <tt>GRANT update ON database.cluster.Account TO backoffice</tt>
+</p>
+<p>
+  To know more about other SQL commands look at <a href=
+  "sql.html">SQL commands</a>.
+</p>

@@ -2,96 +2,229 @@
 title: Manage the Schema
 layout: default
 ---
-
- <p></p>
 <ul>
-<li><a href="#Important_Notes">Important Notes</a></li>
-<li><a href="#Introduction">Introduction</a></li>
-<li><a href="#Create_the_persistent_classes">Create the persistent classes</a></li>
-<li><a href="#Create_the_Class_fields">Create the Class fields</a></li>
-<li><a href="#Define_relationships">Define relationships</a></li>
-<ul>
-<li><a href="#Referenced_relationships">Referenced relationships</a></li>
-<ul>
-<li><a href="#1-1_and_N-1_referenced_relationships">1-1 and N-1 referenced relationships</a></li>
-<li><a href="#1-N_and_N-M_referenced_relationships">1-N and N-M referenced relationships</a></li>
+  <li>
+    <a href="#Important_Notes">Important Notes</a>
+  </li>
+  <li>
+    <a href="#Introduction">Introduction</a>
+  </li>
+  <li>
+    <a href="#Create_the_persistent_classes">Create the persistent
+    classes</a>
+  </li>
+  <li>
+    <a href="#Create_the_Class_fields">Create the Class fields</a>
+  </li>
+  <li>
+    <a href="#Define_relationships">Define relationships</a>
+  </li>
+  <li style="list-style: none">
+    <ul>
+      <li>
+        <a href="#Referenced_relationships">Referenced
+        relationships</a>
+      </li>
+      <li style="list-style: none">
+        <ul>
+          <li>
+            <a href="#1-1_and_N-1_referenced_relationships">1-1 and
+            N-1 referenced relationships</a>
+          </li>
+          <li>
+            <a href="#1-N_and_N-M_referenced_relationships">1-N and
+            N-M referenced relationships</a>
+          </li>
+        </ul>
+      </li>
+      <li>
+        <a href="#Embedded_relationships">Embedded
+        relationships</a>
+      </li>
+      <li style="list-style: none">
+        <ul>
+          <li>
+            <a href="#1-1_and_N-1_referenced_relationships">1-1 and
+            N-1 referenced relationships</a>
+          </li>
+          <li>
+            <a href="#1-N_and_N-M_referenced_relationships">1-N and
+            N-M referenced relationships</a>
+          </li>
+        </ul>
+      </li>
+      <li>
+        <a href="#Constraints">Constraints</a>
+      </li>
+      <li>
+        <a href="#Indexes">Indexes</a>
+      </li>
+      <li>
+        <a href="#Full_example">Full example</a>
+      </li>
+    </ul>
+  </li>
 </ul>
-<li><a href="#Embedded_relationships">Embedded relationships</a></li>
-<ul>
-<li><a href="#1-1_and_N-1_referenced_relationships">1-1 and N-1 referenced relationships</a></li>
-<li><a href="#1-N_and_N-M_referenced_relationships">1-N and N-M referenced relationships</a></li>
-</ul>
-<li><a href="#Constraints">Constraints</a></li>
-<li><a href="#Indexes">Indexes</a></li>
-<li><a href="#Full_example">Full example</a></li>
-</ul>
-</ul><h2>
-<a name="Important_Notes"></a>Important Notes<a href="#Important_Notes" class="section_anchor"></a>
-</h2>
-<p><i>Changes to the schema are not transactional.</i> </p>
 <h2>
-<a name="Introduction"></a>Introduction<a href="#Introduction" class="section_anchor"></a>
+  <a name="Important_Notes" id="Important_Notes"></a>Important
+  Notes<a href="#Important_Notes" class="section_anchor"></a>
 </h2>
-<p>Although OrientDB can work in schema-less mode, sometimes you need to enforce your data model using a schema. OrientDB supports schema-full or schema-mixed solutions where the second one means to set such constraints only for certain fields and leave the user to add custom fields to the records. </p>
-<p>To gain access to the schema APIs you need in the Schema instance of the database you're using. </p>
-<pre class="prettyprint">OSchema schema = database.getMetadata().getSchema();</pre>
-<p>Remember to save the schema instance once finished with changes: </p>
-<pre class="prettyprint">db.getMetadata().getSchema().save();</pre>
+<p>
+  <i>Changes to the schema are not transactional.</i>
+</p>
 <h2>
-<a name="Create_the_persistent_classes"></a>Create the persistent classes<a href="#Create_the_persistent_classes" class="section_anchor"></a>
+  <a name="Introduction" id="Introduction"></a>Introduction<a href=
+  "#Introduction" class="section_anchor"></a>
 </h2>
-<p>Each class contains one or more properties. This mode is similar to the classic Relational DBMS approach where you define tables before storing records. </p>
-<p>Example of creation of Account class. By default a new <a href="concepts.html#Logical_Cluster">Logical Cluster</a> will be created to keep the class instances: </p>
-<pre class="prettyprint">OClass account = database.getMetadata().getSchema().createClass("Account");</pre>
-<p>Example of creation of Account class using a <a href="concepts.html#Local_Physical_Cluster">Physical Cluster</a> (to speedup operations): </p>
-<pre class="prettyprint">OClass account = database.getMetadata().getSchema().createClass("Account",
-				database.getStorage().addCluster("account", OClusterLocal.TYPE));</pre>
+<p>
+  Although OrientDB can work in schema-less mode, sometimes you
+  need to enforce your data model using a schema. OrientDB supports
+  schema-full or schema-mixed solutions where the second one means
+  to set such constraints only for certain fields and leave the
+  user to add custom fields to the records.
+</p>
+<p>
+  To gain access to the schema APIs you need in the Schema instance
+  of the database you're using.
+</p>
+<pre class="prettyprint">
+OSchema schema = database.getMetadata().getSchema();
+</pre>
+<p>
+  Remember to save the schema instance once finished with changes:
+</p>
+<pre class="prettyprint">
+db.getMetadata().getSchema().save();
+</pre>
 <h2>
-<a name="Create_the_Class_fields"></a>Create the Class fields<a href="#Create_the_Class_fields" class="section_anchor"></a>
+  <a name="Create_the_persistent_classes" id=
+  "Create_the_persistent_classes"></a>Create the persistent
+  classes<a href="#Create_the_persistent_classes" class=
+  "section_anchor"></a>
 </h2>
-<p>Once the class has been created, you can define fields (properties). Below an example: </p>
-<pre class="prettyprint">OClass account = database.getMetadata().getSchema().createClass("Account");
+<p>
+  Each class contains one or more properties. This mode is similar
+  to the classic Relational DBMS approach where you define tables
+  before storing records.
+</p>
+<p>
+  Example of creation of Account class. By default a new <a href=
+  "concepts.html#Logical_Cluster">Logical Cluster</a> will be
+  created to keep the class instances:
+</p>
+<pre class="prettyprint">
+OClass account = database.getMetadata().getSchema().createClass("Account");
+</pre>
+<p>
+  Example of creation of Account class using a <a href=
+  "concepts.html#Local_Physical_Cluster">Physical Cluster</a> (to
+  speedup operations):
+</p>
+<pre class="prettyprint">
+OClass account = database.getMetadata().getSchema().createClass("Account",
+                                database.getStorage().addCluster("account", OClusterLocal.TYPE));
+</pre>
+<h2>
+  <a name="Create_the_Class_fields" id=
+  "Create_the_Class_fields"></a>Create the Class fields<a href=
+  "#Create_the_Class_fields" class="section_anchor"></a>
+</h2>
+<p>
+  Once the class has been created, you can define fields
+  (properties). Below an example:
+</p>
+<pre class="prettyprint">
+OClass account = database.getMetadata().getSchema().createClass("Account");
 account.createProperty("id", OType.INTEGER);
-account.createProperty("birthDate", OType.DATE);</pre>
-<p>Please note that each field must belong to one of  <a href="types.html">supported types</a>. </p>
+account.createProperty("birthDate", OType.DATE);
+</pre>
+<p>
+  Please note that each field must belong to one of <a href=
+  "types.html">supported types</a>.
+</p>
 <h2>
-<a name="Define_relationships"></a>Define relationships<a href="#Define_relationships" class="section_anchor"></a>
+  <a name="Define_relationships" id=
+  "Define_relationships"></a>Define relationships<a href=
+  "#Define_relationships" class="section_anchor"></a>
 </h2>
-<p>OrientDB supports two types of relationships: <strong>referenced</strong> and <strong>embedded</strong>. </p>
+<p>
+  OrientDB supports two types of relationships:
+  <strong>referenced</strong> and <strong>embedded</strong>.
+</p>
 <h3>
-<a name="Referenced_relationships"></a>Referenced relationships<a href="#Referenced_relationships" class="section_anchor"></a>
+  <a name="Referenced_relationships" id=
+  "Referenced_relationships"></a>Referenced relationships<a href=
+  "#Referenced_relationships" class="section_anchor"></a>
 </h3>
-<p>OrientDB uses a direct <strong>link</strong> to the referenced record(s) without the need of costly JOINs of the Relational world. Example: </p>
-<pre class="prettyprint">                  customer
+<p>
+  OrientDB uses a direct <strong>link</strong> to the referenced
+  record(s) without the need of costly JOINs of the Relational
+  world. Example:
+</p>
+<pre class="prettyprint">
+                  customer
   Record A     -------------&gt;    Record B
 CLASS=Invoice                 CLASS=Customer
-  RID=5:23                       RID=10:2</pre>
-<p><strong>Record A</strong> will contain the <i>reference</i> to the <strong>Record B</strong> in the property called "customer". Note that both records are reachable by any other records since they have a <a href="concepts.html#RecordID">RecordID</a>. </p>
+  RID=5:23                       RID=10:2
+</pre>
+<p>
+  <strong>Record A</strong> will contain the <i>reference</i> to
+  the <strong>Record B</strong> in the property called "customer".
+  Note that both records are reachable by any other records since
+  they have a <a href="concepts.html#RecordID">RecordID</a>.
+</p>
 <h4>
-<a name="1-1_and_N-1_referenced_relationships"></a>1-1 and N-1 referenced relationships<a href="#1-1_and_N-1_referenced_relationships" class="section_anchor"></a>
+  <a name="1-1_and_N-1_referenced_relationships"></a>1-1 and N-1
+  referenced relationships<a href=
+  "#1-1_and_N-1_referenced_relationships" class=
+  "section_anchor"></a>
 </h4>
-<p>1-1 and N-1 referenced relationships are expressed using the <strong>LINK</strong> type. </p>
-<pre class="prettyprint">OClass customer= database.getMetadata().getSchema().createClass("Customer");
+<p>
+  1-1 and N-1 referenced relationships are expressed using the
+  <strong>LINK</strong> type.
+</p>
+<pre class="prettyprint">
+OClass customer= database.getMetadata().getSchema().createClass("Customer");
 customer.createProperty("name", OType.STRING);
 
 OClass invoice = database.getMetadata().getSchema().createClass("Invoice");
 invoice.createProperty("id", OType.INTEGER);
 invoice.createProperty("date", OType.DATE);
-invoice.createProperty("customer", OType.LINK, customer);</pre>
-<p>In this case records of class "Invoice" will link to a record of class "Customer" using the field "customer". </p>
+invoice.createProperty("customer", OType.LINK, customer);
+</pre>
+<p>
+  In this case records of class "Invoice" will link to a record of
+  class "Customer" using the field "customer".
+</p>
 <h4>
-<a name="1-N_and_N-M_referenced_relationships"></a>1-N and N-M referenced relationships<a href="#1-N_and_N-M_referenced_relationships" class="section_anchor"></a>
+  <a name="1-N_and_N-M_referenced_relationships"></a>1-N and N-M
+  referenced relationships<a href=
+  "#1-N_and_N-M_referenced_relationships" class=
+  "section_anchor"></a>
 </h4>
-<p>1-N and N-M referenced relationships are expressed using the collection of links such as: </p>
+<p>
+  1-N and N-M referenced relationships are expressed using the
+  collection of links such as:
+</p>
 <ul>
-<li>
-<strong>LINKLIST</strong> as an ordered list of links </li>
-<li>
-<strong>LINKSET</strong> as an unordered set of links. It doesn't accept duplicates </li>
-<li>
-<strong>LINKMAP</strong> as an ordered map of links with <strong>String</strong> key. It doesn't accept duplicated keys </li>
-</ul><p>Example of a 1-N relationship between the classes Order and OrderItem: </p>
-<pre class="prettyprint">OClass orderItem = db.getMetadata().getSchema().createClass("OrderItem");
+  <li>
+    <strong>LINKLIST</strong> as an ordered list of links
+  </li>
+  <li>
+    <strong>LINKSET</strong> as an unordered set of links. It
+    doesn't accept duplicates
+  </li>
+  <li>
+    <strong>LINKMAP</strong> as an ordered map of links with
+    <strong>String</strong> key. It doesn't accept duplicated keys
+  </li>
+</ul>
+<p>
+  Example of a 1-N relationship between the classes Order and
+  OrderItem:
+</p>
+<pre class="prettyprint">
+OClass orderItem = db.getMetadata().getSchema().createClass("OrderItem");
 orderItem.createProperty("id", OType.INTEGER);
 orderItem.createProperty("animal", OType.LINK, animal);
 
@@ -100,42 +233,93 @@ order.createProperty("id", OType.INTEGER);
 order.createProperty("date", OType.DATE);
 order.createProperty("items", OType.LINKLIST, orderItem);
 
-db.getMetadata().getSchema().save();</pre>
+db.getMetadata().getSchema().save();
+</pre>
 <h3>
-<a name="Embedded_relationships"></a>Embedded relationships<a href="#Embedded_relationships" class="section_anchor"></a>
+  <a name="Embedded_relationships" id=
+  "Embedded_relationships"></a>Embedded relationships<a href=
+  "#Embedded_relationships" class="section_anchor"></a>
 </h3>
-<p>Embedded records, instead, are contained inside the record that embeds them. It's a kind of relationship stronger than the <a href="#Referenced_relationships">reference</a>. The embedded record will not have a own <a href="concepts.html#RecordID">RecordID</a> since it can't be directly referenced by other records. It's only accessible via the container record. If the container record is deleted, then the embedded record will be deleted too. Example: </p>
-<pre class="prettyprint">                  address
+<p>
+  Embedded records, instead, are contained inside the record that
+  embeds them. It's a kind of relationship stronger than the
+  <a href="#Referenced_relationships">reference</a>. The embedded
+  record will not have a own <a href=
+  "concepts.html#RecordID">RecordID</a> since it can't be directly
+  referenced by other records. It's only accessible via the
+  container record. If the container record is deleted, then the
+  embedded record will be deleted too. Example:
+</p>
+<pre class="prettyprint">
+                  address
   Record A     &lt;&gt;----------&gt;   Record B
 CLASS=Account               CLASS=Address
-  RID=5:23                     NO RID!</pre>
-<p><strong>Record A</strong> will contain the entire <strong>Record B</strong> in the property called "address". <strong>Record B</strong> can be reached only by traversing the container record. </p>
-<p>Example: </p>
-<pre class="prettyprint">SELECT FROM account WHERE address.city = 'Rome'</pre>
+  RID=5:23                     NO RID!
+</pre>
+<p>
+  <strong>Record A</strong> will contain the entire <strong>Record
+  B</strong> in the property called "address". <strong>Record
+  B</strong> can be reached only by traversing the container
+  record.
+</p>
+<p>
+  Example:
+</p>
+<pre class="prettyprint">
+SELECT FROM account WHERE address.city = 'Rome'
+</pre>
 <h4>
-<a name="1-1_and_N-1_referenced_relationships"></a>1-1 and N-1 referenced relationships<a href="#1-1_and_N-1_referenced_relationships" class="section_anchor"></a>
+  <a name="1-1_and_N-1_referenced_relationships"></a>1-1 and N-1
+  referenced relationships<a href=
+  "#1-1_and_N-1_referenced_relationships" class=
+  "section_anchor"></a>
 </h4>
-<p>1-1 and N-1 referenced relationships are expressed using the <strong>EMBEDDED</strong> type. </p>
-<pre class="prettyprint">OClass address = database.getMetadata().getSchema().createClass("Address");
+<p>
+  1-1 and N-1 referenced relationships are expressed using the
+  <strong>EMBEDDED</strong> type.
+</p>
+<pre class="prettyprint">
+OClass address = database.getMetadata().getSchema().createClass("Address");
 
 OClass account = database.getMetadata().getSchema().createClass("Account");
 account.createProperty("id", OType.INTEGER);
 account.createProperty("birthDate", OType.DATE);
-account.createProperty("address", OType.EMBEDDED, address);</pre>
-<p>In this case, records of class "Account" will embed a record of class "Address". </p>
+account.createProperty("address", OType.EMBEDDED, address);
+</pre>
+<p>
+  In this case, records of class "Account" will embed a record of
+  class "Address".
+</p>
 <h4>
-<a name="1-N_and_N-M_referenced_relationships"></a>1-N and N-M referenced relationships<a href="#1-N_and_N-M_referenced_relationships" class="section_anchor"></a>
+  <a name="1-N_and_N-M_referenced_relationships"></a>1-N and N-M
+  referenced relationships<a href=
+  "#1-N_and_N-M_referenced_relationships" class=
+  "section_anchor"></a>
 </h4>
-<p>1-N and N-M referenced relationships are expressed using the collection of links such as: </p>
+<p>
+  1-N and N-M referenced relationships are expressed using the
+  collection of links such as:
+</p>
 <ul>
-<li>
-<strong>EMBEDDEDLIST</strong>, as an ordered list of records </li>
-<li>
-<strong>EMBEDDEDSET</strong>, as an unordered set of records. It doesn't accepts duplicates </li>
-<li>
-<strong>EMBEDDEDMAP</strong>, as an ordered map of records as value with key a <strong>String</strong>. It doesn't accepts duplicated keys </li>
-</ul><p>Example of a 1-N relationship between the class Order and OrderItem: </p>
-<pre class="prettyprint">OClass orderItem = db.getMetadata().getSchema().createClass("OrderItem");
+  <li>
+    <strong>EMBEDDEDLIST</strong>, as an ordered list of records
+  </li>
+  <li>
+    <strong>EMBEDDEDSET</strong>, as an unordered set of records.
+    It doesn't accepts duplicates
+  </li>
+  <li>
+    <strong>EMBEDDEDMAP</strong>, as an ordered map of records as
+    value with key a <strong>String</strong>. It doesn't accepts
+    duplicated keys
+  </li>
+</ul>
+<p>
+  Example of a 1-N relationship between the class Order and
+  OrderItem:
+</p>
+<pre class="prettyprint">
+OClass orderItem = db.getMetadata().getSchema().createClass("OrderItem");
 orderItem.createProperty("id", OType.INTEGER);
 orderItem.createProperty("animal", OType.LINK, animal);
 
@@ -144,48 +328,107 @@ order.createProperty("id", OType.INTEGER);
 order.createProperty("date", OType.DATE);
 order.createProperty("items", OType.EMBEDDEDLIST, orderItem);
 
-db.getMetadata().getSchema().save();</pre>
+db.getMetadata().getSchema().save();
+</pre>
 <h3>
-<a name="Constraints"></a>Constraints<a href="#Constraints" class="section_anchor"></a>
+  <a name="Constraints" id="Constraints"></a>Constraints<a href=
+  "#Constraints" class="section_anchor"></a>
 </h3>
-<p>OrientDB supports a number of constrains for each field: </p>
+<p>
+  OrientDB supports a number of constrains for each field:
+</p>
 <ul>
-<li>
-<strong>Minimum value</strong>, accepts a string because works also for date ranges <tt>setMin()</tt> </li>
-<li>
-<strong>Maximum value</strong>, accepts a string because works also for date ranges <tt>setMax()</tt> </li>
-<li>
-<strong>Mandatory</strong>, it must be specified <tt>setMandatory()</tt> </li>
-<li>
-<strong>Not Null</strong>, can't be NULL <tt>setNotNull()</tt> </li>
-<li>
-<strong>Unique</strong>, doesn't allow duplicates and speedup searches. </li>
-</ul><pre class="prettyprint">profile.createProperty("nick", OType.STRING).setMin("3").setMax("30").setMandatory(true).setNotNull(true);
+  <li>
+    <strong>Minimum value</strong>, accepts a string because works
+    also for date ranges <tt>setMin()</tt>
+  </li>
+  <li>
+    <strong>Maximum value</strong>, accepts a string because works
+    also for date ranges <tt>setMax()</tt>
+  </li>
+  <li>
+    <strong>Mandatory</strong>, it must be specified
+    <tt>setMandatory()</tt>
+  </li>
+  <li>
+    <strong>Not Null</strong>, can't be NULL <tt>setNotNull()</tt>
+  </li>
+  <li>
+    <strong>Unique</strong>, doesn't allow duplicates and speedup
+    searches.
+  </li>
+</ul>
+<pre class="prettyprint">
+profile.createProperty("nick", OType.STRING).setMin("3").setMax("30").setMandatory(true).setNotNull(true);
 profile.createIndex("nickIdx", OClass.INDEX_TYPE.UNIQUE, "nick"); // Creates unique constraint
 
 profile.createProperty("name", OType.STRING).setMin("3").setMax("30");
 profile.createProperty("surname", OType.STRING).setMin("3").setMax("30");
 profile.createProperty("registeredOn", OType.DATE).setMin("2010-01-01 00:00:00");
-profile.createProperty("lastAccessOn", OType.DATE).setMin("2010-01-01 00:00:00");</pre>
+profile.createProperty("lastAccessOn", OType.DATE).setMin("2010-01-01 00:00:00");
+</pre>
 <h3>
-<a name="Indexes"></a>Indexes<a href="#Indexes" class="section_anchor"></a>
+  <a name="Indexes" id="Indexes"></a>Indexes<a href="#Indexes"
+  class="section_anchor"></a>
 </h3>
-<p>Creation of index: </p>
-<pre class="prettyprint">profile.createIndex("surnameIdx", OClass.INDEX_TYPE.NOTUNIQUE, "surname");</pre>
-<p>Creation of composite index: </p>
-<pre class="prettyprint">profile.createIndex("compositeIdx", OClass.INDEX_TYPE.NOTUNIQUE, "name", "surname");</pre>
-<p>To get all indexes for given class and its super classes use getIndexes method: </p>
-<pre class="prettyprint">Set&lt;OIndex&lt;?&gt;&gt; indexes = oClass.getIndexes();</pre>
-<p>Following code retrieves all indexes that support searching by certain fields </p>
-<pre class="prettyprint">Set&lt;OIndex&lt;?&gt;&gt; result = oClass.getInvolvedIndexes("fTwo", "fOne", "fThree");</pre>
-<p>To find a certain index by its name use OIndexManager </p>
-<pre class="prettyprint">OIndex&lt;?&gt; idx = db.getMetadata().getIndexManager().getIndex("compositeIdx");</pre>
-<p>To drop index you also should use OIndexManager interface </p>
-<pre class="prettyprint">database.getMetadata().getIndexManager().dropIndex(name);</pre>
-<p>For more information about indexes look at <a href="indexes.html">Index guide</a>. </p>
+<p>
+  Creation of index:
+</p>
+<pre class="prettyprint">
+profile.createIndex("surnameIdx", OClass.INDEX_TYPE.NOTUNIQUE, "surname");
+</pre>
+<p>
+  Creation of composite index:
+</p>
+<pre class="prettyprint">
+profile.createIndex("compositeIdx", OClass.INDEX_TYPE.NOTUNIQUE, "name", "surname");
+</pre>
+<p>
+  To get all indexes for given class and its super classes use
+  getIndexes method:
+</p>
+<pre class="prettyprint">
+Set&lt;OIndex&lt;?&gt;&gt; indexes = oClass.getIndexes();
+</pre>
+<p>
+  Following code retrieves all indexes that support searching by
+  certain fields
+</p>
+<pre class="prettyprint">
+Set&lt;OIndex&lt;?&gt;&gt; result = oClass.getInvolvedIndexes("fTwo", "fOne", "fThree");
+</pre>
+<p>
+  To find a certain index by its name use OIndexManager
+</p>
+<pre class="prettyprint">
+OIndex&lt;?&gt; idx = db.getMetadata().getIndexManager().getIndex("compositeIdx");
+</pre>
+<p>
+  To drop index you also should use OIndexManager interface
+</p>
+<pre class="prettyprint">
+database.getMetadata().getIndexManager().dropIndex(name);
+</pre>
+<p>
+  For more information about indexes look at <a href=
+  "indexes.html">Index guide</a>.
+</p>
 <h3>
-<a name="Full_example"></a>Full example<a href="#Full_example" class="section_anchor"></a>
+  <a name="Full_example" id="Full_example"></a>Full example<a href=
+  "#Full_example" class="section_anchor"></a>
 </h3>
-<p>Have a look at the unit tests that creates the Schema:  </p>
-<p><a href="http://code.google.com/p/orient/source/browse/trunk/tests/src/test/java/com/orientechnologies/orient/test/database/auto/SchemaTest.java" rel="nofollow">http://code.google.com/p/orient/source/browse/trunk/tests/src/test/java/com/orientechnologies/orient/test/database/auto/SchemaTest.java</a> </p>
-<p><a href="http://code.google.com/p/orient/source/browse/trunk/tests/src/test/java/com/orientechnologies/orient/test/database/auto/ClassIndexTest.java" rel="nofollow">http://code.google.com/p/orient/source/browse/trunk/tests/src/test/java/com/orientechnologies/orient/test/database/auto/ClassIndexTest.java</a> </p>
+<p>
+  Have a look at the unit tests that creates the Schema:
+</p>
+<p>
+  <a href=
+  "http://code.google.com/p/orient/source/browse/trunk/tests/src/test/java/com/orientechnologies/orient/test/database/auto/SchemaTest.java"
+  rel=
+  "nofollow">http://code.google.com/p/orient/source/browse/trunk/tests/src/test/java/com/orientechnologies/orient/test/database/auto/SchemaTest.java</a>
+</p>
+<p>
+  <a href=
+  "http://code.google.com/p/orient/source/browse/trunk/tests/src/test/java/com/orientechnologies/orient/test/database/auto/ClassIndexTest.java"
+  rel=
+  "nofollow">http://code.google.com/p/orient/source/browse/trunk/tests/src/test/java/com/orientechnologies/orient/test/database/auto/ClassIndexTest.java</a>
+</p>

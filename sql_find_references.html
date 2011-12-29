@@ -2,26 +2,59 @@
 title: Find References
 layout: default
 ---
-
- <p>SQL command to search all records that contains a link to a given record id in the entire database or a subset of specified class and cluster. Returns a set of record ids. </p>
+<p>
+  SQL command to search all records that contains a link to a given
+  record id in the entire database or a subset of specified class
+  and cluster. Returns a set of record ids.
+</p>
 <h2>
-<a name="Syntax"></a>Syntax<a href="#Syntax" class="section_anchor"></a>
+  <a name="Syntax" id="Syntax"></a>Syntax<a href="#Syntax" class=
+  "section_anchor"></a>
 </h2>
-<p><tt>FIND REFERENCES &lt;rid&gt; [class-list]</tt> </p>
+<p>
+  <tt>FIND REFERENCES &lt;rid&gt; [class-list]</tt>
+</p>
 <ul>
-<li>
-<strong>rid</strong>, required, the record id to search. Available since 1.0rc1. </li>
-<li>
-<strong>class-list</strong> list of specific class or cluster, separated by commas, you want to execute the search in. </li>
-</ul><h2>
-<a name="Examples"></a>Examples<a href="#Examples" class="section_anchor"></a>
+  <li>
+    <strong>rid</strong>, required, the record id to search.
+    Available since 1.0rc1.
+  </li>
+  <li>
+    <strong>class-list</strong> list of specific class or cluster,
+    separated by commas, you want to execute the search in.
+  </li>
+</ul>
+<h2>
+  <a name="Examples" id="Examples"></a>Examples<a href="#Examples"
+  class="section_anchor"></a>
 </h2>
-<p>Get all the records that contains a link to 5:0 </p>
-<p><tt>find references 5:0</tt> </p>
-<p>Result example: </p>
-<p><tt>RESULT: [6:1,8:2,..]</tt> </p>
-<p>Get all the records in Profile and AnimalType classes that contains a link to 5:0  </p>
-<p><tt>find references 5:0 [Profile,AnimalType]</tt> </p>
-<p>Get all the records in Profile cluster and AnimalType class that contains a link to 5:0  </p>
-<p><tt>find references 5:0 [cluster:Profile,AnimalType]</tt> </p>
-<p>To know more about other SQL commands look at <a href="sql.html">SQL commands</a>. </p>
+<p>
+  Get all the records that contains a link to 5:0
+</p>
+<p>
+  <tt>find references 5:0</tt>
+</p>
+<p>
+  Result example:
+</p>
+<p>
+  <tt>RESULT: [6:1,8:2,..]</tt>
+</p>
+<p>
+  Get all the records in Profile and AnimalType classes that
+  contains a link to 5:0
+</p>
+<p>
+  <tt>find references 5:0 [Profile,AnimalType]</tt>
+</p>
+<p>
+  Get all the records in Profile cluster and AnimalType class that
+  contains a link to 5:0
+</p>
+<p>
+  <tt>find references 5:0 [cluster:Profile,AnimalType]</tt>
+</p>
+<p>
+  To know more about other SQL commands look at <a href=
+  "sql.html">SQL commands</a>.
+</p>

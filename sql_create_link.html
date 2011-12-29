@@ -2,13 +2,29 @@
 title: Create Link
 layout: default
 ---
-
- <p>The <strong>Create Link</strong> command creates links between two or more records of type Document. This is very useful when you're importing data from a Relational database. In facts in the Relational world relationships are resolved as foreign keys. </p>
-<p>For more information about importing a Relational Database into OrientDB look at <a href="import_from_rdbms.html">Import from RDBMS</a>. </p>
-<p>Consider this example where the class "Post" has a relationship 1-N to "Comment": </p>
-<pre class="prettyprint">Post 1 ---&gt; * Comment</pre>
-<p>In a Relational database you'll have something like that: </p>
-<pre class="prettyprint">Table Post
+<p>
+  The <strong>Create Link</strong> command creates links between
+  two or more records of type Document. This is very useful when
+  you're importing data from a Relational database. In facts in the
+  Relational world relationships are resolved as foreign keys.
+</p>
+<p>
+  For more information about importing a Relational Database into
+  OrientDB look at <a href="import_from_rdbms.html">Import from
+  RDBMS</a>.
+</p>
+<p>
+  Consider this example where the class "Post" has a relationship
+  1-N to "Comment":
+</p>
+<pre class="prettyprint">
+Post 1 ---&gt; * Comment
+</pre>
+<p>
+  In a Relational database you'll have something like that:
+</p>
+<pre class="prettyprint">
+Table Post
 +----+----------------+
 | Id | Title          |
 +----+----------------+
@@ -25,28 +41,61 @@ Table Comment
 | 21 |   10   | Another      |
 | 41 |   20   | First again  |
 | 82 |   20   | Second Again |
-+----+--------+--------------+</pre>
-<p>Using OrientDB, instead, you have direct relationship as in your object model. So the navigation is from <i>Post</i> to <i>Comment</i> and not viceversa as for Relational model. For this reason you need to create a link as <strong>INVERSE</strong>. </p>
++----+--------+--------------+
+</pre>
+<p>
+  Using OrientDB, instead, you have direct relationship as in your
+  object model. So the navigation is from <i>Post</i> to
+  <i>Comment</i> and not viceversa as for Relational model. For
+  this reason you need to create a link as
+  <strong>INVERSE</strong>.
+</p>
 <h3>
-<a name="Syntax"></a>Syntax<a href="#Syntax" class="section_anchor"></a>
+  <a name="Syntax" id="Syntax"></a>Syntax<a href="#Syntax" class=
+  "section_anchor"></a>
 </h3>
-<p><tt>CREATE LINK &lt;link-name&gt; [TYPE &lt;link-type&gt;] FROM &lt;source-class&gt;.&lt;source-property&gt; TO &lt;destination-class&gt;.&lt;destination-property&gt; [INVERSE]</tt> </p>
-<p>Where: </p>
+<p>
+  <tt>CREATE LINK &lt;link-name&gt; [TYPE &lt;link-type&gt;] FROM
+  &lt;source-class&gt;.&lt;source-property&gt; TO
+  &lt;destination-class&gt;.&lt;destination-property&gt;
+  [INVERSE]</tt>
+</p>
+<p>
+  Where:
+</p>
 <ul>
-<li>
-<strong>link-name</strong> is the name of the property for the link. If not expressed will be overwritten the <strong>destination-property</strong> field </li>
-<li>
-<strong>link-type</strong>, optional, is the type to use for the link. In case of inverse relationships (the most commons) you can specify LINKSET or LINKLIST for 1-N relationships </li>
-<li>
-<strong>source-class</strong>, is the source class </li>
-<li>
-<strong>source-property</strong>, is the source property </li>
-<li>
-<strong>destination-class</strong>, is the destination class </li>
-<li>
-<strong>destination-property</strong>, is the destination property </li>
-</ul><h3>
-<a name="Examples"></a>Examples<a href="#Examples" class="section_anchor"></a>
+  <li>
+    <strong>link-name</strong> is the name of the property for the
+    link. If not expressed will be overwritten the
+    <strong>destination-property</strong> field
+  </li>
+  <li>
+    <strong>link-type</strong>, optional, is the type to use for
+    the link. In case of inverse relationships (the most commons)
+    you can specify LINKSET or LINKLIST for 1-N relationships
+  </li>
+  <li>
+    <strong>source-class</strong>, is the source class
+  </li>
+  <li>
+    <strong>source-property</strong>, is the source property
+  </li>
+  <li>
+    <strong>destination-class</strong>, is the destination class
+  </li>
+  <li>
+    <strong>destination-property</strong>, is the destination
+    property
+  </li>
+</ul>
+<h3>
+  <a name="Examples" id="Examples"></a>Examples<a href="#Examples"
+  class="section_anchor"></a>
 </h3>
-<pre class="prettyprint">CREATE LINK comments TYPE LINKSET FROM comments.!PostId To posts.Id INVERSE</pre>
-<p>To know more about other SQL commands look at <a href="sql.html">SQL commands</a>. </p>
+<pre class="prettyprint">
+CREATE LINK comments TYPE LINKSET FROM comments.!PostId To posts.Id INVERSE
+</pre>
+<p>
+  To know more about other SQL commands look at <a href=
+  "sql.html">SQL commands</a>.
+</p>

@@ -2,37 +2,69 @@
 title: Share Database
 layout: default
 ---
-
- <h2>
-<a name="Share_database"></a>Share database<a href="#Share_database" class="section_anchor"></a>
+<h2>
+  <a name="Share_database" id="Share_database"></a>Share
+  database<a href="#Share_database" class="section_anchor"></a>
 </h2>
-<p>Share a database with another server in the cluster. This command works only inside a cluster of servers up and running. With this operation a database will be shared in another server node. </p>
-<p><img src="http://www.orientechnologies.com/images/share-database.png"></p>
-<p>To execute this command you need to be connected to the remote server instance where the database resides, in the picture the <strong>Server #1</strong>. The server user must to have the permission to the resource "database.share". The <i>root</i> user has this priviledge. </p>
+<p>
+  Share a database with another server in the cluster. This command
+  works only inside a cluster of servers up and running. With this
+  operation a database will be shared in another server node.
+</p>
+<p>
+  <img src=
+  "http://www.orientechnologies.com/images/share-database.png">
+</p>
+<p>
+  To execute this command you need to be connected to the remote
+  server instance where the database resides, in the picture the
+  <strong>Server #1</strong>. The server user must to have the
+  permission to the resource "database.share". The <i>root</i> user
+  has this priviledge.
+</p>
 <h3>
-<a name="Syntax"></a>Syntax<a href="#Syntax" class="section_anchor"></a>
+  <a name="Syntax" id="Syntax"></a>Syntax<a href="#Syntax" class=
+  "section_anchor"></a>
 </h3>
-<p><tt>share database &lt;db-name&gt; &lt;db-user&gt; &lt;db-password&gt; &lt;server-name&gt; &lt;mode&gt;</tt> </p>
-<p>Where: </p>
+<p>
+  <tt>share database &lt;db-name&gt; &lt;db-user&gt;
+  &lt;db-password&gt; &lt;server-name&gt; &lt;mode&gt;</tt>
+</p>
+<p>
+  Where:
+</p>
 <ul>
-<li>
-<strong>db-name</strong>        Name of the database to share </li>
-<li>
-<strong>db-user</strong>        Database user </li>
-<li>
-<strong>db-password</strong>    Database password </li>
-<li>
-<strong>server-name</strong>    Remote server's name as <tt>&lt;address&gt;:&lt;port&gt;</tt> </li>
-<li>
-<strong>mode</strong>           replication mode: 'synch' or 'asynch' </li>
-</ul><h3>
-<a name="Example"></a>Example<a href="#Example" class="section_anchor"></a>
+  <li>
+    <strong>db-name</strong> Name of the database to share
+  </li>
+  <li>
+    <strong>db-user</strong> Database user
+  </li>
+  <li>
+    <strong>db-password</strong> Database password
+  </li>
+  <li>
+    <strong>server-name</strong> Remote server's name as
+    <tt>&lt;address&gt;:&lt;port&gt;</tt>
+  </li>
+  <li>
+    <strong>mode</strong> replication mode: 'synch' or 'asynch'
+  </li>
+</ul>
+<h3>
+  <a name="Example" id="Example"></a>Example<a href="#Example"
+  class="section_anchor"></a>
 </h3>
-<pre class="prettyprint">&gt; connect remote:localhost:2424 root FF343F35058E4D4AF7AE12910B508384C47
+<pre class="prettyprint">
+&gt; connect remote:localhost:2424 root FF343F35058E4D4AF7AE12910B508384C47
 
 Connecting to remote Server instance [remote:localhost:2424] with user 'root'...OK
 
 &gt; share database demo admin admin 127.0.0.1:2425 synch
 
-Database 'demo' has been shared in 'synch' mode with '127.0.0.1:2425' the server 127.0.0.1:2425</pre>
-<p>This is a command of the Orient console. To know all the commands go to <a href="console_commands.html">Console commands</a>. </p>
+Database 'demo' has been shared in 'synch' mode with '127.0.0.1:2425' the server 127.0.0.1:2425
+</pre>
+<p>
+  This is a command of the Orient console. To know all the commands
+  go to <a href="console_commands.html">Console commands</a>.
+</p>

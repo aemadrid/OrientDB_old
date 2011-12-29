@@ -2,19 +2,44 @@
 title: Insert
 layout: default
 ---
-
- <p>The <strong>SQL Insert</strong> command creates a new record into the database. Records can be schema-less. </p>
+<p>
+  The <strong>SQL Insert</strong> command creates a new record into
+  the database. Records can be schema-less.
+</p>
 <h3>
-<a name="Syntax"></a>Syntax<a href="#Syntax" class="section_anchor"></a>
+  <a name="Syntax" id="Syntax"></a>Syntax<a href="#Syntax" class=
+  "section_anchor"></a>
 </h3>
-<p><tt>INSERT INTO &lt;Class&gt;|cluster:&lt;cluster&gt; (&lt;field&gt;[,]*) VALUES (&lt;expression&gt;[,]*)</tt> </p>
+<p>
+  <tt>INSERT INTO &lt;Class&gt;|cluster:&lt;cluster&gt;
+  (&lt;field&gt;[,]*) VALUES (&lt;expression&gt;[,]*)</tt>
+</p>
 <h3>
-<a name="Examples"></a>Examples<a href="#Examples" class="section_anchor"></a>
+  <a name="Examples" id="Examples"></a>Examples<a href="#Examples"
+  class="section_anchor"></a>
 </h3>
-<p>Insert a new record with name 'Jay' and surname 'Miner': </p>
-<p><tt>insert into Profile (name, surname) values ('Jay', 'Miner' )</tt> </p>
-<p>Insert a new record adding a relationship: </p>
-<p><tt>insert into Employee (name, boss) values ('jack', 11:99 )</tt> </p>
-<p>Insert a new record adding a collection of relationship: </p>
-<p><tt>insert into Profile (name, friends) values ('Luca', [10:3, 10:4] )</tt> </p>
-<p>To know more about other SQL commands look at <a href="sql.html">SQL commands</a>. </p>
+<p>
+  Insert a new record with name 'Jay' and surname 'Miner':
+</p>
+<p>
+  <tt>insert into Profile (name, surname) values ('Jay', 'Miner'
+  )</tt>
+</p>
+<p>
+  Insert a new record adding a relationship:
+</p>
+<p>
+  <tt>insert into Employee (name, boss) values ('jack', 11:99
+  )</tt>
+</p>
+<p>
+  Insert a new record adding a collection of relationship:
+</p>
+<p>
+  <tt>insert into Profile (name, friends) values ('Luca', [10:3,
+  10:4] )</tt>
+</p>
+<p>
+  To know more about other SQL commands look at <a href=
+  "sql.html">SQL commands</a>.
+</p>

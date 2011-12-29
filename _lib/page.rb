@@ -1,6 +1,11 @@
 require 'wrest'
 require 'nokogiri'
+require 'tidy_ffi'
 require 'fileutils'
+
+TidyFFI::Tidy.default_options.tidy_mark = false
+TidyFFI::Tidy.default_options.indent = "yes"
+TidyFFI::Tidy.default_options.doctype = "omit"
 
 class Page
 
@@ -141,6 +146,20 @@ class Page
     else
       log "[#{name} : clean_html] No table.wikitable nodes found ..."
     end
+    # Remove logos
+    nodes = doc.css 'p img'
+    if nodes.size > 0
+      nodes.each_with_index do |tag, idx|
+        if tag['src'] && tag['src'] == 'http://www.orientechnologies.com/images/orient_db_small.png'
+          log "[#{name} : clean_html] (#{idx + 1}) Removing logo ..."
+          tag.parent.remove
+        else
+          log "[#{name} : clean_html] (#{idx + 1}) No need to remove logo here ..."
+        end
+      end
+    else
+      log "[#{name} : clean_html] No logo nodes found ..."
+    end
   end
 
   def save_original
@@ -158,7 +177,7 @@ class Page
     log "Saving generated : #{path} ..."
     File.open(path, "w") do |f|
       f.puts "---\ntitle: #{title}\nlayout: default\n---"
-      f.puts doc.to_html
+      f.puts TidyFFI::Tidy.new(doc.to_html).clean
     end
   end
 

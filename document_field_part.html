@@ -2,67 +2,175 @@
 title: SQL Projections
 layout: default
 ---
-
- <h2>
-<a name="Introduction"></a>Introduction<a href="#Introduction" class="section_anchor"></a>
-</h2>
-<p>OrientDB has a powerful way to extract portion from document field. This applies to Java API, SQL Where conditions and SQL projections. </p>
-<p>To extract parts you have to use the square brackets <tt>[]</tt>. </p>
 <h2>
-<a name="Extract_punctual_items"></a>Extract punctual items<a href="#Extract_punctual_items" class="section_anchor"></a>
+  <a name="Introduction" id="Introduction"></a>Introduction<a href=
+  "#Introduction" class="section_anchor"></a>
+</h2>
+<p>
+  OrientDB has a powerful way to extract portion from document
+  field. This applies to Java API, SQL Where conditions and SQL
+  projections.
+</p>
+<p>
+  To extract parts you have to use the square brackets <tt>[]</tt>.
+</p>
+<h2>
+  <a name="Extract_punctual_items" id=
+  "Extract_punctual_items"></a>Extract punctual items<a href=
+  "#Extract_punctual_items" class="section_anchor"></a>
 </h2>
 <h3>
-<a name="Single_item"></a>Single item<a href="#Single_item" class="section_anchor"></a>
+  <a name="Single_item" id="Single_item"></a>Single item<a href=
+  "#Single_item" class="section_anchor"></a>
 </h3>
-<p>Example: tags is a EMBEDDEDSED of strings containing the values <tt>['Smart', 'Geek', 'Cool']</tt>. </p>
-<p>The expression <strong><tt>tags[0]</tt></strong> will return 'Smart'. </p>
+<p>
+  Example: tags is a EMBEDDEDSED of strings containing the values
+  <tt>['Smart', 'Geek', 'Cool']</tt>.
+</p>
+<p>
+  The expression <strong><tt>tags[0]</tt></strong> will return
+  'Smart'.
+</p>
 <h3>
-<a name="Single_items"></a>Single items<a href="#Single_items" class="section_anchor"></a>
+  <a name="Single_items" id="Single_items"></a>Single items<a href=
+  "#Single_items" class="section_anchor"></a>
 </h3>
-<p>Inside square brackets put the items separated by comma ",". </p>
-<p>Following the tags example above, the expression <strong><tt>tags[0,2]</tt></strong> will return a list with <tt>['Smart', 'Cool']</tt>. </p>
+<p>
+  Inside square brackets put the items separated by comma ",".
+</p>
+<p>
+  Following the tags example above, the expression
+  <strong><tt>tags[0,2]</tt></strong> will return a list with
+  <tt>['Smart', 'Cool']</tt>.
+</p>
 <h3>
-<a name="Range_items"></a>Range items<a href="#Range_items" class="section_anchor"></a>
+  <a name="Range_items" id="Range_items"></a>Range items<a href=
+  "#Range_items" class="section_anchor"></a>
 </h3>
-<p>Inside square brackets put the item lower and upper bounds separated by "-". </p>
-<p>Following the tags example above, the expression <strong><tt>tags[1-2]</tt></strong> will return a list with <tt>['Geek', 'Cool']</tt>. </p>
+<p>
+  Inside square brackets put the item lower and upper bounds
+  separated by "-".
+</p>
+<p>
+  Following the tags example above, the expression
+  <strong><tt>tags[1-2]</tt></strong> will return a list with
+  <tt>['Geek', 'Cool']</tt>.
+</p>
 <h3>
-<a name="Usage_in_SQL_query"></a>Usage in SQL query<a href="#Usage_in_SQL_query" class="section_anchor"></a>
+  <a name="Usage_in_SQL_query" id="Usage_in_SQL_query"></a>Usage in
+  SQL query<a href="#Usage_in_SQL_query" class=
+  "section_anchor"></a>
 </h3>
-<p>Example: </p>
-<pre class="prettyprint">&gt; SELECT * FROM profile WHERE phones[home] like '+39%'</pre>
-<p>The same is using quotes: <tt>phones['home'] and phones["home"]</tt> </p>
-<p>You can go in chain (contacts is a map of map): </p>
-<pre class="prettyprint">&gt; SELECT * FROM profile WHERE contacts[phones][home] like '+39%'</pre>
-<p>With List and arrays you can pick an item of a range of its: </p>
-<pre class="prettyprint">&gt; SELECT * FROM profile WHERE tags[0] = 'smart'</pre>
-<p>and single items: </p>
-<pre class="prettyprint">&gt; SELECT * FROM profile WHERE tags[0,3,5] CONTAINSALL ['smart', 'new', 'crazy']</pre>
-<p>and a range of items: </p>
-<pre class="prettyprint">&gt; SELECT * FROM profile WHERE tags[0-5] CONTAINSALL ['smart', 'new', 'crazy']</pre>
+<p>
+  Example:
+</p>
+<pre class="prettyprint">
+&gt; SELECT * FROM profile WHERE phones[home] like '+39%'
+</pre>
+<p>
+  The same is using quotes: <tt>phones['home'] and
+  phones["home"]</tt>
+</p>
+<p>
+  You can go in chain (contacts is a map of map):
+</p>
+<pre class="prettyprint">
+&gt; SELECT * FROM profile WHERE contacts[phones][home] like '+39%'
+</pre>
+<p>
+  With List and arrays you can pick an item of a range of its:
+</p>
+<pre class="prettyprint">
+&gt; SELECT * FROM profile WHERE tags[0] = 'smart'
+</pre>
+<p>
+  and single items:
+</p>
+<pre class="prettyprint">
+&gt; SELECT * FROM profile WHERE tags[0,3,5] CONTAINSALL ['smart', 'new', 'crazy']
+</pre>
+<p>
+  and a range of items:
+</p>
+<pre class="prettyprint">
+&gt; SELECT * FROM profile WHERE tags[0-5] CONTAINSALL ['smart', 'new', 'crazy']
+</pre>
 <h3>
-<a name="Condition"></a>Condition<a href="#Condition" class="section_anchor"></a>
+  <a name="Condition" id="Condition"></a>Condition<a href=
+  "#Condition" class="section_anchor"></a>
 </h3>
-<p>Inside the square brackets you can specify a condition. Today only equals condition is supported. </p>
-<p>Example: </p>
-<pre class="prettyprint">employees[label = 'Ferrari']</pre>
+<p>
+  Inside the square brackets you can specify a condition. Today
+  only equals condition is supported.
+</p>
+<p>
+  Example:
+</p>
+<pre class="prettyprint">
+employees[label = 'Ferrari']
+</pre>
 <h4>
-<a name="Use_in_graphs"></a>Use in graphs<a href="#Use_in_graphs" class="section_anchor"></a>
+  <a name="Use_in_graphs" id="Use_in_graphs"></a>Use in
+  graphs<a href="#Use_in_graphs" class="section_anchor"></a>
 </h4>
-<p>You can cross the graph using the projection. This an example traverse all the retrieved nodes with name "Tom". "out" is outEdges and it's a collection. Until now collection couldn't be traversed with the . notation. Example: </p>
-<pre class="prettyprint">&gt; SELECT out.in FROM v WHERE name = 'Tom'</pre>
-<p>This retrieves all the vertexes connected to the outgoing edges of the Vertices with name = 'Tom'. </p>
-<p>Collection can be filtered with the equals operator. This an example traverse all the retrieved nodes with name "Tom". The traversal cross the out edges but only where the linked (in) Vertex has label "Ferrari" and then forward to the: </p>
-<pre class="prettyprint">&gt; SELECT out[in.label = 'Ferrari'] FROM v WHERE name = 'Tom'</pre>
-<p>Or selecting vertexes nodes based on class: </p>
-<pre class="prettyprint">&gt; SELECT out[in.@class = 'Car'] FROM v WHERE name = 'Tom'</pre>
-<p>Or both: </p>
-<pre class="prettyprint">&gt; SELECT out[label='drives'][in.@class = 'Car'] FROM v WHERE name = 'Tom'</pre>
-<p>As you can see where multiple follows multiple <a href=""></a> the result set is filtered in each step like a Pipeline. </p>
-<p>NOTE: This doesn't replace the support of GREMLIN. GREMLIN is much more powerful because it does thousands things more, but it's a simple and, at the same time, powerful tool to traverse relationships. </p>
+<p>
+  You can cross the graph using the projection. This an example
+  traverse all the retrieved nodes with name "Tom". "out" is
+  outEdges and it's a collection. Until now collection couldn't be
+  traversed with the . notation. Example:
+</p>
+<pre class="prettyprint">
+&gt; SELECT out.in FROM v WHERE name = 'Tom'
+</pre>
+<p>
+  This retrieves all the vertexes connected to the outgoing edges
+  of the Vertices with name = 'Tom'.
+</p>
+<p>
+  Collection can be filtered with the equals operator. This an
+  example traverse all the retrieved nodes with name "Tom". The
+  traversal cross the out edges but only where the linked (in)
+  Vertex has label "Ferrari" and then forward to the:
+</p>
+<pre class="prettyprint">
+&gt; SELECT out[in.label = 'Ferrari'] FROM v WHERE name = 'Tom'
+</pre>
+<p>
+  Or selecting vertexes nodes based on class:
+</p>
+<pre class="prettyprint">
+&gt; SELECT out[in.@class = 'Car'] FROM v WHERE name = 'Tom'
+</pre>
+<p>
+  Or both:
+</p>
+<pre class="prettyprint">
+&gt; SELECT out[label='drives'][in.@class = 'Car'] FROM v WHERE name = 'Tom'
+</pre>
+<p>
+  As you can see where multiple follows multiple <a href=""></a>
+  the result set is filtered in each step like a Pipeline.
+</p>
+<p>
+  NOTE: This doesn't replace the support of GREMLIN. GREMLIN is
+  much more powerful because it does thousands things more, but
+  it's a simple and, at the same time, powerful tool to traverse
+  relationships.
+</p>
 <h4>
-<a name="Future_directions"></a>Future directions<a href="#Future_directions" class="section_anchor"></a>
+  <a name="Future_directions" id="Future_directions"></a>Future
+  directions<a href="#Future_directions" class=
+  "section_anchor"></a>
 </h4>
-<p>In the future you could use the full expression of OrientDB SQL language inside the <a href=""></a>, like: </p>
-<pre class="prettyprint">&gt; SELECT out[in.label.trim() = 'Ferrari' AND in.@class='Vehicle'] FROM v WHERE name = 'Tom'</pre>
-<p>But for this you have to wait yet :-) Monitor the issue: <a href="http://code.google.com/p/orient/issues/detail?id=513" rel="nofollow">http://code.google.com/p/orient/issues/detail?id=513</a> </p>
+<p>
+  In the future you could use the full expression of OrientDB SQL
+  language inside the <a href=""></a>, like:
+</p>
+<pre class="prettyprint">
+&gt; SELECT out[in.label.trim() = 'Ferrari' AND in.@class='Vehicle'] FROM v WHERE name = 'Tom'
+</pre>
+<p>
+  But for this you have to wait yet :-) Monitor the issue: <a href=
+  "http://code.google.com/p/orient/issues/detail?id=513" rel=
+  "nofollow">http://code.google.com/p/orient/issues/detail?id=513</a>
+</p>

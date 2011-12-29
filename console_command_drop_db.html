@@ -2,33 +2,75 @@
 title: Drop Database
 layout: default
 ---
-
- <h2>
-<a name="Drop_Database"></a>Drop Database<a href="#Drop_Database" class="section_anchor"></a>
+<h2>
+  <a name="Drop_Database" id="Drop_Database"></a>Drop
+  Database<a href="#Drop_Database" class="section_anchor"></a>
 </h2>
-<p>The <strong>Drop Database</strong> command definitely deletes a database. If a database is open and no database name is used, then the current database will be deleted. <i>NOTE: Unless you've made backups there is no way to restore a deleted database.</i> </p>
+<p>
+  The <strong>Drop Database</strong> command definitely deletes a
+  database. If a database is open and no database name is used,
+  then the current database will be deleted. <i>NOTE: Unless you've
+  made backups there is no way to restore a deleted database.</i>
+</p>
 <h3>
-<a name="Syntax"></a>Syntax<a href="#Syntax" class="section_anchor"></a>
+  <a name="Syntax" id="Syntax"></a>Syntax<a href="#Syntax" class=
+  "section_anchor"></a>
 </h3>
-<p>For database opened using "local" protocol: </p>
-<pre class="prettyprint">DROP DATABASE</pre>
-<p>To remove a database hosted in a remote OrientDB Server you need the credential to do it at the target OrientDB server: </p>
-<pre class="prettyprint">DROP DATABASE &lt;database-name&gt; &lt;server-username&gt; &lt;server-userpassword&gt;</pre>
-<p>Where: </p>
+<p>
+  For database opened using "local" protocol:
+</p>
+<pre class="prettyprint">
+DROP DATABASE
+</pre>
+<p>
+  To remove a database hosted in a remote OrientDB Server you need
+  the credential to do it at the target OrientDB server:
+</p>
+<pre class="prettyprint">
+DROP DATABASE &lt;database-name&gt; &lt;server-username&gt; &lt;server-userpassword&gt;
+</pre>
+<p>
+  Where:
+</p>
 <ul>
-<li>
-<strong>database-name</strong> is the name of database. If not specified means the current database if it's opened </li>
-<li>
-<strong>server-username</strong> is the name of the server's user with privileges to drop the database </li>
-<li>
-<strong>server-userpassword</strong> is the password of the server's user </li>
-</ul><h3>
-<a name="Examples"></a>Examples<a href="#Examples" class="section_anchor"></a>
+  <li>
+    <strong>database-name</strong> is the name of database. If not
+    specified means the current database if it's opened
+  </li>
+  <li>
+    <strong>server-username</strong> is the name of the server's
+    user with privileges to drop the database
+  </li>
+  <li>
+    <strong>server-userpassword</strong> is the password of the
+    server's user
+  </li>
+</ul>
+<h3>
+  <a name="Examples" id="Examples"></a>Examples<a href="#Examples"
+  class="section_anchor"></a>
 </h3>
-<p>Delete the current local database: </p>
-<pre class="prettyprint">DROP DATABASE</pre>
-<p>Delete the remote database "demo" hosted on localhost: </p>
-<pre class="prettyprint">DROP DATABASE remote:localhost/demo root 5B1A917B20C78ECAA219E37CFDDA6598D4D62CE68DD82E5B05D4949758A66828</pre>
-<p>To create a new database use the <a href="console_command_create_db.html">Create Database</a> command. </p>
-<p>To know more about other SQL commands look at <a href="sql.html">SQL commands</a>. </p>
-<p>This is a command of the Orient console. To know all the commands go to <a href="console_commands.html">Console commands</a>. </p>
+<p>
+  Delete the current local database:
+</p>
+<pre class="prettyprint">
+DROP DATABASE
+</pre>
+<p>
+  Delete the remote database "demo" hosted on localhost:
+</p>
+<pre class="prettyprint">
+DROP DATABASE remote:localhost/demo root 5B1A917B20C78ECAA219E37CFDDA6598D4D62CE68DD82E5B05D4949758A66828
+</pre>
+<p>
+  To create a new database use the <a href=
+  "console_command_create_db.html">Create Database</a> command.
+</p>
+<p>
+  To know more about other SQL commands look at <a href=
+  "sql.html">SQL commands</a>.
+</p>
+<p>
+  This is a command of the Orient console. To know all the commands
+  go to <a href="console_commands.html">Console commands</a>.
+</p>

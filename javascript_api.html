@@ -2,40 +2,100 @@
 title: Javascript API
 layout: default
 ---
-
- <p></p>
 <ul>
-<li><a href="#Introduction">Introduction</a></li>
-<li><a href="#ODatabase_object">ODatabase object</a></li>
-<li><a href="#Open">Open</a></li>
-<ul>
-<li><a href="#Browser_Authentication">Browser Authentication</a></li>
-<li><a href="#Javascript_Authentication">Javascript Authentication</a></li>
+  <li>
+    <a href="#Introduction">Introduction</a>
+  </li>
+  <li>
+    <a href="#ODatabase_object">ODatabase object</a>
+  </li>
+  <li>
+    <a href="#Open">Open</a>
+  </li>
+  <li style="list-style: none">
+    <ul>
+      <li>
+        <a href="#Browser_Authentication">Browser
+        Authentication</a>
+      </li>
+      <li>
+        <a href="#Javascript_Authentication">Javascript
+        Authentication</a>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <a href="#Query">Query</a>
+  </li>
+  <li>
+    <a href="#Execute_Command">Execute Command</a>
+  </li>
+  <li>
+    <a href="#Load">Load</a>
+  </li>
+  <li>
+    <a href="#Class_Info">Class Info</a>
+  </li>
+  <li>
+    <a href="#Browse_Cluster">Browse Cluster</a>
+  </li>
+  <li>
+    <a href="#Server_Information">Server Information</a>
+  </li>
+  <li>
+    <a href="#Schema">Schema</a>
+  </li>
+  <li>
+    <a href="#Security">Security</a>
+  </li>
+  <li style="list-style: none">
+    <ul>
+      <li>
+        <a href="#Roles">Roles</a>
+      </li>
+      <li>
+        <a href="#Users">Users</a>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <a href="#Close">Close</a>
+  </li>
+  <li>
+    <a href="#Change_server_URL">Change server URL</a>
+  </li>
+  <li>
+    <a href="#Change_database_name">Change database name</a>
+  </li>
+  <li>
+    <a href="#Setting_return_type">Setting return type</a>
+  </li>
+  <li>
+    <a href="#Errors">Errors</a>
+  </li>
 </ul>
-<li><a href="#Query">Query</a></li>
-<li><a href="#Execute_Command">Execute Command</a></li>
-<li><a href="#Load">Load</a></li>
-<li><a href="#Class_Info">Class Info</a></li>
-<li><a href="#Browse_Cluster">Browse Cluster</a></li>
-<li><a href="#Server_Information">Server Information</a></li>
-<li><a href="#Schema">Schema</a></li>
-<li><a href="#Security">Security</a></li>
-<ul>
-<li><a href="#Roles">Roles</a></li>
-<li><a href="#Users">Users</a></li>
-</ul>
-<li><a href="#Close">Close</a></li>
-<li><a href="#Change_server_URL">Change server URL</a></li>
-<li><a href="#Change_database_name">Change database name</a></li>
-<li><a href="#Setting_return_type">Setting return type</a></li>
-<li><a href="#Errors">Errors</a></li>
-</ul><h2>
-<a name="Introduction"></a>Introduction<a href="#Introduction" class="section_anchor"></a>
+<h2>
+  <a name="Introduction" id="Introduction"></a>Introduction<a href=
+  "#Introduction" class="section_anchor"></a>
 </h2>
-<p>This API wraps the most common use cases in database usage. All parameters required by methods or constructor are Strings. This library works on top of <a href="orient_db_rest.html">HTTP RESTful protocol</a>. Available since release 0.9.25.<br><i>Note: Due to cross-domain XMLHttpRequest restriction this API works, for now, only placed in the server deployment</i> </p>
-<p>The full source code is available here: <strong><a href="http://code.google.com/p/orient/source/browse/trunk/server/src/site/js/orientdb-api.js" rel="nofollow">oriendb-api.js</a></strong>. </p>
-<p>Example: </p>
-<pre class="prettyprint">var database = new ODatabase('http://localhost:2480/demo');
+<p>
+  This API wraps the most common use cases in database usage. All
+  parameters required by methods or constructor are Strings. This
+  library works on top of <a href="orient_db_rest.html">HTTP
+  RESTful protocol</a>. Available since release 0.9.25.<br>
+  <i>Note: Due to cross-domain XMLHttpRequest restriction this API
+  works, for now, only placed in the server deployment</i>
+</p>
+<p>
+  The full source code is available here: <strong><a href=
+  "http://code.google.com/p/orient/source/browse/trunk/server/src/site/js/orientdb-api.js"
+  rel="nofollow">oriendb-api.js</a></strong>.
+</p>
+<p>
+  Example:
+</p>
+<pre class="prettyprint">
+var database = new ODatabase('http://localhost:2480/demo');
 databaseInfo = database.open();
 queryResult = database.query('select from Address where city.country.name = \'Italy\'');
 if (queryResult["result"].length == 0){
@@ -43,35 +103,79 @@ if (queryResult["result"].length == 0){
 } else {
       commandResult = database.executeCommand('update Address set street = \'Via test 1\' where city.country.name = \'Italy\'');
 }
-database.close();</pre>
+database.close();
+</pre>
 <h2>
-<a name="ODatabase_object"></a>ODatabase object<a href="#ODatabase_object" class="section_anchor"></a>
+  <a name="ODatabase_object" id="ODatabase_object"></a>ODatabase
+  object<a href="#ODatabase_object" class="section_anchor"></a>
 </h2>
-<p>ODatabase object requires server URL and database name: </p>
-<p>Syntax: <tt>new ODatabase(http://&lt;host&gt;:&lt;port&gt;/&lt;databaseName&gt;)</tt> </p>
-<p>Example: </p>
-<pre class="prettyprint">var orientServer = new ODatabase('http://localhost:2480/demo');</pre>
-<p>Once created database instance is ready to be used. Every method return the operation result when it succeeded, null elsewhere. <br> In case of null result the database instance will have the error message obtainable by the <a href="#Errors">getErrorMessage()</a> method. </p>
+<p>
+  ODatabase object requires server URL and database name:
+</p>
+<p>
+  Syntax: <tt>new
+  ODatabase(http://&lt;host&gt;:&lt;port&gt;/&lt;databaseName&gt;)</tt>
+</p>
+<p>
+  Example:
+</p>
+<pre class="prettyprint">
+var orientServer = new ODatabase('http://localhost:2480/demo');
+</pre>
+<p>
+  Once created database instance is ready to be used. Every method
+  return the operation result when it succeeded, null
+  elsewhere.<br>
+  In case of null result the database instance will have the error
+  message obtainable by the <a href="#Errors">getErrorMessage()</a>
+  method.
+</p>
 <h2>
-<a name="Open"></a>Open<a href="#Open" class="section_anchor"></a>
+  <a name="Open" id="Open"></a>Open<a href="#Open" class=
+  "section_anchor"></a>
 </h2>
-<p>Method that connects to the server, it returns database information in JSON format.<br></p>
+<p>
+  Method that connects to the server, it returns database
+  information in JSON format.<br>
+</p>
 <h3>
-<a name="Browser_Authentication"></a>Browser Authentication<a href="#Browser_Authentication" class="section_anchor"></a>
+  <a name="Browser_Authentication" id=
+  "Browser_Authentication"></a>Browser Authentication<a href=
+  "#Browser_Authentication" class="section_anchor"></a>
 </h3>
-<p>Syntax: <tt>&lt;databaseInstance&gt;.open()</tt><br><i>Note: This implementation asks to the browser to provide user and password.</i> </p>
-<p>Example: </p>
-<pre class="prettyprint">orientServer = new ODatabase('http://localhost:2480/demo');
-databaseInfo = orientServer.open();</pre>
+<p>
+  Syntax: <tt>&lt;databaseInstance&gt;.open()</tt><br>
+  <i>Note: This implementation asks to the browser to provide user
+  and password.</i>
+</p>
+<p>
+  Example:
+</p>
+<pre class="prettyprint">
+orientServer = new ODatabase('http://localhost:2480/demo');
+databaseInfo = orientServer.open();
+</pre>
 <h3>
-<a name="Javascript_Authentication"></a>Javascript Authentication<a href="#Javascript_Authentication" class="section_anchor"></a>
+  <a name="Javascript_Authentication" id=
+  "Javascript_Authentication"></a>Javascript Authentication<a href=
+  "#Javascript_Authentication" class="section_anchor"></a>
 </h3>
-<p>Syntax: <tt>&lt;databaseInstance&gt;.open(username,userpassword)</tt> </p>
-<p>Example: </p>
-<pre class="prettyprint">orientServer = new ODatabase('http://localhost:2480/demo');
-databaseInfo = orientServer.open('admin','admin');</pre>
-<p>Return Example: </p>
-<pre class="prettyprint">{"classes": [
+<p>
+  Syntax:
+  <tt>&lt;databaseInstance&gt;.open(username,userpassword)</tt>
+</p>
+<p>
+  Example:
+</p>
+<pre class="prettyprint">
+orientServer = new ODatabase('http://localhost:2480/demo');
+databaseInfo = orientServer.open('admin','admin');
+</pre>
+<p>
+  Return Example:
+</p>
+<pre class="prettyprint">
+{"classes": [
     {
       "id": 0, 
       "name": "ORole", 
@@ -155,16 +259,36 @@ databaseInfo = orientServer.open('admin','admin');</pre>
     "properties": [
     ]
   }
-}</pre>
+}
+</pre>
 <h2>
-<a name="Query"></a>Query<a href="#Query" class="section_anchor"></a>
+  <a name="Query" id="Query"></a>Query<a href="#Query" class=
+  "section_anchor"></a>
 </h2>
-<p>Method that executes the query, it returns query results in JSON format. </p>
-<p>Syntax: <tt>&lt;databaseInstance&gt;.query(&lt;queryText&gt;,[limit],[fetchPlan])</tt><br><i>Note: limit and fetchPlan are optional</i><br> See <a href="http://code.google.com/p/orient/wiki/FetchingStrategies" rel="nofollow">Fetching Strategies</a> </p>
-<p>Simple Example: </p>
-<pre class="prettyprint">queryResult = orientServer.query('select from Address where city.country.name = \'Italy\'');</pre>
-<p>Return Example: </p>
-<pre class="prettyprint">{ "schema": {
+<p>
+  Method that executes the query, it returns query results in JSON
+  format.
+</p>
+<p>
+  Syntax:
+  <tt>&lt;databaseInstance&gt;.query(&lt;queryText&gt;,[limit],[fetchPlan])</tt><br>
+
+  <i>Note: limit and fetchPlan are optional</i><br>
+  See <a href=
+  "http://code.google.com/p/orient/wiki/FetchingStrategies" rel=
+  "nofollow">Fetching Strategies</a>
+</p>
+<p>
+  Simple Example:
+</p>
+<pre class="prettyprint">
+queryResult = orientServer.query('select from Address where city.country.name = \'Italy\'');
+</pre>
+<p>
+  Return Example:
+</p>
+<pre class="prettyprint">
+{ "schema": {
     "id": 8, 
     "name": "Address"
   }, 
@@ -180,11 +304,19 @@ databaseInfo = orientServer.open('admin','admin');</pre>
       "city": "#13:0"
     }
   ]
-}</pre>
-<p>Fetched Example: fetching of all fields except "type" </p>
-<pre class="prettyprint">queryResult = orientServer.query('select from Address where city.country.name = \'Italy\'',null,'*:-1 type:0');</pre>
-<p>Return Example 1: </p>
-<pre class="prettyprint">{ "schema": {
+}
+</pre>
+<p>
+  Fetched Example: fetching of all fields except "type"
+</p>
+<pre class="prettyprint">
+queryResult = orientServer.query('select from Address where city.country.name = \'Italy\'',null,'*:-1 type:0');
+</pre>
+<p>
+  Return Example 1:
+</p>
+<pre class="prettyprint">
+{ "schema": {
     "id": 6, 
     "name": "Address"
   }, 
@@ -212,11 +344,19 @@ databaseInfo = orientServer.open('admin','admin');</pre>
       }
     }
   ]
-}</pre>
-<p>Fetched Example: fetching of all fields except "city" (Class) </p>
-<pre class="prettyprint">queryResult = orientServer.query('select from Address where city.country.name = \'Italy\'',null,'*:-1 city:0');</pre>
-<p>Return Example 2: </p>
-<pre class="prettyprint">{ "schema": {
+}
+</pre>
+<p>
+  Fetched Example: fetching of all fields except "city" (Class)
+</p>
+<pre class="prettyprint">
+queryResult = orientServer.query('select from Address where city.country.name = \'Italy\'',null,'*:-1 city:0');
+</pre>
+<p>
+  Return Example 2:
+</p>
+<pre class="prettyprint">
+{ "schema": {
     "id": 6, 
     "name": "Address"
   }, 
@@ -230,11 +370,20 @@ databaseInfo = orientServer.open('admin','admin');</pre>
        "type": "Residence"
     }
   ]
-}</pre>
-<p>Fetched Example: fetching of all fields except "country" of City class </p>
-<pre class="prettyprint">queryResult = orientServer.query('select from Address where city.country.name = \'Italy\'',null,'*:-1 City.country:0');</pre>
-<p>Return Example 3: </p>
-<pre class="prettyprint">{ "schema": {
+}
+</pre>
+<p>
+  Fetched Example: fetching of all fields except "country" of City
+  class
+</p>
+<pre class="prettyprint">
+queryResult = orientServer.query('select from Address where city.country.name = \'Italy\'',null,'*:-1 City.country:0');
+</pre>
+<p>
+  Return Example 3:
+</p>
+<pre class="prettyprint">
+{ "schema": {
     "id": 6, 
     "name": "Address"
   }, 
@@ -248,39 +397,93 @@ databaseInfo = orientServer.open('admin','admin');</pre>
       }
     }
   ]
-}</pre>
+}
+</pre>
 <h2>
-<a name="Execute_Command"></a>Execute Command<a href="#Execute_Command" class="section_anchor"></a>
+  <a name="Execute_Command" id="Execute_Command"></a>Execute
+  Command<a href="#Execute_Command" class="section_anchor"></a>
 </h2>
-<p>Method that executes arbitrary commands, it returns command result in text format. </p>
-<p>Syntax: <tt>&lt;databaseInstance&gt;.executeCommand(&lt;commandText&gt;)</tt> </p>
-<p>Example 1 (insert): </p>
-<pre class="prettyprint">commandResult = orientServer.executeCommand('insert into Address (street,type) values (\'Via test 1\',\'Tipo test\')');</pre>
-<p>Return Example 1 (created record): </p>
-<pre class="prettyprint">Address@14:177{street:Via test 1,type:Tipo test}</pre>
-<p><br> Example 2 (delete): </p>
-<pre class="prettyprint">commandResult = orientServer.executeCommand('delete from Address where street = \'Via test 1\' and type = \'Tipo test\'');</pre>
-<p>Return Example 2 (records deleted): </p>
-<pre class="prettyprint">5</pre>
-<p><i>Note: Delete example works also with update command</i> </p>
+<p>
+  Method that executes arbitrary commands, it returns command
+  result in text format.
+</p>
+<p>
+  Syntax:
+  <tt>&lt;databaseInstance&gt;.executeCommand(&lt;commandText&gt;)</tt>
+</p>
+<p>
+  Example 1 (insert):
+</p>
+<pre class="prettyprint">
+commandResult = orientServer.executeCommand('insert into Address (street,type) values (\'Via test 1\',\'Tipo test\')');
+</pre>
+<p>
+  Return Example 1 (created record):
+</p>
+<pre class="prettyprint">
+Address@14:177{street:Via test 1,type:Tipo test}
+</pre>
+<p>
+  <br>
+  Example 2 (delete):
+</p>
+<pre class="prettyprint">
+commandResult = orientServer.executeCommand('delete from Address where street = \'Via test 1\' and type = \'Tipo test\'');
+</pre>
+<p>
+  Return Example 2 (records deleted):
+</p>
+<pre class="prettyprint">
+5
+</pre>
+<p>
+  <i>Note: Delete example works also with update command</i>
+</p>
 <h2>
-<a name="Load"></a>Load<a href="#Load" class="section_anchor"></a>
+  <a name="Load" id="Load"></a>Load<a href="#Load" class=
+  "section_anchor"></a>
 </h2>
-<p>Method that loads a record from the record ID, it returns the record informations in JSON format. </p>
-<p>Syntax: <tt>&lt;databaseInstance&gt;.load(&lt;recordID&gt;,[fetchPlan])</tt><br><i>Note: fetchPlan is optional</i><br> See <a href="http://code.google.com/p/orient/wiki/FetchingStrategies" rel="nofollow">Fetching Strategies</a> </p>
-<p>Simple Example: </p>
-<pre class="prettyprint">queryResult = orientServer.load('12:0');</pre>
-<p>Return Example: </p>
-<pre class="prettyprint">{
+<p>
+  Method that loads a record from the record ID, it returns the
+  record informations in JSON format.
+</p>
+<p>
+  Syntax:
+  <tt>&lt;databaseInstance&gt;.load(&lt;recordID&gt;,[fetchPlan])</tt><br>
+
+  <i>Note: fetchPlan is optional</i><br>
+  See <a href=
+  "http://code.google.com/p/orient/wiki/FetchingStrategies" rel=
+  "nofollow">Fetching Strategies</a>
+</p>
+<p>
+  Simple Example:
+</p>
+<pre class="prettyprint">
+queryResult = orientServer.load('12:0');
+</pre>
+<p>
+  Return Example:
+</p>
+<pre class="prettyprint">
+{
 "@rid": "12:0", "@class": "Address", 
       "street": "Piazza Navona, 1", 
       "type": "Residence", 
       "city": "#13:0"
-    }</pre>
-<p>Fetched Example: all fields fetched except "type" </p>
-<pre class="prettyprint">queryResult = orientServer.load('12:0', '*:-1 type:0');</pre>
-<p>Return Example 1: </p>
-<pre class="prettyprint">{
+    }
+</pre>
+<p>
+  Fetched Example: all fields fetched except "type"
+</p>
+<pre class="prettyprint">
+queryResult = orientServer.load('12:0', '*:-1 type:0');
+</pre>
+<p>
+  Return Example 1:
+</p>
+<pre class="prettyprint">
+{
 "@rid": "12:0", "@class": "Address", 
       "street": "Piazza Navona, 1", 
       "city":{
@@ -291,16 +494,31 @@ databaseInfo = orientServer.open('admin','admin');</pre>
              "name": "Italy"
           }
       }
-    }</pre>
+    }
+</pre>
 <h2>
-<a name="Class_Info"></a>Class Info<a href="#Class_Info" class="section_anchor"></a>
+  <a name="Class_Info" id="Class_Info"></a>Class Info<a href=
+  "#Class_Info" class="section_anchor"></a>
 </h2>
-<p>Method that retrieves information of a class, it returns the class informations in JSON format. </p>
-<p>Syntax: <tt>&lt;databaseInstance&gt;.classInfo(&lt;className&gt;)</tt> </p>
-<p>Example: </p>
-<pre class="prettyprint">addressInfo = orientServer.classInfo('Address');</pre>
-<p>Return Example: </p>
-<pre class="prettyprint">{ "schema": {
+<p>
+  Method that retrieves information of a class, it returns the
+  class informations in JSON format.
+</p>
+<p>
+  Syntax:
+  <tt>&lt;databaseInstance&gt;.classInfo(&lt;className&gt;)</tt>
+</p>
+<p>
+  Example:
+</p>
+<pre class="prettyprint">
+addressInfo = orientServer.classInfo('Address');
+</pre>
+<p>
+  Return Example:
+</p>
+<pre class="prettyprint">
+{ "schema": {
     "id": 8, 
     "name": "Address"
   }, 
@@ -316,16 +534,31 @@ databaseInfo = orientServer.open('admin','admin');</pre>
       "city": "#12:1"
     }
   ]
-}</pre>
+}
+</pre>
 <h2>
-<a name="Browse_Cluster"></a>Browse Cluster<a href="#Browse_Cluster" class="section_anchor"></a>
+  <a name="Browse_Cluster" id="Browse_Cluster"></a>Browse
+  Cluster<a href="#Browse_Cluster" class="section_anchor"></a>
 </h2>
-<p>Method that retrieves information of a cluster, it returns the class informations in JSON format. </p>
-<p>Syntax: <tt>&lt;databaseInstance&gt;.browseCluster(&lt;className&gt;)</tt> </p>
-<p>Example: </p>
-<pre class="prettyprint">addressInfo = orientServer.browseCluster('Address');</pre>
-<p>Return Example: </p>
-<pre class="prettyprint">{ "schema": {
+<p>
+  Method that retrieves information of a cluster, it returns the
+  class informations in JSON format.
+</p>
+<p>
+  Syntax:
+  <tt>&lt;databaseInstance&gt;.browseCluster(&lt;className&gt;)</tt>
+</p>
+<p>
+  Example:
+</p>
+<pre class="prettyprint">
+addressInfo = orientServer.browseCluster('Address');
+</pre>
+<p>
+  Return Example:
+</p>
+<pre class="prettyprint">
+{ "schema": {
     "id": 8, 
     "name": "Address"
   }, 
@@ -341,16 +574,34 @@ databaseInfo = orientServer.open('admin','admin');</pre>
       "city": "#12:1"
     }
   ]
-}</pre>
+}
+</pre>
 <h2>
-<a name="Server_Information"></a>Server Information<a href="#Server_Information" class="section_anchor"></a>
+  <a name="Server_Information" id="Server_Information"></a>Server
+  Information<a href="#Server_Information" class=
+  "section_anchor"></a>
 </h2>
-<p>Method that retrieves server informations, it returns the server informations in JSON format.<br><i>Note: Server information needs <a href="security.html#OrientDB_Server_security">root</a> username and password.</i> </p>
-<p>Syntax: <tt>&lt;databaseInstance&gt;.serverInfo()</tt> </p>
-<p>Example: </p>
-<pre class="prettyprint">serverInfo = orientServer.serverInfo();</pre>
-<p>Return Example: </p>
-<pre class="prettyprint">{
+<p>
+  Method that retrieves server informations, it returns the server
+  informations in JSON format.<br>
+  <i>Note: Server information needs <a href=
+  "security.html#OrientDB_Server_security">root</a> username and
+  password.</i>
+</p>
+<p>
+  Syntax: <tt>&lt;databaseInstance&gt;.serverInfo()</tt>
+</p>
+<p>
+  Example:
+</p>
+<pre class="prettyprint">
+serverInfo = orientServer.serverInfo();
+</pre>
+<p>
+  Return Example:
+</p>
+<pre class="prettyprint">
+{
   "connections": [{
     "id": "64", 
     "id": "64", 
@@ -393,16 +644,30 @@ databaseInfo = orientServer.open('admin','admin');</pre>
       {"name": "log.file.level", "value": "fine"
       }
     ]
-}</pre>
+}
+</pre>
 <h2>
-<a name="Schema"></a>Schema<a href="#Schema" class="section_anchor"></a>
+  <a name="Schema" id="Schema"></a>Schema<a href="#Schema" class=
+  "section_anchor"></a>
 </h2>
-<p>Method that retrieves database Schema, it returns an array of classes (JSON parsed Object). </p>
-<p>Syntax: <tt>&lt;databaseInstance&gt;.schema()</tt> </p>
-<p>Example: </p>
-<pre class="prettyprint">schemaInfo = orientServer.schema();</pre>
-<p>Return Example: </p>
-<pre class="prettyprint">{"classes": [
+<p>
+  Method that retrieves database Schema, it returns an array of
+  classes (JSON parsed Object).
+</p>
+<p>
+  Syntax: <tt>&lt;databaseInstance&gt;.schema()</tt>
+</p>
+<p>
+  Example:
+</p>
+<pre class="prettyprint">
+schemaInfo = orientServer.schema();
+</pre>
+<p>
+  Return Example:
+</p>
+<pre class="prettyprint">
+{"classes": [
     {
       "id": 0, 
       "name": "ORole", 
@@ -432,19 +697,34 @@ databaseInfo = orientServer.open('admin','admin');</pre>
       }
   ]}, 
 ]
-}</pre>
+}
+</pre>
 <h2>
-<a name="Security"></a>Security<a href="#Security" class="section_anchor"></a>
+  <a name="Security" id="Security"></a>Security<a href="#Security"
+  class="section_anchor"></a>
 </h2>
 <h3>
-<a name="Roles"></a>Roles<a href="#Roles" class="section_anchor"></a>
+  <a name="Roles" id="Roles"></a>Roles<a href="#Roles" class=
+  "section_anchor"></a>
 </h3>
-<p>Method that retrieves database Security Roles, it returns an array of Roles (JSON parsed Object). </p>
-<p>Syntax: <tt>&lt;databaseInstance&gt;.securityRoles()</tt> </p>
-<p>Example: </p>
-<pre class="prettyprint">roles = orientServer.securityRoles();</pre>
-<p>Return Example: </p>
-<pre class="prettyprint">{ "roles": [
+<p>
+  Method that retrieves database Security Roles, it returns an
+  array of Roles (JSON parsed Object).
+</p>
+<p>
+  Syntax: <tt>&lt;databaseInstance&gt;.securityRoles()</tt>
+</p>
+<p>
+  Example:
+</p>
+<pre class="prettyprint">
+roles = orientServer.securityRoles();
+</pre>
+<p>
+  Return Example:
+</p>
+<pre class="prettyprint">
+{ "roles": [
     {"name": "admin", "mode": "ALLOW_ALL_BUT", 
       "rules": []
     }, 
@@ -470,59 +750,143 @@ databaseInfo = orientServer.open('admin','admin');</pre>
         }]
 }
 ]
-}</pre>
+}
+</pre>
 <h3>
-<a name="Users"></a>Users<a href="#Users" class="section_anchor"></a>
+  <a name="Users" id="Users"></a>Users<a href="#Users" class=
+  "section_anchor"></a>
 </h3>
-<p>Method that retrieves database Security Users, it returns an array of Users (JSON parsed Object). </p>
-<p>Syntax: <tt>&lt;databaseInstance&gt;.securityUsers()</tt> </p>
-<p>Example: </p>
-<pre class="prettyprint">users = orientServer.securityUsers();</pre>
-<p>Return Example: </p>
-<pre class="prettyprint">{ "users": [
+<p>
+  Method that retrieves database Security Users, it returns an
+  array of Users (JSON parsed Object).
+</p>
+<p>
+  Syntax: <tt>&lt;databaseInstance&gt;.securityUsers()</tt>
+</p>
+<p>
+  Example:
+</p>
+<pre class="prettyprint">
+users = orientServer.securityUsers();
+</pre>
+<p>
+  Return Example:
+</p>
+<pre class="prettyprint">
+{ "users": [
     {"name": "admin", "roles": "[admin]"}, 
     {"name": "reader", "roles": "[reader]"}, 
     {"name": "writer", "roles": "[writer]"}
   ]
-}</pre>
+}
+</pre>
 <h2>
-<a name="Close"></a>Close<a href="#Close" class="section_anchor"></a>
+  <a name="Close" id="Close"></a>Close<a href="#Close" class=
+  "section_anchor"></a>
 </h2>
-<p>Method that disconnects from the server. </p>
-<p>Syntax: <tt>&lt;databaseInstance&gt;.close()</tt> </p>
-<p>Example: </p>
-<pre class="prettyprint">orientServer.close();</pre>
+<p>
+  Method that disconnects from the server.
+</p>
+<p>
+  Syntax: <tt>&lt;databaseInstance&gt;.close()</tt>
+</p>
+<p>
+  Example:
+</p>
+<pre class="prettyprint">
+orientServer.close();
+</pre>
 <h2>
-<a name="Change_server_URL"></a>Change server URL<a href="#Change_server_URL" class="section_anchor"></a>
+  <a name="Change_server_URL" id="Change_server_URL"></a>Change
+  server URL<a href="#Change_server_URL" class=
+  "section_anchor"></a>
 </h2>
-<p>Method that changes server URL in the database instance.<br> You'll need to call the <a href="#Open">open</a> method to reconnect to the new server. </p>
-<p>Syntax: <tt>&lt;databaseInstance&gt;.setDatabaseUrl(&lt;newDatabaseUrl&gt;)</tt> </p>
-<p>Example: </p>
-<pre class="prettyprint">orientServer.setDatabaseUrl('http://localhost:3040')</pre>
+<p>
+  Method that changes server URL in the database instance.<br>
+  You'll need to call the <a href="#Open">open</a> method to
+  reconnect to the new server.
+</p>
+<p>
+  Syntax:
+  <tt>&lt;databaseInstance&gt;.setDatabaseUrl(&lt;newDatabaseUrl&gt;)</tt>
+</p>
+<p>
+  Example:
+</p>
+<pre class="prettyprint">
+orientServer.setDatabaseUrl('http://localhost:3040')
+</pre>
 <h2>
-<a name="Change_database_name"></a>Change database name<a href="#Change_database_name" class="section_anchor"></a>
+  <a name="Change_database_name" id=
+  "Change_database_name"></a>Change database name<a href=
+  "#Change_database_name" class="section_anchor"></a>
 </h2>
-<p>Method that changes database name in the database instance.<br> You'll need to call the <a href="#Open">open</a> method to reconnect to the new database. </p>
-<p>Syntax: <tt>&lt;databaseInstance&gt;.setDatabaseName(&lt;newDatabaseName&gt;)</tt> </p>
-<p>Example: </p>
-<pre class="prettyprint">orientServer.setDatabaseName('demo2');</pre>
+<p>
+  Method that changes database name in the database instance.<br>
+  You'll need to call the <a href="#Open">open</a> method to
+  reconnect to the new database.
+</p>
+<p>
+  Syntax:
+  <tt>&lt;databaseInstance&gt;.setDatabaseName(&lt;newDatabaseName&gt;)</tt>
+</p>
+<p>
+  Example:
+</p>
+<pre class="prettyprint">
+orientServer.setDatabaseName('demo2');
+</pre>
 <h2>
-<a name="Setting_return_type"></a>Setting return type<a href="#Setting_return_type" class="section_anchor"></a>
+  <a name="Setting_return_type" id=
+  "Setting_return_type"></a>Setting return type<a href=
+  "#Setting_return_type" class="section_anchor"></a>
 </h2>
-<p>This API allows you to chose the return type, Javascript Object or JSON plain text. Default return is Javascript Object. </p>
-<p><strong>Important</strong>: the javascript object is not always the evaluation of JSON plain text: for each document (identified by its Record ID) the JSON file contains only one expanded object, all other references are just its Record ID as String, so the API will reconstruct the real structure by re-linking all references to the matching javascript object. </p>
-<p>Syntax: <tt>orientServer.setEvalResponse(&lt;boolean&gt;)</tt> </p>
-<p>Examples:  </p>
-<pre class="prettyprint">orientServer.setEvalResponse(true);</pre>
-<p>Return types will be Javascript Objects. </p>
-<pre class="prettyprint">orientServer.setEvalResponse(false);</pre>
-<p>Return types will be JSON plain text. </p>
+<p>
+  This API allows you to chose the return type, Javascript Object
+  or JSON plain text. Default return is Javascript Object.
+</p>
+<p>
+  <strong>Important</strong>: the javascript object is not always
+  the evaluation of JSON plain text: for each document (identified
+  by its Record ID) the JSON file contains only one expanded
+  object, all other references are just its Record ID as String, so
+  the API will reconstruct the real structure by re-linking all
+  references to the matching javascript object.
+</p>
+<p>
+  Syntax: <tt>orientServer.setEvalResponse(&lt;boolean&gt;)</tt>
+</p>
+<p>
+  Examples:
+</p>
+<pre class="prettyprint">
+orientServer.setEvalResponse(true);
+</pre>
+<p>
+  Return types will be Javascript Objects.
+</p>
+<pre class="prettyprint">
+orientServer.setEvalResponse(false);
+</pre>
+<p>
+  Return types will be JSON plain text.
+</p>
 <h2>
-<a name="Errors"></a>Errors<a href="#Errors" class="section_anchor"></a>
+  <a name="Errors" id="Errors"></a>Errors<a href="#Errors" class=
+  "section_anchor"></a>
 </h2>
-<p>In case of errors the error message will be stored inside the database instance, retrievable by getErrorMessage() method. </p>
-<p>Syntax: <tt>&lt;databaseInstance&gt;.getErrorMessage()</tt> </p>
-<p>Example: </p>
-<pre class="prettyprint">if (orientServer.getErrorMessage() != null){
+<p>
+  In case of errors the error message will be stored inside the
+  database instance, retrievable by getErrorMessage() method.
+</p>
+<p>
+  Syntax: <tt>&lt;databaseInstance&gt;.getErrorMessage()</tt>
+</p>
+<p>
+  Example:
+</p>
+<pre class="prettyprint">
+if (orientServer.getErrorMessage() != null){
        //write error message
-}</pre>
+}
+</pre>
