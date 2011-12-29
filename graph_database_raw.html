@@ -2,63 +2,158 @@
 title: Native raw implementation
 layout: default
 ---
-
- <p></p>
 <ul>
-<li><a href="#Introduction">Introduction</a></li>
-<ul><li><a href="#Use_the_database_pool">Use the database pool</a></li></ul>
-<li><a href="#First_example">First example</a></li>
-<ul>
-<li><a href="#Create_an_empty_database">Create an empty database</a></li>
-<li><a href="#Create_a_graph_of_1,000_vertexes">Create a graph of 1,000 vertexes</a></li>
-<li><a href="#Browse_the_entire_graph">Browse the entire graph</a></li>
+  <li>
+    <a href="#Introduction">Introduction</a>
+  </li>
+  <li style="list-style: none">
+    <ul>
+      <li>
+        <a href="#Use_the_database_pool">Use the database pool</a>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <a href="#First_example">First example</a>
+  </li>
+  <li style="list-style: none">
+    <ul>
+      <li>
+        <a href="#Create_an_empty_database">Create an empty
+        database</a>
+      </li>
+      <li>
+        <a href="#Create_a_graph_of_1,000_vertexes">Create a graph
+        of 1,000 vertexes</a>
+      </li>
+      <li>
+        <a href="#Browse_the_entire_graph">Browse the entire
+        graph</a>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <a href="#Build_the_graph">Build the graph</a>
+  </li>
+  <li style="list-style: none">
+    <ul>
+      <li>
+        <a href="#Create_vertexes">Create vertexes</a>
+      </li>
+      <li>
+        <a href="#Create_edges">Create edges</a>
+      </li>
+      <li>
+        <a href="#Manage_labels">Manage labels</a>
+      </li>
+      <li>
+        <a href="#Remove_edges">Remove edges</a>
+      </li>
+      <li>
+        <a href="#Delete_vertexes">Delete vertexes</a>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <a href="#Query_vertexes">Query vertexes</a>
+  </li>
+  <li style="list-style: none">
+    <ul>
+      <li>
+        <a href="#Query_targets">Query targets</a>
+      </li>
+      <li>
+        <a href="#Traverse_operator">Traverse operator</a>
+      </li>
+      <li style="list-style: none">
+        <ul>
+          <li>
+            <a href="#Examples">Examples</a>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <a href="#Polymorphism_and_custom_types">Polymorphism and
+    custom types</a>
+  </li>
 </ul>
-<li><a href="#Build_the_graph">Build the graph</a></li>
-<ul>
-<li><a href="#Create_vertexes">Create vertexes</a></li>
-<li><a href="#Create_edges">Create edges</a></li>
-<li><a href="#Manage_labels">Manage labels</a></li>
-<li><a href="#Remove_edges">Remove edges</a></li>
-<li><a href="#Delete_vertexes">Delete vertexes</a></li>
-</ul>
-<li><a href="#Query_vertexes">Query vertexes</a></li>
-<ul>
-<li><a href="#Query_targets">Query targets</a></li>
-<li><a href="#Traverse_operator">Traverse operator</a></li>
-<ul><li><a href="#Examples">Examples</a></li></ul>
-</ul>
-<li><a href="#Polymorphism_and_custom_types">Polymorphism and custom types</a></li>
-</ul><h1>
-<a name="Introduction"></a>Introduction<a href="#Introduction" class="section_anchor"></a>
-</h1>
-<p>OrientDB provides natively the class <a href="http://code.google.com/p/orient/source/browse/trunk/core/src/main/java/com/orientechnologies/orient/core/db/graph/OGraphDatabase.java" rel="nofollow">OGraphDatabase</a> to handle graphs at document level. Furthermore, starting from v. 0.9.22, OrientDB provides an implementation of the <a href="graph_database_tinkerpop.html">Tinkerpop stack</a>. You can use both APIs together. </p>
-<p>Main graph classes: </p>
-<ul><li>
-<a href="http://code.google.com/p/orient/source/browse/trunk/core/src/main/java/com/orientechnologies/orient/core/db/graph/OGraphDatabase.java" rel="nofollow">OGraphDatabase</a>: Main class to handle graphs </li></ul><h2>
-<a name="Use_the_database_pool"></a>Use the database pool<a href="#Use_the_database_pool" class="section_anchor"></a>
+<h2>
+  <a name="Introduction" id="Introduction"></a>Introduction<a href=
+  "#Introduction" class="section_anchor"></a>
 </h2>
-<p>In order to recycle database instance use the OGraphDatabasePool class. Remember to close ALWAYS the database instance when you've finished by using a try/finally block. Example: </p>
-<pre class="prettyprint">database = OGraphDatabasePool.global().acquire("local:/tmp/graphdb", "admin", "admin");
+<p>
+  OrientDB provides natively the class <a href=
+  "http://code.google.com/p/orient/source/browse/trunk/core/src/main/java/com/orientechnologies/orient/core/db/graph/OGraphDatabase.java"
+  rel="nofollow">OGraphDatabase</a> to handle graphs at document
+  level. Furthermore, starting from v. 0.9.22, OrientDB provides an
+  implementation of the <a href=
+  "graph_database_tinkerpop.html">Tinkerpop stack</a>. You can use
+  both APIs together.
+</p>
+<p>
+  Main graph classes:
+</p>
+<ul>
+  <li>
+    <a href=
+    "http://code.google.com/p/orient/source/browse/trunk/core/src/main/java/com/orientechnologies/orient/core/db/graph/OGraphDatabase.java"
+    rel="nofollow">OGraphDatabase</a>: Main class to handle graphs
+  </li>
+</ul>
+<h3>
+  <a name="Use_the_database_pool" id=
+  "Use_the_database_pool"></a>Use the database pool<a href=
+  "#Use_the_database_pool" class="section_anchor"></a>
+</h3>
+<p>
+  In order to recycle database instance use the OGraphDatabasePool
+  class. Remember to close ALWAYS the database instance when you've
+  finished by using a try/finally block. Example:
+</p>
+<pre class="prettyprint">
+database = OGraphDatabasePool.global().acquire("local:/tmp/graphdb", "admin", "admin");
 
 try{
   ...
 } finally{
   database.close();
-}</pre>
-<h1>
-<a name="First_example"></a>First example<a href="#First_example" class="section_anchor"></a>
-</h1>
+}
+</pre>
 <h2>
-<a name="Create_an_empty_database"></a>Create an empty database<a href="#Create_an_empty_database" class="section_anchor"></a>
+  <a name="First_example" id="First_example"></a>First
+  example<a href="#First_example" class="section_anchor"></a>
 </h2>
-<p>Launch the <a href="console_commands.html">console</a> and type: </p>
-<pre class="prettyprint">&gt; create database local:C:/temp/graph/graph admin admin local</pre>
-<p><i>If you're using Linux, MacOsX or any other Operative System change the location of the database to adhere to its file system.</i> </p>
-<h2>
-<a name="Create_a_graph_of_1,000_vertexes"></a>Create a graph of 1,000 vertexes<a href="#Create_a_graph_of_1,000_vertexes" class="section_anchor"></a>
-</h2>
-<p>This example creates a graph of 1,000 vertex. The root node will be bound to the database to get accessed for further uses (such as read). The graph has only one edge, so the deep level is of 1,000! </p>
-<pre class="prettyprint">OGraphDatabase database = new OGraphDatabase("local:C:/temp/graph/graph");
+<h3>
+  <a name="Create_an_empty_database" id=
+  "Create_an_empty_database"></a>Create an empty database<a href=
+  "#Create_an_empty_database" class="section_anchor"></a>
+</h3>
+<p>
+  Launch the <a href="console_commands.html">console</a> and type:
+</p>
+<pre class="prettyprint">
+&gt; create database local:C:/temp/graph/graph admin admin local
+</pre>
+<p>
+  <i>If you're using Linux, MacOsX or any other Operative System
+  change the location of the database to adhere to its file
+  system.</i>
+</p>
+<h3>
+  <a name="Create_a_graph_of_1,000_vertexes"></a>Create a graph of
+  1,000 vertexes<a href="#Create_a_graph_of_1,000_vertexes" class=
+  "section_anchor"></a>
+</h3>
+<p>
+  This example creates a graph of 1,000 vertex. The root node will
+  be bound to the database to get accessed for further uses (such
+  as read). The graph has only one edge, so the deep level is of
+  1,000!
+</p>
+<pre class="prettyprint">
+OGraphDatabase database = new OGraphDatabase("local:C:/temp/graph/graph");
 database.open("admin", "admin");
 
 ODocument rootNode = database.createVertex().field("id", 0);
@@ -71,21 +166,37 @@ for (int i = 1; i &lt; 1000; ++i) {
 }
 database.setRoot("graph", rootNode);
 
-database.close();</pre>
-<p>The main points of the code above are: </p>
+database.close();
+</pre>
+<p>
+  The main points of the code above are:
+</p>
 <ul>
-<li>
-<tt>database.createVertex()</tt>: creates a new vertex. Note vertexes and edges are always ODocument instances </li>
-<li>
-<tt>database.createVertex().field("id", 0)</tt>: set the property "id" to the value 0 to the new created vertex object </li>
-<li>
-<tt>database.createEdge( currentNode, newNode)</tt>: links the current node to the new one. OrientDB creates a new edge between them </li>
-<li>
-<tt>database.setRoot("graph", rootNode)</tt>: set the root vertex as a root node called "graph" </li>
-</ul><h2>
-<a name="Browse_the_entire_graph"></a>Browse the entire graph<a href="#Browse_the_entire_graph" class="section_anchor"></a>
-</h2>
-<pre class="prettyprint">public static void main(String[] args) {
+  <li>
+    <tt>database.createVertex()</tt>: creates a new vertex. Note
+    vertexes and edges are always ODocument instances
+  </li>
+  <li>
+    <tt>database.createVertex().field("id", 0)</tt>: set the
+    property "id" to the value 0 to the new created vertex object
+  </li>
+  <li>
+    <tt>database.createEdge( currentNode, newNode)</tt>: links the
+    current node to the new one. OrientDB creates a new edge
+    between them
+  </li>
+  <li>
+    <tt>database.setRoot("graph", rootNode)</tt>: set the root
+    vertex as a root node called "graph"
+  </li>
+</ul>
+<h3>
+  <a name="Browse_the_entire_graph" id=
+  "Browse_the_entire_graph"></a>Browse the entire graph<a href=
+  "#Browse_the_entire_graph" class="section_anchor"></a>
+</h3>
+<pre class="prettyprint">
+public static void main(String[] args) {
   OGraphDatabase database = new OGraphDatabase("local:C:/temp/graph/graph");
   database.open("admin", "admin");
 
@@ -100,33 +211,61 @@ private void readAllTheGraph(final ODocument iNode) {
   for (ODocument edge: database.getOutEdges(iNode)) {
     readAllTheGraph( database.getInVertex( edge ) );
   }
-}</pre>
-<p>The main points of the code above are: </p>
+}
+</pre>
+<p>
+  The main points of the code above are:
+</p>
 <ul>
-<li>
-<tt>database.getRoot("graph")</tt>: get the root vertex by name ("graph") </li>
-<li>
-<tt>database.getOutEdges(iNode)</tt>: browse all the outgoing edges </li>
-<li>
-<tt>database.getInVertex( edge )</tt>: for each edge returns the incoming vertex </li>
-</ul><h1>
-<a name="Build_the_graph"></a>Build the graph<a href="#Build_the_graph" class="section_anchor"></a>
-</h1>
-<p>To build a graph you have to create vertexes and connect them with edges. </p>
+  <li>
+    <tt>database.getRoot("graph")</tt>: get the root vertex by name
+    ("graph")
+  </li>
+  <li>
+    <tt>database.getOutEdges(iNode)</tt>: browse all the outgoing
+    edges
+  </li>
+  <li>
+    <tt>database.getInVertex( edge )</tt>: for each edge returns
+    the incoming vertex
+  </li>
+</ul>
 <h2>
-<a name="Create_vertexes"></a>Create vertexes<a href="#Create_vertexes" class="section_anchor"></a>
+  <a name="Build_the_graph" id="Build_the_graph"></a>Build the
+  graph<a href="#Build_the_graph" class="section_anchor"></a>
 </h2>
-<p>To create a new vertex: </p>
-<pre class="prettyprint">ODocument vertex = database.createVertex();
+<p>
+  To build a graph you have to create vertexes and connect them
+  with edges.
+</p>
+<h3>
+  <a name="Create_vertexes" id="Create_vertexes"></a>Create
+  vertexes<a href="#Create_vertexes" class="section_anchor"></a>
+</h3>
+<p>
+  To create a new vertex:
+</p>
+<pre class="prettyprint">
+ODocument vertex = database.createVertex();
 vertex.field("type", "TV");
 vertex.field("brand", "Samsung");
-vertex.save();</pre>
-<p>To make the graph elements persistent, remember to call always the save() method against the new vertex. </p>
-<h2>
-<a name="Create_edges"></a>Create edges<a href="#Create_edges" class="section_anchor"></a>
-</h2>
-<p>Use the <tt>database.createEdge( sourceVertex, destinationVertex )</tt> to create a new edge between two vertexes. name of the edge to use. Example: </p>
-<pre class="prettyprint">ODocument vertex1 = database.createVertex();
+vertex.save();
+</pre>
+<p>
+  To make the graph elements persistent, remember to call always
+  the save() method against the new vertex.
+</p>
+<h3>
+  <a name="Create_edges" id="Create_edges"></a>Create edges<a href=
+  "#Create_edges" class="section_anchor"></a>
+</h3>
+<p>
+  Use the <tt>database.createEdge( sourceVertex, destinationVertex
+  )</tt> to create a new edge between two vertexes. name of the
+  edge to use. Example:
+</p>
+<pre class="prettyprint">
+ODocument vertex1 = database.createVertex();
 vertex1.field("name", "Jay");
 vertex1.field("surname", "Miner");
 
@@ -136,97 +275,216 @@ vertex2.field("type", "Computer");
 
 ODocument edge = database.createEdge( vertex1, vertex2 );
 edge.field("on", "1985");
-edge.save();</pre>
-<p>Remember to call the save() method against the new edge or any of the vertexes connected. save() is viral and save recursively all the dirty elements. </p>
-<h2>
-<a name="Manage_labels"></a>Manage labels<a href="#Manage_labels" class="section_anchor"></a>
-</h2>
-<p><a href="http://code.google.com/p/orient/wiki/GraphDatabaseTinkerpop" rel="nofollow">TinkerPop Blueprints</a> model supports the concept of "label". You can label vertexes and edges. In OrientDB a label is just a field as any others. To create an edge with a label you can use: </p>
-<pre class="prettyprint">database.createEdge( vertex1, vertex2 ).field( "label", "ciao" );</pre>
-<p>Or you could use the constant: </p>
-<pre class="prettyprint">database.createEdge( vertex1, vertex2 ).field( OGraphDatabase.LABEL, "ciao" );</pre>
-<h2>
-<a name="Remove_edges"></a>Remove edges<a href="#Remove_edges" class="section_anchor"></a>
-</h2>
-<p>Use the <tt>database.removeEdge( edge )</tt> to remove an edge between two vertexes. </p>
-<h2>
-<a name="Delete_vertexes"></a>Delete vertexes<a href="#Delete_vertexes" class="section_anchor"></a>
-</h2>
-<p>On <tt>database.removeVertex( vertex )</tt> method all the edges are unlinked before to delete the vertex. This assure the graph remains coherent. </p>
-<h1>
-<a name="Query_vertexes"></a>Query vertexes<a href="#Query_vertexes" class="section_anchor"></a>
-</h1>
-<p>OrientDB comes with a powerful query language based on SQL but with several extensions for graphs. </p>
-<h2>
-<a name="Query_targets"></a>Query targets<a href="#Query_targets" class="section_anchor"></a>
-</h2>
-<p>Query can start from one or multiple root nodes. In SQL the queries can have as target only tables. In OrientDB you can use: </p>
-<ul>
-<li>the entire <a href="concepts.html#Class">Class</a> (the closest concept to a Relational Table). Example: <tt>SELECT FROM OGraphVertex WHERE name = 'test'</tt> </li>
-<li>the entire <a href="concepts.html#Cluster">Cluster</a> (the physical place where records reside). Example: <tt>select from cluster:OGraphVertex WHERE outEdges.size() &gt; 0</tt> </li>
-<li>a single <a href="concepts.html#RecordID">RID</a>. Example: <tt>select from 11:4 where any() traverse(0,10) (@class = 'Profile' &amp;&amp; address.city = 'Rome')</tt> </li>
-<li>multiple <a href="concepts.html#RecordID">RID</a>s. Example: <tt>select from [11:0,11:1,11:2] where outEdge.size() &gt; 0</tt> </li>
-</ul><h2>
-<a name="Traverse_operator"></a>Traverse operator<a href="#Traverse_operator" class="section_anchor"></a>
-</h2>
-<p>OrientDB allows to traverse all or part of the graph starting from a set of <strong>Vertexes</strong>. The syntax is: </p>
-<pre class="prettyprint">SELECT FROM &lt;target&gt; WHERE &lt;field&gt; TRAVERSE[(&lt;minDeep&gt; [,&lt;maxDeep&gt; [,&lt;fields&gt;]])] (&lt;conditions&gt;)</pre>
-<p>Where: </p>
-<ul>
-<li>
-<strong>target</strong> can be one of <a href="#Query_target">listed above</a> </li>
-<li>
-<strong>field</strong> can be: </li>
-<ul>
-<li>
-<strong>outEdges</strong>, as the outgoing edges </li>
-<li>
-<strong>inEdges</strong>, as the incoming edges </li>
-<li>
-<strong>any attribute of the vertex</strong> </li>
-<li>
-<strong>any()</strong>, means any of the field considering also <strong>inEdges</strong> and <strong>outEdges</strong> </li>
-<li>
-<strong>all()</strong>, means all the fields considering also <strong>inEdges</strong> and <strong>outEdges</strong> </li>
-</ul>
-<li>
-<strong>minDeep</strong> is the minimum deep level to start to apply the conditions. Usually is 0 for the root vertex or 1 for the just-outgoing vertexes </li>
-<li>
-<strong>maxDeep</strong>, optionally limits the maximum deep level to reach. -1 means infinite. Default is -1 </li>
-<li>
-<strong>fields</strong>, optionally tells the field list to traverse. Default is any() </li>
-<li>
-<strong>conditions</strong> are the conditions to check for any traversed vertex. To know more about the query syntax see <a href="http://code.google.com/p/orient/wiki/SQLWhere" rel="nofollow">SQL syntax</a> </li>
-</ul><h3>
-<a name="Examples"></a>Examples<a href="#Examples" class="section_anchor"></a>
+edge.save();
+</pre>
+<p>
+  Remember to call the save() method against the new edge or any of
+  the vertexes connected. save() is viral and save recursively all
+  the dirty elements.
+</p>
+<h3>
+  <a name="Manage_labels" id="Manage_labels"></a>Manage
+  labels<a href="#Manage_labels" class="section_anchor"></a>
 </h3>
-<p>Returns the record with id "11:4" if traversing all its connections, up to the 10th level, there is a profile that lives in Rome: </p>
-<p><tt>select from 11:4 where any() traverse(0,10) (@class = 'Profile' &amp;&amp; address.city = 'Rome') </tt> </p>
-<h1>
-<a name="Polymorphism_and_custom_types"></a>Polymorphism and custom types<a href="#Polymorphism_and_custom_types" class="section_anchor"></a>
-</h1>
-<p>OrientDB supports the polymorphism with vertex and edges. You can create your own Vertex and Edge types using the Object Oriented paradigm. </p>
-<p>All the vertex types must inherit the <strong>OGraphVertex</strong> at the highest point of the inheritance chain. The same is for edge types but the class to inherit is <strong>OGraphEdge</strong>. When you extends classes (or types, is the same concepts) you inherit all the fields and constraints of the extended class. Furthermore you can use the OrientDB query engine to execute polymorphic queries (see later). </p>
-<p>Example of class inheritance schema: </p>
-<pre class="prettyprint">           OGraphVertex
+<p>
+  <a href=
+  "http://code.google.com/p/orient/wiki/GraphDatabaseTinkerpop"
+  rel="nofollow">TinkerPop Blueprints</a> model supports the
+  concept of "label". You can label vertexes and edges. In OrientDB
+  a label is just a field as any others. To create an edge with a
+  label you can use:
+</p>
+<pre class="prettyprint">
+database.createEdge( vertex1, vertex2 ).field( "label", "ciao" );
+</pre>
+<p>
+  Or you could use the constant:
+</p>
+<pre class="prettyprint">
+database.createEdge( vertex1, vertex2 ).field( OGraphDatabase.LABEL, "ciao" );
+</pre>
+<h3>
+  <a name="Remove_edges" id="Remove_edges"></a>Remove edges<a href=
+  "#Remove_edges" class="section_anchor"></a>
+</h3>
+<p>
+  Use the <tt>database.removeEdge( edge )</tt> to remove an edge
+  between two vertexes.
+</p>
+<h3>
+  <a name="Delete_vertexes" id="Delete_vertexes"></a>Delete
+  vertexes<a href="#Delete_vertexes" class="section_anchor"></a>
+</h3>
+<p>
+  On <tt>database.removeVertex( vertex )</tt> method all the edges
+  are unlinked before to delete the vertex. This assure the graph
+  remains coherent.
+</p>
+<h2>
+  <a name="Query_vertexes" id="Query_vertexes"></a>Query
+  vertexes<a href="#Query_vertexes" class="section_anchor"></a>
+</h2>
+<p>
+  OrientDB comes with a powerful query language based on SQL but
+  with several extensions for graphs.
+</p>
+<h3>
+  <a name="Query_targets" id="Query_targets"></a>Query
+  targets<a href="#Query_targets" class="section_anchor"></a>
+</h3>
+<p>
+  Query can start from one or multiple root nodes. In SQL the
+  queries can have as target only tables. In OrientDB you can use:
+</p>
+<ul>
+  <li>the entire <a href="concepts.html#Class">Class</a> (the
+  closest concept to a Relational Table). Example: <tt>SELECT FROM
+  OGraphVertex WHERE name = 'test'</tt>
+  </li>
+  <li>the entire <a href="concepts.html#Cluster">Cluster</a> (the
+  physical place where records reside). Example: <tt>select from
+  cluster:OGraphVertex WHERE outEdges.size() &gt; 0</tt>
+  </li>
+  <li>a single <a href="concepts.html#RecordID">RID</a>. Example:
+  <tt>select from 11:4 where any() traverse(0,10) (@class =
+  'Profile' &amp;&amp; address.city = 'Rome')</tt>
+  </li>
+  <li>multiple <a href="concepts.html#RecordID">RID</a>s. Example:
+  <tt>select from [11:0,11:1,11:2] where outEdge.size() &gt; 0</tt>
+  </li>
+</ul>
+<h3>
+  <a name="Traverse_operator" id="Traverse_operator"></a>Traverse
+  operator<a href="#Traverse_operator" class="section_anchor"></a>
+</h3>
+<p>
+  OrientDB allows to traverse all or part of the graph starting
+  from a set of <strong>Vertexes</strong>. The syntax is:
+</p>
+<pre class="prettyprint">
+SELECT FROM &lt;target&gt; WHERE &lt;field&gt; TRAVERSE[(&lt;minDeep&gt; [,&lt;maxDeep&gt; [,&lt;fields&gt;]])] (&lt;conditions&gt;)
+</pre>
+<p>
+  Where:
+</p>
+<ul>
+  <li>
+    <strong>target</strong> can be one of <a href=
+    "#Query_target">listed above</a>
+  </li>
+  <li>
+    <strong>field</strong> can be:
+  </li>
+  <li style="list-style: none">
+    <ul>
+      <li>
+        <strong>outEdges</strong>, as the outgoing edges
+      </li>
+      <li>
+        <strong>inEdges</strong>, as the incoming edges
+      </li>
+      <li>
+        <strong>any attribute of the vertex</strong>
+      </li>
+      <li>
+        <strong>any()</strong>, means any of the field considering
+        also <strong>inEdges</strong> and <strong>outEdges</strong>
+      </li>
+      <li>
+        <strong>all()</strong>, means all the fields considering
+        also <strong>inEdges</strong> and <strong>outEdges</strong>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <strong>minDeep</strong> is the minimum deep level to start to
+    apply the conditions. Usually is 0 for the root vertex or 1 for
+    the just-outgoing vertexes
+  </li>
+  <li>
+    <strong>maxDeep</strong>, optionally limits the maximum deep
+    level to reach. -1 means infinite. Default is -1
+  </li>
+  <li>
+    <strong>fields</strong>, optionally tells the field list to
+    traverse. Default is any()
+  </li>
+  <li>
+    <strong>conditions</strong> are the conditions to check for any
+    traversed vertex. To know more about the query syntax see
+    <a href="http://code.google.com/p/orient/wiki/SQLWhere" rel=
+    "nofollow">SQL syntax</a>
+  </li>
+</ul>
+<h4>
+  <a name="Examples" id="Examples"></a>Examples<a href="#Examples"
+  class="section_anchor"></a>
+</h4>
+<p>
+  Returns the record with id "11:4" if traversing all its
+  connections, up to the 10th level, there is a profile that lives
+  in Rome:
+</p>
+<p>
+  <tt>select from 11:4 where any() traverse(0,10) (@class =
+  'Profile' &amp;&amp; address.city = 'Rome')</tt>
+</p>
+<h2>
+  <a name="Polymorphism_and_custom_types" id=
+  "Polymorphism_and_custom_types"></a>Polymorphism and custom
+  types<a href="#Polymorphism_and_custom_types" class=
+  "section_anchor"></a>
+</h2>
+<p>
+  OrientDB supports the polymorphism with vertex and edges. You can
+  create your own Vertex and Edge types using the Object Oriented
+  paradigm.
+</p>
+<p>
+  All the vertex types must inherit the
+  <strong>OGraphVertex</strong> at the highest point of the
+  inheritance chain. The same is for edge types but the class to
+  inherit is <strong>OGraphEdge</strong>. When you extends classes
+  (or types, is the same concepts) you inherit all the fields and
+  constraints of the extended class. Furthermore you can use the
+  OrientDB query engine to execute polymorphic queries (see later).
+</p>
+<p>
+  Example of class inheritance schema:
+</p>
+<pre class="prettyprint">
+           OGraphVertex
                 |
              Vehicle
                 |
                / \
               /   \
-            Car  Motocycle</pre>
-<p>This is the simple code that creates the classes: </p>
-<pre class="prettyprint">OClass vehicleClass = database.createVertexType("GraphVehicle");
+            Car  Motocycle
+</pre>
+<p>
+  This is the simple code that creates the classes:
+</p>
+<pre class="prettyprint">
+OClass vehicleClass = database.createVertexType("GraphVehicle");
 database.createVertexType("GraphCar", vehicleClass );
-database.createVertexType("GraphMotocycle", vehicleClass );</pre>
-<p>Create vertexes of custom type: </p>
-<pre class="prettyprint">  ODocument carNode = database.createVertex("GraphCar").field("brand", "Hyundai").field("model", "Coupe").field("year", 2003).save();
-  ODocument motoNode = database.createVertex("GraphMotocycle").field("brand", "Yamaha").field("model", "X-City 250").field("year", 2009).save();</pre>
-<p>Execute polymorphic queries against custom types: </p>
-<pre class="prettyprint">  List&lt;ODocument&gt; result = database.query(new OSQLSynchQuery&lt;ODocument&gt;("select from GraphVehicle"));
+database.createVertexType("GraphMotocycle", vehicleClass );
+</pre>
+<p>
+  Create vertexes of custom type:
+</p>
+<pre class="prettyprint">
+  ODocument carNode = database.createVertex("GraphCar").field("brand", "Hyundai").field("model", "Coupe").field("year", 2003).save();
+  ODocument motoNode = database.createVertex("GraphMotocycle").field("brand", "Yamaha").field("model", "X-City 250").field("year", 2009).save();
+</pre>
+<p>
+  Execute polymorphic queries against custom types:
+</p>
+<pre class="prettyprint">
+  List&lt;ODocument&gt; result = database.query(new OSQLSynchQuery&lt;ODocument&gt;("select from GraphVehicle"));
   Assert.assertEquals(result.size(), 2);
   for (ODocument v : result) {
     Assert.assertTrue(v.getSchemaClass().isSubClassOf(vehicleClass));
   }
 
-  database.close();</pre>
+  database.close();
+</pre>

@@ -8,9 +8,13 @@ body {
 .container > footer p {
   text-align: center; /* center align it with the container */
 }
+/*
 .container {
-  width: 820px; /* downsize our container to make the content feel a bit tighter and more cohesive. NOTE: this removes two full columns from the grid, meaning you only go to 14 columns and not 16. */
+  width: 820px; */
+/* downsize our container to make the content feel a bit tighter and more cohesive. NOTE: this removes two full columns from the grid, meaning you only go to 14 columns and not 16. *//*
+
 }
+*/
 
 /* The white background content wrapper */
 .content {
@@ -18,11 +22,11 @@ body {
   padding: 20px;
   margin: 0 -20px; /* negative indent the amount of the padding to maintain the grid system */
   -webkit-border-radius: 0 0 6px 6px;
-     -moz-border-radius: 0 0 6px 6px;
-          border-radius: 0 0 6px 6px;
-  -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.15);
-     -moz-box-shadow: 0 1px 2px rgba(0,0,0,.15);
-          box-shadow: 0 1px 2px rgba(0,0,0,.15);
+  -moz-border-radius: 0 0 6px 6px;
+  border-radius: 0 0 6px 6px;
+  -webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, .15);
+  -moz-box-shadow: 0 1px 2px rgba(0, 0, 0, .15);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, .15);
 }
 
 /* Page header tweaks */
@@ -52,35 +56,39 @@ body {
 
 /* Topbar Logo */
 div.topbar a.brand {
-  background:url("../images/orient_db_topbar.png") 20px 0;
-  background-repeat:no-repeat;
-  width:96px;
-  height:41px;
+  background: url("../images/orient_db_topbar.png") 20px 0;
+  background-repeat: no-repeat;
+  width: 96px;
+  height: 41px;
   padding-bottom: 0;
   padding-top: 0;
 }
 div.topbar a.brand span {
-  display:none;
+  display: none;
 }
 /* Home */
 #home-title-row {
   height: 220px;
   margin-bottom: 14px;
 }
-#home-title-row div {
-  float: right;
-  width: 600px;
+#home-title-row h1 {
+  background: url("../images/orient_db.png") 0 0;
+  background-repeat: no-repeat;
+  width: 540px;
+  height: 110px;
+  margin-bottom: 3px;
 }
-#home-title-row div h1 {
-  background:url("../images/orient_db.png") 0 0;
-  background-repeat:no-repeat;
-  width:540px;
-  height:110px;
-}
-#home-title-row div h1 span{
+#home-title-row h1 span {
   display: none;
 }
-
-#logo_sun {
-	float: left;
+#home-title-row h2 {
+  margin-left: 9px;
 }
+#home-title-row ul {
+  margin-top: 3px;
+  margin-bottom: 12px;
+}
+#home-title-row li {
+  color: #404040;
+}
+

@@ -2,8 +2,8 @@
 title: Syntax
 layout: default
 ---
-
- <pre class="prettyprint">DOCUMENT START
+<pre class="prettyprint">
+DOCUMENT START
 TOKENS
 &lt;DEFAULT&gt; SKIP : {
 " "
@@ -128,107 +128,108 @@ TOKENS
 }
 
 NON-TERMINALS
-	Rid	:=	"#" &lt;INTEGER_LITERAL&gt; &lt;COLON&gt; &lt;INTEGER_LITERAL&gt;
-		|	&lt;INTEGER_LITERAL&gt; &lt;COLON&gt; &lt;INTEGER_LITERAL&gt;
-/** Root production. */	OrientGrammar	:=	Statement &lt;EOF&gt;
-	Statement	:=	( SelectStatement | DeleteStatement | InsertStatement | UpdateStatement )
-	SelectStatement	:=	&lt;SELECT&gt; ( Projection )? &lt;FROM&gt; FromClause ( &lt;WHERE&gt; WhereClause )? ( OrderBy )? ( Limit )? ( Range )?
-	DeleteStatement	:=	&lt;DELETE&gt; &lt;FROM&gt; &lt;IDENTIFIER&gt; ( &lt;WHERE&gt; WhereClause )?
-	UpdateStatement	:=	&lt;UPDATE&gt; ( &lt;IDENTIFIER&gt; | Cluster | IndexIdentifier ) ( ( &lt;SET&gt; UpdateItem ( "," UpdateItem )* ) ) ( &lt;WHERE&gt; WhereClause )?
-	UpdateItem	:=	&lt;IDENTIFIER&gt; &lt;EQ&gt; ( &lt;NULL&gt; | &lt;STRING_LITERAL&gt; | Rid | &lt;INTEGER_LITERAL&gt; | &lt;FLOATING_POINT_LITERAL&gt; | &lt;CHARACTER_LITERAL&gt; | &lt;LBRACKET&gt; Rid ( "," Rid )* &lt;RBRACKET&gt; )
-	UpdateAddItem	:=	&lt;IDENTIFIER&gt; &lt;EQ&gt; ( &lt;STRING_LITERAL&gt; | Rid | &lt;INTEGER_LITERAL&gt; | &lt;FLOATING_POINT_LITERAL&gt; | &lt;CHARACTER_LITERAL&gt; | &lt;LBRACKET&gt; Rid ( "," Rid )* &lt;RBRACKET&gt; )
-	InsertStatement	:=	&lt;INSERT&gt; &lt;INTO&gt; ( &lt;IDENTIFIER&gt; | Cluster ) &lt;LPAREN&gt; &lt;IDENTIFIER&gt; ( "," &lt;IDENTIFIER&gt; ) &lt;RPAREN&gt; &lt;VALUES&gt; &lt;LPAREN&gt; InsertExpression ( "," InsertExpression ) &lt;RPAREN&gt;
-	InsertExpression	:=	&lt;NULL&gt;
-		|	&lt;STRING_LITERAL&gt;
-		|	&lt;INTEGER_LITERAL&gt;
-		|	&lt;FLOATING_POINT_LITERAL&gt;
-		|	Rid
-		|	&lt;CHARACTER_LITERAL&gt;
-		|	&lt;LBRACKET&gt; Rid ( "," Rid )* &lt;RBRACKET&gt;
-	InputParameter	:=	"?"
-	Projection	:=	ProjectionItem ( "," ProjectionItem )*
-	ProjectionItem	:=	"*"
-		|	( ( &lt;NULL&gt; | &lt;INTEGER_LITERAL&gt; | &lt;STRING_LITERAL&gt; | &lt;FLOATING_POINT_LITERAL&gt; | &lt;CHARACTER_LITERAL&gt; | FunctionCall | DottedIdentifier | RecordAttribute | ThisOperation | InputParameter ) ( &lt;AS&gt; Alias )? )
-	FilterItem	:=	&lt;NULL&gt;
-		|	Any
-		|	All
-		|	&lt;INTEGER_LITERAL&gt;
-		|	&lt;STRING_LITERAL&gt;
-		|	&lt;FLOATING_POINT_LITERAL&gt;
-		|	&lt;CHARACTER_LITERAL&gt;
-		|	FunctionCall
-		|	DottedIdentifier
-		|	RecordAttribute
-		|	ThisOperation
-		|	InputParameter
-	Alias	:=	&lt;IDENTIFIER&gt;
-	Any	:=	"any()"
-	All	:=	"all()"
-	RecordAttribute	:=	&lt;RECORD_ATTRIBUTE&gt;
-	ThisOperation	:=	&lt;THIS&gt; ( FieldOperator )*
-	FunctionCall	:=	&lt;IDENTIFIER&gt; &lt;LPAREN&gt; ( "*" | ( FilterItem ( "," FilterItem )* ) ) &lt;RPAREN&gt; ( FieldOperator )*
-	FieldOperator	:=	( &lt;DOT&gt; &lt;IDENTIFIER&gt; &lt;LPAREN&gt; ( FilterItem ( "," FilterItem )* )? &lt;RPAREN&gt; )
-		|	( "[" &lt;STRING_LITERAL&gt; "]" )
-	DottedIdentifier	:=	&lt;IDENTIFIER&gt; ( "[" WhereClause "]" )+
-		|	&lt;IDENTIFIER&gt; ( FieldOperator )+
-		|	&lt;IDENTIFIER&gt; ( &lt;DOT&gt; DottedIdentifier )?
-	FromClause	:=	FromItem
-	FromItem	:=	Rid
-		|	&lt;LBRACKET&gt; Rid ( "," Rid )* &lt;RBRACKET&gt;
-		|	Cluster
-		|	IndexIdentifier
-		|	&lt;IDENTIFIER&gt;
-	Cluster	:=	"cluster:" &lt;IDENTIFIER&gt;
-	IndexIdentifier	:=	"index:" &lt;IDENTIFIER&gt;
-	WhereClause	:=	OrBlock
-	OrBlock	:=	AndBlock ( &lt;OR&gt; AndBlock )*
-	AndBlock	:=	( NotBlock ) ( &lt;AND&gt; ( NotBlock ) )*
-	NotBlock	:=	( &lt;NOT&gt; )? ( ConditionBlock | ParenthesisBlock )
-	ParenthesisBlock	:=	&lt;LPAREN&gt; OrBlock &lt;RPAREN&gt;
-	ConditionBlock	:=	TraverseCondition
-		|	IsNotNullCondition
-		|	IsNullCondition
-		|	BinaryCondition
-		|	BetweenCondition
-		|	ContainsCondition
-		|	ContainsTextCondition
-		|	MatchesCondition
-	CompareOperator	:=	EqualsCompareOperator
-		|	LtOperator
-		|	GtOperator
-		|	NeOperator
-		|	NeqOperator
-		|	GeOperator
-		|	LeOperator
-		|	InOperator
-		|	NotInOperator
-		|	LikeOperator
-		|	ContainsKeyOperator
-		|	ContainsValueOperator
-	LtOperator	:=	&lt;LT&gt;
-	GtOperator	:=	&lt;GT&gt;
-	NeOperator	:=	&lt;NE&gt;
-	NeqOperator	:=	&lt;NEQ&gt;
-	GeOperator	:=	&lt;GE&gt;
-	LeOperator	:=	&lt;LE&gt;
-	InOperator	:=	&lt;IN&gt;
-	NotInOperator	:=	&lt;NOT&gt; &lt;IN&gt;
-	LikeOperator	:=	&lt;LIKE&gt;
-	ContainsKeyOperator	:=	&lt;CONTAINSKEY&gt;
-	ContainsValueOperator	:=	&lt;CONTAINSVALUE&gt;
-	EqualsCompareOperator	:=	&lt;EQ&gt;
-	BinaryCondition	:=	FilterItem CompareOperator ( Rid | FilterItem )
-	BetweenCondition	:=	FilterItem &lt;BETWEEN&gt; FilterItem &lt;AND&gt; FilterItem
-	IsNullCondition	:=	FilterItem &lt;IS&gt; &lt;NULL&gt;
-	IsNotNullCondition	:=	FilterItem &lt;IS&gt; &lt;NOT&gt; &lt;NULL&gt;
-	ContainsCondition	:=	FilterItem &lt;CONTAINS&gt; &lt;LPAREN&gt; OrBlock &lt;RPAREN&gt;
-	ContainsAllCondition	:=	FilterItem &lt;CONTAINSALL&gt; &lt;LPAREN&gt; OrBlock &lt;RPAREN&gt;
-	ContainsTextCondition	:=	FilterItem &lt;CONTAINSTEXT&gt; ( &lt;STRING_LITERAL&gt; | DottedIdentifier )
-	MatchesCondition	:=	FilterItem &lt;MATCHES&gt; &lt;STRING_LITERAL&gt;
-	TraverseCondition	:=	&lt;TRAVERSE&gt; ( &lt;LPAREN&gt; &lt;INTEGER_LITERAL&gt; ( "," &lt;INTEGER_LITERAL&gt; ( "," TraverseFields )? )? &lt;RPAREN&gt; )? &lt;LPAREN&gt; OrBlock &lt;RPAREN&gt;
-	TraverseFields	:=	&lt;STRING_LITERAL&gt;
-	OrderBy	:=	&lt;ORDER&gt; &lt;BY&gt; &lt;IDENTIFIER&gt; ( "," &lt;IDENTIFIER&gt; )* ( &lt;DESC&gt; | &lt;ASC&gt; )?
-	Limit	:=	&lt;LIMIT&gt; &lt;INTEGER_LITERAL&gt;
-	Range	:=	&lt;RANGE&gt; Rid ( "," Rid )?
+        Rid     :=      "#" &lt;INTEGER_LITERAL&gt; &lt;COLON&gt; &lt;INTEGER_LITERAL&gt;
+                |       &lt;INTEGER_LITERAL&gt; &lt;COLON&gt; &lt;INTEGER_LITERAL&gt;
+/** Root production. */ OrientGrammar   :=      Statement &lt;EOF&gt;
+        Statement       :=      ( SelectStatement | DeleteStatement | InsertStatement | UpdateStatement )
+        SelectStatement :=      &lt;SELECT&gt; ( Projection )? &lt;FROM&gt; FromClause ( &lt;WHERE&gt; WhereClause )? ( OrderBy )? ( Limit )? ( Range )?
+        DeleteStatement :=      &lt;DELETE&gt; &lt;FROM&gt; &lt;IDENTIFIER&gt; ( &lt;WHERE&gt; WhereClause )?
+        UpdateStatement :=      &lt;UPDATE&gt; ( &lt;IDENTIFIER&gt; | Cluster | IndexIdentifier ) ( ( &lt;SET&gt; UpdateItem ( "," UpdateItem )* ) ) ( &lt;WHERE&gt; WhereClause )?
+        UpdateItem      :=      &lt;IDENTIFIER&gt; &lt;EQ&gt; ( &lt;NULL&gt; | &lt;STRING_LITERAL&gt; | Rid | &lt;INTEGER_LITERAL&gt; | &lt;FLOATING_POINT_LITERAL&gt; | &lt;CHARACTER_LITERAL&gt; | &lt;LBRACKET&gt; Rid ( "," Rid )* &lt;RBRACKET&gt; )
+        UpdateAddItem   :=      &lt;IDENTIFIER&gt; &lt;EQ&gt; ( &lt;STRING_LITERAL&gt; | Rid | &lt;INTEGER_LITERAL&gt; | &lt;FLOATING_POINT_LITERAL&gt; | &lt;CHARACTER_LITERAL&gt; | &lt;LBRACKET&gt; Rid ( "," Rid )* &lt;RBRACKET&gt; )
+        InsertStatement :=      &lt;INSERT&gt; &lt;INTO&gt; ( &lt;IDENTIFIER&gt; | Cluster ) &lt;LPAREN&gt; &lt;IDENTIFIER&gt; ( "," &lt;IDENTIFIER&gt; ) &lt;RPAREN&gt; &lt;VALUES&gt; &lt;LPAREN&gt; InsertExpression ( "," InsertExpression ) &lt;RPAREN&gt;
+        InsertExpression        :=      &lt;NULL&gt;
+                |       &lt;STRING_LITERAL&gt;
+                |       &lt;INTEGER_LITERAL&gt;
+                |       &lt;FLOATING_POINT_LITERAL&gt;
+                |       Rid
+                |       &lt;CHARACTER_LITERAL&gt;
+                |       &lt;LBRACKET&gt; Rid ( "," Rid )* &lt;RBRACKET&gt;
+        InputParameter  :=      "?"
+        Projection      :=      ProjectionItem ( "," ProjectionItem )*
+        ProjectionItem  :=      "*"
+                |       ( ( &lt;NULL&gt; | &lt;INTEGER_LITERAL&gt; | &lt;STRING_LITERAL&gt; | &lt;FLOATING_POINT_LITERAL&gt; | &lt;CHARACTER_LITERAL&gt; | FunctionCall | DottedIdentifier | RecordAttribute | ThisOperation | InputParameter ) ( &lt;AS&gt; Alias )? )
+        FilterItem      :=      &lt;NULL&gt;
+                |       Any
+                |       All
+                |       &lt;INTEGER_LITERAL&gt;
+                |       &lt;STRING_LITERAL&gt;
+                |       &lt;FLOATING_POINT_LITERAL&gt;
+                |       &lt;CHARACTER_LITERAL&gt;
+                |       FunctionCall
+                |       DottedIdentifier
+                |       RecordAttribute
+                |       ThisOperation
+                |       InputParameter
+        Alias   :=      &lt;IDENTIFIER&gt;
+        Any     :=      "any()"
+        All     :=      "all()"
+        RecordAttribute :=      &lt;RECORD_ATTRIBUTE&gt;
+        ThisOperation   :=      &lt;THIS&gt; ( FieldOperator )*
+        FunctionCall    :=      &lt;IDENTIFIER&gt; &lt;LPAREN&gt; ( "*" | ( FilterItem ( "," FilterItem )* ) ) &lt;RPAREN&gt; ( FieldOperator )*
+        FieldOperator   :=      ( &lt;DOT&gt; &lt;IDENTIFIER&gt; &lt;LPAREN&gt; ( FilterItem ( "," FilterItem )* )? &lt;RPAREN&gt; )
+                |       ( "[" &lt;STRING_LITERAL&gt; "]" )
+        DottedIdentifier        :=      &lt;IDENTIFIER&gt; ( "[" WhereClause "]" )+
+                |       &lt;IDENTIFIER&gt; ( FieldOperator )+
+                |       &lt;IDENTIFIER&gt; ( &lt;DOT&gt; DottedIdentifier )?
+        FromClause      :=      FromItem
+        FromItem        :=      Rid
+                |       &lt;LBRACKET&gt; Rid ( "," Rid )* &lt;RBRACKET&gt;
+                |       Cluster
+                |       IndexIdentifier
+                |       &lt;IDENTIFIER&gt;
+        Cluster :=      "cluster:" &lt;IDENTIFIER&gt;
+        IndexIdentifier :=      "index:" &lt;IDENTIFIER&gt;
+        WhereClause     :=      OrBlock
+        OrBlock :=      AndBlock ( &lt;OR&gt; AndBlock )*
+        AndBlock        :=      ( NotBlock ) ( &lt;AND&gt; ( NotBlock ) )*
+        NotBlock        :=      ( &lt;NOT&gt; )? ( ConditionBlock | ParenthesisBlock )
+        ParenthesisBlock        :=      &lt;LPAREN&gt; OrBlock &lt;RPAREN&gt;
+        ConditionBlock  :=      TraverseCondition
+                |       IsNotNullCondition
+                |       IsNullCondition
+                |       BinaryCondition
+                |       BetweenCondition
+                |       ContainsCondition
+                |       ContainsTextCondition
+                |       MatchesCondition
+        CompareOperator :=      EqualsCompareOperator
+                |       LtOperator
+                |       GtOperator
+                |       NeOperator
+                |       NeqOperator
+                |       GeOperator
+                |       LeOperator
+                |       InOperator
+                |       NotInOperator
+                |       LikeOperator
+                |       ContainsKeyOperator
+                |       ContainsValueOperator
+        LtOperator      :=      &lt;LT&gt;
+        GtOperator      :=      &lt;GT&gt;
+        NeOperator      :=      &lt;NE&gt;
+        NeqOperator     :=      &lt;NEQ&gt;
+        GeOperator      :=      &lt;GE&gt;
+        LeOperator      :=      &lt;LE&gt;
+        InOperator      :=      &lt;IN&gt;
+        NotInOperator   :=      &lt;NOT&gt; &lt;IN&gt;
+        LikeOperator    :=      &lt;LIKE&gt;
+        ContainsKeyOperator     :=      &lt;CONTAINSKEY&gt;
+        ContainsValueOperator   :=      &lt;CONTAINSVALUE&gt;
+        EqualsCompareOperator   :=      &lt;EQ&gt;
+        BinaryCondition :=      FilterItem CompareOperator ( Rid | FilterItem )
+        BetweenCondition        :=      FilterItem &lt;BETWEEN&gt; FilterItem &lt;AND&gt; FilterItem
+        IsNullCondition :=      FilterItem &lt;IS&gt; &lt;NULL&gt;
+        IsNotNullCondition      :=      FilterItem &lt;IS&gt; &lt;NOT&gt; &lt;NULL&gt;
+        ContainsCondition       :=      FilterItem &lt;CONTAINS&gt; &lt;LPAREN&gt; OrBlock &lt;RPAREN&gt;
+        ContainsAllCondition    :=      FilterItem &lt;CONTAINSALL&gt; &lt;LPAREN&gt; OrBlock &lt;RPAREN&gt;
+        ContainsTextCondition   :=      FilterItem &lt;CONTAINSTEXT&gt; ( &lt;STRING_LITERAL&gt; | DottedIdentifier )
+        MatchesCondition        :=      FilterItem &lt;MATCHES&gt; &lt;STRING_LITERAL&gt;
+        TraverseCondition       :=      &lt;TRAVERSE&gt; ( &lt;LPAREN&gt; &lt;INTEGER_LITERAL&gt; ( "," &lt;INTEGER_LITERAL&gt; ( "," TraverseFields )? )? &lt;RPAREN&gt; )? &lt;LPAREN&gt; OrBlock &lt;RPAREN&gt;
+        TraverseFields  :=      &lt;STRING_LITERAL&gt;
+        OrderBy :=      &lt;ORDER&gt; &lt;BY&gt; &lt;IDENTIFIER&gt; ( "," &lt;IDENTIFIER&gt; )* ( &lt;DESC&gt; | &lt;ASC&gt; )?
+        Limit   :=      &lt;LIMIT&gt; &lt;INTEGER_LITERAL&gt;
+        Range   :=      &lt;RANGE&gt; Rid ( "," Rid )?
 
-DOCUMENT END</pre>
+DOCUMENT END
+</pre>

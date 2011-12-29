@@ -2,32 +2,71 @@
 title: Create Class
 layout: default
 ---
-
- <h1>
-<a name="Create_Class"></a>Create Class<a href="#Create_Class" class="section_anchor"></a>
-</h1>
-<p>The <strong>SQL Create Class</strong> command creates a new class in the schema. <i>NOTE: If a cluster with the same name exists in the database will be used as default cluster.</i> </p>
 <h2>
-<a name="Syntax"></a>Syntax<a href="#Syntax" class="section_anchor"></a>
+  <a name="Create_Class" id="Create_Class"></a>Create Class<a href=
+  "#Create_Class" class="section_anchor"></a>
 </h2>
-<p><tt>CREATE CLASS &lt;class&gt; [EXTENDS &lt;super-class&gt;] [CLUSTER &lt;clusterId&gt;*]</tt> </p>
-<p>Where: </p>
+<p>
+  The <strong>SQL Create Class</strong> command creates a new class
+  in the schema. <i>NOTE: If a cluster with the same name exists in
+  the database will be used as default cluster.</i>
+</p>
+<h3>
+  <a name="Syntax" id="Syntax"></a>Syntax<a href="#Syntax" class=
+  "section_anchor"></a>
+</h3>
+<p>
+  <tt>CREATE CLASS &lt;class&gt; [EXTENDS &lt;super-class&gt;]
+  [CLUSTER &lt;clusterId&gt;*]</tt>
+</p>
+<p>
+  Where:
+</p>
 <ul>
-<li>
-<strong>class</strong> is the class to create </li>
-<li>
-<strong>super-class</strong>, optional, is the super-class to extend </li>
-<li>
-<strong>clusterId</strong> can be a list separated by comma (,). At least one element is mandatory and it's also the default cluster id </li>
-</ul><h2>
-<a name="Examples"></a>Examples<a href="#Examples" class="section_anchor"></a>
-</h2>
-<p>Create the class 'Account': </p>
-<p><tt>CREATE CLASS Account</tt> </p>
-<p>Create the class 'Car' that extends 'Vehicle': </p>
-<p><tt>CREATE CLASS Car extends Vehicle</tt> </p>
-<p>Create the class 'Car' with clusterId 10: </p>
-<p><tt>CREATE CLASS Car CLUSTER 10</tt> </p>
-<p>To remove a class use the <a href="sql_remove_class.html">Drop Class</a> command. </p>
-<p>To know more about other SQL commands look at <a href="sql.html">SQL commands</a>. </p>
-<p>This is a command of the Orient console. To know all the commands go to <a href="console_commands.html">Console commands</a>. </p>
+  <li>
+    <strong>class</strong> is the class to create
+  </li>
+  <li>
+    <strong>super-class</strong>, optional, is the super-class to
+    extend
+  </li>
+  <li>
+    <strong>clusterId</strong> can be a list separated by comma
+    (,). At least one element is mandatory and it's also the
+    default cluster id
+  </li>
+</ul>
+<h3>
+  <a name="Examples" id="Examples"></a>Examples<a href="#Examples"
+  class="section_anchor"></a>
+</h3>
+<p>
+  Create the class 'Account':
+</p>
+<p>
+  <tt>CREATE CLASS Account</tt>
+</p>
+<p>
+  Create the class 'Car' that extends 'Vehicle':
+</p>
+<p>
+  <tt>CREATE CLASS Car extends Vehicle</tt>
+</p>
+<p>
+  Create the class 'Car' with clusterId 10:
+</p>
+<p>
+  <tt>CREATE CLASS Car CLUSTER 10</tt>
+</p>
+<p>
+  To remove a class use the <a href="sql_remove_class.html">Drop
+  Class</a> command.
+</p>
+<p>
+  To know more about other SQL commands look at <a href=
+  "sql.html">SQL commands</a>.
+</p>
+<p>
+  This is a command of the Orient console. To know all the commands
+  go to <a href="console_commands.html">Console commands</a>.
+</p>

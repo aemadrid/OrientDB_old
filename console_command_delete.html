@@ -2,20 +2,35 @@
 title: delete
 layout: default
 ---
-
- <h1>
-<a name="Delete"></a>Delete<a href="#Delete" class="section_anchor"></a>
-</h1>
-<p>Delete one or more records from the current database. </p>
 <h2>
-<a name="Syntax"></a>Syntax<a href="#Syntax" class="section_anchor"></a>
+  <a name="Delete" id="Delete"></a>Delete<a href="#Delete" class=
+  "section_anchor"></a>
 </h2>
-<p><tt>delete from &lt;class|cluster:&lt;cluster&gt;&gt; [where &lt;conditions&gt;]</tt> </p>
-<h2>
-<a name="Example"></a>Example<a href="#Example" class="section_anchor"></a>
-</h2>
-<pre class="prettyprint">&gt; delete from Profile where nick is null
+<p>
+  Delete one or more records from the current database.
+</p>
+<h3>
+  <a name="Syntax" id="Syntax"></a>Syntax<a href="#Syntax" class=
+  "section_anchor"></a>
+</h3>
+<p>
+  <tt>delete from &lt;class|cluster:&lt;cluster&gt;&gt; [where
+  &lt;conditions&gt;]</tt>
+</p>
+<h3>
+  <a name="Example" id="Example"></a>Example<a href="#Example"
+  class="section_anchor"></a>
+</h3>
+<pre class="prettyprint">
+&gt; delete from Profile where nick is null
 
-Deleted 123 record(s) in 0,012000 sec(s).</pre>
-<p>To know more about the SQL syntax used in Orient take a look to: <a href="sql_query.html">SQL Query</a>. </p>
-<p>This is a command of the Orient console. To know all the commands go to <a href="console_commands.html">Console commands</a>. </p>
+Deleted 123 record(s) in 0,012000 sec(s).
+</pre>
+<p>
+  To know more about the SQL syntax used in Orient take a look to:
+  <a href="sql_query.html">SQL Query</a>.
+</p>
+<p>
+  This is a command of the Orient console. To know all the commands
+  go to <a href="console_commands.html">Console commands</a>.
+</p>

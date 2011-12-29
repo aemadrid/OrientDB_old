@@ -2,31 +2,66 @@
 title: Connect
 layout: default
 ---
-
- <h1>
-<a name="Connect"></a>Connect<a href="#Connect" class="section_anchor"></a>
-</h1>
-<p>Open a database using a URL. </p>
 <h2>
-<a name="Syntax"></a>Syntax<a href="#Syntax" class="section_anchor"></a>
+  <a name="Connect" id="Connect"></a>Connect<a href="#Connect"
+  class="section_anchor"></a>
 </h2>
-<p><tt>connect &lt;database-url&gt; &lt;user-name&gt; &lt;user-password&gt;</tt> </p>
-<p>Where: </p>
+<p>
+  Open a database using a URL.
+</p>
+<h3>
+  <a name="Syntax" id="Syntax"></a>Syntax<a href="#Syntax" class=
+  "section_anchor"></a>
+</h3>
+<p>
+  <tt>connect &lt;database-url&gt; &lt;user-name&gt;
+  &lt;user-password&gt;</tt>
+</p>
+<p>
+  Where:
+</p>
 <ul>
-<li>database-url   The url of the database to connect in the format <tt>&lt;mode&gt;:&lt;path&gt;</tt> </li>
-<li>user           The user name </li>
-<li>database-url   The user password </li>
-</ul><h2>
-<a name="Example:_connect_to_a_local_database"></a>Example: connect to a local database<a href="#Example:_connect_to_a_local_database" class="section_anchor"></a>
-</h2>
-<p>To connect to a local database loading it directly into the console. </p>
-<p>Example: <tt>&gt; connect local:../databases/demo/demo admin admin</tt> </p>
-<h2>
-<a name="Example:_Connect_to_a_remote_database"></a>Example: Connect to a remote database<a href="#Example:_Connect_to_a_remote_database" class="section_anchor"></a>
-</h2>
-<p>To connect to a local or remote database by using a Orient Server. </p>
-<p>Example: <tt>&gt; connect remote:127.0.0.1/demo admin admin</tt> </p>
-<pre class="prettyprint">&gt; connect local:../databases/demo/demo admin admin
+  <li>database-url The url of the database to connect in the format
+  <tt>&lt;mode&gt;:&lt;path&gt;</tt>
+  </li>
+  <li>user The user name
+  </li>
+  <li>database-url The user password
+  </li>
+</ul>
+<h3>
+  <a name="Example:_connect_to_a_local_database" id=
+  "Example:_connect_to_a_local_database"></a>Example: connect to a
+  local database<a href="#Example:_connect_to_a_local_database"
+  class="section_anchor"></a>
+</h3>
+<p>
+  To connect to a local database loading it directly into the
+  console.
+</p>
+<p>
+  Example: <tt>&gt; connect local:../databases/demo/demo admin
+  admin</tt>
+</p>
+<h3>
+  <a name="Example:_Connect_to_a_remote_database" id=
+  "Example:_Connect_to_a_remote_database"></a>Example: Connect to a
+  remote database<a href="#Example:_Connect_to_a_remote_database"
+  class="section_anchor"></a>
+</h3>
+<p>
+  To connect to a local or remote database by using a Orient
+  Server.
+</p>
+<p>
+  Example: <tt>&gt; connect remote:127.0.0.1/demo admin admin</tt>
+</p>
+<pre class="prettyprint">
+&gt; connect local:../databases/demo/demo admin admin
 
-Connecting to database [local:../databases/demo/demo]...OK</pre>
-<p>This is a command of the Orient console. To know all the commands go to <a href="console_commands.html">Console commands</a>. </p>
+Connecting to database [local:../databases/demo/demo]...OK
+</pre>
+<p>
+  This is a command of the Orient console. To know all the commands
+  go to <a href="console_commands.html">Console commands</a>.
+</p>

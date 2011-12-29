@@ -2,25 +2,61 @@
 title: Truncate Record
 layout: default
 ---
-
- <p>The <strong>SQL Truncate Class</strong> command truncates a record without loading it. Useful when the record is dirty in any way and can't be loaded correctly. </p>
-<h2>
-<a name="Syntax"></a>Syntax<a href="#Syntax" class="section_anchor"></a>
-</h2>
-<p><tt>TRUNCATE RECORD &lt;rid&gt;*</tt> </p>
-<p>Where: </p>
-<ul><li>
-<strong>rid</strong> <a href="concepts.html#RecordID">RecordID</a> to truncate. To truncate multiple records in one shot, list all the <a href="concepts.html#RecordID">RecordIDs</a> separated by comma inside squared brackets. </li></ul><h3>
-<a name="Returns"></a>Returns<a href="#Returns" class="section_anchor"></a>
+<p>
+  The <strong>SQL Truncate Class</strong> command truncates a
+  record without loading it. Useful when the record is dirty in any
+  way and can't be loaded correctly.
+</p>
+<h3>
+  <a name="Syntax" id="Syntax"></a>Syntax<a href="#Syntax" class=
+  "section_anchor"></a>
 </h3>
-<p>The number of records truncated. </p>
-<h2>
-<a name="Examples"></a>Examples<a href="#Examples" class="section_anchor"></a>
-</h2>
-<p>Truncates the record <strong>#20:3</strong>: </p>
-<pre class="prettyprint">TRUNCATE RECORD 20:3</pre>
-<p>Truncates 3 records all together: </p>
-<pre class="prettyprint">TRUNCATE RECORD [20:0, 20:1, 20:2]</pre>
-<p>See also <a href="sql_delete.html">SQL Delete Command</a>. </p>
-<p>To know more about other SQL commands look at <a href="sql.html">SQL commands</a>. </p>
-<p>This is a command of the Orient console. To know all the commands go to <a href="console_commands.html">Console commands</a>. </p>
+<p>
+  <tt>TRUNCATE RECORD &lt;rid&gt;*</tt>
+</p>
+<p>
+  Where:
+</p>
+<ul>
+  <li>
+    <strong>rid</strong> <a href=
+    "concepts.html#RecordID">RecordID</a> to truncate. To truncate
+    multiple records in one shot, list all the <a href=
+    "concepts.html#RecordID">RecordIDs</a> separated by comma
+    inside squared brackets.
+  </li>
+</ul>
+<h4>
+  <a name="Returns" id="Returns"></a>Returns<a href="#Returns"
+  class="section_anchor"></a>
+</h4>
+<p>
+  The number of records truncated.
+</p>
+<h3>
+  <a name="Examples" id="Examples"></a>Examples<a href="#Examples"
+  class="section_anchor"></a>
+</h3>
+<p>
+  Truncates the record <strong>#20:3</strong>:
+</p>
+<pre class="prettyprint">
+TRUNCATE RECORD 20:3
+</pre>
+<p>
+  Truncates 3 records all together:
+</p>
+<pre class="prettyprint">
+TRUNCATE RECORD [20:0, 20:1, 20:2]
+</pre>
+<p>
+  See also <a href="sql_delete.html">SQL Delete Command</a>.
+</p>
+<p>
+  To know more about other SQL commands look at <a href=
+  "sql.html">SQL commands</a>.
+</p>
+<p>
+  This is a command of the Orient console. To know all the commands
+  go to <a href="console_commands.html">Console commands</a>.
+</p>

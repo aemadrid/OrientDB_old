@@ -2,19 +2,41 @@
 title: Rebuild Index
 layout: default
 ---
-
- <p>The <strong>SQL Rebuild Index</strong> command rebuilds an automatic index. </p>
-<h2>
-<a name="Syntax"></a>Syntax<a href="#Syntax" class="section_anchor"></a>
-</h2>
-<p><tt>REBUILD INDEX &lt;index-name&gt;</tt> </p>
-<p>Where: </p>
-<ul><li>
-<strong>index-name</strong> name of the index. Use <strong> to rebuild all the automatic indices </strong>
-</li></ul><h2>
-<a name="Examples"></a>Examples<a href="#Examples" class="section_anchor"></a>
-</h2>
-<pre class="prettyprint">REBUILD INDEX Profile.nick</pre>
-<pre class="prettyprint">REBUILD INDEX *</pre>
-<p>For complete index guide look at <a href="indexes.html">Index guide</a>. </p>
-<p>To know more about other SQL commands look at <a href="sql.html">SQL commands</a>. </p>
+<p>
+  The <strong>SQL Rebuild Index</strong> command rebuilds an
+  automatic index.
+</p>
+<h3>
+  <a name="Syntax" id="Syntax"></a>Syntax<a href="#Syntax" class=
+  "section_anchor"></a>
+</h3>
+<p>
+  <tt>REBUILD INDEX &lt;index-name&gt;</tt>
+</p>
+<p>
+  Where:
+</p>
+<ul>
+  <li>
+    <strong>index-name</strong> name of the index. Use <strong>to
+    rebuild all the automatic indices</strong>
+  </li>
+</ul>
+<h3>
+  <a name="Examples" id="Examples"></a>Examples<a href="#Examples"
+  class="section_anchor"></a>
+</h3>
+<pre class="prettyprint">
+REBUILD INDEX Profile.nick
+</pre>
+<pre class="prettyprint">
+REBUILD INDEX *
+</pre>
+<p>
+  For complete index guide look at <a href="indexes.html">Index
+  guide</a>.
+</p>
+<p>
+  To know more about other SQL commands look at <a href=
+  "sql.html">SQL commands</a>.
+</p>

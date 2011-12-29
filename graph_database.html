@@ -2,64 +2,159 @@
 title: GraphDatabase
 layout: default
 ---
-
- <p></p>
 <ul>
-<li><a href="#Introduction">Introduction</a></li>
-<li><a href="#Usage">Usage</a></li>
-<li><a href="#How_is_it_implemented?">How is it implemented?</a></li>
-<li><a href="#Manipulate_graphs_as_documents">Manipulate graphs as documents</a></li>
-<li><a href="#SQL">SQL</a></li>
-</ul><h1>
-<a name="Introduction"></a>Introduction<a href="#Introduction" class="section_anchor"></a>
-</h1>
-<p>OrientDB is a Document-Graph DBMS because has the features of both Document DBMS and Graph DBMS. This section explores the Graph capabilities of OrientDB. </p>
-<p>NOTE: <i>If you plan to use OrientDB as pure Graph Database look at the <a href="graph_ed_tutorial.html">Graph(Ed) tutorial</a>. </i></p>
-<p>The principal feature of a GraphDB is the ability to handle relationships. A GraphDB can traverse thousands of edges at a fraction of the cost of the Relational JOINs because relationships are direct links between document/nodes. </p>
-<p>The GraphDB has few but strong concepts: </p>
+  <li>
+    <a href="#Introduction">Introduction</a>
+  </li>
+  <li>
+    <a href="#Usage">Usage</a>
+  </li>
+  <li>
+    <a href="#How_is_it_implemented?">How is it implemented?</a>
+  </li>
+  <li>
+    <a href="#Manipulate_graphs_as_documents">Manipulate graphs as
+    documents</a>
+  </li>
+  <li>
+    <a href="#SQL">SQL</a>
+  </li>
+</ul>
+<h2>
+  <a name="Introduction" id="Introduction"></a>Introduction<a href=
+  "#Introduction" class="section_anchor"></a>
+</h2>
+<p>
+  OrientDB is a Document-Graph DBMS because has the features of
+  both Document DBMS and Graph DBMS. This section explores the
+  Graph capabilities of OrientDB.
+</p>
+<p>
+  NOTE: <i>If you plan to use OrientDB as pure Graph Database look
+  at the <a href="graph_ed_tutorial.html">Graph(Ed)
+  tutorial</a>.</i>
+</p>
+<p>
+  The principal feature of a GraphDB is the ability to handle
+  relationships. A GraphDB can traverse thousands of edges at a
+  fraction of the cost of the Relational JOINs because
+  relationships are direct links between document/nodes.
+</p>
+<p>
+  The GraphDB has few but strong concepts:
+</p>
 <ul>
-<li>
-<strong>Vertex</strong> or Node, the linked entity. Vertexes can have properties </li>
-<li>
-<strong>Edge</strong> or Arc, as the link between Vertexes. Edges can have properties and can be unidirectional or bidirectional </li>
-<li>
-<strong>Property</strong>, is a value to assign to Vertexes and Edges. A property has a name and a value </li>
-</ul><p><img src="http://www.orientechnologies.com/images/graph-schema.png"></p>
-<p>In this diagram on the left we represent the simplified domain of a PetShop application using the UML class diagram notation following the Object Oriented paradigm. How to model it using the OrientDB's graph model? </p>
-<p>OrientDB supports a superset of <a href="http://blueprints.tinkerpop.com" rel="nofollow">TinkerPop Blueprints</a> model, the <a href="https://github.com/tinkerpop/blueprints/wiki/Property-Graph-Model" rel="nofollow">Property Graph Model</a>. The difference is that with OrientDB you can create custom types of vertices and edges. In this example the orange classes are Vertex types, while the green one is the Edge type. </p>
-<p>To cross the graph you can use the powerful <a href="gremlin.html">GREMLIN</a> language, the OrientDB's SQL (an extended version of SQL with new operators to work with Trees and Graphs or a mix of both. </p>
-<p><img src="http://www.orientechnologies.com/images/graph-instance.png"></p>
-<p>Extract, per each food, the list of animals that eat that food: </p>
-<pre class="prettyprint">&gt; SELECT name, in.out.in.name FROM Food
+  <li>
+    <strong>Vertex</strong> or Node, the linked entity. Vertexes
+    can have properties
+  </li>
+  <li>
+    <strong>Edge</strong> or Arc, as the link between Vertexes.
+    Edges can have properties and can be unidirectional or
+    bidirectional
+  </li>
+  <li>
+    <strong>Property</strong>, is a value to assign to Vertexes and
+    Edges. A property has a name and a value
+  </li>
+</ul>
+<p>
+  <img src=
+  "http://www.orientechnologies.com/images/graph-schema.png">
+</p>
+<p>
+  In this diagram on the left we represent the simplified domain of
+  a PetShop application using the UML class diagram notation
+  following the Object Oriented paradigm. How to model it using the
+  OrientDB's graph model?
+</p>
+<p>
+  OrientDB supports a superset of <a href=
+  "http://blueprints.tinkerpop.com" rel="nofollow">TinkerPop
+  Blueprints</a> model, the <a href=
+  "https://github.com/tinkerpop/blueprints/wiki/Property-Graph-Model"
+  rel="nofollow">Property Graph Model</a>. The difference is that
+  with OrientDB you can create custom types of vertices and edges.
+  In this example the orange classes are Vertex types, while the
+  green one is the Edge type.
+</p>
+<p>
+  To cross the graph you can use the powerful <a href=
+  "gremlin.html">GREMLIN</a> language, the OrientDB's SQL (an
+  extended version of SQL with new operators to work with Trees and
+  Graphs or a mix of both.
+</p>
+<p>
+  <img src=
+  "http://www.orientechnologies.com/images/graph-instance.png">
+</p>
+<p>
+  Extract, per each food, the list of animals that eat that food:
+</p>
+<pre class="prettyprint">
+&gt; SELECT name, in.out.in.name FROM Food
 
-Meat, [Gaudì,Kelly]</pre>
-<p>Extract the name of the animals that eat less than 1Kg of meat per day: </p>
-<pre class="prettyprint">&gt; SELECT name FROM Animal WHERE out.kgPerDay &lt; 1 AND out[@class='Eat'].in.name = 'Meat'
+Meat, [Gaud&Atilde;&not;,Kelly]
+</pre>
+<p>
+  Extract the name of the animals that eat less than 1Kg of meat
+  per day:
+</p>
+<pre class="prettyprint">
+&gt; SELECT name FROM Animal WHERE out.kgPerDay &lt; 1 AND out[@class='Eat'].in.name = 'Meat'
 
-Gaudì</pre>
-<p>Extract the name of the animals that eat at 10 AM: </p>
-<pre class="prettyprint">&gt; SELECT FROM Animal WHERE out[@class='Eat'].whenAsHours CONTAINS 10
+Gaud&Atilde;&not;
+</pre>
+<p>
+  Extract the name of the animals that eat at 10 AM:
+</p>
+<pre class="prettyprint">
+&gt; SELECT FROM Animal WHERE out[@class='Eat'].whenAsHours CONTAINS 10
 
-Kelly</pre>
-<p>Usage of SQL + <a href="gremlin.html">GREMLIN</a> to extract all the outgoing vertices connected to 'Gaudì' Animal: </p>
-<pre class="prettyprint">&gt; SELECT GREMLIN("current.out") FROM Animal where name = 'Gaudì'
+Kelly
+</pre>
+<p>
+  Usage of SQL + <a href="gremlin.html">GREMLIN</a> to extract all
+  the outgoing vertices connected to 'Gaud&Atilde;&not;' Animal:
+</p>
+<pre class="prettyprint">
+&gt; SELECT GREMLIN("current.out") FROM Animal where name = 'Gaud&Atilde;&not;'
 
-Kelly</pre>
-<h1>
-<a name="Usage"></a>Usage<a href="#Usage" class="section_anchor"></a>
-</h1>
-<p>You can work with graphs using three approaches:  </p>
+Kelly
+</pre>
+<h2>
+  <a name="Usage" id="Usage"></a>Usage<a href="#Usage" class=
+  "section_anchor"></a>
+</h2>
+<p>
+  You can work with graphs using three approaches:
+</p>
 <ul>
-<li>
-<strong><a href="graph_database_raw.html">GraphDatabaseRaw</a></strong>: Raw native API, the fastest but not so fluent API </li>
-<li>
-<strong><a href="graph_database_native.html">GraphDatabaseNative</a></strong>: Native APIs, built on top of core engine (will be deprecated in next release) </li>
-<li>
-<strong><a href="graph_database_tinkerpop.html">GraphDatabaseTinkerpop</a></strong>: APIs, using all the technologies buil on top of it such as Gremlin language and Pipes </li>
-</ul><h1>
-<a name="How_is_it_implemented?"></a>How is it implemented?<a href="#How_is_it_implemented?" class="section_anchor"></a>
-</h1>
-<pre class="prettyprint">+--------------+                                       +--------------+
+  <li>
+    <strong><a href=
+    "graph_database_raw.html">GraphDatabaseRaw</a></strong>: Raw
+    native API, the fastest but not so fluent API
+  </li>
+  <li>
+    <strong><a href=
+    "graph_database_native.html">GraphDatabaseNative</a></strong>:
+    Native APIs, built on top of core engine (will be deprecated in
+    next release)
+  </li>
+  <li>
+    <strong><a href=
+    "graph_database_tinkerpop.html">GraphDatabaseTinkerpop</a></strong>:
+    APIs, using all the technologies buil on top of it such as
+    Gremlin language and Pipes
+  </li>
+</ul>
+<h2>
+  <a name="How_is_it_implemented?"></a>How is it
+  implemented?<a href="#How_is_it_implemented?" class=
+  "section_anchor"></a>
+</h2>
+<pre class="prettyprint">
++--------------+                                       +--------------+
 |              | out       * +------------+ out     in |              |
 |              |------------&gt;| OGraphEdge |-----------&gt;|              |
 | OGraphVertex |             +------------+            | OGraphVertex | 
@@ -67,39 +162,135 @@ Kelly</pre>
 |              |             +------------+ * in       |              |
 |              |&lt;------------| OGraphEdge |&lt;-----------|              |
 |              | in      out +------------+            |              |
-+--------------+                                       +--------------+</pre>
-<p>Since the internal Document-Graph architecture of OrientDB is flexible and fast with links, the Object Database, Graph Database and Key/Value Database are all built on top of the Document Database interface (<a href="http://code.google.com/p/orient/source/browse/trunk/core/src/main/java/com/orientechnologies/orient/core/db/document/ODatabaseDocumentTx.java" rel="nofollow">ODatabaseDocumentTx</a> class). In reality there are other layers behind the Document Database but that APIs are not yet documented and probably are too raw to be used for a real use case (unless you're writing a distributed file system)... </p>
-<p>The GraphDB stores vertices in the class <strong><a href="http://code.google.com/p/orient/source/browse/trunk/core/src/main/java/com/orientechnologies/orient/core/db/graph/OGraphVertex.java" rel="nofollow">OGraphVertex</a></strong> and edges in <strong><a href="http://code.google.com/p/orient/source/browse/trunk/core/src/main/java/com/orientechnologies/orient/core/db/graph/OGraphEdge.java" rel="nofollow">OGraphEdge</a></strong>. Both classes extend <a href="http://code.google.com/p/orient/source/browse/trunk/core/src/main/java/com/orientechnologies/orient/core/db/graph/OGraphElement.java" rel="nofollow">OGraphElement</a> that extends <a href="http://code.google.com/p/orient/source/browse/trunk/core/src/main/java/com/orientechnologies/orient/core/type/ODocumentWrapper.java" rel="nofollow">ODocumentWrapper</a>. </p>
-<p>So you can always query your graph using the OrientDB SQL language and act at lower level if you maintain the constraints of the GraphDB itself: </p>
++--------------+                                       +--------------+
+</pre>
+<p>
+  Since the internal Document-Graph architecture of OrientDB is
+  flexible and fast with links, the Object Database, Graph Database
+  and Key/Value Database are all built on top of the Document
+  Database interface (<a href=
+  "http://code.google.com/p/orient/source/browse/trunk/core/src/main/java/com/orientechnologies/orient/core/db/document/ODatabaseDocumentTx.java"
+  rel="nofollow">ODatabaseDocumentTx</a> class). In reality there
+  are other layers behind the Document Database but that APIs are
+  not yet documented and probably are too raw to be used for a real
+  use case (unless you're writing a distributed file system)...
+</p>
+<p>
+  The GraphDB stores vertices in the class <strong><a href=
+  "http://code.google.com/p/orient/source/browse/trunk/core/src/main/java/com/orientechnologies/orient/core/db/graph/OGraphVertex.java"
+  rel="nofollow">OGraphVertex</a></strong> and edges in
+  <strong><a href=
+  "http://code.google.com/p/orient/source/browse/trunk/core/src/main/java/com/orientechnologies/orient/core/db/graph/OGraphEdge.java"
+  rel="nofollow">OGraphEdge</a></strong>. Both classes extend
+  <a href=
+  "http://code.google.com/p/orient/source/browse/trunk/core/src/main/java/com/orientechnologies/orient/core/db/graph/OGraphElement.java"
+  rel="nofollow">OGraphElement</a> that extends <a href=
+  "http://code.google.com/p/orient/source/browse/trunk/core/src/main/java/com/orientechnologies/orient/core/type/ODocumentWrapper.java"
+  rel="nofollow">ODocumentWrapper</a>.
+</p>
+<p>
+  So you can always query your graph using the OrientDB SQL
+  language and act at lower level if you maintain the constraints
+  of the GraphDB itself:
+</p>
 <ul>
-<li>Edges must be always bi-directionals </li>
-<li>
-<strong><a href="http://code.google.com/p/orient/source/browse/trunk/core/src/main/java/com/orientechnologies/orient/core/db/graph/OGraphVertex.java" rel="nofollow">OGraphVertex</a></strong> instances store out edges in the property "outEdges" and in edges in "inEdges". Both the properties are declared as OType.LINKLIST </li>
-<li>
-<strong><a href="http://code.google.com/p/orient/source/browse/trunk/core/src/main/java/com/orientechnologies/orient/core/db/graph/OGraphEdge.java" rel="nofollow">OGraphEdge</a></strong> instances store out vertex in the property "out" and in vertex in "in". Both the properties are declared as OType.LINK </li>
-</ul><p>If you're using the <a href="https://github.com/tinkerpop/blueprints/wiki/Property-Graph-Model" rel="nofollow">Blueprints API</a> then: </p>
+  <li>Edges must be always bi-directionals
+  </li>
+  <li>
+    <strong><a href=
+    "http://code.google.com/p/orient/source/browse/trunk/core/src/main/java/com/orientechnologies/orient/core/db/graph/OGraphVertex.java"
+    rel="nofollow">OGraphVertex</a></strong> instances store out
+    edges in the property "outEdges" and in edges in "inEdges".
+    Both the properties are declared as OType.LINKLIST
+  </li>
+  <li>
+    <strong><a href=
+    "http://code.google.com/p/orient/source/browse/trunk/core/src/main/java/com/orientechnologies/orient/core/db/graph/OGraphEdge.java"
+    rel="nofollow">OGraphEdge</a></strong> instances store out
+    vertex in the property "out" and in vertex in "in". Both the
+    properties are declared as OType.LINK
+  </li>
+</ul>
+<p>
+  If you're using the <a href=
+  "https://github.com/tinkerpop/blueprints/wiki/Property-Graph-Model"
+  rel="nofollow">Blueprints API</a> then:
+</p>
 <ul>
-<li>
-<a href="https://github.com/tinkerpop/blueprints/blob/master/blueprints-core/src/main/java/com/tinkerpop/blueprints/pgm/Vertex.java" rel="nofollow">Vertex</a> is a wrapper of <strong><a href="http://code.google.com/p/orient/source/browse/trunk/core/src/main/java/com/orientechnologies/orient/core/db/graph/OGraphVertex.java" rel="nofollow">OGraphVertex</a></strong> </li>
-<li>
-<a href="https://github.com/tinkerpop/blueprints/blob/master/blueprints-core/src/main/java/com/tinkerpop/blueprints/pgm/Edge.java" rel="nofollow">Edge</a> is a wrapper of <strong><a href="http://code.google.com/p/orient/source/browse/trunk/core/src/main/java/com/orientechnologies/orient/core/db/graph/OGraphEdge.java" rel="nofollow">OGraphEdge</a></strong> </li>
-<li>The "label" is stored as "label" property of the OGraphVertex and OGraphEdge </li>
-</ul><h1>
-<a name="Manipulate_graphs_as_documents"></a>Manipulate graphs as documents<a href="#Manipulate_graphs_as_documents" class="section_anchor"></a>
-</h1>
-<p>Since the graph model has been built on top of OrientDB, you can use all the OrientDB features to manipulate graphs even without the graph API. </p>
-<h1>
-<a name="SQL"></a>SQL<a href="#SQL" class="section_anchor"></a>
-</h1>
-<p>Simple query against vertexes: </p>
-<pre class="prettyprint">SELECT FROM V WHERE out CONTAINS ( label = 'knows' )</pre>
-<p>Retrieves all the vertices connected to the outgoing edges. </p>
-<pre class="prettyprint">SELECT out.in AS labels FROM V WHERE out CONTAINS ( label IS NOT NULL )</pre>
-<p>Traverse all the retrieved nodes with name "Tom". The traversal cross the out edges but only where the linked (in) Vertex has label "Ferrari" and then forward to the: </p>
-<pre class="prettyprint">SELECT out[in.label = 'Ferrari'] FROM v WHERE name = 'Tom'</pre>
-<p>To know more about crossing graph in SQL projections look at <a href="document_field_part.html#Use_in_graphs">SQL Projections</a>. </p>
-<p>Or if you've installed the <a href="http://code.google.com/p/orient/wiki/GraphEdTutorial" rel="nofollow">Graph(Ed)</a> you can mix <a href="gremlin.html">GREMLIN</a> and SQL together: </p>
-<p>Simple query against vertexes: </p>
-<pre class="prettyprint">SELECT GREMLIN( 'current.outE.inV' ) AS labels FROM V WHERE out CONTAINS ( label IS NOT NULL )</pre>
-<p>Traverse up to 7th level of depth searching all the edges with label equals to "knows": </p>
-<pre class="prettyprint">SELECT FROM V WHERE out TRAVERSE(0,7,'out,out') ( @class = 'OGraphEdge' and label = 'knows' )</pre>
+  <li>
+    <a href=
+    "https://github.com/tinkerpop/blueprints/blob/master/blueprints-core/src/main/java/com/tinkerpop/blueprints/pgm/Vertex.java"
+    rel="nofollow">Vertex</a> is a wrapper of <strong><a href=
+    "http://code.google.com/p/orient/source/browse/trunk/core/src/main/java/com/orientechnologies/orient/core/db/graph/OGraphVertex.java"
+    rel="nofollow">OGraphVertex</a></strong>
+  </li>
+  <li>
+    <a href=
+    "https://github.com/tinkerpop/blueprints/blob/master/blueprints-core/src/main/java/com/tinkerpop/blueprints/pgm/Edge.java"
+    rel="nofollow">Edge</a> is a wrapper of <strong><a href=
+    "http://code.google.com/p/orient/source/browse/trunk/core/src/main/java/com/orientechnologies/orient/core/db/graph/OGraphEdge.java"
+    rel="nofollow">OGraphEdge</a></strong>
+  </li>
+  <li>The "label" is stored as "label" property of the OGraphVertex
+  and OGraphEdge
+  </li>
+</ul>
+<h2>
+  <a name="Manipulate_graphs_as_documents" id=
+  "Manipulate_graphs_as_documents"></a>Manipulate graphs as
+  documents<a href="#Manipulate_graphs_as_documents" class=
+  "section_anchor"></a>
+</h2>
+<p>
+  Since the graph model has been built on top of OrientDB, you can
+  use all the OrientDB features to manipulate graphs even without
+  the graph API.
+</p>
+<h2>
+  <a name="SQL" id="SQL"></a>SQL<a href="#SQL" class=
+  "section_anchor"></a>
+</h2>
+<p>
+  Simple query against vertexes:
+</p>
+<pre class="prettyprint">
+SELECT FROM V WHERE out CONTAINS ( label = 'knows' )
+</pre>
+<p>
+  Retrieves all the vertices connected to the outgoing edges.
+</p>
+<pre class="prettyprint">
+SELECT out.in AS labels FROM V WHERE out CONTAINS ( label IS NOT NULL )
+</pre>
+<p>
+  Traverse all the retrieved nodes with name "Tom". The traversal
+  cross the out edges but only where the linked (in) Vertex has
+  label "Ferrari" and then forward to the:
+</p>
+<pre class="prettyprint">
+SELECT out[in.label = 'Ferrari'] FROM v WHERE name = 'Tom'
+</pre>
+<p>
+  To know more about crossing graph in SQL projections look at
+  <a href="document_field_part.html#Use_in_graphs">SQL
+  Projections</a>.
+</p>
+<p>
+  Or if you've installed the <a href=
+  "http://code.google.com/p/orient/wiki/GraphEdTutorial" rel=
+  "nofollow">Graph(Ed)</a> you can mix <a href=
+  "gremlin.html">GREMLIN</a> and SQL together:
+</p>
+<p>
+  Simple query against vertexes:
+</p>
+<pre class="prettyprint">
+SELECT GREMLIN( 'current.outE.inV' ) AS labels FROM V WHERE out CONTAINS ( label IS NOT NULL )
+</pre>
+<p>
+  Traverse up to 7th level of depth searching all the edges with
+  label equals to "knows":
+</p>
+<pre class="prettyprint">
+SELECT FROM V WHERE out TRAVERSE(0,7,'out,out') ( @class = 'OGraphEdge' and label = 'knows' )
+</pre>

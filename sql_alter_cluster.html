@@ -2,27 +2,52 @@
 title: Alter Cluster
 layout: default
 ---
-
- <p>The <strong>SQL Alter Cluster</strong> command update a cluster. </p>
-<h2>
-<a name="Syntax"></a>Syntax<a href="#Syntax" class="section_anchor"></a>
-</h2>
-<p><tt>ALTER CLUSTER &lt;cluster-name&gt;|&lt;cluster-id&gt; &lt;attribute-name&gt; &lt;attribute-value&gt;</tt> </p>
-<p>Where: </p>
+<p>
+  The <strong>SQL Alter Cluster</strong> command update a cluster.
+</p>
+<h3>
+  <a name="Syntax" id="Syntax"></a>Syntax<a href="#Syntax" class=
+  "section_anchor"></a>
+</h3>
+<p>
+  <tt>ALTER CLUSTER &lt;cluster-name&gt;|&lt;cluster-id&gt;
+  &lt;attribute-name&gt; &lt;attribute-value&gt;</tt>
+</p>
+<p>
+  Where:
+</p>
 <ul>
-<li>
-<strong>cluster-name</strong> name of the cluster to modify </li>
-<li>
-<strong>cluster-id</strong> id of the cluster to modify </li>
-<li>
-<strong>attribute-name</strong> between those supported: </li>
-<ul><li>
-<strong>NAME</strong> cluster's name </li></ul>
-<li>
-<strong>attribute-value</strong> attribute's value to set </li>
-</ul><h2>
-<a name="Examples"></a>Examples<a href="#Examples" class="section_anchor"></a>
-</h2>
-<pre class="prettyprint">ALTER CLUSTER profile NAME profile2</pre>
-<pre class="prettyprint">ALTER 9 profile NAME profile2</pre>
-<p>To know more about other SQL commands look at <a href="sql.html">SQL commands</a>. </p>
+  <li>
+    <strong>cluster-name</strong> name of the cluster to modify
+  </li>
+  <li>
+    <strong>cluster-id</strong> id of the cluster to modify
+  </li>
+  <li>
+    <strong>attribute-name</strong> between those supported:
+  </li>
+  <li style="list-style: none">
+    <ul>
+      <li>
+        <strong>NAME</strong> cluster's name
+      </li>
+    </ul>
+  </li>
+  <li>
+    <strong>attribute-value</strong> attribute's value to set
+  </li>
+</ul>
+<h3>
+  <a name="Examples" id="Examples"></a>Examples<a href="#Examples"
+  class="section_anchor"></a>
+</h3>
+<pre class="prettyprint">
+ALTER CLUSTER profile NAME profile2
+</pre>
+<pre class="prettyprint">
+ALTER 9 profile NAME profile2
+</pre>
+<p>
+  To know more about other SQL commands look at <a href=
+  "sql.html">SQL commands</a>.
+</p>

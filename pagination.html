@@ -2,24 +2,52 @@
 title: Pagination
 layout: default
 ---
-
- <h1>
-<a name="Query_pagination"></a>Query pagination<a href="#Query_pagination" class="section_anchor"></a>
-</h1>
-<p>OrientDB supports pagination natively. Pagination doesn't consume server side resources because no cursors are used but only <a href="concepts.html#RecordID">RecordIDs</a> as pointers to the physical position in the cluster. The trick is to execute the query multiple times setting the LIMIT as the page size and using the greater than &gt; operator against @rid. The <strong>lower-rid</strong> is the starting point where to start to search, for example #10:300. </p>
-<p>Syntax: </p>
-<pre class="prettyprint">SELECT FROM @rid &gt; &lt;lower-rid&gt; ... [LIMIT &lt;max-records&gt;]</pre>
-<p>Where: </p>
-<ul>
-<li>
-<strong>lower-rid</strong> is the exclusive lower bound of the range as <a href="concepts.html#RecordID">RecordID</a> </li>
-<li>
-<strong>max-records</strong> is the maximum number of records returned by the query </li>
-</ul><p>In this way OrientDB will start to scan the cluster from the given position <strong>lower-rid</strong> + 1. After the first call the <strong>lower-rid</strong> will be the rid of the last record returned by the previous call. To scan cluster form beginning use #-1:-1 as <strong>lower-rid</strong> . </p>
 <h2>
-<a name="Handle_it_by_hand"></a>Handle it by hand<a href="#Handle_it_by_hand" class="section_anchor"></a>
+  <a name="Query_pagination" id="Query_pagination"></a>Query
+  pagination<a href="#Query_pagination" class="section_anchor"></a>
 </h2>
-<pre class="prettyprint">database.open("admin", "admin");
+<p>
+  OrientDB supports pagination natively. Pagination doesn't consume
+  server side resources because no cursors are used but only
+  <a href="concepts.html#RecordID">RecordIDs</a> as pointers to the
+  physical position in the cluster. The trick is to execute the
+  query multiple times setting the LIMIT as the page size and using
+  the greater than &gt; operator against @rid. The
+  <strong>lower-rid</strong> is the starting point where to start
+  to search, for example #10:300.
+</p>
+<p>
+  Syntax:
+</p>
+<pre class="prettyprint">
+SELECT FROM @rid &gt; &lt;lower-rid&gt; ... [LIMIT &lt;max-records&gt;]
+</pre>
+<p>
+  Where:
+</p>
+<ul>
+  <li>
+    <strong>lower-rid</strong> is the exclusive lower bound of the
+    range as <a href="concepts.html#RecordID">RecordID</a>
+  </li>
+  <li>
+    <strong>max-records</strong> is the maximum number of records
+    returned by the query
+  </li>
+</ul>
+<p>
+  In this way OrientDB will start to scan the cluster from the
+  given position <strong>lower-rid</strong> + 1. After the first
+  call the <strong>lower-rid</strong> will be the rid of the last
+  record returned by the previous call. To scan cluster form
+  beginning use #-1:-1 as <strong>lower-rid</strong> .
+</p>
+<h3>
+  <a name="Handle_it_by_hand" id="Handle_it_by_hand"></a>Handle it
+  by hand<a href="#Handle_it_by_hand" class="section_anchor"></a>
+</h3>
+<pre class="prettyprint">
+database.open("admin", "admin");
 final OSQLSynchQuery&lt;ODocument&gt; query = new OSQLSynchQuery&lt;ODocument&gt;("select from Customer where @rid &gt; ? LIMIT 20");
 ORID last = new ORecordId();
 
@@ -29,13 +57,25 @@ while (!resultset.isEmpty()) {
     last = resultset.get(resultset.size() - 1).getIdentity();
     resultset = database.query(query, last);
 }
-database.close();</pre>
-<h2>
-<a name="Automatic_management"></a>Automatic management<a href="#Automatic_management" class="section_anchor"></a>
-</h2>
-<p>In order to simplify the pagination the OSQLSynchQuery object (usually used in queries) keeps track of the current page and if executed multiple times it advances by page to page automatically without using the "&gt;" operator. </p>
-<p>Example: </p>
-<pre class="prettyprint">OSQLSynchQuery&lt;ODocument&gt; query = new OSQLSynchQuery&lt;ODocument&gt;("select from Customer LIMIT 20");
+database.close();
+</pre>
+<h3>
+  <a name="Automatic_management" id=
+  "Automatic_management"></a>Automatic management<a href=
+  "#Automatic_management" class="section_anchor"></a>
+</h3>
+<p>
+  In order to simplify the pagination the OSQLSynchQuery object
+  (usually used in queries) keeps track of the current page and if
+  executed multiple times it advances by page to page automatically
+  without using the "&gt;" operator.
+</p>
+<p>
+  Example:
+</p>
+<pre class="prettyprint">
+OSQLSynchQuery&lt;ODocument&gt; query = new OSQLSynchQuery&lt;ODocument&gt;("select from Customer LIMIT 20");
 for (List&lt;ODocument&gt; resultset = database.query(query); !resultset.isEmpty(); resultset = database.query(query)) {
   ...
-}</pre>
+}
+</pre>

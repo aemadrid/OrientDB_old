@@ -2,81 +2,204 @@
 title: Binary data management (BLOB)
 layout: default
 ---
-
- <h1>
-<a name="Introduction"></a>Introduction<a href="#Introduction" class="section_anchor"></a>
-</h1>
-<p>OrientDB natively handles binary data, namely BLOB. However there are some consideration to do based on the type of binary data, the size, the kind of usage, etc. </p>
-<h1>
-<a name="Techniques"></a>Techniques<a href="#Techniques" class="section_anchor"></a>
-</h1>
 <h2>
-<a name="Store_on_file_system_and_save_the_path_in_the_document"></a>Store on file system and save the path in the document<a href="#Store_on_file_system_and_save_the_path_in_the_document" class="section_anchor"></a>
+  <a name="Introduction" id="Introduction"></a>Introduction<a href=
+  "#Introduction" class="section_anchor"></a>
 </h2>
-<p>This is the simpler way to handle binary data: store them to the file system and just keep the path to retrieve them. </p>
-<p>Example: </p>
-<pre class="prettyprint">ODocument doc = new ODocument(db);
+<p>
+  OrientDB natively handles binary data, namely BLOB. However there
+  are some consideration to do based on the type of binary data,
+  the size, the kind of usage, etc.
+</p>
+<h2>
+  <a name="Techniques" id="Techniques"></a>Techniques<a href=
+  "#Techniques" class="section_anchor"></a>
+</h2>
+<h3>
+  <a name="Store_on_file_system_and_save_the_path_in_the_document"
+  id=
+  "Store_on_file_system_and_save_the_path_in_the_document"></a>Store
+  on file system and save the path in the document<a href=
+  "#Store_on_file_system_and_save_the_path_in_the_document" class=
+  "section_anchor"></a>
+</h3>
+<p>
+  This is the simpler way to handle binary data: store them to the
+  file system and just keep the path to retrieve them.
+</p>
+<p>
+  Example:
+</p>
+<pre class="prettyprint">
+ODocument doc = new ODocument(db);
 doc.field("binary", "/usr/local/orientdb/binary/test.pdf");
-doc.save();</pre>
-<p>Pros: </p>
+doc.save();
+</pre>
+<p>
+  Pros:
+</p>
 <ul>
-<li>Easy to write </li>
-<li>100% delegated to the File System </li>
-</ul>Cons: <ul><li>Binary data can't be automatically distributed using the OrientDB cluster </li></ul><h2>
-<a name="Store_it_as_Document's_field"></a>Store it as Document's field<a href="#Store_it_as_Document's_field" class="section_anchor"></a>
-</h2>
-<p>ODocument class is able to manage binary data in form of <tt>byte[]</tt> (byte array). Example: </p>
-<pre class="prettyprint">ODocument doc = new ODocument(db);
+  <li>Easy to write
+  </li>
+  <li>100% delegated to the File System
+  </li>
+</ul>Cons:
+<ul>
+  <li>Binary data can't be automatically distributed using the
+  OrientDB cluster
+  </li>
+</ul>
+<h3>
+  <a name="Store_it_as_Document's_field"></a>Store it as Document's
+  field<a href="#Store_it_as_Document's_field" class=
+  "section_anchor"></a>
+</h3>
+<p>
+  ODocument class is able to manage binary data in form of
+  <tt>byte[]</tt> (byte array). Example:
+</p>
+<pre class="prettyprint">
+ODocument doc = new ODocument(db);
 doc.field("binary", "Binary data".getBytes());
-doc.save();</pre>
-<p>This is the easiest way to keep the binary data inside the database, but it's not really efficient on large BLOB because the binary content is serialized in Base64. This means a waste of space (33% more) and a run-time cost in marshalling/unmarshalling. </p>
-<p>Pros: </p>
-<ul><li>Easy to write </li></ul>Cons: <ul>
-<li>Waste of space +33% </li>
-<li>Run-time cost of marshalling/unmarshalling </li>
-</ul><h2>
-<a name="Store_it_with_ORecordBytes"></a>Store it with ORecordBytes<a href="#Store_it_with_ORecordBytes" class="section_anchor"></a>
-</h2>
-<p>The ORecordBytes class is a record implementation able to store binary content without conversions (see above). This is the faster way to handle binary data with OrientDB but needs a separate record to handle it. </p>
-<p>Example: </p>
-<pre class="prettyprint">ORecordBytes record = new ORecordBytes(db, "Binary data".getBytes());
-record.save();</pre>
-<p>Since this is a separate record, the best way to reference it is to link it to a Document record. Example: </p>
-<pre class="prettyprint">ORecordBytes record = new ORecordBytes(db, "Binary data".getBytes());
+doc.save();
+</pre>
+<p>
+  This is the easiest way to keep the binary data inside the
+  database, but it's not really efficient on large BLOB because the
+  binary content is serialized in Base64. This means a waste of
+  space (33% more) and a run-time cost in
+  marshalling/unmarshalling.
+</p>
+<p>
+  Pros:
+</p>
+<ul>
+  <li>Easy to write
+  </li>
+</ul>Cons:
+<ul>
+  <li>Waste of space +33%
+  </li>
+  <li>Run-time cost of marshalling/unmarshalling
+  </li>
+</ul>
+<h3>
+  <a name="Store_it_with_ORecordBytes" id=
+  "Store_it_with_ORecordBytes"></a>Store it with
+  ORecordBytes<a href="#Store_it_with_ORecordBytes" class=
+  "section_anchor"></a>
+</h3>
+<p>
+  The ORecordBytes class is a record implementation able to store
+  binary content without conversions (see above). This is the
+  faster way to handle binary data with OrientDB but needs a
+  separate record to handle it.
+</p>
+<p>
+  Example:
+</p>
+<pre class="prettyprint">
+ORecordBytes record = new ORecordBytes(db, "Binary data".getBytes());
+record.save();
+</pre>
+<p>
+  Since this is a separate record, the best way to reference it is
+  to link it to a Document record. Example:
+</p>
+<pre class="prettyprint">
+ORecordBytes record = new ORecordBytes(db, "Binary data".getBytes());
 
 ODocument doc = new ODocument(db);
 doc.field("id", 12345);
 doc.field("binary", record);
-doc.save();</pre>
-<p>In this way you can access to the binary data by traversing the "binary" field of the parent's document record. </p>
-<pre class="prettyprint">ORecordBytes record = doc.field("binary");
-byte[] content = record.toStream();</pre>
-<p>ORecordBytes class can work with Java Streams: </p>
-<pre class="prettyprint">ORecordBytes record = new ORecordBytes(db).fromInputStream(in);
+doc.save();
+</pre>
+<p>
+  In this way you can access to the binary data by traversing the
+  "binary" field of the parent's document record.
+</p>
+<pre class="prettyprint">
+ORecordBytes record = doc.field("binary");
+byte[] content = record.toStream();
+</pre>
+<p>
+  ORecordBytes class can work with Java Streams:
+</p>
+<pre class="prettyprint">
+ORecordBytes record = new ORecordBytes(db).fromInputStream(in);
 
-record.toOutputStream(out);</pre>
-<p>Pros: </p>
-<ul><li>Fast and compact solution </li></ul>Cons: <ul><li>Slightly complex management </li></ul><h2>
-<a name="Large_content:_split_in_multiple_ORecordBytes"></a>Large content: split in multiple ORecordBytes<a href="#Large_content:_split_in_multiple_ORecordBytes" class="section_anchor"></a>
-</h2>
-<p>OrientDB can store up to 2Gb as record content. But there are other limitations on network buffers and file sizes you should tune to reach the 2GB barrier. </p>
-<p>However managing big chunks of binary data means having big <tt>byte[]</tt>  structures in RAM and this could cause a Out Of Memory of the JVM. Many users reported that splitting the binary data in chunks it's the best solution. </p>
-<p>Continuing from the last example we could handle not a single reference against one ORecordBytes record but multiple references. A One-To-Many relationship. For this purpose the LINKLIST type fits perfect because maintains the order. </p>
-<pre class="prettyprint">List&lt;ORecordBytes &gt; chunks = new ArrayList&lt;ORecordBytes&gt;();
+record.toOutputStream(out);
+</pre>
+<p>
+  Pros:
+</p>
+<ul>
+  <li>Fast and compact solution
+  </li>
+</ul>Cons:
+<ul>
+  <li>Slightly complex management
+  </li>
+</ul>
+<h3>
+  <a name="Large_content:_split_in_multiple_ORecordBytes" id=
+  "Large_content:_split_in_multiple_ORecordBytes"></a>Large
+  content: split in multiple ORecordBytes<a href=
+  "#Large_content:_split_in_multiple_ORecordBytes" class=
+  "section_anchor"></a>
+</h3>
+<p>
+  OrientDB can store up to 2Gb as record content. But there are
+  other limitations on network buffers and file sizes you should
+  tune to reach the 2GB barrier.
+</p>
+<p>
+  However managing big chunks of binary data means having big
+  <tt>byte[]</tt> structures in RAM and this could cause a Out Of
+  Memory of the JVM. Many users reported that splitting the binary
+  data in chunks it's the best solution.
+</p>
+<p>
+  Continuing from the last example we could handle not a single
+  reference against one ORecordBytes record but multiple
+  references. A One-To-Many relationship. For this purpose the
+  LINKLIST type fits perfect because maintains the order.
+</p>
+<pre class="prettyprint">
+List&lt;ORecordBytes &gt; chunks = new ArrayList&lt;ORecordBytes&gt;();
 chunks.add( new ORecordBytes(db, "This is".getBytes()) );
 chunks.add( new ORecordBytes(db, " a test".getBytes()) );
 
 ODocument doc = new ODocument(db);
 doc.field("id", 12345);
 doc.field("binary", chunks);
-doc.save();</pre>
-<p>Pros: </p>
-<ul><li>Fastest and compact solution </li></ul>Cons: <ul><li>Quite complex management </li></ul><h1>
-<a name="Conclusion"></a>Conclusion<a href="#Conclusion" class="section_anchor"></a>
-</h1>
-<p>What to use? </p>
+doc.save();
+</pre>
+<p>
+  Pros:
+</p>
 <ul>
-<li>Have you short binary data? Store them as document's field </li>
-<li>Do you want the maximum of performance and better use of the space? Store it with ORecordBytes </li>
-<li>Have you large binary objects? Store it with ORecordBytes but split the content in multiple records </li>
+  <li>Fastest and compact solution
+  </li>
+</ul>Cons:
+<ul>
+  <li>Quite complex management
+  </li>
+</ul>
+<h2>
+  <a name="Conclusion" id="Conclusion"></a>Conclusion<a href=
+  "#Conclusion" class="section_anchor"></a>
+</h2>
+<p>
+  What to use?
+</p>
+<ul>
+  <li>Have you short binary data? Store them as document's field
+  </li>
+  <li>Do you want the maximum of performance and better use of the
+  space? Store it with ORecordBytes
+  </li>
+  <li>Have you large binary objects? Store it with ORecordBytes but
+  split the content in multiple records
+  </li>
 </ul>

@@ -2,30 +2,57 @@
 title: Export format
 layout: default
 ---
-
- <p></p>
 <ul>
-<li><a href="#Introduction">Introduction</a></li>
-<li><a href="#Sections">Sections</a></li>
-<ul>
-<li><a href="#Info">Info</a></li>
-<li><a href="#Clusters">Clusters</a></li>
-<li><a href="#Schema">Schema</a></li>
-<li><a href="#Records">Records</a></li>
+  <li>
+    <a href="#Introduction">Introduction</a>
+  </li>
+  <li>
+    <a href="#Sections">Sections</a>
+  </li>
+  <li style="list-style: none">
+    <ul>
+      <li>
+        <a href="#Info">Info</a>
+      </li>
+      <li>
+        <a href="#Clusters">Clusters</a>
+      </li>
+      <li>
+        <a href="#Schema">Schema</a>
+      </li>
+      <li>
+        <a href="#Records">Records</a>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <a href="#Full_Example">Full Example</a>
+  </li>
 </ul>
-<li><a href="#Full_Example">Full Example</a></li>
-</ul><h1>
-<a name="Introduction"></a>Introduction<a href="#Introduction" class="section_anchor"></a>
-</h1>
-<p>This page contains the format used by <a href="console_command_export.html">Export Database</a> and <a href="console_command_import.html">Import Database</a> tools. The file is 100% JSON compliant. </p>
-<h1>
-<a name="Sections"></a>Sections<a href="#Sections" class="section_anchor"></a>
-</h1>
 <h2>
-<a name="Info"></a>Info<a href="#Info" class="section_anchor"></a>
+  <a name="Introduction" id="Introduction"></a>Introduction<a href=
+  "#Introduction" class="section_anchor"></a>
 </h2>
-<p>First section resuming the database information and all the version used to check compatibility on import. </p>
-<pre class="prettyprint">{
+<p>
+  This page contains the format used by <a href=
+  "console_command_export.html">Export Database</a> and <a href=
+  "console_command_import.html">Import Database</a> tools. The file
+  is 100% JSON compliant.
+</p>
+<h2>
+  <a name="Sections" id="Sections"></a>Sections<a href="#Sections"
+  class="section_anchor"></a>
+</h2>
+<h3>
+  <a name="Info" id="Info"></a>Info<a href="#Info" class=
+  "section_anchor"></a>
+</h3>
+<p>
+  First section resuming the database information and all the
+  version used to check compatibility on import.
+</p>
+<pre class="prettyprint">
+{
   "info":{
     "name": &lt;database-name&gt;, 
     "default-cluster-id": &lt;default-cluster-id&gt;, 
@@ -34,53 +61,104 @@ layout: default
     "storage-config-version": &lt;storage-version&gt;, 
     "schema-version": &lt;schema-version&gt;, 
     "mvrbtree-version": &lt;mvrbtree-version&gt;
-  }</pre>
-<p></p>
-<table class="wikitable">
-<tr>
-<td style="border: 1px solid #ccc; padding: 5px;"> <strong>Parameter</strong> </td>
-<td style="border: 1px solid #ccc; padding: 5px;"> <strong>Description</strong> </td>
-<td style="border: 1px solid #ccc; padding: 5px;"> <strong>JSON Type</strong> </td>
-</tr>
-<tr>
-<td style="border: 1px solid #ccc; padding: 5px;">database-name</td>
-<td style="border: 1px solid #ccc; padding: 5px;">Name of database</td>
-<td style="border: 1px solid #ccc; padding: 5px;">String</td>
-</tr>
-<tr>
-<td style="border: 1px solid #ccc; padding: 5px;">default-cluster-id</td>
-<td style="border: 1px solid #ccc; padding: 5px;">Cluster Id used by default. Range: 0-32,767</td>
-<td style="border: 1px solid #ccc; padding: 5px;">Integer</td>
-</tr>
-<tr>
-<td style="border: 1px solid #ccc; padding: 5px;">exporter-format</td>
-<td style="border: 1px solid #ccc; padding: 5px;">Version of Database exporter</td>
-<td style="border: 1px solid #ccc; padding: 5px;">Integer</td>
-</tr>
-<tr>
-<td style="border: 1px solid #ccc; padding: 5px;">engine-version</td>
-<td style="border: 1px solid #ccc; padding: 5px;">Version of OrientDB</td>
-<td style="border: 1px solid #ccc; padding: 5px;">String</td>
-</tr>
-<tr>
-<td style="border: 1px solid #ccc; padding: 5px;">storage-version</td>
-<td style="border: 1px solid #ccc; padding: 5px;">Version of Storage layer</td>
-<td style="border: 1px solid #ccc; padding: 5px;">Integer</td>
-</tr>
-<tr>
-<td style="border: 1px solid #ccc; padding: 5px;">schema-version</td>
-<td style="border: 1px solid #ccc; padding: 5px;">Version of the schema exporter</td>
-<td style="border: 1px solid #ccc; padding: 5px;">Integer</td>
-</tr>
-<tr>
-<td style="border: 1px solid #ccc; padding: 5px;">mvrbtree-version</td>
-<td style="border: 1px solid #ccc; padding: 5px;">Version of the MVRB-Tree</td>
-<td style="border: 1px solid #ccc; padding: 5px;">Integer</td>
-</tr>
-</table><h3>
-<a name="Example"></a>Example<a href="#Example" class="section_anchor"></a>
-</h3>
-<pre class="prettyprint">{
+  }
+</pre>
+<table class="zebra-striped bordered-table">
+  <tr>
+    <td>
+      <strong>Parameter</strong>
+    </td>
+    <td>
+      <strong>Description</strong>
+    </td>
+    <td>
+      <strong>JSON Type</strong>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      database-name
+    </td>
+    <td>
+      Name of database
+    </td>
+    <td>
+      String
+    </td>
+  </tr>
+  <tr>
+    <td>
+      default-cluster-id
+    </td>
+    <td>
+      Cluster Id used by default. Range: 0-32,767
+    </td>
+    <td>
+      Integer
+    </td>
+  </tr>
+  <tr>
+    <td>
+      exporter-format
+    </td>
+    <td>
+      Version of Database exporter
+    </td>
+    <td>
+      Integer
+    </td>
+  </tr>
+  <tr>
+    <td>
+      engine-version
+    </td>
+    <td>
+      Version of OrientDB
+    </td>
+    <td>
+      String
+    </td>
+  </tr>
+  <tr>
+    <td>
+      storage-version
+    </td>
+    <td>
+      Version of Storage layer
+    </td>
+    <td>
+      Integer
+    </td>
+  </tr>
+  <tr>
+    <td>
+      schema-version
+    </td>
+    <td>
+      Version of the schema exporter
+    </td>
+    <td>
+      Integer
+    </td>
+  </tr>
+  <tr>
+    <td>
+      mvrbtree-version
+    </td>
+    <td>
+      Version of the MVRB-Tree
+    </td>
+    <td>
+      Integer
+    </td>
+  </tr>
+</table>
+<h4>
+  <a name="Example" id="Example"></a>Example<a href="#Example"
+  class="section_anchor"></a>
+</h4>
+<pre class="prettyprint">
+{
   "info":{
     "name": "demo", 
     "default-cluster-id": 2, 
@@ -89,49 +167,86 @@ layout: default
     "storage-config-version": 2, 
     "schema-version": 4, 
     "mvrbtree-version": 0
-  }</pre>
-<h2>
-<a name="Clusters"></a>Clusters<a href="#Clusters" class="section_anchor"></a>
-</h2>
-<p>Contains the database structure in clusters. </p>
-<pre class="prettyprint">  "clusters": [
-    {"name": &lt;cluster-name&gt;, "id": &lt;cluster-id&gt;, "type": &lt;cluster-type&gt;}
-  ]</pre>
-<p></p>
-<table class="wikitable">
-<tr>
-<td style="border: 1px solid #ccc; padding: 5px;"> <strong>Parameter</strong> </td>
-<td style="border: 1px solid #ccc; padding: 5px;"> <strong>Description</strong> </td>
-<td style="border: 1px solid #ccc; padding: 5px;"> <strong>JSON Type</strong> </td>
-</tr>
-<tr>
-<td style="border: 1px solid #ccc; padding: 5px;">cluster-name</td>
-<td style="border: 1px solid #ccc; padding: 5px;">Name of cluster</td>
-<td style="border: 1px solid #ccc; padding: 5px;">String</td>
-</tr>
-<tr>
-<td style="border: 1px solid #ccc; padding: 5px;">cluster-id</td>
-<td style="border: 1px solid #ccc; padding: 5px;">Cluster id. Range: 0-32,767</td>
-<td style="border: 1px solid #ccc; padding: 5px;">Integer</td>
-</tr>
-<tr>
-<td style="border: 1px solid #ccc; padding: 5px;">cluster-type</td>
-<td style="border: 1px solid #ccc; padding: 5px;">Cluster type between "PHYSICAL", "LOGICAL" and "MEMORY"</td>
-<td style="border: 1px solid #ccc; padding: 5px;">String</td>
-</tr>
-</table><h3>
-<a name="Example"></a>Example<a href="#Example" class="section_anchor"></a>
+  }
+</pre>
+<h3>
+  <a name="Clusters" id="Clusters"></a>Clusters<a href="#Clusters"
+  class="section_anchor"></a>
 </h3>
-<pre class="prettyprint">  "clusters": [
+<p>
+  Contains the database structure in clusters.
+</p>
+<pre class="prettyprint">
+  "clusters": [
+    {"name": &lt;cluster-name&gt;, "id": &lt;cluster-id&gt;, "type": &lt;cluster-type&gt;}
+  ]
+</pre>
+<table class="zebra-striped bordered-table">
+  <tr>
+    <td>
+      <strong>Parameter</strong>
+    </td>
+    <td>
+      <strong>Description</strong>
+    </td>
+    <td>
+      <strong>JSON Type</strong>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      cluster-name
+    </td>
+    <td>
+      Name of cluster
+    </td>
+    <td>
+      String
+    </td>
+  </tr>
+  <tr>
+    <td>
+      cluster-id
+    </td>
+    <td>
+      Cluster id. Range: 0-32,767
+    </td>
+    <td>
+      Integer
+    </td>
+  </tr>
+  <tr>
+    <td>
+      cluster-type
+    </td>
+    <td>
+      Cluster type between "PHYSICAL", "LOGICAL" and "MEMORY"
+    </td>
+    <td>
+      String
+    </td>
+  </tr>
+</table>
+<h4>
+  <a name="Example" id="Example"></a>Example<a href="#Example"
+  class="section_anchor"></a>
+</h4>
+<pre class="prettyprint">
+  "clusters": [
     {"name": "internal", "id": 0, "type": "PHYSICAL"}, 
     {"name": "index", "id": 1, "type": "PHYSICAL"}, 
     {"name": "default", "id": 2, "type": "PHYSICAL"}
-  ]</pre>
-<h2>
-<a name="Schema"></a>Schema<a href="#Schema" class="section_anchor"></a>
-</h2>
-<p>Contains the schema as classes and properties. </p>
-<pre class="prettyprint">  "schema":{
+  ]
+</pre>
+<h3>
+  <a name="Schema" id="Schema"></a>Schema<a href="#Schema" class=
+  "section_anchor"></a>
+</h3>
+<p>
+  Contains the schema as classes and properties.
+</p>
+<pre class="prettyprint">
+  "schema":{
     "version": &lt;schema-version&gt;, 
     "classes": [
       {"name": &lt;class-name&gt;, "default-cluster-id": &lt;default-cluster-id&gt;, "cluster-ids": [&lt;cluster-ids&gt;], 
@@ -140,60 +255,119 @@ layout: default
         ]
       }
     ]
-  }</pre>
-<p></p>
-<table class="wikitable">
-<tr>
-<td style="border: 1px solid #ccc; padding: 5px;"> <strong>Parameter</strong> </td>
-<td style="border: 1px solid #ccc; padding: 5px;"> <strong>Description</strong> </td>
-<td style="border: 1px solid #ccc; padding: 5px;"> <strong>JSON Type</strong> </td>
-</tr>
-<tr>
-<td style="border: 1px solid #ccc; padding: 5px;">schema-version</td>
-<td style="border: 1px solid #ccc; padding: 5px;">Version of the record where the schema is stored. Range: 0-2,147,483,647</td>
-<td style="border: 1px solid #ccc; padding: 5px;">Integer</td>
-</tr>
-<tr>
-<td style="border: 1px solid #ccc; padding: 5px;">class-name</td>
-<td style="border: 1px solid #ccc; padding: 5px;">Class name</td>
-<td style="border: 1px solid #ccc; padding: 5px;">String</td>
-</tr>
-<tr>
-<td style="border: 1px solid #ccc; padding: 5px;">default-cluster-id</td>
-<td style="border: 1px solid #ccc; padding: 5px;">Default cluster id for the class. Represents the cluster where records will be stored</td>
-<td style="border: 1px solid #ccc; padding: 5px;">Integer</td>
-</tr>
-<tr>
-<td style="border: 1px solid #ccc; padding: 5px;">cluster-ids</td>
-<td style="border: 1px solid #ccc; padding: 5px;">Array of cluster ids where the class records can be stored. The first is always the <tt>&lt;default-cluster-id&gt;</tt>
-</td>
-<td style="border: 1px solid #ccc; padding: 5px;">Array of Integer</td>
-</tr>
-<tr>
-<td style="border: 1px solid #ccc; padding: 5px;">property-name</td>
-<td style="border: 1px solid #ccc; padding: 5px;">Name of the property</td>
-<td style="border: 1px solid #ccc; padding: 5px;">String</td>
-</tr>
-<tr>
-<td style="border: 1px solid #ccc; padding: 5px;">property-type</td>
-<td style="border: 1px solid #ccc; padding: 5px;">Property type between the <a href="types.html">supported ones</a>
-</td>
-<td style="border: 1px solid #ccc; padding: 5px;">String</td>
-</tr>
-<tr>
-<td style="border: 1px solid #ccc; padding: 5px;">property-is-mandatory</td>
-<td style="border: 1px solid #ccc; padding: 5px;">Is this property mandatory? true or false</td>
-<td style="border: 1px solid #ccc; padding: 5px;">Boolean</td>
-</tr>
-<tr>
-<td style="border: 1px solid #ccc; padding: 5px;">property-not-null</td>
-<td style="border: 1px solid #ccc; padding: 5px;">The property can't accept null? true or false</td>
-<td style="border: 1px solid #ccc; padding: 5px;">Boolean</td>
-</tr>
-</table><h3>
-<a name="Example"></a>Example<a href="#Example" class="section_anchor"></a>
-</h3>
-<pre class="prettyprint">  "schema":{
+  }
+</pre>
+<table class="zebra-striped bordered-table">
+  <tr>
+    <td>
+      <strong>Parameter</strong>
+    </td>
+    <td>
+      <strong>Description</strong>
+    </td>
+    <td>
+      <strong>JSON Type</strong>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      schema-version
+    </td>
+    <td>
+      Version of the record where the schema is stored. Range:
+      0-2,147,483,647
+    </td>
+    <td>
+      Integer
+    </td>
+  </tr>
+  <tr>
+    <td>
+      class-name
+    </td>
+    <td>
+      Class name
+    </td>
+    <td>
+      String
+    </td>
+  </tr>
+  <tr>
+    <td>
+      default-cluster-id
+    </td>
+    <td>
+      Default cluster id for the class. Represents the cluster
+      where records will be stored
+    </td>
+    <td>
+      Integer
+    </td>
+  </tr>
+  <tr>
+    <td>
+      cluster-ids
+    </td>
+    <td>
+      Array of cluster ids where the class records can be stored.
+      The first is always the <tt>&lt;default-cluster-id&gt;</tt>
+    </td>
+    <td>
+      Array of Integer
+    </td>
+  </tr>
+  <tr>
+    <td>
+      property-name
+    </td>
+    <td>
+      Name of the property
+    </td>
+    <td>
+      String
+    </td>
+  </tr>
+  <tr>
+    <td>
+      property-type
+    </td>
+    <td>
+      Property type between the <a href="types.html">supported
+      ones</a>
+    </td>
+    <td>
+      String
+    </td>
+  </tr>
+  <tr>
+    <td>
+      property-is-mandatory
+    </td>
+    <td>
+      Is this property mandatory? true or false
+    </td>
+    <td>
+      Boolean
+    </td>
+  </tr>
+  <tr>
+    <td>
+      property-not-null
+    </td>
+    <td>
+      The property can't accept null? true or false
+    </td>
+    <td>
+      Boolean
+    </td>
+  </tr>
+</table>
+<h4>
+  <a name="Example" id="Example"></a>Example<a href="#Example"
+  class="section_anchor"></a>
+</h4>
+<pre class="prettyprint">
+  "schema":{
     "version": 210, 
     "classes": [
       {"name": "Account", "default-cluster-id": 9, "cluster-ids": [9], 
@@ -202,64 +376,121 @@ layout: default
           {"name": "birthDate", "type": "DATE", "mandatory": false, "not-null": false}, 
           {"name": "id", "type": "INTEGER", "mandatory": false, "not-null": false}
         ]
-      }</pre>
-<h2>
-<a name="Records"></a>Records<a href="#Records" class="section_anchor"></a>
-</h2>
-<p>Contains the exported records with metadata (prefixed by @) and fields. </p>
-<pre class="prettyprint"> "records": [{
+      }
+</pre>
+<h3>
+  <a name="Records" id="Records"></a>Records<a href="#Records"
+  class="section_anchor"></a>
+</h3>
+<p>
+  Contains the exported records with metadata (prefixed by @) and
+  fields.
+</p>
+<pre class="prettyprint">
+ "records": [{
           "@type": &lt;record-type&gt;, "@rid": &lt;record-id&gt;, "@version": 0, "@class": &lt;record-class&gt;, 
           &lt;field-name&gt;: &lt;field-value&gt;, 
           ["@fieldTypes": "&lt;field-name&gt;=&lt;field-type&gt;"]
-        }</pre>
-<p></p>
-<table class="wikitable">
-<tr>
-<td style="border: 1px solid #ccc; padding: 5px;"> <strong>Parameter</strong> </td>
-<td style="border: 1px solid #ccc; padding: 5px;"> <strong>Description</strong> </td>
-<td style="border: 1px solid #ccc; padding: 5px;"> <strong>JSON Type</strong> </td>
-</tr>
-<tr>
-<td style="border: 1px solid #ccc; padding: 5px;">record-type</td>
-<td style="border: 1px solid #ccc; padding: 5px;">Record type: d = document, b = binary, f = flat</td>
-<td style="border: 1px solid #ccc; padding: 5px;">String</td>
-</tr>
-<tr>
-<td style="border: 1px solid #ccc; padding: 5px;">record-id</td>
-<td style="border: 1px solid #ccc; padding: 5px;">
-<a href="concepts.html#RecordID">RecordID</a> in the format <tt>#&lt;cluster-id&gt;:&lt;cluster-position&gt;</tt>
-</td>
-<td style="border: 1px solid #ccc; padding: 5px;">String</td>
-</tr>
-<tr>
-<td style="border: 1px solid #ccc; padding: 5px;">record-version</td>
-<td style="border: 1px solid #ccc; padding: 5px;">Record version from 0 to 2,147,483,647</td>
-<td style="border: 1px solid #ccc; padding: 5px;">Integer</td>
-</tr>
-<tr>
-<td style="border: 1px solid #ccc; padding: 5px;">record-class</td>
-<td style="border: 1px solid #ccc; padding: 5px;">Record class name</td>
-<td style="border: 1px solid #ccc; padding: 5px;">String</td>
-</tr>
-<tr>
-<td style="border: 1px solid #ccc; padding: 5px;">field-name</td>
-<td style="border: 1px solid #ccc; padding: 5px;">Field name</td>
-<td style="border: 1px solid #ccc; padding: 5px;">String</td>
-</tr>
-<tr>
-<td style="border: 1px solid #ccc; padding: 5px;">field-value</td>
-<td style="border: 1px solid #ccc; padding: 5px;">Field value</td>
-<td style="border: 1px solid #ccc; padding: 5px;">Any</td>
-</tr>
-<tr>
-<td style="border: 1px solid #ccc; padding: 5px;">field-type</td>
-<td style="border: 1px solid #ccc; padding: 5px;">Optional, it's the field type: 'l'=Long, 'f'=Float, 'd'=Double, 's'=Short, 't'=Datetime, 'b'=Byte</td>
-<td style="border: 1px solid #ccc; padding: 5px;">Any</td>
-</tr>
-</table><h3>
-<a name="Example"></a>Example<a href="#Example" class="section_anchor"></a>
-</h3>
-<pre class="prettyprint">  "records": [{
+        }
+</pre>
+<table class="zebra-striped bordered-table">
+  <tr>
+    <td>
+      <strong>Parameter</strong>
+    </td>
+    <td>
+      <strong>Description</strong>
+    </td>
+    <td>
+      <strong>JSON Type</strong>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      record-type
+    </td>
+    <td>
+      Record type: d = document, b = binary, f = flat
+    </td>
+    <td>
+      String
+    </td>
+  </tr>
+  <tr>
+    <td>
+      record-id
+    </td>
+    <td>
+      <a href="concepts.html#RecordID">RecordID</a> in the format
+      <tt>#&lt;cluster-id&gt;:&lt;cluster-position&gt;</tt>
+    </td>
+    <td>
+      String
+    </td>
+  </tr>
+  <tr>
+    <td>
+      record-version
+    </td>
+    <td>
+      Record version from 0 to 2,147,483,647
+    </td>
+    <td>
+      Integer
+    </td>
+  </tr>
+  <tr>
+    <td>
+      record-class
+    </td>
+    <td>
+      Record class name
+    </td>
+    <td>
+      String
+    </td>
+  </tr>
+  <tr>
+    <td>
+      field-name
+    </td>
+    <td>
+      Field name
+    </td>
+    <td>
+      String
+    </td>
+  </tr>
+  <tr>
+    <td>
+      field-value
+    </td>
+    <td>
+      Field value
+    </td>
+    <td>
+      Any
+    </td>
+  </tr>
+  <tr>
+    <td>
+      field-type
+    </td>
+    <td>
+      Optional, it's the field type: 'l'=Long, 'f'=Float,
+      'd'=Double, 's'=Short, 't'=Datetime, 'b'=Byte
+    </td>
+    <td>
+      Any
+    </td>
+  </tr>
+</table>
+<h4>
+  <a name="Example" id="Example"></a>Example<a href="#Example"
+  class="section_anchor"></a>
+</h4>
+<pre class="prettyprint">
+  "records": [{
           "@type": "d", "@rid": "#12:476", "@version": 0, "@class": "Whiz", 
           "id": 476, 
           "date": "2011-12-09 00:00:00:000", 
@@ -272,11 +503,14 @@ layout: default
           "text": "He in office return He inside electronics for $500,000 Jay", 
           "@fieldTypes": "date=t"
         }
-  ]</pre>
-<h1>
-<a name="Full_Example"></a>Full Example<a href="#Full_Example" class="section_anchor"></a>
-</h1>
-<pre class="prettyprint">{
+  ]
+</pre>
+<h2>
+  <a name="Full_Example" id="Full_Example"></a>Full Example<a href=
+  "#Full_Example" class="section_anchor"></a>
+</h2>
+<pre class="prettyprint">
+{
   "info":{
     "name": "demo", 
     "default-cluster-id": 2, 
@@ -493,4 +727,5 @@ layout: default
           "@fieldTypes": "date=t"
         }
   ]
-}</pre>
+}
+</pre>

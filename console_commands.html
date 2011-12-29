@@ -2,206 +2,459 @@
 title: Console
 layout: default
 ---
-
- <p></p>
 <ul>
-<li><a href="#Introduction">Introduction</a></li>
-<ul>
-<li><a href="#Interactive_mode">Interactive mode</a></li>
-<li><a href="#Batch_mode">Batch mode</a></li>
+  <li>
+    <a href="#Introduction">Introduction</a>
+  </li>
+  <li style="list-style: none">
+    <ul>
+      <li>
+        <a href="#Interactive_mode">Interactive mode</a>
+      </li>
+      <li>
+        <a href="#Batch_mode">Batch mode</a>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <a href="#Console_commands">Console commands</a>
+  </li>
+  <li>
+    <a href="#Extend_the_console_with_custom_command">Extend the
+    console with custom command</a>
+  </li>
 </ul>
-<li><a href="#Console_commands">Console commands</a></li>
-<li><a href="#Extend_the_console_with_custom_command">Extend the console with custom command</a></li>
-</ul><h1>
-<a name="Introduction"></a>Introduction<a href="#Introduction" class="section_anchor"></a>
-</h1>
-<p>The OrientDB Console is a Java Application made to work against OrientDB databases and Server instances. </p>
-<p><i>NOTE: Current release of OrientDB doesn't propagate the schema changes to all the threads/clients. This is the reason why you could experience synchronization problems if these changes happen while multiple connections are opened. Waiting for the fix of this problem (<a href="http://code.google.com/p/orient/issues/detail?id=85" rel="nofollow">http://code.google.com/p/orient/issues/detail?id=85</a>) we suggest to change the schema when no connections are opened or at the database creation.</i> </p>
 <h2>
-<a name="Interactive_mode"></a>Interactive mode<a href="#Interactive_mode" class="section_anchor"></a>
+  <a name="Introduction" id="Introduction"></a>Introduction<a href=
+  "#Introduction" class="section_anchor"></a>
 </h2>
-<p>This is the default mode. Just launch the console by executing the script <strong>bin/console.sh</strong> (or <strong>bin/console.bat</strong> in MS Windows systems). Assure to have execution permission on it. </p>
-<p>Once started the console is ready to accepts commands. </p>
-<pre class="prettyprint">ORIENT database v.0.9.13 www.orientechnologies.com
+<p>
+  The OrientDB Console is a Java Application made to work against
+  OrientDB databases and Server instances.
+</p>
+<p>
+  <i>NOTE: Current release of OrientDB doesn't propagate the schema
+  changes to all the threads/clients. This is the reason why you
+  could experience synchronization problems if these changes happen
+  while multiple connections are opened. Waiting for the fix of
+  this problem (<a href=
+  "http://code.google.com/p/orient/issues/detail?id=85" rel=
+  "nofollow">http://code.google.com/p/orient/issues/detail?id=85</a>)
+  we suggest to change the schema when no connections are opened or
+  at the database creation.</i>
+</p>
+<h3>
+  <a name="Interactive_mode" id="Interactive_mode"></a>Interactive
+  mode<a href="#Interactive_mode" class="section_anchor"></a>
+</h3>
+<p>
+  This is the default mode. Just launch the console by executing
+  the script <strong>bin/console.sh</strong> (or
+  <strong>bin/console.bat</strong> in MS Windows systems). Assure
+  to have execution permission on it.
+</p>
+<p>
+  Once started the console is ready to accepts commands.
+</p>
+<pre class="prettyprint">
+ORIENT database v.0.9.13 www.orientechnologies.com
 Type 'help' to display all the commands supported.
 
-&gt;</pre>
-<p>To know all the supported commands look to <a href="#Console_Commands">commands</a>. </p>
+&gt;
+</pre>
+<p>
+  To know all the supported commands look to <a href=
+  "#Console_Commands">commands</a>.
+</p>
+<h3>
+  <a name="Batch_mode" id="Batch_mode"></a>Batch mode<a href=
+  "#Batch_mode" class="section_anchor"></a>
+</h3>
+<p>
+  To execute commands in batch mode run the
+  <strong>bin/console.sh</strong> (or
+  <strong>bin/console.bat</strong> in MS Windows systems) script
+  passing all the commands separated with semicolon ";". Example:
+</p>
+<p>
+  <tt>&gt; console.bat "connect remote:localhost/demo;select * from
+  profile"</tt>
+</p>
+<p>
+  Or call the console script passing the name of the file in text
+  format containing the list of commands to execute. Commands must
+  be separated with semicolon ";". Example:
+</p>
+<p>
+  <tt>&gt; console.bat commands.txt</tt>
+</p>
 <h2>
-<a name="Batch_mode"></a>Batch mode<a href="#Batch_mode" class="section_anchor"></a>
+  <a name="Console_commands" id="Console_commands"></a>Console
+  commands<a href="#Console_commands" class="section_anchor"></a>
 </h2>
-<p>To execute commands in batch mode run the <strong>bin/console.sh</strong> (or <strong>bin/console.bat</strong> in MS Windows systems) script passing all the commands separated with semicolon ";". Example: </p>
-<p><tt>&gt; console.bat "connect remote:localhost/demo;select * from profile"</tt> </p>
-<p>Or call the console script passing the name of the file in text format containing the list of commands to execute. Commands must be separated with semicolon ";". Example: </p>
-<p><tt>&gt; console.bat commands.txt</tt> </p>
-<h1>
-<a name="Console_commands"></a>Console commands<a href="#Console_commands" class="section_anchor"></a>
-</h1>
-<p>To know all the commands supported by the Orient console open it and type <strong>help</strong> or <strong>?</strong>. </p>
-<p></p>
-<table class="wikitable">
-<tr>
-<td style="border: 1px solid #ccc; padding: 5px;"> <strong>Command</strong> </td>
-<td style="border: 1px solid #ccc; padding: 5px;"> <strong>Description</strong> </td>
-</tr>
-<tr>
-<td style="border: 1px solid #ccc; padding: 5px;"> alter class </td>
-<td style="border: 1px solid #ccc; padding: 5px;"> Change the class schema </td>
-</tr>
-<tr>
-<td style="border: 1px solid #ccc; padding: 5px;"> alter property </td>
-<td style="border: 1px solid #ccc; padding: 5px;"> Change the class's property schema </td>
-</tr>
-<tr>
-<td style="border: 1px solid #ccc; padding: 5px;"> <a href="console_command_browse_class.html">browse class</a> </td>
-<td style="border: 1px solid #ccc; padding: 5px;"> Browses all the records of a class </td>
-</tr>
-<tr>
-<td style="border: 1px solid #ccc; padding: 5px;"> <a href="console_command_browse_cluster.html">browse cluster</a> </td>
-<td style="border: 1px solid #ccc; padding: 5px;"> Browses all the records of a cluster </td>
-</tr>
-<tr>
-<td style="border: 1px solid #ccc; padding: 5px;"> <a href="console_command_classes.html">classes</a> </td>
-<td style="border: 1px solid #ccc; padding: 5px;"> Displays all the configured classes </td>
-</tr>
-<tr>
-<td style="border: 1px solid #ccc; padding: 5px;"> <a href="console_command_clusters.html">clusters</a> </td>
-<td style="border: 1px solid #ccc; padding: 5px;"> Displays all the configured clusters </td>
-</tr>
-<tr>
-<td style="border: 1px solid #ccc; padding: 5px;"> <a href="console_command_config.html">config</a> </td>
-<td style="border: 1px solid #ccc; padding: 5px;"> Displays the configuration where the opened database is located (local or remote) </td>
-</tr>
-<tr>
-<td style="border: 1px solid #ccc; padding: 5px;"> <a href="console_command_config_get.html">config get</a> </td>
-<td style="border: 1px solid #ccc; padding: 5px;"> Returns a configuration value </td>
-</tr>
-<tr>
-<td style="border: 1px solid #ccc; padding: 5px;"> <a href="console_command_config_set.html">config set</a> </td>
-<td style="border: 1px solid #ccc; padding: 5px;"> Set a configuration value </td>
-</tr>
-<tr>
-<td style="border: 1px solid #ccc; padding: 5px;"> <a href="console_command_connect.html">connect</a> </td>
-<td style="border: 1px solid #ccc; padding: 5px;"> Connects to a database </td>
-</tr>
-<tr>
-<td style="border: 1px solid #ccc; padding: 5px;"> <a href="console_command_create_db.html">create database</a> </td>
-<td style="border: 1px solid #ccc; padding: 5px;"> Creates a new database </td>
-</tr>
-<tr>
-<td style="border: 1px solid #ccc; padding: 5px;"> <a href="console_command_create_cluster.html">create cluster</a> </td>
-<td style="border: 1px solid #ccc; padding: 5px;"> Creates a new cluster inside a database </td>
-</tr>
-<tr>
-<td style="border: 1px solid #ccc; padding: 5px;"> <a href="console_command_delete.html">delete</a> </td>
-<td style="border: 1px solid #ccc; padding: 5px;"> Deletes a record from the database using the SQL syntax. To know more about the <a href="sql_query.html">SQL syntax go here</a> </td>
-</tr>
-<tr>
-<td style="border: 1px solid #ccc; padding: 5px;"> <a href="console_command_dictionary_keys.html">dictionary keys</a> </td>
-<td style="border: 1px solid #ccc; padding: 5px;"> Displays all the keys in the database dictionary </td>
-</tr>
-<tr>
-<td style="border: 1px solid #ccc; padding: 5px;"> <a href="console_command_dictionary_get.html">dictionary get</a> </td>
-<td style="border: 1px solid #ccc; padding: 5px;"> Loookups for a record using the dictionary. If found set it as the current record </td>
-</tr>
-<tr>
-<td style="border: 1px solid #ccc; padding: 5px;"> <a href="console_command_dictionary_put.html">dictionary put</a> </td>
-<td style="border: 1px solid #ccc; padding: 5px;"> Inserts or modify an entry in the database dictionary. The entry is composed by key=String, value=record-id </td>
-</tr>
-<tr>
-<td style="border: 1px solid #ccc; padding: 5px;"> <a href="console_command_dictionary_remove.html">dictionary remove</a> </td>
-<td style="border: 1px solid #ccc; padding: 5px;"> Removes the association in the dictionary </td>
-</tr>
-<tr>
-<td style="border: 1px solid #ccc; padding: 5px;"> <a href="console_command_disconnect.html">disconnect</a> </td>
-<td style="border: 1px solid #ccc; padding: 5px;"> Disconnects from the current database </td>
-</tr>
-<tr>
-<td style="border: 1px solid #ccc; padding: 5px;"> <a href="console_command_display_record.html">display record</a> </td>
-<td style="border: 1px solid #ccc; padding: 5px;"> Displays current record's attributes </td>
-</tr>
-<tr>
-<td style="border: 1px solid #ccc; padding: 5px;"> <a href="console_command_export.html">export database</a> </td>
-<td style="border: 1px solid #ccc; padding: 5px;"> Exports a database </td>
-</tr>
-<tr>
-<td style="border: 1px solid #ccc; padding: 5px;"> <a href="console_command_export_record.html">export record</a> </td>
-<td style="border: 1px solid #ccc; padding: 5px;"> Exports a record in any of the supported format (i.e. json)</td>
-</tr>
-<tr>
-<td style="border: 1px solid #ccc; padding: 5px;"> <a href="console_command_get.html">get</a> </td>
-<td style="border: 1px solid #ccc; padding: 5px;"> Returns the value of a property </td>
-</tr>
-<tr>
-<td style="border: 1px solid #ccc; padding: 5px;"> <a href="console_command_import.html">import database</a> </td>
-<td style="border: 1px solid #ccc; padding: 5px;"> Imports a database previously exported </td>
-</tr>
-<tr>
-<td style="border: 1px solid #ccc; padding: 5px;"> <a href="console_command_info.html">info</a> </td>
-<td style="border: 1px solid #ccc; padding: 5px;"> Displays information about current status </td>
-</tr>
-<tr>
-<td style="border: 1px solid #ccc; padding: 5px;"> <a href="console_command_info.html">info class</a> </td>
-<td style="border: 1px solid #ccc; padding: 5px;"> Displays information about a class </td>
-</tr>
-<tr>
-<td style="border: 1px solid #ccc; padding: 5px;"> <a href="console_command_insert.html">insert</a> </td>
-<td style="border: 1px solid #ccc; padding: 5px;"> Inserts a new record in the current database using the SQL syntax. To know more about the <a href="sql_query.html">SQL syntax go here</a> </td>
-</tr>
-<tr>
-<td style="border: 1px solid #ccc; padding: 5px;"> <a href="console_command_declare_intent.html">declare intent</a> </td>
-<td style="border: 1px solid #ccc; padding: 5px;"> Declare an intent </td>
-</tr>
-<tr>
-<td style="border: 1px solid #ccc; padding: 5px;"> <a href="console_command_load_record.html">load record</a> </td>
-<td style="border: 1px solid #ccc; padding: 5px;"> Loads a record in memory and set it as the current one </td>
-</tr>
-<tr>
-<td style="border: 1px solid #ccc; padding: 5px;"> <a href="console_command_reload_record.html">reload record</a> </td>
-<td style="border: 1px solid #ccc; padding: 5px;"> Reloads a record in memory and set it as the current one </td>
-</tr>
-<tr>
-<td style="border: 1px solid #ccc; padding: 5px;"> <a href="console_command_profiler.html">profiler</a> </td>
-<td style="border: 1px solid #ccc; padding: 5px;"> Control the profiler </td>
-</tr>
-<tr>
-<td style="border: 1px solid #ccc; padding: 5px;"> <a href="console_command_properties.html">properties</a> </td>
-<td style="border: 1px solid #ccc; padding: 5px;"> Returns all the configured properties </td>
-</tr>
-<tr>
-<td style="border: 1px solid #ccc; padding: 5px;"> <a href="console_command_select.html">select</a> </td>
-<td style="border: 1px solid #ccc; padding: 5px;"> Executes a SQL query against the database and display the results. To know more about the <a href="sql_query.html">SQL syntax go here</a> </td>
-</tr>
-<tr>
-<td style="border: 1px solid #ccc; padding: 5px;"> <a href="console_command_set.html">set</a> </td>
-<td style="border: 1px solid #ccc; padding: 5px;"> Changes the value of a property </td>
-</tr>
-<tr>
-<td style="border: 1px solid #ccc; padding: 5px;"> truncate class </td>
-<td style="border: 1px solid #ccc; padding: 5px;"> Remove all the records of a class (by truncating all the underlying configured clusters) </td>
-</tr>
-<tr>
-<td style="border: 1px solid #ccc; padding: 5px;"> truncate cluster </td>
-<td style="border: 1px solid #ccc; padding: 5px;"> Remove all the records of a cluster </td>
-</tr>
-<tr>
-<td style="border: 1px solid #ccc; padding: 5px;"> <a href="console_command_update.html">update</a> </td>
-<td style="border: 1px solid #ccc; padding: 5px;"> Updates a record in the current database using the SQL syntax. To know more about the <a href="sql_query.html">SQL syntax go here</a> </td>
-</tr>
-<tr>
-<td style="border: 1px solid #ccc; padding: 5px;"> help </td>
-<td style="border: 1px solid #ccc; padding: 5px;"> Prints this help </td>
-</tr>
-<tr>
-<td style="border: 1px solid #ccc; padding: 5px;"> exit </td>
-<td style="border: 1px solid #ccc; padding: 5px;"> Closes the console </td>
-</tr>
-</table><h1>
-<a name="Extend_the_console_with_custom_command"></a>Extend the console with custom command<a href="#Extend_the_console_with_custom_command" class="section_anchor"></a>
-</h1>
-<p>Edit the <a href="http://www.google.com/codesearch#Q2eMNvxgD0M/trunk/tools/src/main/java/com/orientechnologies/orient/console/OConsoleDatabaseApp.java&amp;q=oconsoleda%20package:http://orient%5C.googlecode%5C.com" rel="nofollow">OConsoleDatabaseApp</a> class and add a new method. There's an auto discovering system that put the new method between the available commands. To provide a description of the command use the annotations (look below). The command name must follow the Java code convention where to separate works just use the Camel-case. </p>
-<p>So, for example, if you want to create the brand new "move cluster" command: </p>
-<pre class="prettyprint">@ConsoleCommand(description = "Move the physical location of cluster files")
+<p>
+  To know all the commands supported by the Orient console open it
+  and type <strong>help</strong> or <strong>?</strong>.
+</p>
+<table class="zebra-striped bordered-table">
+  <tr>
+    <td>
+      <strong>Command</strong>
+    </td>
+    <td>
+      <strong>Description</strong>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      alter class
+    </td>
+    <td>
+      Change the class schema
+    </td>
+  </tr>
+  <tr>
+    <td>
+      alter property
+    </td>
+    <td>
+      Change the class's property schema
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <a href="console_command_browse_class.html">browse class</a>
+    </td>
+    <td>
+      Browses all the records of a class
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <a href="console_command_browse_cluster.html">browse
+      cluster</a>
+    </td>
+    <td>
+      Browses all the records of a cluster
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <a href="console_command_classes.html">classes</a>
+    </td>
+    <td>
+      Displays all the configured classes
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <a href="console_command_clusters.html">clusters</a>
+    </td>
+    <td>
+      Displays all the configured clusters
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <a href="console_command_config.html">config</a>
+    </td>
+    <td>
+      Displays the configuration where the opened database is
+      located (local or remote)
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <a href="console_command_config_get.html">config get</a>
+    </td>
+    <td>
+      Returns a configuration value
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <a href="console_command_config_set.html">config set</a>
+    </td>
+    <td>
+      Set a configuration value
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <a href="console_command_connect.html">connect</a>
+    </td>
+    <td>
+      Connects to a database
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <a href="console_command_create_db.html">create database</a>
+    </td>
+    <td>
+      Creates a new database
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <a href="console_command_create_cluster.html">create
+      cluster</a>
+    </td>
+    <td>
+      Creates a new cluster inside a database
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <a href="console_command_delete.html">delete</a>
+    </td>
+    <td>
+      Deletes a record from the database using the SQL syntax. To
+      know more about the <a href="sql_query.html">SQL syntax go
+      here</a>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <a href="console_command_dictionary_keys.html">dictionary
+      keys</a>
+    </td>
+    <td>
+      Displays all the keys in the database dictionary
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <a href="console_command_dictionary_get.html">dictionary
+      get</a>
+    </td>
+    <td>
+      Loookups for a record using the dictionary. If found set it
+      as the current record
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <a href="console_command_dictionary_put.html">dictionary
+      put</a>
+    </td>
+    <td>
+      Inserts or modify an entry in the database dictionary. The
+      entry is composed by key=String, value=record-id
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <a href="console_command_dictionary_remove.html">dictionary
+      remove</a>
+    </td>
+    <td>
+      Removes the association in the dictionary
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <a href="console_command_disconnect.html">disconnect</a>
+    </td>
+    <td>
+      Disconnects from the current database
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <a href="console_command_display_record.html">display
+      record</a>
+    </td>
+    <td>
+      Displays current record's attributes
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <a href="console_command_export.html">export database</a>
+    </td>
+    <td>
+      Exports a database
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <a href="console_command_export_record.html">export
+      record</a>
+    </td>
+    <td>
+      Exports a record in any of the supported format (i.e. json)
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <a href="console_command_get.html">get</a>
+    </td>
+    <td>
+      Returns the value of a property
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <a href="console_command_import.html">import database</a>
+    </td>
+    <td>
+      Imports a database previously exported
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <a href="console_command_info.html">info</a>
+    </td>
+    <td>
+      Displays information about current status
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <a href="console_command_info.html">info class</a>
+    </td>
+    <td>
+      Displays information about a class
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <a href="console_command_insert.html">insert</a>
+    </td>
+    <td>
+      Inserts a new record in the current database using the SQL
+      syntax. To know more about the <a href="sql_query.html">SQL
+      syntax go here</a>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <a href="console_command_declare_intent.html">declare
+      intent</a>
+    </td>
+    <td>
+      Declare an intent
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <a href="console_command_load_record.html">load record</a>
+    </td>
+    <td>
+      Loads a record in memory and set it as the current one
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <a href="console_command_reload_record.html">reload
+      record</a>
+    </td>
+    <td>
+      Reloads a record in memory and set it as the current one
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <a href="console_command_profiler.html">profiler</a>
+    </td>
+    <td>
+      Control the profiler
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <a href="console_command_properties.html">properties</a>
+    </td>
+    <td>
+      Returns all the configured properties
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <a href="console_command_select.html">select</a>
+    </td>
+    <td>
+      Executes a SQL query against the database and display the
+      results. To know more about the <a href="sql_query.html">SQL
+      syntax go here</a>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <a href="console_command_set.html">set</a>
+    </td>
+    <td>
+      Changes the value of a property
+    </td>
+  </tr>
+  <tr>
+    <td>
+      truncate class
+    </td>
+    <td>
+      Remove all the records of a class (by truncating all the
+      underlying configured clusters)
+    </td>
+  </tr>
+  <tr>
+    <td>
+      truncate cluster
+    </td>
+    <td>
+      Remove all the records of a cluster
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <a href="console_command_update.html">update</a>
+    </td>
+    <td>
+      Updates a record in the current database using the SQL
+      syntax. To know more about the <a href="sql_query.html">SQL
+      syntax go here</a>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      help
+    </td>
+    <td>
+      Prints this help
+    </td>
+  </tr>
+  <tr>
+    <td>
+      exit
+    </td>
+    <td>
+      Closes the console
+    </td>
+  </tr>
+</table>
+<h2>
+  <a name="Extend_the_console_with_custom_command" id=
+  "Extend_the_console_with_custom_command"></a>Extend the console
+  with custom command<a href=
+  "#Extend_the_console_with_custom_command" class=
+  "section_anchor"></a>
+</h2>
+<p>
+  Edit the <a href=
+  "http://www.google.com/codesearch#Q2eMNvxgD0M/trunk/tools/src/main/java/com/orientechnologies/orient/console/OConsoleDatabaseApp.java&amp;q=oconsoleda%20package:http://orient%5C.googlecode%5C.com"
+  rel="nofollow">OConsoleDatabaseApp</a> class and add a new
+  method. There's an auto discovering system that put the new
+  method between the available commands. To provide a description
+  of the command use the annotations (look below). The command name
+  must follow the Java code convention where to separate works just
+  use the Camel-case.
+</p>
+<p>
+  So, for example, if you want to create the brand new "move
+  cluster" command:
+</p>
+<pre class="prettyprint">
+@ConsoleCommand(description = "Move the physical location of cluster files")
 public void moveCluster(
   @ConsoleParameter(name = "cluster-name", description = "The name or the id of the cluster to remove") String iClusterName,
   @ConsoleParameter(name = "target-path", description = "path of the new position where to move the cluster files") String iNewPath ) {
@@ -209,12 +462,24 @@ public void moveCluster(
   checkCurrentDatabase(); // THE DB MUST BE OPENED
 
   System.out.println("Moving cluster '" + iClusterName + "' to path " + iNewPath + "...");
-}</pre>
-<p>If you type: </p>
-<pre class="prettyprint">&gt; console
-&gt; help</pre>
-<p>Your new command will appear. And now try: </p>
-<pre class="prettyprint">&gt; move cluster foo /temp
+}
+</pre>
+<p>
+  If you type:
+</p>
+<pre class="prettyprint">
+&gt; console
+&gt; help
+</pre>
+<p>
+  Your new command will appear. And now try:
+</p>
+<pre class="prettyprint">
+&gt; move cluster foo /temp
 
-Moving cluster 'foo' to path /temp...</pre>
-<p>Don't miss to contribute your command to the OrientDB community! ;-) </p>
+Moving cluster 'foo' to path /temp...
+</pre>
+<p>
+  Don't miss to contribute your command to the OrientDB community!
+  ;-)
+</p>
