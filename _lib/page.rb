@@ -3,10 +3,6 @@ require 'nokogiri'
 require 'tidy_ffi'
 require 'fileutils'
 
-TidyFFI::Tidy.default_options.tidy_mark = false
-TidyFFI::Tidy.default_options.indent = "yes"
-TidyFFI::Tidy.default_options.doctype = "omit"
-
 class Page
 
   attr_reader :original_url, :url
@@ -19,6 +15,18 @@ class Page
   MARK = '/p/orient/wiki/' unless const_defined?(:MARK)
   ROOT_URL = "#{SITE}#{MARK}Main?tm=6" unless const_defined?(:ROOT_URL)
   CONTENT_ID = 'wikimaincol' unless const_defined?(:CONTENT_ID)
+  TIDY_OPTIONS = {
+    :numeric_entities   => 1,
+    :output_html        => 1,
+    :merge_divs         => 0,
+    :merge_spans        => 0,
+    :join_styles        => 0,
+    :clean              => 1,
+    :indent             => 1,
+    :wrap               => 0,
+    :drop_empty_paras   => 0,
+    :literal_attributes => 1
+  }
 
   def initialize(name, original_url, title = nil)
     @name         = name
@@ -177,7 +185,7 @@ class Page
     log "Saving generated : #{path} ..."
     File.open(path, "w") do |f|
       f.puts "---\ntitle: #{title}\nlayout: default\n---"
-      f.puts TidyFFI::Tidy.new(doc.to_html).clean
+      f.puts TidyFFI::Tidy.new(doc.to_html, TIDY_OPTIONS).clean
     end
   end
 
