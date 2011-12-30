@@ -2,414 +2,291 @@
 title: OrientDB Studio app
 layout: default
 ---
-<ul>
-  <li>
-    <a href="#Introduction">Introduction</a>
-  </li>
-  <li>
-    <a href="#Getting_Started">Getting Started</a>
-  </li>
-  <li>
-    <a href="#Database_information">Database information</a>
-  </li>
-  <li style="list-style: none">
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<html>
+  <head>
+    <meta name="generator" content="HTML Tidy for Mac OS X (vers 31 October 2006 - Apple Inc. build 15.6), see www.w3.org">
+    <title></title>
+    <style type="text/css">
+li.c1 {list-style: none}
+    </style>
+  </head>
+  <body>
+    <p></p>
     <ul>
       <li>
-        <a href="#Schema">Schema</a>
+        <a href="#Introduction">Introduction</a>
       </li>
       <li>
-        <a href="#Structure">Structure</a>
+        <a href="#Getting_Started">Getting Started</a>
       </li>
       <li>
-        <a href="#Security">Security</a>
+        <a href="#Database_information">Database information</a>
+      </li>
+      <li class="c1">
+        <ul>
+          <li>
+            <a href="#Schema">Schema</a>
+          </li>
+          <li>
+            <a href="#Structure">Structure</a>
+          </li>
+          <li>
+            <a href="#Security">Security</a>
+          </li>
+        </ul>
+      </li>
+      <li>
+        <a href="#Working_with_records">Working with records</a>
+      </li>
+      <li class="c1">
+        <ul>
+          <li>
+            <a href="#Execute_a_query">Execute a query</a>
+          </li>
+          <li>
+            <a href="#Live_edit">Live edit</a>
+          </li>
+          <li>
+            <a href="#Delete_a_record">Delete a record</a>
+          </li>
+          <li>
+            <a href="#Create_a_new_record">Create a new record</a>
+          </li>
+          <li>
+            <a href="#Execute_an_arbitrary_SQL_command">Execute an arbitrary SQL command</a>
+          </li>
+        </ul>
+      </li>
+      <li>
+        <a href="#Execute_HTTP_RESTful_raw_commands">Execute HTTP RESTful raw commands</a>
+      </li>
+      <li>
+        <a href="#Monitor_the_server_status">Monitor the server status</a>
+      </li>
+      <li class="c1">
+        <ul>
+          <li>
+            <a href="#Active_Connections">Active Connections</a>
+          </li>
+          <li>
+            <a href="#Profiler">Profiler</a>
+          </li>
+        </ul>
       </li>
     </ul>
-  </li>
-  <li>
-    <a href="#Working_with_records">Working with records</a>
-  </li>
-  <li style="list-style: none">
+    <h2>
+      <a name="Introduction" id="Introduction"></a>Introduction<a href="#Introduction" class="section_anchor"></a>
+    </h2>
+    <p>
+      OrientDB Studio is a client-side web application built using HTML, CSS and jQuery. It executes commands against a OrientDB Server using the <a href="orient_db_rest.html">OrientDB HTTP REST protocol</a> and Ajax calls. If you want to try it out, connect to the <a href="http://www.moobilis.com:2480/" rel="nofollow">Online OrientDB Studio</a> with a demo database.
+    </p>
+    <h2>
+      <a name="Getting_Started" id="Getting_Started"></a>Getting Started<a href="#Getting_Started" class="section_anchor"></a>
+    </h2>
+    <p>
+      OrientDB server has a lightweight built-in HTTP server that responds REST JSON requests for managing data. It also provides the Studio admin interface which is based on JavaScript and it does not depend on any server-side templates.
+    </p>
+    <p>
+      To get started, simply point your browser to <a href="http://localhost:2480/" rel="nofollow">http://localhost:2480/</a>. The Studio provides a form for connecting to the server where you can provide both the URL and the database name to be used, the defaults being "localhost" and "demo", respectively.
+    </p>
+    <p>
+      By default databases are created with users "admin", "writer" and "reader" where the password is equals to the name. If you've just created a new database login as admin/admin to have the full control of the database, but don't miss to change default passwords. For more information look at the Security page.
+    </p>
+    <h2>
+      <a name="Database_information" id="Database_information"></a>Database information<a href="#Database_information" class="section_anchor"></a>
+    </h2>
+    <p>
+      Once connected, the first "Database" tab contains information about currently-open database.
+    </p>
+    <h3>
+      <a name="Schema" id="Schema"></a>Schema<a href="#Schema" class="section_anchor"></a>
+    </h3>
+    <p>
+      Even though Orient is a schema-less database you can declare classes (similar to Relational tables) with properties. Each property can have constraints such as min, max, not null and mandatory. In this way you can have schema-less, full-schema or partial-schema class modes.
+    </p>
+    <p>
+      The OrientDB Studio currently only supports adding and removing class properties. Creation of classes will be added at a future date.
+    </p>
+    <p>
+      <img src="http://www.orientechnologies.com/images/orientdb-studio-schema.png">
+    </p>
+    <h3>
+      <a name="Structure" id="Structure"></a>Structure<a href="#Structure" class="section_anchor"></a>
+    </h3>
+    <p>
+      This represents the <a href="concepts.html#Data_Segment">Data segments</a>, the <a href="concepts.html#Cluster">Clusters</a> and the Transaction log segment that are part of the <a href="concepts.html#Storage">Storage</a>. Each of the <a href="concepts.html#Cluster">Clusters</a> contains records. If you see no records within a given cluster, it is most probable that you don't have the necessary authorization for this. Typically, cluster metadata is visible only to the "admin" user.
+    </p>
+    <p>
+      <img src="http://www.orientechnologies.com/images/orientdb-studio-structure.png">
+    </p>
+    <h3>
+      <a name="Security" id="Security"></a>Security<a href="#Security" class="section_anchor"></a>
+    </h3>
+    <p>
+      Orient supports a flexible mechanism of user profiles. Each <strong>user</strong> can have one or more <strong>roles</strong>. Each <strong>roles</strong> can have multiple <strong>rules</strong>. Rule are comprised of the target <strong>resource</strong> and the operation allowed. Operations currently supported are:
+    </p>
     <ul>
       <li>
-        <a href="#Execute_a_query">Execute a query</a>
+        <strong>NONE</strong>, <i>no</i> permission on the target resource
       </li>
       <li>
-        <a href="#Live_edit">Live edit</a>
+        <strong>CREATE</strong>, permission to <i>create</i> the target resource
       </li>
       <li>
-        <a href="#Delete_a_record">Delete a record</a>
+        <strong>READ</strong>, permission to <i>read</i> the target resource
       </li>
       <li>
-        <a href="#Create_a_new_record">Create a new record</a>
+        <strong>UPDATE</strong>, permission to <i>update</i> the target resource
       </li>
       <li>
-        <a href="#Execute_an_arbitrary_SQL_command">Execute an
-        arbitrary SQL command</a>
+        <strong>DELETE</strong>, permission to <i>delete</i> the target resource
+      </li>
+      <li>
+        <strong>ALL</strong>, <i>full</i> permissions (all the permissions listed above)
       </li>
     </ul>
-  </li>
-  <li>
-    <a href="#Execute_HTTP_RESTful_raw_commands">Execute HTTP
-    RESTful raw commands</a>
-  </li>
-  <li>
-    <a href="#Monitor_the_server_status">Monitor the server
-    status</a>
-  </li>
-  <li style="list-style: none">
+    <p>
+      <img src="http://www.orientechnologies.com/images/orientdb-studio-security.png">
+    </p>
+    <h2>
+      <a name="Working_with_records" id="Working_with_records"></a>Working with records<a href="#Working_with_records" class="section_anchor"></a>
+    </h2>
+    <h3>
+      <a name="Execute_a_query" id="Execute_a_query"></a>Execute a query<a href="#Execute_a_query" class="section_anchor"></a>
+    </h3>
+    <p>
+      To execute a query against the database, type your request in the lower text area of the "Query" tab. The supported language is an extension of standard SQL. To see the full syntax look at <a href="sql_query.html">SQL Query language</a>. By default, the query result set is limited to 20 items. Set this to 0 to remove this limit but beware of large result sets; the reponse might be very slow on some browsers.
+    </p>
+    <p>
+      <img src="http://www.orientechnologies.com/images/orientdb-studio-query.png">
+    </p>
+    <h3>
+      <a name="Live_edit" id="Live_edit"></a>Live edit<a href="#Live_edit" class="section_anchor"></a>
+    </h3>
+    <p>
+      Once a query has been executed, you can edit the record content inline by clicking on the row of the table. When finished editing, just press the ENTER key and the record will be updated. Check the output message on the bottom of the page to make sure that the record has been updated correctly. To abort editing, press the ESC key.
+    </p>
+    <p>
+      <img src="http://www.orientechnologies.com/images/orientdb-studio-editrecord.png">
+    </p>
+    <h3>
+      <a name="Delete_a_record" id="Delete_a_record"></a>Delete a record<a href="#Delete_a_record" class="section_anchor"></a>
+    </h3>
+    <p>
+      Once a query has been successfully executed, you can delete a record by selecting it in the result table and pressing the "Delete" button. Check the output message on the bottom of the page to check that the record has been deleted correctly.
+    </p>
+    <h3>
+      <a name="Create_a_new_record" id="Create_a_new_record"></a>Create a new record<a href="#Create_a_new_record" class="section_anchor"></a>
+    </h3>
+    <p>
+      Since Orient is a schema-less database you can create arbitrary fields in each record. To do this, use the Raw Command. If you want to create a new record similar to an existing one, follow these steps:
+    </p>
+    <ul>
+      <li>Execute a query against the class you want to create, e.g. profile
+      </li>
+      <li>Press the "New record" button and a new form will apear, showing the fields retrieved in the last query. Fill in the values and click on the "Submit" button. Make sure that you choose the class in the "class" field of the document record you're creating.
+      </li>
+    </ul>
+    <p>
+      <img src="http://www.orientechnologies.com/images/orientdb-studio-newrecord.png">
+    </p>
+    <h3>
+      <a name="Execute_an_arbitrary_SQL_command" id="Execute_an_arbitrary_SQL_command"></a>Execute an arbitrary SQL command<a href="#Execute_an_arbitrary_SQL_command" class="section_anchor"></a>
+    </h3>
+    <p>
+      Although OrientDB is a NoSQL dbms, it supports a subset of SQL with some extensions to handle documents. The user must be authorized to execute SQL commands (check Users and Roles).
+    </p>
     <ul>
       <li>
-        <a href="#Active_Connections">Active Connections</a>
+        <a href="sql.html">Full syntax of SQL commands</a>
       </li>
       <li>
-        <a href="#Profiler">Profiler</a>
+        <a href="sql_where.html">Quick reference of SQL operators</a>
       </li>
     </ul>
-  </li>
-</ul>
-<h2>
-  <a name="Introduction" id="Introduction"></a>Introduction<a href=
-  "#Introduction" class="section_anchor"></a>
-</h2>
-<p>
-  OrientDB Studio is a client-side web application built using
-  HTML, CSS and jQuery. It executes commands against a OrientDB
-  Server using the <a href="orient_db_rest.html">OrientDB HTTP REST
-  protocol</a> and Ajax calls. If you want to try it out, connect
-  to the <a href="http://www.moobilis.com:2480/" rel=
-  "nofollow">Online OrientDB Studio</a> with a demo database.
-</p>
-<h2>
-  <a name="Getting_Started" id="Getting_Started"></a>Getting
-  Started<a href="#Getting_Started" class="section_anchor"></a>
-</h2>
-<p>
-  OrientDB server has a lightweight built-in HTTP server that
-  responds REST JSON requests for managing data. It also provides
-  the Studio admin interface which is based on JavaScript and it
-  does not depend on any server-side templates.
-</p>
-<p>
-  To get started, simply point your browser to <a href=
-  "http://localhost:2480/" rel=
-  "nofollow">http://localhost:2480/</a>. The Studio provides a form
-  for connecting to the server where you can provide both the URL
-  and the database name to be used, the defaults being "localhost"
-  and "demo", respectively.
-</p>
-<p>
-  By default databases are created with users "admin", "writer" and
-  "reader" where the password is equals to the name. If you've just
-  created a new database login as admin/admin to have the full
-  control of the database, but don't miss to change default
-  passwords. For more information look at the Security page.
-</p>
-<h2>
-  <a name="Database_information" id=
-  "Database_information"></a>Database information<a href=
-  "#Database_information" class="section_anchor"></a>
-</h2>
-<p>
-  Once connected, the first "Database" tab contains information
-  about currently-open database.
-</p>
-<h3>
-  <a name="Schema" id="Schema"></a>Schema<a href="#Schema" class=
-  "section_anchor"></a>
-</h3>
-<p>
-  Even though Orient is a schema-less database you can declare
-  classes (similar to Relational tables) with properties. Each
-  property can have constraints such as min, max, not null and
-  mandatory. In this way you can have schema-less, full-schema or
-  partial-schema class modes.
-</p>
-<p>
-  The OrientDB Studio currently only supports adding and removing
-  class properties. Creation of classes will be added at a future
-  date.
-</p>
-<p>
-  <img src=
-  "http://www.orientechnologies.com/images/orientdb-studio-schema.png">
-</p>
-<h3>
-  <a name="Structure" id="Structure"></a>Structure<a href=
-  "#Structure" class="section_anchor"></a>
-</h3>
-<p>
-  This represents the <a href="concepts.html#Data_Segment">Data
-  segments</a>, the <a href="concepts.html#Cluster">Clusters</a>
-  and the Transaction log segment that are part of the <a href=
-  "concepts.html#Storage">Storage</a>. Each of the <a href=
-  "concepts.html#Cluster">Clusters</a> contains records. If you see
-  no records within a given cluster, it is most probable that you
-  don't have the necessary authorization for this. Typically,
-  cluster metadata is visible only to the "admin" user.
-</p>
-<p>
-  <img src=
-  "http://www.orientechnologies.com/images/orientdb-studio-structure.png">
-</p>
-<h3>
-  <a name="Security" id="Security"></a>Security<a href="#Security"
-  class="section_anchor"></a>
-</h3>
-<p>
-  Orient supports a flexible mechanism of user profiles. Each
-  <strong>user</strong> can have one or more
-  <strong>roles</strong>. Each <strong>roles</strong> can have
-  multiple <strong>rules</strong>. Rule are comprised of the target
-  <strong>resource</strong> and the operation allowed. Operations
-  currently supported are:
-</p>
-<ul>
-  <li>
-    <strong>NONE</strong>, <i>no</i> permission on the target
-    resource
-  </li>
-  <li>
-    <strong>CREATE</strong>, permission to <i>create</i> the target
-    resource
-  </li>
-  <li>
-    <strong>READ</strong>, permission to <i>read</i> the target
-    resource
-  </li>
-  <li>
-    <strong>UPDATE</strong>, permission to <i>update</i> the target
-    resource
-  </li>
-  <li>
-    <strong>DELETE</strong>, permission to <i>delete</i> the target
-    resource
-  </li>
-  <li>
-    <strong>ALL</strong>, <i>full</i> permissions (all the
-    permissions listed above)
-  </li>
-</ul>
-<p>
-  <img src=
-  "http://www.orientechnologies.com/images/orientdb-studio-security.png">
-</p>
-<h2>
-  <a name="Working_with_records" id=
-  "Working_with_records"></a>Working with records<a href=
-  "#Working_with_records" class="section_anchor"></a>
-</h2>
-<h3>
-  <a name="Execute_a_query" id="Execute_a_query"></a>Execute a
-  query<a href="#Execute_a_query" class="section_anchor"></a>
-</h3>
-<p>
-  To execute a query against the database, type your request in the
-  lower text area of the "Query" tab. The supported language is an
-  extension of standard SQL. To see the full syntax look at
-  <a href="sql_query.html">SQL Query language</a>. By default, the
-  query result set is limited to 20 items. Set this to 0 to remove
-  this limit but beware of large result sets; the reponse might be
-  very slow on some browsers.
-</p>
-<p>
-  <img src=
-  "http://www.orientechnologies.com/images/orientdb-studio-query.png">
-</p>
-<h3>
-  <a name="Live_edit" id="Live_edit"></a>Live edit<a href=
-  "#Live_edit" class="section_anchor"></a>
-</h3>
-<p>
-  Once a query has been executed, you can edit the record content
-  inline by clicking on the row of the table. When finished
-  editing, just press the ENTER key and the record will be updated.
-  Check the output message on the bottom of the page to make sure
-  that the record has been updated correctly. To abort editing,
-  press the ESC key.
-</p>
-<p>
-  <img src=
-  "http://www.orientechnologies.com/images/orientdb-studio-editrecord.png">
-</p>
-<h3>
-  <a name="Delete_a_record" id="Delete_a_record"></a>Delete a
-  record<a href="#Delete_a_record" class="section_anchor"></a>
-</h3>
-<p>
-  Once a query has been successfully executed, you can delete a
-  record by selecting it in the result table and pressing the
-  "Delete" button. Check the output message on the bottom of the
-  page to check that the record has been deleted correctly.
-</p>
-<h3>
-  <a name="Create_a_new_record" id="Create_a_new_record"></a>Create
-  a new record<a href="#Create_a_new_record" class=
-  "section_anchor"></a>
-</h3>
-<p>
-  Since Orient is a schema-less database you can create arbitrary
-  fields in each record. To do this, use the Raw Command. If you
-  want to create a new record similar to an existing one, follow
-  these steps:
-</p>
-<ul>
-  <li>Execute a query against the class you want to create, e.g.
-  profile
-  </li>
-  <li>Press the "New record" button and a new form will apear,
-  showing the fields retrieved in the last query. Fill in the
-  values and click on the "Submit" button. Make sure that you
-  choose the class in the "class" field of the document record
-  you're creating.
-  </li>
-</ul>
-<p>
-  <img src=
-  "http://www.orientechnologies.com/images/orientdb-studio-newrecord.png">
-</p>
-<h3>
-  <a name="Execute_an_arbitrary_SQL_command" id=
-  "Execute_an_arbitrary_SQL_command"></a>Execute an arbitrary SQL
-  command<a href="#Execute_an_arbitrary_SQL_command" class=
-  "section_anchor"></a>
-</h3>
-<p>
-  Although OrientDB is a NoSQL dbms, it supports a subset of SQL
-  with some extensions to handle documents. The user must be
-  authorized to execute SQL commands (check Users and Roles).
-</p>
-<ul>
-  <li>
-    <a href="sql.html">Full syntax of SQL commands</a>
-  </li>
-  <li>
-    <a href="sql_where.html">Quick reference of SQL operators</a>
-  </li>
-</ul>
-<p>
-  <img src=
-  "http://www.orientechnologies.com/images/orientdb-studio-command.png">
-</p>
-<h2>
-  <a name="Execute_HTTP_RESTful_raw_commands" id=
-  "Execute_HTTP_RESTful_raw_commands"></a>Execute HTTP RESTful raw
-  commands<a href="#Execute_HTTP_RESTful_raw_commands" class=
-  "section_anchor"></a>
-</h2>
-<p>
-  OrientDB Studio uses the <a href="orient_db_rest.html">OrientDB
-  HTTP REST protocol</a> to communicate with OrientDB Server
-  instances. You can execute any supported command against the
-  Server directly using an Internet Browser (e.g. Mozilla Firefox,
-  Google Chrome, Apple Safari, Microsoft Internet Explorer, etc.)
-  or by using the "Raw Access".
-</p>
-<p>
-  An example of a simple query executed at raw level is shown
-  below. The results are always in <a href=
-  "http://en.wikipedia.org/wiki/JSON" rel="nofollow">JSON</a>
-  format and appear in the middle of the page.
-</p>
-<p>
-  <img src=
-  "http://www.orientechnologies.com/images/orientdb-studio-raw.png">
-</p>
-<h2>
-  <a name="Monitor_the_server_status" id=
-  "Monitor_the_server_status"></a>Monitor the server status<a href=
-  "#Monitor_the_server_status" class="section_anchor"></a>
-</h2>
-<p>
-  To monitor the server status and all active connections, click on
-  the tab "Server". This is the first prototype of server console.
-  Other interesting features will be added in the near future.
-</p>
-<h3>
-  <a name="Active_Connections" id="Active_Connections"></a>Active
-  Connections<a href="#Active_Connections" class=
-  "section_anchor"></a>
-</h3>
-<p>
-  This panel shows all active connections in real time. Each
-  connection has attributes useful to monitor and tune the server:
-</p>
-<ul>
-  <li>
-    <strong>Id</strong>: a unique connection id. Ids are
-    sequential.
-  </li>
-  <li>
-    <strong>Remote Client</strong>: as remote ip address and port
-    of the client
-  </li>
-  <li>
-    <strong>Database</strong>: the database opened by the
-    connection. HTTP connections acquire and release the database
-    immediately, so this field will normally be empty
-  </li>
-  <li>
-    <strong>User</strong>: the name of user using the database
-  </li>
-  <li>
-    <strong>Protocol</strong>: <strong>Binary-DB</strong> means a
-    binary connection such as Orient Console and pure Java clients;
-    <strong>HTTP-DB</strong> means HTTP RESTful connections and the
-    OrientDB Studio itself
-  </li>
-  <li>
-    <strong>Total requests</strong>: the total number of requests
-    handled by the connection. Usually, for HTTP connections this
-    will be a small number since such connections die after a few
-    seconds
-  </li>
-  <li>
-    <strong>Command Info</strong>: the command the connection is
-    executing. <strong>Listening</strong> means that the connection
-    is waiting for a new command from the client
-  </li>
-  <li>
-    <strong>Command Detail</strong>: if the connection is executing
-    a command, this provides further details if any, e.g. the SQL
-    query
-  </li>
-  <li>
-    <strong>Last Command When</strong>: the date/time of the last
-    executed command
-  </li>
-  <li>
-    <strong>Last Command Info</strong>: the last command executed
-  </li>
-  <li>
-    <strong>Last Command Detail</strong>: details, if any, of the
-    last command executed
-  </li>
-  <li>
-    <strong>Last Execution Time</strong>: the time in milliseconds
-    for the last command executed
-  </li>
-  <li>
-    <strong>Total Working Time</strong>: the total time in
-    milliseconds spent for all the commands executed on this
-    connection
-  </li>
-  <li>
-    <strong>Connected since</strong>: the date-time when the
-    connection was created
-  </li>
-</ul>
-<p>
-  <img src=
-  "http://www.orientechnologies.com/images/orientdb-studio-connections.png">
-</p>
-<h3>
-  <a name="Profiler" id="Profiler"></a>Profiler<a href="#Profiler"
-  class="section_anchor"></a>
-</h3>
-<p>
-  Contains statistics and measurements about the internal state of
-  OrientDB Server. This is useful for fine tuning.
-</p>
-<p>
-  <img src=
-  "http://www.orientechnologies.com/images/orientdb-studio-profiler.png">
-</p>
+    <p>
+      <img src="http://www.orientechnologies.com/images/orientdb-studio-command.png">
+    </p>
+    <h2>
+      <a name="Execute_HTTP_RESTful_raw_commands" id="Execute_HTTP_RESTful_raw_commands"></a>Execute HTTP RESTful raw commands<a href="#Execute_HTTP_RESTful_raw_commands" class="section_anchor"></a>
+    </h2>
+    <p>
+      OrientDB Studio uses the <a href="orient_db_rest.html">OrientDB HTTP REST protocol</a> to communicate with OrientDB Server instances. You can execute any supported command against the Server directly using an Internet Browser (e.g. Mozilla Firefox, Google Chrome, Apple Safari, Microsoft Internet Explorer, etc.) or by using the "Raw Access".
+    </p>
+    <p>
+      An example of a simple query executed at raw level is shown below. The results are always in <a href="http://en.wikipedia.org/wiki/JSON" rel="nofollow">JSON</a> format and appear in the middle of the page.
+    </p>
+    <p>
+      <img src="http://www.orientechnologies.com/images/orientdb-studio-raw.png">
+    </p>
+    <h2>
+      <a name="Monitor_the_server_status" id="Monitor_the_server_status"></a>Monitor the server status<a href="#Monitor_the_server_status" class="section_anchor"></a>
+    </h2>
+    <p>
+      To monitor the server status and all active connections, click on the tab "Server". This is the first prototype of server console. Other interesting features will be added in the near future.
+    </p>
+    <h3>
+      <a name="Active_Connections" id="Active_Connections"></a>Active Connections<a href="#Active_Connections" class="section_anchor"></a>
+    </h3>
+    <p>
+      This panel shows all active connections in real time. Each connection has attributes useful to monitor and tune the server:
+    </p>
+    <ul>
+      <li>
+        <strong>Id</strong>: a unique connection id. Ids are sequential.
+      </li>
+      <li>
+        <strong>Remote Client</strong>: as remote ip address and port of the client
+      </li>
+      <li>
+        <strong>Database</strong>: the database opened by the connection. HTTP connections acquire and release the database immediately, so this field will normally be empty
+      </li>
+      <li>
+        <strong>User</strong>: the name of user using the database
+      </li>
+      <li>
+        <strong>Protocol</strong>: <strong>Binary-DB</strong> means a binary connection such as Orient Console and pure Java clients; <strong>HTTP-DB</strong> means HTTP RESTful connections and the OrientDB Studio itself
+      </li>
+      <li>
+        <strong>Total requests</strong>: the total number of requests handled by the connection. Usually, for HTTP connections this will be a small number since such connections die after a few seconds
+      </li>
+      <li>
+        <strong>Command Info</strong>: the command the connection is executing. <strong>Listening</strong> means that the connection is waiting for a new command from the client
+      </li>
+      <li>
+        <strong>Command Detail</strong>: if the connection is executing a command, this provides further details if any, e.g. the SQL query
+      </li>
+      <li>
+        <strong>Last Command When</strong>: the date/time of the last executed command
+      </li>
+      <li>
+        <strong>Last Command Info</strong>: the last command executed
+      </li>
+      <li>
+        <strong>Last Command Detail</strong>: details, if any, of the last command executed
+      </li>
+      <li>
+        <strong>Last Execution Time</strong>: the time in milliseconds for the last command executed
+      </li>
+      <li>
+        <strong>Total Working Time</strong>: the total time in milliseconds spent for all the commands executed on this connection
+      </li>
+      <li>
+        <strong>Connected since</strong>: the date-time when the connection was created
+      </li>
+    </ul>
+    <p>
+      <img src="http://www.orientechnologies.com/images/orientdb-studio-connections.png">
+    </p>
+    <h3>
+      <a name="Profiler" id="Profiler"></a>Profiler<a href="#Profiler" class="section_anchor"></a>
+    </h3>
+    <p>
+      Contains statistics and measurements about the internal state of OrientDB Server. This is useful for fine tuning.
+    </p>
+    <p>
+      <img src="http://www.orientechnologies.com/images/orientdb-studio-profiler.png">
+    </p>
+  </body>
+</html>

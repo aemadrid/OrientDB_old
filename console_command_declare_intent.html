@@ -1,46 +1,54 @@
 ---
 title: Declare Intent
 layout: default
+bc_1_name: console_commands
+bc_1_title: Console
 ---
-<h2>
-  <a name="Declare_intent" id="Declare_intent"></a>Declare
-  intent<a href="#Declare_intent" class="section_anchor"></a>
-</h2>
-<p>
-  Declare an intent on current database. Intents are a way to tell
-  to OrientDB what you're going to do.
-</p>
-<h3>
-  <a name="Syntax" id="Syntax"></a>Syntax<a href="#Syntax" class=
-  "section_anchor"></a>
-</h3>
-<pre class="prettyprint">
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<html>
+  <head>
+    <meta name="generator" content="HTML Tidy for Mac OS X (vers 31 October 2006 - Apple Inc. build 15.6), see www.w3.org">
+    <title></title>
+    <style type="text/css">
+li.c1 {list-style: none}
+    </style>
+  </head>
+  <body>
+    <h2>
+      <a name="Declare_intent" id="Declare_intent"></a>Declare intent<a href="#Declare_intent" class="section_anchor"></a>
+    </h2>
+    <p>
+      Declare an intent on current database. Intents are a way to tell to OrientDB what you're going to do.
+    </p>
+    <h3>
+      <a name="Syntax" id="Syntax"></a>Syntax<a href="#Syntax" class="section_anchor"></a>
+    </h3>
+    <pre class="prettyprint">
 declare intent &lt;intent-name&gt;
 </pre>
-<p>
-  Where:
-</p>
-<ul>
-  <li>intent-name The name of the intent. "null" means remove the
-  current intent. Supported ones are:
-  </li>
-  <li style="list-style: none">
+    <p>
+      Where:
+    </p>
     <ul>
-      <li>massiveinsert
+      <li>intent-name The name of the intent. "null" means remove the current intent. Supported ones are:
       </li>
-      <li>massiveread
+      <li class="c1">
+        <ul>
+          <li>massiveinsert
+          </li>
+          <li>massiveread
+          </li>
+        </ul>
       </li>
     </ul>
-  </li>
-</ul>
-<h3>
-  <a name="Example" id="Example"></a>Example<a href="#Example"
-  class="section_anchor"></a>
-</h3>
-<pre class="prettyprint">
+    <h3>
+      <a name="Example" id="Example"></a>Example<a href="#Example" class="section_anchor"></a>
+    </h3>
+    <pre class="prettyprint">
 &gt; declare intent massiveinsert
 </pre>
-<p>
-  This is a command of the Orient console. To know all the commands
-  go to <a href="console_commands.html">Console commands</a>.
-</p>
+    <p>
+      This is a command of the Orient console. To know all the commands go to <a href="console_commands.html">Console commands</a>.
+    </p>
+  </body>
+</html>

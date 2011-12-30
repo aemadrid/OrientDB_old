@@ -36,6 +36,13 @@ body {
   margin: -20px -20px 20px;
 }
 
+ul.breadcrumb {
+  border-top-style: none;
+  margin-top: -20px;
+  margin-left: -20px;
+  margin-right: -20px;
+}
+
 /* Styles you shouldn't keep as they are for displaying this base example only */
 /*
 .content .span10,

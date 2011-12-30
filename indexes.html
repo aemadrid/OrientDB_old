@@ -2,517 +2,438 @@
 title: Indexes
 layout: default
 ---
-<ul>
-  <li>
-    <a href="#Introduction">Introduction</a>
-  </li>
-  <li style="list-style: none">
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<html>
+  <head>
+    <meta name="generator" content="HTML Tidy for Mac OS X (vers 31 October 2006 - Apple Inc. build 15.6), see www.w3.org">
+    <title></title>
+    <style type="text/css">
+li.c1 {list-style: none}
+    </style>
+  </head>
+  <body>
+    <p></p>
     <ul>
       <li>
-        <a href="#Index_target">Index target</a>
+        <a href="#Introduction">Introduction</a>
+      </li>
+      <li class="c1">
+        <ul>
+          <li>
+            <a href="#Index_target">Index target</a>
+          </li>
+          <li>
+            <a href="#Index_types">Index types</a>
+          </li>
+          <li>
+            <a href="#Dictionary">Dictionary</a>
+          </li>
+        </ul>
       </li>
       <li>
-        <a href="#Index_types">Index types</a>
+        <a href="#Create_an_index">Create an index</a>
       </li>
       <li>
-        <a href="#Dictionary">Dictionary</a>
+        <a href="#Drop_an_index">Drop an index</a>
+      </li>
+      <li>
+        <a href="#Lookup">Lookup</a>
+      </li>
+      <li>
+        <a href="#Put_an_entry">Put an entry</a>
+      </li>
+      <li>
+        <a href="#Query_range">Query range</a>
+      </li>
+      <li>
+        <a href="#Remove_entries_by_key">Remove entries by key</a>
+      </li>
+      <li>
+        <a href="#Remove_an_entry">Remove an entry</a>
+      </li>
+      <li>
+        <a href="#Remove_all_references_to_a_record">Remove all references to a record</a>
+      </li>
+      <li>
+        <a href="#Count_all_the_entries">Count all the entries</a>
+      </li>
+      <li>
+        <a href="#Retrieve_all_the_keys">Retrieve all the keys</a>
+      </li>
+      <li>
+        <a href="#Retrieve_all_the_entries">Retrieve all the entries</a>
+      </li>
+      <li>
+        <a href="#Clear_the_index">Clear the index</a>
+      </li>
+      <li>
+        <a href="#Composite_keys">Composite keys</a>
+      </li>
+      <li class="c1">
+        <ul>
+          <li>
+            <a href="#Partial_match_search">Partial match search</a>
+          </li>
+          <li>
+            <a href="#Direct_insertion_for_composite_indexes">Direct insertion for composite indexes</a>
+          </li>
+        </ul>
       </li>
     </ul>
-  </li>
-  <li>
-    <a href="#Create_an_index">Create an index</a>
-  </li>
-  <li>
-    <a href="#Drop_an_index">Drop an index</a>
-  </li>
-  <li>
-    <a href="#Lookup">Lookup</a>
-  </li>
-  <li>
-    <a href="#Put_an_entry">Put an entry</a>
-  </li>
-  <li>
-    <a href="#Query_range">Query range</a>
-  </li>
-  <li>
-    <a href="#Remove_entries_by_key">Remove entries by key</a>
-  </li>
-  <li>
-    <a href="#Remove_an_entry">Remove an entry</a>
-  </li>
-  <li>
-    <a href="#Remove_all_references_to_a_record">Remove all
-    references to a record</a>
-  </li>
-  <li>
-    <a href="#Count_all_the_entries">Count all the entries</a>
-  </li>
-  <li>
-    <a href="#Retrieve_all_the_keys">Retrieve all the keys</a>
-  </li>
-  <li>
-    <a href="#Retrieve_all_the_entries">Retrieve all the
-    entries</a>
-  </li>
-  <li>
-    <a href="#Clear_the_index">Clear the index</a>
-  </li>
-  <li>
-    <a href="#Composite_keys">Composite keys</a>
-  </li>
-  <li style="list-style: none">
+    <h2>
+      <a name="Introduction" id="Introduction"></a>Introduction<a href="#Introduction" class="section_anchor"></a>
+    </h2>
+    <p>
+      OrientDB supports indexes by using an innovative algorithm: the MVRB-Tree. It has the best of:
+    </p>
     <ul>
       <li>
-        <a href="#Partial_match_search">Partial match search</a>
+        <strong>B+Tree</strong> (the most used by RDBMS and NoSQL products) and
       </li>
       <li>
-        <a href="#Direct_insertion_for_composite_indexes">Direct
-        insertion for composite indexes</a>
+        <strong>Red-Black Tree</strong>
       </li>
     </ul>
-  </li>
-</ul>
-<h2>
-  <a name="Introduction" id="Introduction"></a>Introduction<a href=
-  "#Introduction" class="section_anchor"></a>
-</h2>
-<p>
-  OrientDB supports indexes by using an innovative algorithm: the
-  MVRB-Tree. It has the best of:
-</p>
-<ul>
-  <li>
-    <strong>B+Tree</strong> (the most used by RDBMS and NoSQL
-    products) and
-  </li>
-  <li>
-    <strong>Red-Black Tree</strong>
-  </li>
-</ul>
-<p>
-  This means fast insertion and update and super fast lookup.
-</p>
-<p>
-  Indexes can be handled like classes (or tables for RDBMS users)
-  using the SQL language and prefixing with "index:" the index
-  name. The index is like a class (or table) with 2 properties:
-</p>
-<ul>
-  <li>
-    <strong>key</strong>, as the index's key
-  </li>
-  <li>
-    <strong>rid</strong>, as the <a href=
-    "concepts.html#RecordId">RecordId</a> that points to the record
-    associated with the key
-  </li>
-</ul>
-<h3>
-  <a name="Index_target" id="Index_target"></a>Index target<a href=
-  "#Index_target" class="section_anchor"></a>
-</h3>
-<p>
-  Indexes can be <strong>manual</strong> or
-  <strong>automatic</strong>. Automatic indexes are automatically
-  updated by OrientDB engine and are bound to schema properties,
-  example "User.id". If you have a schema-less database and you
-  want to create automatic index you need to create the class and
-  the property before to use indexing. Manual indexes are handled
-  by using SQL commands (see below) and can be used for arbitrary
-  purposes.
-</p>
-<h3>
-  <a name="Index_types" id="Index_types"></a>Index types<a href=
-  "#Index_types" class="section_anchor"></a>
-</h3>
-<p>
-  Indexes can be of these types. The type can't be changed once
-  created:
-</p>
-<ul>
-  <li>
-    <strong>UNIQUE</strong>, doesn't allow duplicates. For
-    composite index means uniqueness of composite keys.
-  </li>
-  <li>
-    <strong>NOTUNIQUE</strong>, allows duplicates
-  </li>
-  <li>
-    <strong>FULLTEXT</strong>, by indexing any single word of the
-    text. It's used in query with the operator CONTAINSTEXT
-  </li>
-  <li>
-    <strong>DICTIONARY</strong>, like UNIQUE but in case the key
-    already exists replace the record with the new one
-  </li>
-</ul>
-<h3>
-  <a name="Dictionary" id="Dictionary"></a>Dictionary<a href=
-  "#Dictionary" class="section_anchor"></a>
-</h3>
-<p>
-  Every single database has a default manual index of type
-  "DICTIONARY" called "<strong>dictionary</strong>" with Strings as
-  keys. This is very useful to:
-</p>
-<ul>
-  <li>handle root records of trees and graphs
-  </li>
-  <li>handle singleton records used for configuration
-  </li>
-</ul>
-<h2>
-  <a name="Create_an_index" id="Create_an_index"></a>Create an
-  index<a href="#Create_an_index" class="section_anchor"></a>
-</h2>
-<p>
-  Creates a new index. To create an automatic index bound to a
-  schema property use section "ON" of create index command or use
-  as name the <tt>&lt;class.property&gt;</tt> notation. But assure
-  to have created the schema for it before the index. See the
-  example below.
-</p>
-<p>
-  Syntax:
-</p>
-<pre class="prettyprint">
+    <p>
+      This means fast insertion and update and super fast lookup.
+    </p>
+    <p>
+      Indexes can be handled like classes (or tables for RDBMS users) using the SQL language and prefixing with "index:" the index name. The index is like a class (or table) with 2 properties:
+    </p>
+    <ul>
+      <li>
+        <strong>key</strong>, as the index's key
+      </li>
+      <li>
+        <strong>rid</strong>, as the <a href="concepts.html#RecordId">RecordId</a> that points to the record associated with the key
+      </li>
+    </ul>
+    <h3>
+      <a name="Index_target" id="Index_target"></a>Index target<a href="#Index_target" class="section_anchor"></a>
+    </h3>
+    <p>
+      Indexes can be <strong>manual</strong> or <strong>automatic</strong>. Automatic indexes are automatically updated by OrientDB engine and are bound to schema properties, example "User.id". If you have a schema-less database and you want to create automatic index you need to create the class and the property before to use indexing. Manual indexes are handled by using SQL commands (see below) and can be used for arbitrary purposes.
+    </p>
+    <h3>
+      <a name="Index_types" id="Index_types"></a>Index types<a href="#Index_types" class="section_anchor"></a>
+    </h3>
+    <p>
+      Indexes can be of these types. The type can't be changed once created:
+    </p>
+    <ul>
+      <li>
+        <strong>UNIQUE</strong>, doesn't allow duplicates. For composite index means uniqueness of composite keys.
+      </li>
+      <li>
+        <strong>NOTUNIQUE</strong>, allows duplicates
+      </li>
+      <li>
+        <strong>FULLTEXT</strong>, by indexing any single word of the text. It's used in query with the operator CONTAINSTEXT
+      </li>
+      <li>
+        <strong>DICTIONARY</strong>, like UNIQUE but in case the key already exists replace the record with the new one
+      </li>
+    </ul>
+    <h3>
+      <a name="Dictionary" id="Dictionary"></a>Dictionary<a href="#Dictionary" class="section_anchor"></a>
+    </h3>
+    <p>
+      Every single database has a default manual index of type "DICTIONARY" called "<strong>dictionary</strong>" with Strings as keys. This is very useful to:
+    </p>
+    <ul>
+      <li>handle root records of trees and graphs
+      </li>
+      <li>handle singleton records used for configuration
+      </li>
+    </ul>
+    <h2>
+      <a name="Create_an_index" id="Create_an_index"></a>Create an index<a href="#Create_an_index" class="section_anchor"></a>
+    </h2>
+    <p>
+      Creates a new index. To create an automatic index bound to a schema property use section "ON" of create index command or use as name the <tt>&lt;class.property&gt;</tt> notation. But assure to have created the schema for it before the index. See the example below.
+    </p>
+    <p>
+      Syntax:
+    </p>
+    <pre class="prettyprint">
 CREATE INDEX &lt;name&gt; [ON &lt;class-name&gt; (prop-names)] &lt;type&gt; [&lt;key-type&gt;]
 </pre>
-<p>
-  Where:
-</p>
-<ul>
-  <li>
-    <strong>name</strong> logical name of index. Can be
-    <strong><tt>&lt;class&gt;.&lt;property&gt;</tt></strong> to
-    create an automatic index bound to a schema property. In this
-    case <strong>class</strong> is the class of the schema and
-    <strong>property</strong>, is the property created into the
-    class. Notice that in another case index name can't contain '.'
-    symbol
-  </li>
-  <li>
-    <strong>class-name</strong> name of class that automatic index
-    created for. Class with such name must already exist in
-    database
-  </li>
-  <li>
-    <strong>prop-names</strong> comma-separated list of properties
-    for which automatic index is created for. Property with such
-    name must already exist in schema. If property belongs to one
-    of the Map types (LINKMAP, EMBEDDEDMAP) you can specify will be
-    keys or values used for index generation. Use "by key" or "by
-    value" expressions for that, if nothing will be specified keys
-    will be used during index creation.
-  </li>
-  <li>
-    <strong>type</strong>, between 'unique', 'notunique' and
-    'fulltext'
-  </li>
-  <li>
-    <strong>key-type</strong>, is the type of key (Optional). On
-    automatic indexes is auto-determined by reading the target
-    schema property where the index is created. If not specified
-    for manual indexes, at run-time during the first insertion the
-    type will be auto determined by reading the type of the class.
-  </li>
-</ul>
-<p>
-  Examples of custom index:
-</p>
-<pre class="prettyprint">
+    <p>
+      Where:
+    </p>
+    <ul>
+      <li>
+        <strong>name</strong> logical name of index. Can be <strong><tt>&lt;class&gt;.&lt;property&gt;</tt></strong> to create an automatic index bound to a schema property. In this case <strong>class</strong> is the class of the schema and <strong>property</strong>, is the property created into the class. Notice that in another case index name can't contain '.' symbol
+      </li>
+      <li>
+        <strong>class-name</strong> name of class that automatic index created for. Class with such name must already exist in database
+      </li>
+      <li>
+        <strong>prop-names</strong> comma-separated list of properties for which automatic index is created for. Property with such name must already exist in schema. If property belongs to one of the Map types (LINKMAP, EMBEDDEDMAP) you can specify will be keys or values used for index generation. Use "by key" or "by value" expressions for that, if nothing will be specified keys will be used during index creation.
+      </li>
+      <li>
+        <strong>type</strong>, between 'unique', 'notunique' and 'fulltext'
+      </li>
+      <li>
+        <strong>key-type</strong>, is the type of key (Optional). On automatic indexes is auto-determined by reading the target schema property where the index is created. If not specified for manual indexes, at run-time during the first insertion the type will be auto determined by reading the type of the class.
+      </li>
+    </ul>
+    <p>
+      Examples of custom index:
+    </p>
+    <pre class="prettyprint">
 CREATE INDEX mostRecentRecords unique date
 </pre>
-<p>
-  Examples of automatic index bound to the property "id" of class
-  "User":
-</p>
-<pre class="prettyprint">
+    <p>
+      Examples of automatic index bound to the property "id" of class "User":
+    </p>
+    <pre class="prettyprint">
 CREATE PROPERTY User.id STRING
 CREATE INDEX User.id UNIQUE
 </pre>
-<p>
-  Another index for "id" property of class "User":
-</p>
-<pre class="prettyprint">
+    <p>
+      Another index for "id" property of class "User":
+    </p>
+    <pre class="prettyprint">
 CREATE INDEX indexForId ON User (id) unique
 </pre>
-<p>
-  Examples of index for "thumbs" property of class "Movie".
-</p>
-<pre class="prettyprint">
+    <p>
+      Examples of index for "thumbs" property of class "Movie".
+    </p>
+    <pre class="prettyprint">
 CREATE INDEX thumbsAuthor ON Movie (thumbs) unique;
 CREATE INDEX thumbsAuthor ON Movie (thumbs by key) unique; 
 CREATE INDEX thumbsValue ON Movie (thumbs by value) unique; 
 </pre>
-<p>
-  Example of composite index
-</p>
-<pre class="prettyprint">
+    <p>
+      Example of composite index
+    </p>
+    <pre class="prettyprint">
 CREATE PROPERTY Book.author STRING
 CREATE PROPERTY Book.title STRING
 CREATE PROPERTY Book.publicationYear INTEGER
 CREATE INDEX books ON Book (author, title, publicationYear) unique
 </pre>
-<p>
-  For more information look at <a href=
-  "sql_create_index.html">Create index command</a>.
-</p>
-<h2>
-  <a name="Drop_an_index" id="Drop_an_index"></a>Drop an
-  index<a href="#Drop_an_index" class="section_anchor"></a>
-</h2>
-<p>
-  Drop definitely an index. Linked records will be not removed.
-  Syntax:
-</p>
-<pre class="prettyprint">
+    <p>
+      For more information look at <a href="sql_create_index.html">Create index command</a>.
+    </p>
+    <h2>
+      <a name="Drop_an_index" id="Drop_an_index"></a>Drop an index<a href="#Drop_an_index" class="section_anchor"></a>
+    </h2>
+    <p>
+      Drop definitely an index. Linked records will be not removed. Syntax:
+    </p>
+    <pre class="prettyprint">
 DROP INDEX &lt;name&gt;
 </pre>
-<p>
-  Where:
-</p>
-<ul>
-  <li>
-    <strong>name</strong> of the index to drop
-  </li>
-</ul>
-<p>
-  For more information look at <a href="sql_remove_index.html">Drop
-  index command</a>.
-</p>
-<h2>
-  <a name="Lookup" id="Lookup"></a>Lookup<a href="#Lookup" class=
-  "section_anchor"></a>
-</h2>
-<p>
-  Returns all the records with the requested <i>key</i>.
-</p>
-<pre class="prettyprint">
+    <p>
+      Where:
+    </p>
+    <ul>
+      <li>
+        <strong>name</strong> of the index to drop
+      </li>
+    </ul>
+    <p>
+      For more information look at <a href="sql_remove_index.html">Drop index command</a>.
+    </p>
+    <h2>
+      <a name="Lookup" id="Lookup"></a>Lookup<a href="#Lookup" class="section_anchor"></a>
+    </h2>
+    <p>
+      Returns all the records with the requested <i>key</i>.
+    </p>
+    <pre class="prettyprint">
 select from index:&lt;index-name&gt; where key = &lt;key&gt;
 </pre>
-<p>
-  Example:
-</p>
-<pre class="prettyprint">
+    <p>
+      Example:
+    </p>
+    <pre class="prettyprint">
 select from index:dictionary where key = 'Luke'
 </pre>
-<h2>
-  <a name="Put_an_entry" id="Put_an_entry"></a>Put an entry<a href=
-  "#Put_an_entry" class="section_anchor"></a>
-</h2>
-<p>
-  Inserts a new entry in the index with <i>key</i> and <i>rid</i>.
-</p>
-<pre class="prettyprint">
+    <h2>
+      <a name="Put_an_entry" id="Put_an_entry"></a>Put an entry<a href="#Put_an_entry" class="section_anchor"></a>
+    </h2>
+    <p>
+      Inserts a new entry in the index with <i>key</i> and <i>rid</i>.
+    </p>
+    <pre class="prettyprint">
 insert into index:&lt;index-name&gt; (key,rid) values (&lt;key&gt;,&lt;rid&gt;)
 </pre>
-<p>
-  Example:
-</p>
-<pre class="prettyprint">
+    <p>
+      Example:
+    </p>
+    <pre class="prettyprint">
 insert into index:dictionary (key,rid) values ('Luke',#10:4)
 </pre>
-<h2>
-  <a name="Query_range" id="Query_range"></a>Query range<a href=
-  "#Query_range" class="section_anchor"></a>
-</h2>
-<p>
-  Retrieves the key ranges between <i>min</i> and <i>max</i>.
-</p>
-<pre class="prettyprint">
+    <h2>
+      <a name="Query_range" id="Query_range"></a>Query range<a href="#Query_range" class="section_anchor"></a>
+    </h2>
+    <p>
+      Retrieves the key ranges between <i>min</i> and <i>max</i>.
+    </p>
+    <pre class="prettyprint">
 select from index:&lt;index-name&gt; where key between &lt;min&gt; and &lt;max&gt;
 </pre>
-<p>
-  Example:
-</p>
-<pre class="prettyprint">
+    <p>
+      Example:
+    </p>
+    <pre class="prettyprint">
 select from index:coordinates where key between 10.3 and 10.7
 </pre>
-<h2>
-  <a name="Remove_entries_by_key" id=
-  "Remove_entries_by_key"></a>Remove entries by key<a href=
-  "#Remove_entries_by_key" class="section_anchor"></a>
-</h2>
-<p>
-  Deletes all the entries with the requested <i>key</i>.
-</p>
-<pre class="prettyprint">
+    <h2>
+      <a name="Remove_entries_by_key" id="Remove_entries_by_key"></a>Remove entries by key<a href="#Remove_entries_by_key" class="section_anchor"></a>
+    </h2>
+    <p>
+      Deletes all the entries with the requested <i>key</i>.
+    </p>
+    <pre class="prettyprint">
 delete from index:&lt;index-name&gt; where key = &lt;key&gt;
 </pre>
-<p>
-  Example:
-</p>
-<pre class="prettyprint">
+    <p>
+      Example:
+    </p>
+    <pre class="prettyprint">
 delete from index:addressbook where key = 'Luke'
 </pre>
-<h2>
-  <a name="Remove_an_entry" id="Remove_an_entry"></a>Remove an
-  entry<a href="#Remove_an_entry" class="section_anchor"></a>
-</h2>
-<p>
-  Deletes an entry by passing <i>key</i> and <i>rid</i>. Returns
-  true if removed, otherwise false if the entry wasn't found.
-</p>
-<pre class="prettyprint">
+    <h2>
+      <a name="Remove_an_entry" id="Remove_an_entry"></a>Remove an entry<a href="#Remove_an_entry" class="section_anchor"></a>
+    </h2>
+    <p>
+      Deletes an entry by passing <i>key</i> and <i>rid</i>. Returns true if removed, otherwise false if the entry wasn't found.
+    </p>
+    <pre class="prettyprint">
 delete from index:&lt;index-name&gt; where key = &lt;key&gt; and rid = &lt;rid&gt;
 </pre>
-<p>
-  Example:
-</p>
-<pre class="prettyprint">
+    <p>
+      Example:
+    </p>
+    <pre class="prettyprint">
 delete from index:dictionary where key = 'Luke' and rid = #10:4
 </pre>
-<h2>
-  <a name="Remove_all_references_to_a_record" id=
-  "Remove_all_references_to_a_record"></a>Remove all references to
-  a record<a href="#Remove_all_references_to_a_record" class=
-  "section_anchor"></a>
-</h2>
-<p>
-  Removes all the entries with the <i>rid</i> passed.
-</p>
-<pre class="prettyprint">
+    <h2>
+      <a name="Remove_all_references_to_a_record" id="Remove_all_references_to_a_record"></a>Remove all references to a record<a href="#Remove_all_references_to_a_record" class="section_anchor"></a>
+    </h2>
+    <p>
+      Removes all the entries with the <i>rid</i> passed.
+    </p>
+    <pre class="prettyprint">
 delete from index:&lt;index-name&gt; where rid = &lt;rid&gt;
 </pre>
-<p>
-  Example:
-</p>
-<pre class="prettyprint">
+    <p>
+      Example:
+    </p>
+    <pre class="prettyprint">
 delete from index:dictionary where rid = #10:4
 </pre>
-<h2>
-  <a name="Count_all_the_entries" id=
-  "Count_all_the_entries"></a>Count all the entries<a href=
-  "#Count_all_the_entries" class="section_anchor"></a>
-</h2>
-<p>
-  Returns the size of the index as entries.
-</p>
-<pre class="prettyprint">
+    <h2>
+      <a name="Count_all_the_entries" id="Count_all_the_entries"></a>Count all the entries<a href="#Count_all_the_entries" class="section_anchor"></a>
+    </h2>
+    <p>
+      Returns the size of the index as entries.
+    </p>
+    <pre class="prettyprint">
 select count(*) as size from index:&lt;index-name&gt;
 </pre>
-<p>
-  Example:
-</p>
-<pre class="prettyprint">
+    <p>
+      Example:
+    </p>
+    <pre class="prettyprint">
 select count(*) as size from index:dictionary
 </pre>
-<h2>
-  <a name="Retrieve_all_the_keys" id=
-  "Retrieve_all_the_keys"></a>Retrieve all the keys<a href=
-  "#Retrieve_all_the_keys" class="section_anchor"></a>
-</h2>
-<p>
-  Retrieves all the keys of the index.
-</p>
-<pre class="prettyprint">
+    <h2>
+      <a name="Retrieve_all_the_keys" id="Retrieve_all_the_keys"></a>Retrieve all the keys<a href="#Retrieve_all_the_keys" class="section_anchor"></a>
+    </h2>
+    <p>
+      Retrieves all the keys of the index.
+    </p>
+    <pre class="prettyprint">
 select key from index:&lt;index-name&gt;
 </pre>
-<p>
-  Example:
-</p>
-<pre class="prettyprint">
+    <p>
+      Example:
+    </p>
+    <pre class="prettyprint">
 select key from index:dictionary
 </pre>
-<h2>
-  <a name="Retrieve_all_the_entries" id=
-  "Retrieve_all_the_entries"></a>Retrieve all the entries<a href=
-  "#Retrieve_all_the_entries" class="section_anchor"></a>
-</h2>
-<p>
-  Retrieves all the entries of the index as pairs <i>key</i> and
-  <i>rid</i>.
-</p>
-<pre class="prettyprint">
+    <h2>
+      <a name="Retrieve_all_the_entries" id="Retrieve_all_the_entries"></a>Retrieve all the entries<a href="#Retrieve_all_the_entries" class="section_anchor"></a>
+    </h2>
+    <p>
+      Retrieves all the entries of the index as pairs <i>key</i> and <i>rid</i>.
+    </p>
+    <pre class="prettyprint">
 select key, value from index:&lt;index-name&gt;
 </pre>
-<p>
-  Example:
-</p>
-<pre class="prettyprint">
+    <p>
+      Example:
+    </p>
+    <pre class="prettyprint">
 select key, value from index:dictionary
 </pre>
-<h2>
-  <a name="Clear_the_index" id="Clear_the_index"></a>Clear the
-  index<a href="#Clear_the_index" class="section_anchor"></a>
-</h2>
-<p>
-  Removes all the entries. The index will be empty after this call.
-  This removes all the entries of an index.
-</p>
-<pre class="prettyprint">
+    <h2>
+      <a name="Clear_the_index" id="Clear_the_index"></a>Clear the index<a href="#Clear_the_index" class="section_anchor"></a>
+    </h2>
+    <p>
+      Removes all the entries. The index will be empty after this call. This removes all the entries of an index.
+    </p>
+    <pre class="prettyprint">
 delete from index:&lt;index-name&gt;
 </pre>
-<p>
-  Example:
-</p>
-<pre class="prettyprint">
+    <p>
+      Example:
+    </p>
+    <pre class="prettyprint">
 delete from index:dictionary
 </pre>
-<h2>
-  <a name="Composite_keys" id="Composite_keys"></a>Composite
-  keys<a href="#Composite_keys" class="section_anchor"></a>
-</h2>
-<p>
-  You can do the same operations with composite indexes.
-</p>
-<p>
-  Composite key is a collection of values by its nature, so
-  syntactically it is defined as collection. For example, if we
-  have class book, and index by its three fields: <i>author</i>,
-  <i>title</i> and <i>publication year</i>. So, we can use
-  following query for lookup book:
-</p>
-<pre class="prettyprint">
+    <h2>
+      <a name="Composite_keys" id="Composite_keys"></a>Composite keys<a href="#Composite_keys" class="section_anchor"></a>
+    </h2>
+    <p>
+      You can do the same operations with composite indexes.
+    </p>
+    <p>
+      Composite key is a collection of values by its nature, so syntactically it is defined as collection. For example, if we have class book, and index by its three fields: <i>author</i>, <i>title</i> and <i>publication year</i>. So, we can use following query for lookup book:
+    </p>
+    <pre class="prettyprint">
 select from index:books where key = ["Donald Knuth", "The Art of Computer Programming", 1968]
 </pre>
-<p>
-  Or for lookup book with range of <i>publication year</i>:
-</p>
-<pre class="prettyprint">
+    <p>
+      Or for lookup book with range of <i>publication year</i>:
+    </p>
+    <pre class="prettyprint">
 select from index:books where key between ["Donald Knuth", "The Art of Computer Programming", 1960] and ["Donald Knuth", "The Art of Computer Programming", 2000]
 </pre>
-<h3>
-  <a name="Partial_match_search" id=
-  "Partial_match_search"></a>Partial match search<a href=
-  "#Partial_match_search" class="section_anchor"></a>
-</h3>
-<p>
-  This is mechanism that allows searching index record by several
-  first fields of its composite key. In this case rest fields with
-  undefined value can have any value in result.
-</p>
-<p>
-  For example, if we don't when book has been published, we can
-  throw away <i>publication year</i> field from query. So, result
-  of following query will be all books with this <i>author</i> and
-  <i>title</i> and any <i>publication year</i>
-</p>
-<pre class="prettyprint">
+    <h3>
+      <a name="Partial_match_search" id="Partial_match_search"></a>Partial match search<a href="#Partial_match_search" class="section_anchor"></a>
+    </h3>
+    <p>
+      This is mechanism that allows searching index record by several first fields of its composite key. In this case rest fields with undefined value can have any value in result.
+    </p>
+    <p>
+      For example, if we don't when book has been published, we can throw away <i>publication year</i> field from query. So, result of following query will be all books with this <i>author</i> and <i>title</i> and any <i>publication year</i>
+    </p>
+    <pre class="prettyprint">
 select from index:books where key = ["Author", "The Art of Computer Programming"]
 </pre>
-<p>
-  If we also don't know <i>title</i>, we can keep only
-  <i>author</i> field in query. Result of following query will be
-  all books of this <i>author</i>.
-</p>
-<pre class="prettyprint">
+    <p>
+      If we also don't know <i>title</i>, we can keep only <i>author</i> field in query. Result of following query will be all books of this <i>author</i>.
+    </p>
+    <pre class="prettyprint">
 select from index:books where key = ["Donald Knuth"]
 </pre>
-<p>
-  Or equivalent
-</p>
-<pre class="prettyprint">
+    <p>
+      Or equivalent
+    </p>
+    <pre class="prettyprint">
 select from index:books where key = "Donald Knuth"
 </pre>
-<h3>
-  <a name="Direct_insertion_for_composite_indexes" id=
-  "Direct_insertion_for_composite_indexes"></a>Direct insertion for
-  composite indexes<a href=
-  "#Direct_insertion_for_composite_indexes" class=
-  "section_anchor"></a>
-</h3>
-<p>
-  Unsupported yet.
-</p>
+    <h3>
+      <a name="Direct_insertion_for_composite_indexes" id="Direct_insertion_for_composite_indexes"></a>Direct insertion for composite indexes<a href="#Direct_insertion_for_composite_indexes" class="section_anchor"></a>
+    </h3>
+    <p>
+      Unsupported yet.
+    </p>
+  </body>
+</html>

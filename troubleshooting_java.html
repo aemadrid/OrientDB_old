@@ -1,65 +1,60 @@
 ---
 title: Troubleshooting Java API
 layout: default
+bc_1_name: java_api
+bc_1_title: Java APIs
 ---
-<div style="margin-left: 2em">
-  <ul>
-    <li>
-      <a href=
-      "#Database_instance_has_been_released_to_the_pool._Get_another_dat">
-      Database instance has been released to the pool. Get another
-      database instance from the pool with the right username and
-      password</a>
-    </li>
-    <li style="list-style: none">
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<html>
+  <head>
+    <meta name="generator" content="HTML Tidy for Mac OS X (vers 31 October 2006 - Apple Inc. build 15.6), see www.w3.org">
+    <title></title>
+    <style type="text/css">
+div.c2 {margin-left: 2em}
+    li.c1 {list-style: none}
+    </style>
+  </head>
+  <body>
+    <p></p>
+    <div class="c2">
       <ul>
         <li>
-          <a href="#OLazyObjectIterator">OLazyObjectIterator</a>
+          <a href="#Database_instance_has_been_released_to_the_pool._Get_another_dat">Database instance has been released to the pool. Get another database instance from the pool with the right username and password</a>
+        </li>
+        <li class="c1">
+          <ul>
+            <li>
+              <a href="#OLazyObjectIterator">OLazyObjectIterator</a>
+            </li>
+          </ul>
         </li>
       </ul>
-    </li>
-  </ul>
-</div>
-<h3>
-  <a name=
-  "Database_instance_has_been_released_to_the_pool._Get_another_dat"
-  id=
-  "Database_instance_has_been_released_to_the_pool._Get_another_dat">
-  </a>Database instance has been released to the pool. Get another
-  database instance from the pool with the right username and
-  password<a href=
-  "#Database_instance_has_been_released_to_the_pool._Get_another_dat"
-  class="section_anchor"></a>
-</h3>
-<p>
-  This is a generic error telling that the database has been found
-  closed while using it.
-</p>
-<p>
-  Check the stack trace to find the reason of it:
-</p>
-<h4>
-  <a name="OLazyObjectIterator" id=
-  "OLazyObjectIterator"></a>OLazyObjectIterator<a href=
-  "#OLazyObjectIterator" class="section_anchor"></a>
-</h4>
-<p>
-  This is the case when you're working with <a href=
-  "object_database.html">Object Database API</a> and a field
-  contains a collection or a map loaded in lazy. On iteration it
-  needs an open database to fetch linked records.
-</p>
-<p>
-  Solutions:
-</p>
-<ul>
-  <li>assure to leave the database open while browsing the field
-  </li>
-  <li>or early load all the instances (just iterate the items)
-  </li>
-  <li>define a fetch-plan to load the entire object tree in one
-  shoot and then work offline. If you need to save the object back
-  to the database then reopen the database and call <tt>db.save(
-  object )</tt>.
-  </li>
-</ul>
+    </div>
+    <h3>
+      <a name="Database_instance_has_been_released_to_the_pool._Get_another_dat" id="Database_instance_has_been_released_to_the_pool._Get_another_dat"></a>Database instance has been released to the pool. Get another database instance from the pool with the right username and password<a href="#Database_instance_has_been_released_to_the_pool._Get_another_dat" class="section_anchor"></a>
+    </h3>
+    <p>
+      This is a generic error telling that the database has been found closed while using it.
+    </p>
+    <p>
+      Check the stack trace to find the reason of it:
+    </p>
+    <h4>
+      <a name="OLazyObjectIterator" id="OLazyObjectIterator"></a>OLazyObjectIterator<a href="#OLazyObjectIterator" class="section_anchor"></a>
+    </h4>
+    <p>
+      This is the case when you're working with <a href="object_database.html">Object Database API</a> and a field contains a collection or a map loaded in lazy. On iteration it needs an open database to fetch linked records.
+    </p>
+    <p>
+      Solutions:
+    </p>
+    <ul>
+      <li>assure to leave the database open while browsing the field
+      </li>
+      <li>or early load all the instances (just iterate the items)
+      </li>
+      <li>define a fetch-plan to load the entire object tree in one shoot and then work offline. If you need to save the object back to the database then reopen the database and call <tt>db.save( object )</tt>.
+      </li>
+    </ul>
+  </body>
+</html>

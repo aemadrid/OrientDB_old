@@ -2,68 +2,50 @@
 title: "Bucket/Key/Value paradigm as replacement of the Relational DBMS"
 layout: default
 ---
-<h2>
-  <a name=
-  "Bucket/Key/Value_paradigm_as_replacement_of_the_Relational_DBMS">
-  </a>Bucket/Key/Value paradigm as replacement of the Relational
-  DBMS<a href=
-  "#Bucket/Key/Value_paradigm_as_replacement_of_the_Relational_DBMS"
-  class="section_anchor"></a>
-</h2>
-<p>
-  This example wants to demonstrate that it's possible and easy to
-  use the Bucket/Key/Value approach even to build a complex
-  application. In this example we're going to compare this new
-  approach with the classic Relational DBMS way. In this article we
-  use <a href="http://www.orientechnologies.com/orient-kv.htm" rel=
-  "nofollow">Orient Key/Value Server</a> but it can be applied to
-  any other Key/Value engine that supports buckets.
-</p>
-<p>
-  Why to use a Key/Value Server in favor to a Relational DBMS?
-</p>
-<ul>
-  <li>Because it's faster dued to the reduced complexity of the
-  model in comparison to the Relational
-  </li>
-  <li>It's schema-less and allow more flexibility when the domain
-  model changes
-  </li>
-  <li>Easier to serialize records to write on file or send/receive
-  over the network
-  </li>
-  <li>Easier to browse and debug, because you can use any Web
-  Browser
-  </li>
-</ul>
-<p>
-  Before to start we remember the 3 basic concepts:
-</p>
-<ul>
-  <li>Buckets: group the key/value pairs in a logical sense. A sort
-  of collections of entries
-  </li>
-  <li>Keys: are the unique ids used to get/update/delete the
-  associated value
-  </li>
-  <li>Values: are the values associated to the buckets/keys pair.
-  Values can be any kind of documents
-  </li>
-</ul>
-<p>
-  In our example we'll use Buckets to group key/value entries by
-  types. The role of the Key will be the same of the "Primary Key"
-  in the Relational Model. Values will contain the record columns
-  but in a unique field using the <a href="http://www.json.org"
-  rel="nofollow">JSON</a> format.
-</p>
-<h3>
-  <a name="Usage_of_the_Bucket/Key/Value_model"></a>Usage of the
-  Bucket/Key/Value model<a href=
-  "#Usage_of_the_Bucket/Key/Value_model" class=
-  "section_anchor"></a>
-</h3>
-<pre class="prettyprint">
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<html>
+  <head>
+    <meta name="generator" content="HTML Tidy for Mac OS X (vers 31 October 2006 - Apple Inc. build 15.6), see www.w3.org">
+    <title></title>
+  </head>
+  <body>
+    <h2>
+      <a name="Bucket/Key/Value_paradigm_as_replacement_of_the_Relational_DBMS"></a>Bucket/Key/Value paradigm as replacement of the Relational DBMS<a href="#Bucket/Key/Value_paradigm_as_replacement_of_the_Relational_DBMS" class="section_anchor"></a>
+    </h2>
+    <p>
+      This example wants to demonstrate that it's possible and easy to use the Bucket/Key/Value approach even to build a complex application. In this example we're going to compare this new approach with the classic Relational DBMS way. In this article we use <a href="http://www.orientechnologies.com/orient-kv.htm" rel="nofollow">Orient Key/Value Server</a> but it can be applied to any other Key/Value engine that supports buckets.
+    </p>
+    <p>
+      Why to use a Key/Value Server in favor to a Relational DBMS?
+    </p>
+    <ul>
+      <li>Because it's faster dued to the reduced complexity of the model in comparison to the Relational
+      </li>
+      <li>It's schema-less and allow more flexibility when the domain model changes
+      </li>
+      <li>Easier to serialize records to write on file or send/receive over the network
+      </li>
+      <li>Easier to browse and debug, because you can use any Web Browser
+      </li>
+    </ul>
+    <p>
+      Before to start we remember the 3 basic concepts:
+    </p>
+    <ul>
+      <li>Buckets: group the key/value pairs in a logical sense. A sort of collections of entries
+      </li>
+      <li>Keys: are the unique ids used to get/update/delete the associated value
+      </li>
+      <li>Values: are the values associated to the buckets/keys pair. Values can be any kind of documents
+      </li>
+    </ul>
+    <p>
+      In our example we'll use Buckets to group key/value entries by types. The role of the Key will be the same of the "Primary Key" in the Relational Model. Values will contain the record columns but in a unique field using the <a href="http://www.json.org" rel="nofollow">JSON</a> format.
+    </p>
+    <h3>
+      <a name="Usage_of_the_Bucket/Key/Value_model"></a>Usage of the Bucket/Key/Value model<a href="#Usage_of_the_Bucket/Key/Value_model" class="section_anchor"></a>
+    </h3>
+    <pre class="prettyprint">
 Bucket:customer
  |
  +-----&gt; orient=Orient Technologies
@@ -82,73 +64,46 @@ Bucket:stock
  +-----&gt; 32323={ "type":"keyboard", "model":"Logitech 222", quantity: 15 }
  +-----&gt; 39494={ "type":"mouse", "model":"Saitek ergo", quantity: 100 }
 </pre>
-<h3>
-  <a name="Relationships" id=
-  "Relationships"></a>Relationships<a href="#Relationships" class=
-  "section_anchor"></a>
-</h3>
-<p>
-  Relationships are managed using the key of the target document.
-  Look to the <tt>order/3455</tt>. It has the attribute "items"
-  that is a collection of embedded objects. This is a regular 1-N
-  relationship. In the Relational world they are the foreign keys
-  on the target table, while here we have the relationships on the
-  main object that lead the relationship direction. These embedded
-  objects have the attribute "stock" that contains the relationship
-  to the objects stored in the "stock" bucket.
-</p>
-<h3>
-  <a name="Helper_entries_and_buckets" id=
-  "Helper_entries_and_buckets"></a>Helper entries and
-  buckets<a href="#Helper_entries_and_buckets" class=
-  "section_anchor"></a>
-</h3>
-<p>
-  As you can see there is a key "last" in the bucket "order". This
-  is a conventional key that indicates always the last order. In
-  this way you can obtain the last order by asking:
-</p>
-<p>
-  <tt>HTTP GET http://localhost:8000/example/order/last</tt>
-</p>
-<p>
-  This key is just a helper entry. It could be useful create one or
-  more helper buckets to store something like:
-</p>
-<ul>
-  <li>all the orders to ship: <tt>/orderToShip/</tt>
-  </li>
-  <li>the user permissions by creating a new bucket foreach user
-  group. It could be help to use prefix to distinguish it among the
-  others. In the followinng example the prefix used is "user": <tt>
-    /user_admin/, /user_basic/, etc.</tt>
-  </li>
-  <li>all the most recent entries updated. For example it could be
-  useful to display the most recent articles in a CMS like
-  application. The application is responsable to leave only X items
-  </li>
-</ul>
-<h3>
-  <a name="Write_the_application_code" id=
-  "Write_the_application_code"></a>Write the application
-  code<a href="#Write_the_application_code" class=
-  "section_anchor"></a>
-</h3>
-<p>
-  The application can be written in any language because the
-  Key/Value Server uses REST/HTTP. The entire application could be
-  written in Javascript and run entirely on the Web Browser with
-  Ajax calls to the Orient Key/Value Server instance.
-</p>
-<p>
-  JSON documents are automatically converted in Javascript object
-  trees. However there are a lot of <a href="http://www.json.org"
-  rel="nofollow">JSON libraries for any programming language</a>.
-</p>
-<p>
-  The calls to the Key/Value Server can be asynchronous as well
-  using asynchronous Ajax calls.
-</p>
-<p>
-  What do you think about it? Comments are welcome.
-</p>
+    <h3>
+      <a name="Relationships" id="Relationships"></a>Relationships<a href="#Relationships" class="section_anchor"></a>
+    </h3>
+    <p>
+      Relationships are managed using the key of the target document. Look to the <tt>order/3455</tt>. It has the attribute "items" that is a collection of embedded objects. This is a regular 1-N relationship. In the Relational world they are the foreign keys on the target table, while here we have the relationships on the main object that lead the relationship direction. These embedded objects have the attribute "stock" that contains the relationship to the objects stored in the "stock" bucket.
+    </p>
+    <h3>
+      <a name="Helper_entries_and_buckets" id="Helper_entries_and_buckets"></a>Helper entries and buckets<a href="#Helper_entries_and_buckets" class="section_anchor"></a>
+    </h3>
+    <p>
+      As you can see there is a key "last" in the bucket "order". This is a conventional key that indicates always the last order. In this way you can obtain the last order by asking:
+    </p>
+    <p>
+      <tt>HTTP GET http://localhost:8000/example/order/last</tt>
+    </p>
+    <p>
+      This key is just a helper entry. It could be useful create one or more helper buckets to store something like:
+    </p>
+    <ul>
+      <li>all the orders to ship: <tt>/orderToShip/</tt>
+      </li>
+      <li>the user permissions by creating a new bucket foreach user group. It could be help to use prefix to distinguish it among the others. In the followinng example the prefix used is "user": <tt>/user_admin/, /user_basic/, etc.</tt>
+      </li>
+      <li>all the most recent entries updated. For example it could be useful to display the most recent articles in a CMS like application. The application is responsable to leave only X items
+      </li>
+    </ul>
+    <h3>
+      <a name="Write_the_application_code" id="Write_the_application_code"></a>Write the application code<a href="#Write_the_application_code" class="section_anchor"></a>
+    </h3>
+    <p>
+      The application can be written in any language because the Key/Value Server uses REST/HTTP. The entire application could be written in Javascript and run entirely on the Web Browser with Ajax calls to the Orient Key/Value Server instance.
+    </p>
+    <p>
+      JSON documents are automatically converted in Javascript object trees. However there are a lot of <a href="http://www.json.org" rel="nofollow">JSON libraries for any programming language</a>.
+    </p>
+    <p>
+      The calls to the Key/Value Server can be asynchronous as well using asynchronous Ajax calls.
+    </p>
+    <p>
+      What do you think about it? Comments are welcome.
+    </p>
+  </body>
+</html>

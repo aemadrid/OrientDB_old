@@ -2,115 +2,74 @@
 title: Production deployments
 layout: default
 ---
-<h2>
-  <a name="Introduction" id="Introduction"></a>Introduction<a href=
-  "#Introduction" class="section_anchor"></a>
-</h2>
-<p>
-  <i>Since a lot of users are using OrientDB in production why
-  don't collect them all in one page?</i>
-</p>
-<p>
-  Are you using OrientDB in production? Please contribute to this
-  list by writing an email to <a href=
-  "mailto:deployments@orientechnologies.com" rel=
-  "nofollow">deployments@orientechnologies.com</a>.
-</p>
-<table class="zebra-striped bordered-table">
-  <tr>
-    <td>
-      Company
-    </td>
-    <td>
-      Use cases
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <img src=
-      "http://www.orientechnologies.com/images/asset_data.gif">
-    </td>
-    <td>
-      <a href="http://www.assetdata.it" rel=
-      "nofollow">AssetData</a> uses OrientDB in production for two
-      applications: <a href="http://www.stresscorrelato.it" rel=
-      "nofollow">Stess Correlato</a> and Trick a new Web CRM 100%
-      client side using OrientDB as backend and Web Server<br>
-      <strong>8108SCP (Stress Correlato):</strong><br>
-      <i>The scenario</i><br>
-      8108SCP is a web application that evaluates, via objective
-      and subjective questionnaires, the work related stress of a
-      company based on its internal organization tree.<br>
-      <i>Why OrientDB?</i><br>
-      Was needed an <i>Object Database</i> free, fast and easily
-      manageable due to continous domain refactoring. We also
-      needed an easy way to search data by object references<br>
-      <i>The solution</i><br>
-      We created a schema-full object database with OrientDB, using
-      the Java API to insert,delete and retrieve data<br>
-      <i>Results</i><br>
-      Right now the application manages a 1.5Gb database with more
-      than 1,000,000 records. All database interactions (insert,
-      delete, update and query), with indexed data, managed to be
-      between 0 and 2 seconds the average operation time is
-      0.567221s. For example the retrieving of 1,290
-      questionnaires, result calculation and storing for each
-      questionaire, and the creation of a set of 50-60 XML
-      containing various aggregated data takes no more than 5
-      minutes.
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <img src="http://www.celi.it/imgs/logo.gif">
-    </td>
-    <td>
-      <a href="http://www.celi.it" rel="nofollow">Celi</a> company
-      is actually using OrientDB in three different ways:<br>
-      1) as a simple datastore for storing user's bookmarks: not so
-      much records, but growing constantly every day<br>
-      2) as a document storage for a very specialized crawler: more
-      than 100k documents, daily updates with 1k new docs. It
-      allows us to incrementally add new docs in different format
-      and incrementally analyse them. Documents are XML, DOC, PDF,
-      stored as binary data. We are planning to replicate this
-      deployment in upcoming projects.<br>
-      3) as the back end for the new inflected-form morphology
-      service: in this scenario it is used most as a key value with
-      a very high rate of requests since the db for each single
-      word in a text to be analyzed. The access to the db is backed
-      by a cache on the client, but cache can't be too big. The
-      system caches locally at least 50k entries, while the db has
-      1,4M entries. This way we have a centralized morphology
-      service. Performance are quite similar to the locally
-      deployed FSM-based. The analysis system runs distributed, so
-      there are many clients querying the db at the same time with
-      very high rate of requests.<br>
-      <i>Why OrientDB?</i><br>
-      First, Orient give us a lot of flexibility on the data
-      format. No schema, or at least a minimal schema, means no
-      pain when adding new fields or new relations. Flexibility on
-      query with different level of abstractions and apis:
-      document, graph, binary. Flexibility on the way to interact
-      with the db: java-api, SQL, text-console, REST interface.
-      It's written in java and we have got a lot of java
-      experience, on performance tuning too. So it's easy for us to
-      tune the db, dive the code and share our knowledge to the
-      community.
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <img src=
-      "http://www.forgerock.com/sites/default/files/forgerock_logo.png">
-    </td>
-    <td>
-      <a href="http://www.forgerock.com" rel=
-      "nofollow">ForgeRock</a>.The ForgeRock open platform strategy
-      sets the standard for a secure and integrated platform that
-      lets you leverage your IT infrastructure to reach the next
-      level.<br>
-      OrientDB is the default DBMS bundled with the distribution.
-    </td>
-  </tr>
-</table>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<html>
+  <head>
+    <meta name="generator" content="HTML Tidy for Mac OS X (vers 31 October 2006 - Apple Inc. build 15.6), see www.w3.org">
+    <title></title>
+    <style type="text/css">
+p.c1 {font-style: italic}
+    </style>
+  </head>
+  <body>
+    <h2>
+      <a name="Introduction" id="Introduction"></a>Introduction<a href="#Introduction" class="section_anchor"></a>
+    </h2>
+    <p class="c1">
+      Since a lot of users are using OrientDB in production why don't collect them all in one page?
+    </p>
+    <p>
+      Are you using OrientDB in production? Please contribute to this list by writing an email to <a href="mailto:deployments@orientechnologies.com" rel="nofollow">deployments@orientechnologies.com</a>.
+    </p>
+    <p></p>
+    <table class="zebra-striped bordered-table">
+      <tr>
+        <td>
+          Company
+        </td>
+        <td>
+          Use cases
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <img src="http://www.orientechnologies.com/images/asset_data.gif">
+        </td>
+        <td>
+          <a href="http://www.assetdata.it" rel="nofollow">AssetData</a> uses OrientDB in production for two applications: <a href="http://www.stresscorrelato.it" rel="nofollow">Stess Correlato</a> and Trick a new Web CRM 100% client side using OrientDB as backend and Web Server<br>
+          <strong>8108SCP (Stress Correlato):</strong><br>
+          <i>The scenario</i><br>
+          8108SCP is a web application that evaluates, via objective and subjective questionnaires, the work related stress of a company based on its internal organization tree.<br>
+          <i>Why OrientDB?</i><br>
+          Was needed an <i>Object Database</i> free, fast and easily manageable due to continous domain refactoring. We also needed an easy way to search data by object references<br>
+          <i>The solution</i><br>
+          We created a schema-full object database with OrientDB, using the Java API to insert,delete and retrieve data<br>
+          <i>Results</i><br>
+          Right now the application manages a 1.5Gb database with more than 1,000,000 records. All database interactions (insert, delete, update and query), with indexed data, managed to be between 0 and 2 seconds the average operation time is 0.567221s. For example the retrieving of 1,290 questionnaires, result calculation and storing for each questionaire, and the creation of a set of 50-60 XML containing various aggregated data takes no more than 5 minutes.
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <img src="http://www.celi.it/imgs/logo.gif">
+        </td>
+        <td>
+          <a href="http://www.celi.it" rel="nofollow">Celi</a> company is actually using OrientDB in three different ways:<br>
+          1) as a simple datastore for storing user's bookmarks: not so much records, but growing constantly every day<br>
+          2) as a document storage for a very specialized crawler: more than 100k documents, daily updates with 1k new docs. It allows us to incrementally add new docs in different format and incrementally analyse them. Documents are XML, DOC, PDF, stored as binary data. We are planning to replicate this deployment in upcoming projects.<br>
+          3) as the back end for the new inflected-form morphology service: in this scenario it is used most as a key value with a very high rate of requests since the db for each single word in a text to be analyzed. The access to the db is backed by a cache on the client, but cache can't be too big. The system caches locally at least 50k entries, while the db has 1,4M entries. This way we have a centralized morphology service. Performance are quite similar to the locally deployed FSM-based. The analysis system runs distributed, so there are many clients querying the db at the same time with very high rate of requests.<br>
+          <i>Why OrientDB?</i><br>
+          First, Orient give us a lot of flexibility on the data format. No schema, or at least a minimal schema, means no pain when adding new fields or new relations. Flexibility on query with different level of abstractions and apis: document, graph, binary. Flexibility on the way to interact with the db: java-api, SQL, text-console, REST interface. It's written in java and we have got a lot of java experience, on performance tuning too. So it's easy for us to tune the db, dive the code and share our knowledge to the community.
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <img src="http://www.forgerock.com/sites/default/files/forgerock_logo.png">
+        </td>
+        <td>
+          <a href="http://www.forgerock.com" rel="nofollow">ForgeRock</a>.The ForgeRock open platform strategy sets the standard for a secure and integrated platform that lets you leverage your IT infrastructure to reach the next level.<br>
+          OrientDB is the default DBMS bundled with the distribution.
+        </td>
+      </tr>
+    </table>
+  </body>
+</html>

@@ -2,295 +2,238 @@
 title: Concepts
 layout: default
 ---
-<ul>
-  <li>
-    <a href="#Storage">Storage</a>
-  </li>
-  <li>
-    <a href="#Cluster">Cluster</a>
-  </li>
-  <li style="list-style: none">
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<html>
+  <head>
+    <meta name="generator" content="HTML Tidy for Mac OS X (vers 31 October 2006 - Apple Inc. build 15.6), see www.w3.org">
+    <title></title>
+    <style type="text/css">
+p.c2 {font-style: italic}
+    li.c1 {list-style: none}
+    </style>
+  </head>
+  <body>
+    <p></p>
     <ul>
       <li>
-        <a href="#Local_Physical_Cluster">Local Physical
-        Cluster</a>
+        <a href="#Storage">Storage</a>
       </li>
       <li>
-        <a href="#Logical_Cluster">Logical Cluster</a>
+        <a href="#Cluster">Cluster</a>
       </li>
-    </ul>
-  </li>
-  <li>
-    <a href="#Data_Segment">Data Segment</a>
-  </li>
-  <li>
-    <a href="#Record">Record</a>
-  </li>
-  <li style="list-style: none">
-    <ul>
-      <li>
-        <a href="#Record_types">Record types</a>
-      </li>
-      <li style="list-style: none">
+      <li class="c1">
         <ul>
           <li>
-            <a href="#Document">Document</a>
+            <a href="#Local_Physical_Cluster">Local Physical Cluster</a>
           </li>
           <li>
-            <a href="#Columned_record">Columned record</a>
-          </li>
-          <li>
-            <a href="#Raw">Raw</a>
+            <a href="#Logical_Cluster">Logical Cluster</a>
           </li>
         </ul>
       </li>
       <li>
-        <a href="#RecordID">RecordID</a>
+        <a href="#Data_Segment">Data Segment</a>
       </li>
       <li>
-        <a href="#Record_version">Record version</a>
+        <a href="#Record">Record</a>
       </li>
-    </ul>
-  </li>
-  <li>
-    <a href="#Class">Class</a>
-  </li>
-  <li>
-    <a href="#Relationships">Relationships</a>
-  </li>
-  <li style="list-style: none">
-    <ul>
-      <li>
-        <a href="#Referenced_relationships">Referenced
-        relationships</a>
-      </li>
-      <li style="list-style: none">
+      <li class="c1">
         <ul>
           <li>
-            <a href="#1-1_and_N-1_referenced_relationships">1-1 and
-            N-1 referenced relationships</a>
+            <a href="#Record_types">Record types</a>
+          </li>
+          <li class="c1">
+            <ul>
+              <li>
+                <a href="#Document">Document</a>
+              </li>
+              <li>
+                <a href="#Columned_record">Columned record</a>
+              </li>
+              <li>
+                <a href="#Raw">Raw</a>
+              </li>
+            </ul>
           </li>
           <li>
-            <a href="#1-N_and_N-M_referenced_relationships">1-N and
-            N-M referenced relationships</a>
+            <a href="#RecordID">RecordID</a>
+          </li>
+          <li>
+            <a href="#Record_version">Record version</a>
           </li>
         </ul>
       </li>
       <li>
-        <a href="#Embedded_relationships">Embedded
-        relationships</a>
+        <a href="#Class">Class</a>
       </li>
-      <li style="list-style: none">
+      <li>
+        <a href="#Relationships">Relationships</a>
+      </li>
+      <li class="c1">
         <ul>
           <li>
-            <a href="#1-1_and_N-1_referenced_relationships">1-1 and
-            N-1 referenced relationships</a>
+            <a href="#Referenced_relationships">Referenced relationships</a>
+          </li>
+          <li class="c1">
+            <ul>
+              <li>
+                <a href="#1-1_and_N-1_referenced_relationships">1-1 and N-1 referenced relationships</a>
+              </li>
+              <li>
+                <a href="#1-N_and_N-M_referenced_relationships">1-N and N-M referenced relationships</a>
+              </li>
+            </ul>
           </li>
           <li>
-            <a href="#1-N_and_N-M_referenced_relationships">1-N and
-            N-M referenced relationships</a>
+            <a href="#Embedded_relationships">Embedded relationships</a>
+          </li>
+          <li class="c1">
+            <ul>
+              <li>
+                <a href="#1-1_and_N-1_referenced_relationships">1-1 and N-1 referenced relationships</a>
+              </li>
+              <li>
+                <a href="#1-N_and_N-M_referenced_relationships">1-N and N-M referenced relationships</a>
+              </li>
+            </ul>
+          </li>
+          <li>
+            <a href="#Inverse_relationships">Inverse relationships</a>
           </li>
         </ul>
       </li>
       <li>
-        <a href="#Inverse_relationships">Inverse relationships</a>
+        <a href="#Database">Database</a>
+      </li>
+      <li class="c1">
+        <ul>
+          <li>
+            <a href="#Database_URL">Database URL</a>
+          </li>
+          <li>
+            <a href="#Database_usage">Database usage</a>
+          </li>
+        </ul>
       </li>
     </ul>
-  </li>
-  <li>
-    <a href="#Database">Database</a>
-  </li>
-  <li style="list-style: none">
+    <h2>
+      <a name="Storage" id="Storage"></a>Storage<a href="#Storage" class="section_anchor"></a>
+    </h2>
+    <p>
+      It's the real physical database. It can be:
+    </p>
     <ul>
       <li>
-        <a href="#Database_URL">Database URL</a>
+        <strong>local</strong>, where the access is made in the same process
       </li>
       <li>
-        <a href="#Database_usage">Database usage</a>
+        <strong>remote</strong>, by using the network to access to a remote storage
+      </li>
+      <li>
+        <strong>memory</strong>, all data remain in memory without to use the file system at all
       </li>
     </ul>
-  </li>
-</ul>
-<h2>
-  <a name="Storage" id="Storage"></a>Storage<a href="#Storage"
-  class="section_anchor"></a>
-</h2>
-<p>
-  It's the real physical database. It can be:
-</p>
-<ul>
-  <li>
-    <strong>local</strong>, where the access is made in the same
-    process
-  </li>
-  <li>
-    <strong>remote</strong>, by using the network to access to a
-    remote storage
-  </li>
-  <li>
-    <strong>memory</strong>, all data remain in memory without to
-    use the file system at all
-  </li>
-</ul>
-<p>
-  A Storage is composed by multiple <a href="#Cluster">Clusters</a>
-  and <a href="#Data_Segment">Data Segments</a>. You <i>must</i>
-  move real files in your file system only by using the Orient APIs
-  to avoid data corruption.
-</p>
-<p>
-  <img src=
-  "http://www.orientechnologies.com/images/orientdb-storage.png">
-</p>
-<h2>
-  <a name="Cluster" id="Cluster"></a>Cluster<a href="#Cluster"
-  class="section_anchor"></a>
-</h2>
-<p>
-  Orient uses <strong>clusters</strong> to store links to the data.
-  A cluster is a very generic way to group records and it is a
-  concept that does not exists in the Relational world. You can use
-  a cluster to group all the record of a certain type, or by a
-  specific value. Example:
-</p>
-<ul>
-  <li>Use the cluster "Person" to group all the records of type
-  "Person". This approach is similar to the RDBMS where each table
-  is a cluster.
-  </li>
-  <li>Use the cluster "Cache" to group all the records most
-  accessed.
-  </li>
-  <li>Use the cluster "Today" to group all the record created today
-  </li>
-  <li>Use the cluster "CityCar" to group all the city cars
-  </li>
-</ul>
-<p>
-  These are some examples about the clustering concepts. If you've
-  the background of Relational DBMS world you can start to think to
-  a cluster like a table and use it to group all the records by
-  types.
-</p>
-<p>
-  A cluster can by local or logical.
-</p>
-<h3>
-  <a name="Local_Physical_Cluster" id=
-  "Local_Physical_Cluster"></a>Local Physical Cluster<a href=
-  "#Local_Physical_Cluster" class="section_anchor"></a>
-</h3>
-<p>
-  It's the best choice if you plan to have a lot of records. The
-  cluster is mapped 1-by-2 to a file in the Operative File System.
-  This boosts the performance of storing and retrieving records at
-  the cost of more space and to have 2 more files as part of your
-  database. Some OS's are quite restrictive on the number of files
-  a process can keep open.
-</p>
-<p>
-  The local physycal cluster uses two or more files: One or more
-  files with extension "ocl" (Orient Cluster) and one file with
-  extension "och" (Orient Cluster Holes).
-</p>
-<p>
-  If you create the "Person" cluster you'll find in the folder that
-  contains your database the following files:
-</p>
-<ul>
-  <li>person.0.ocl
-  </li>
-  <li>person.och
-  </li>
-</ul>
-<p>
-  The first one is the first file (because the '0') that contains
-  real data. You can split a physical cluster into multiple real
-  files. This behavior depends on your configuration. When a
-  cluster file is full, a new file will be used. <i>NOTE: You can
-  move real files in your file system only by using the Orient
-  APIs</i>.
-</p>
-<p>
-  The second one is the "Hole" file that stores the holes of erased
-  data inside your cluster.
-</p>
-<h3>
-  <a name="Logical_Cluster" id="Logical_Cluster"></a>Logical
-  Cluster<a href="#Logical_Cluster" class="section_anchor"></a>
-</h3>
-<p>
-  This is the best choice if you plan to have few record in of poor
-  used by your application. In fact Logical Clusters are stored
-  inside a real physical cluster (by default in the cluster called
-  "default"). It's much slower than the physical cluster, but it
-  saves space and lets the Orient instance use less files. Some
-  OS's are quite restrictive on the number of files a process can
-  keep open.
-</p>
-<h2>
-  <a name="Data_Segment" id="Data_Segment"></a>Data Segment<a href=
-  "#Data_Segment" class="section_anchor"></a>
-</h2>
-<p>
-  Orient uses <strong>data segments</strong> to store the record
-  content. The Data segment behaves similar to the physical cluster
-  files: uses two or more files: One or multiple files with
-  extension "oda" (Orient DAta) and only one file with extension
-  "odh" (Orient Data Holes).
-</p>
-<p>
-  By default Orient creates the first data segment named "default".
-  In the folder that contains your database you can check the
-  following files:
-</p>
-<ul>
-  <li>default.0.oda
-  </li>
-  <li>default.odh
-  </li>
-</ul>
-<p>
-  The first one is the first file (because the '0') that contains
-  real data. You can split a data segment in multiple real files.
-  This behaviour depends by your configuration. When a data segment
-  file is full, a new file will be used. <i>NOTE: You can move real
-  files in your file system only by using the Orient APIs</i>.
-</p>
-<p>
-  Interaction between components: load record use case:
-</p>
-<p>
-  <img src=
-  "http://www.orientechnologies.com/images/orientdb-loadrecord.png">
-</p>
-<h2>
-  <a name="Record" id="Record"></a>Record<a href="#Record" class=
-  "section_anchor"></a>
-</h2>
-<p>
-  A record is the smallest unit that can be load and stored into
-  the database.
-</p>
-<h3>
-  <a name="Record_types" id="Record_types"></a>Record types<a href=
-  "#Record_types" class="section_anchor"></a>
-</h3>
-<p>
-  At developer level there are several types of records.
-</p>
-<h4>
-  <a name="Document" id="Document"></a>Document<a href="#Document"
-  class="section_anchor"></a>
-</h4>
-<p>
-  It's the most flexible record available in OrientDB. It's softly
-  typed. Types are the schema classes with the defined constraints,
-  but can be used also in schema-less mode. It handles fields in
-  flexible way. A document can be easily imported and exported in
-  JSON format. Example of a Document in JSON format:
-</p>
-<pre class="prettyprint">
+    <p>
+      A Storage is composed by multiple <a href="#Cluster">Clusters</a> and <a href="#Data_Segment">Data Segments</a>. You <i>must</i> move real files in your file system only by using the Orient APIs to avoid data corruption.
+    </p>
+    <p>
+      <img src="http://www.orientechnologies.com/images/orientdb-storage.png">
+    </p>
+    <h2>
+      <a name="Cluster" id="Cluster"></a>Cluster<a href="#Cluster" class="section_anchor"></a>
+    </h2>
+    <p>
+      Orient uses <strong>clusters</strong> to store links to the data. A cluster is a very generic way to group records and it is a concept that does not exists in the Relational world. You can use a cluster to group all the record of a certain type, or by a specific value. Example:
+    </p>
+    <ul>
+      <li>Use the cluster "Person" to group all the records of type "Person". This approach is similar to the RDBMS where each table is a cluster.
+      </li>
+      <li>Use the cluster "Cache" to group all the records most accessed.
+      </li>
+      <li>Use the cluster "Today" to group all the record created today
+      </li>
+      <li>Use the cluster "CityCar" to group all the city cars
+      </li>
+    </ul>
+    <p>
+      These are some examples about the clustering concepts. If you've the background of Relational DBMS world you can start to think to a cluster like a table and use it to group all the records by types.
+    </p>
+    <p>
+      A cluster can by local or logical.
+    </p>
+    <h3>
+      <a name="Local_Physical_Cluster" id="Local_Physical_Cluster"></a>Local Physical Cluster<a href="#Local_Physical_Cluster" class="section_anchor"></a>
+    </h3>
+    <p>
+      It's the best choice if you plan to have a lot of records. The cluster is mapped 1-by-2 to a file in the Operative File System. This boosts the performance of storing and retrieving records at the cost of more space and to have 2 more files as part of your database. Some OS's are quite restrictive on the number of files a process can keep open.
+    </p>
+    <p>
+      The local physycal cluster uses two or more files: One or more files with extension "ocl" (Orient Cluster) and one file with extension "och" (Orient Cluster Holes).
+    </p>
+    <p>
+      If you create the "Person" cluster you'll find in the folder that contains your database the following files:
+    </p>
+    <ul>
+      <li>person.0.ocl
+      </li>
+      <li>person.och
+      </li>
+    </ul>
+    <p>
+      The first one is the first file (because the '0') that contains real data. You can split a physical cluster into multiple real files. This behavior depends on your configuration. When a cluster file is full, a new file will be used. <i>NOTE: You can move real files in your file system only by using the Orient APIs</i>.
+    </p>
+    <p>
+      The second one is the "Hole" file that stores the holes of erased data inside your cluster.
+    </p>
+    <h3>
+      <a name="Logical_Cluster" id="Logical_Cluster"></a>Logical Cluster<a href="#Logical_Cluster" class="section_anchor"></a>
+    </h3>
+    <p>
+      This is the best choice if you plan to have few record in of poor used by your application. In fact Logical Clusters are stored inside a real physical cluster (by default in the cluster called "default"). It's much slower than the physical cluster, but it saves space and lets the Orient instance use less files. Some OS's are quite restrictive on the number of files a process can keep open.
+    </p>
+    <h2>
+      <a name="Data_Segment" id="Data_Segment"></a>Data Segment<a href="#Data_Segment" class="section_anchor"></a>
+    </h2>
+    <p>
+      Orient uses <strong>data segments</strong> to store the record content. The Data segment behaves similar to the physical cluster files: uses two or more files: One or multiple files with extension "oda" (Orient DAta) and only one file with extension "odh" (Orient Data Holes).
+    </p>
+    <p>
+      By default Orient creates the first data segment named "default". In the folder that contains your database you can check the following files:
+    </p>
+    <ul>
+      <li>default.0.oda
+      </li>
+      <li>default.odh
+      </li>
+    </ul>
+    <p>
+      The first one is the first file (because the '0') that contains real data. You can split a data segment in multiple real files. This behaviour depends by your configuration. When a data segment file is full, a new file will be used. <i>NOTE: You can move real files in your file system only by using the Orient APIs</i>.
+    </p>
+    <p>
+      Interaction between components: load record use case:
+    </p>
+    <p>
+      <img src="http://www.orientechnologies.com/images/orientdb-loadrecord.png">
+    </p>
+    <h2>
+      <a name="Record" id="Record"></a>Record<a href="#Record" class="section_anchor"></a>
+    </h2>
+    <p>
+      A record is the smallest unit that can be load and stored into the database.
+    </p>
+    <h3>
+      <a name="Record_types" id="Record_types"></a>Record types<a href="#Record_types" class="section_anchor"></a>
+    </h3>
+    <p>
+      At developer level there are several types of records.
+    </p>
+    <h4>
+      <a name="Document" id="Document"></a>Document<a href="#Document" class="section_anchor"></a>
+    </h4>
+    <p>
+      It's the most flexible record available in OrientDB. It's softly typed. Types are the schema classes with the defined constraints, but can be used also in schema-less mode. It handles fields in flexible way. A document can be easily imported and exported in JSON format. Example of a Document in JSON format:
+    </p>
+    <pre class="prettyprint">
 {
   "name": "Jay",
   "surname": "Miner",
@@ -305,343 +248,235 @@ layout: default
   ]
 }
 </pre>
-<p>
-  OrientDB Documents support complex <a href=
-  "#Relationships">relationships</a>. From a programmer perspective
-  can be seen as a sort of persistent Map&lt;String,Object&gt;.
-</p>
-<h4>
-  <a name="Columned_record" id="Columned_record"></a>Columned
-  record<a href="#Columned_record" class="section_anchor"></a>
-</h4>
-<p>
-  Allow to store fields but as positional order.
-</p>
-<h4>
-  <a name="Raw" id="Raw"></a>Raw<a href="#Raw" class=
-  "section_anchor"></a>
-</h4>
-<p>
-  Allow only to store bytes. No fields are supported.
-</p>
-<h3>
-  <a name="RecordID" id="RecordID"></a>RecordID<a href="#RecordID"
-  class="section_anchor"></a>
-</h3>
-<p>
-  In OrientDB each record has a unique ID. The RecordID is composed
-  in this way: <tt>#[&lt;cluster&gt;:&lt;position&gt;]</tt> Where:
-</p>
-<ul>
-  <li>cluster, is the cluster id. Positive numbers mean <a href=
-  "#Physical_Cluster">physical clusters</a>. Negative numbers mean
-  <a href="#Logical_Cluster">logical clusters</a>.
-  </li>
-  <li>position, is the absolute position of the record inside a
-  cluster.
-  </li>
-</ul>
-<p>
-  <i>NOTE: After the release 1.0rc4 the prefix character # is
-  mandatory to recognize a RecordID.</i>
-</p>
-<p>
-  The record never looses its identity unless is deleted. Once
-  deleted its identity could be recycled and assigned to a new
-  record. See the <a href="#Inverse_relationships">Inverse
-  relationships</a> to know more about this.
-</p>
-<p>
-  You can access directly to a record by knowing its RecordID. For
-  this reason you don't need to create a field as primary key as
-  happens in Relational DBMS.
-</p>
-<h3>
-  <a name="Record_version" id="Record_version"></a>Record
-  version<a href="#Record_version" class="section_anchor"></a>
-</h3>
-<p>
-  Each record maintains own version number that is incremented at
-  every update. When a record is created the version is zero. In
-  optimistic transactions the version is checked in order to avoid
-  conflicts at commit time.
-</p>
-<h2>
-  <a name="Class" id="Class"></a>Class<a href="#Class" class=
-  "section_anchor"></a>
-</h2>
-<p>
-  A Class is a concept taken from the <a href=
-  "http://en.wikipedia.org/wiki/Object-oriented_programming" rel=
-  "nofollow">Object Oriented paradigm</a>. In OrientDB defines a
-  type of record. It's the closest concept to a Relational DBMS
-  Table. Class can be schema-less, schema-full or mixed. Each class
-  has its cluster that can be <a href=
-  "#Logical_Cluster">logical</a> (by default) or <a href=
-  "#Physical_Cluster">physical</a>.
-</p>
-<p>
-  A class can inherit from another shaping a tree of classes.
-  <a href=
-  "http://en.wikipedia.org/wiki/Inheritance_(object-oriented_programming)"
-  rel="nofollow">Inheritance</a> means that the sub-class extends
-  the parent one inheriting all the attributes as they was own.
-</p>
-<h2>
-  <a name="Relationships" id=
-  "Relationships"></a>Relationships<a href="#Relationships" class=
-  "section_anchor"></a>
-</h2>
-<p>
-  OrientDB supports two kind of relationships:
-  <strong>referenced</strong> and <strong>embedded</strong>.
-  OrientDB can manage relationships when are defined in the
-  <a href="http://code.google.com/p/orient/wiki/Schema#Define_relationships"
-  rel="nofollow">Schema</a> or in Schema-less scenario.
-</p>
-<h3>
-  <a name="Referenced_relationships" id=
-  "Referenced_relationships"></a>Referenced relationships<a href=
-  "#Referenced_relationships" class="section_anchor"></a>
-</h3>
-<p>
-  Relationships in Orient are managed natively without computing
-  costly JOINs as happens in the Relational DBMSs. In facts Orient
-  stores the direct link(s) to the target objects of relationship.
-  This boost up the load of entire graph of connected objects as
-  happens for Graph and Object DBMSs. Example:
-</p>
-<pre class="prettyprint">
+    <p>
+      OrientDB Documents support complex <a href="#Relationships">relationships</a>. From a programmer perspective can be seen as a sort of persistent Map&lt;String,Object&gt;.
+    </p>
+    <h4>
+      <a name="Columned_record" id="Columned_record"></a>Columned record<a href="#Columned_record" class="section_anchor"></a>
+    </h4>
+    <p>
+      Allow to store fields but as positional order.
+    </p>
+    <h4>
+      <a name="Raw" id="Raw"></a>Raw<a href="#Raw" class="section_anchor"></a>
+    </h4>
+    <p>
+      Allow only to store bytes. No fields are supported.
+    </p>
+    <h3>
+      <a name="RecordID" id="RecordID"></a>RecordID<a href="#RecordID" class="section_anchor"></a>
+    </h3>
+    <p>
+      In OrientDB each record has a unique ID. The RecordID is composed in this way: <tt>#[&lt;cluster&gt;:&lt;position&gt;]</tt> Where:
+    </p>
+    <ul>
+      <li>cluster, is the cluster id. Positive numbers mean <a href="#Physical_Cluster">physical clusters</a>. Negative numbers mean <a href="#Logical_Cluster">logical clusters</a>.
+      </li>
+      <li>position, is the absolute position of the record inside a cluster.
+      </li>
+    </ul>
+    <p class="c2">
+      NOTE: After the release 1.0rc4 the prefix character # is mandatory to recognize a RecordID.
+    </p>
+    <p>
+      The record never looses its identity unless is deleted. Once deleted its identity could be recycled and assigned to a new record. See the <a href="#Inverse_relationships">Inverse relationships</a> to know more about this.
+    </p>
+    <p>
+      You can access directly to a record by knowing its RecordID. For this reason you don't need to create a field as primary key as happens in Relational DBMS.
+    </p>
+    <h3>
+      <a name="Record_version" id="Record_version"></a>Record version<a href="#Record_version" class="section_anchor"></a>
+    </h3>
+    <p>
+      Each record maintains own version number that is incremented at every update. When a record is created the version is zero. In optimistic transactions the version is checked in order to avoid conflicts at commit time.
+    </p>
+    <h2>
+      <a name="Class" id="Class"></a>Class<a href="#Class" class="section_anchor"></a>
+    </h2>
+    <p>
+      A Class is a concept taken from the <a href="http://en.wikipedia.org/wiki/Object-oriented_programming" rel="nofollow">Object Oriented paradigm</a>. In OrientDB defines a type of record. It's the closest concept to a Relational DBMS Table. Class can be schema-less, schema-full or mixed. Each class has its cluster that can be <a href="#Logical_Cluster">logical</a> (by default) or <a href="#Physical_Cluster">physical</a>.
+    </p>
+    <p>
+      A class can inherit from another shaping a tree of classes. <a href="http://en.wikipedia.org/wiki/Inheritance_(object-oriented_programming)" rel="nofollow">Inheritance</a> means that the sub-class extends the parent one inheriting all the attributes as they was own.
+    </p>
+    <h2>
+      <a name="Relationships" id="Relationships"></a>Relationships<a href="#Relationships" class="section_anchor"></a>
+    </h2>
+    <p>
+      OrientDB supports two kind of relationships: <strong>referenced</strong> and <strong>embedded</strong>. OrientDB can manage relationships when are defined in the <a href="http://code.google.com/p/orient/wiki/Schema#Define_relationships" rel="nofollow">Schema</a> or in Schema-less scenario.
+    </p>
+    <h3>
+      <a name="Referenced_relationships" id="Referenced_relationships"></a>Referenced relationships<a href="#Referenced_relationships" class="section_anchor"></a>
+    </h3>
+    <p>
+      Relationships in Orient are managed natively without computing costly JOINs as happens in the Relational DBMSs. In facts Orient stores the direct link(s) to the target objects of relationship. This boost up the load of entire graph of connected objects as happens for Graph and Object DBMSs. Example:
+    </p>
+    <pre class="prettyprint">
                   customer
   Record A     -------------&gt;    Record B
 CLASS=Invoice                 CLASS=Customer
   RID=5:23                       RID=10:2
 </pre>
-<p>
-  <strong>Record A</strong> will contain the <i>reference</i> to
-  the <strong>Record B</strong> in the property called "customer".
-  Note that both records are reachable by any other records since
-  they have a <a href="#RecordID">RecordID</a>.
-</p>
-<h4>
-  <a name="1-1_and_N-1_referenced_relationships"></a>1-1 and N-1
-  referenced relationships<a href=
-  "#1-1_and_N-1_referenced_relationships" class=
-  "section_anchor"></a>
-</h4>
-<p>
-  This kind of relationships are expressed using the
-  <strong>LINK</strong> type.
-</p>
-<h4>
-  <a name="1-N_and_N-M_referenced_relationships"></a>1-N and N-M
-  referenced relationships<a href=
-  "#1-N_and_N-M_referenced_relationships" class=
-  "section_anchor"></a>
-</h4>
-<p>
-  This kind of relationships are expressed using the collection of
-  links such as:
-</p>
-<ul>
-  <li>
-    <strong>LINKLIST</strong>, as an ordered list of links
-  </li>
-  <li>
-    <strong>LINKSET</strong>, as an unordered set of links. It
-    doesn't accepts duplicates
-  </li>
-  <li>
-    <strong>LINKMAP</strong>, as an ordered map of links with key a
-    <strong>String</strong>. It doesn't accepts duplicated keys
-  </li>
-</ul>
-<h3>
-  <a name="Embedded_relationships" id=
-  "Embedded_relationships"></a>Embedded relationships<a href=
-  "#Embedded_relationships" class="section_anchor"></a>
-</h3>
-<p>
-  Embedded records, instead, are contained inside the record that
-  embeds them. It's a kind of relationship stronger than the
-  <a href="#Referenced_relationships">reference</a>. The embedded
-  record will not have a own <a href="#RecordID">RecordID</a> since
-  it can't be directly referenced by other records. It's only
-  accessible thriught the container record. If the container record
-  is deleted, then the embedded record will be deleted too.
-  Example:
-</p>
-<pre class="prettyprint">
+    <p>
+      <strong>Record A</strong> will contain the <i>reference</i> to the <strong>Record B</strong> in the property called "customer". Note that both records are reachable by any other records since they have a <a href="#RecordID">RecordID</a>.
+    </p>
+    <h4>
+      <a name="1-1_and_N-1_referenced_relationships"></a>1-1 and N-1 referenced relationships<a href="#1-1_and_N-1_referenced_relationships" class="section_anchor"></a>
+    </h4>
+    <p>
+      This kind of relationships are expressed using the <strong>LINK</strong> type.
+    </p>
+    <h4>
+      <a name="1-N_and_N-M_referenced_relationships"></a>1-N and N-M referenced relationships<a href="#1-N_and_N-M_referenced_relationships" class="section_anchor"></a>
+    </h4>
+    <p>
+      This kind of relationships are expressed using the collection of links such as:
+    </p>
+    <ul>
+      <li>
+        <strong>LINKLIST</strong>, as an ordered list of links
+      </li>
+      <li>
+        <strong>LINKSET</strong>, as an unordered set of links. It doesn't accepts duplicates
+      </li>
+      <li>
+        <strong>LINKMAP</strong>, as an ordered map of links with key a <strong>String</strong>. It doesn't accepts duplicated keys
+      </li>
+    </ul>
+    <h3>
+      <a name="Embedded_relationships" id="Embedded_relationships"></a>Embedded relationships<a href="#Embedded_relationships" class="section_anchor"></a>
+    </h3>
+    <p>
+      Embedded records, instead, are contained inside the record that embeds them. It's a kind of relationship stronger than the <a href="#Referenced_relationships">reference</a>. The embedded record will not have a own <a href="#RecordID">RecordID</a> since it can't be directly referenced by other records. It's only accessible thriught the container record. If the container record is deleted, then the embedded record will be deleted too. Example:
+    </p>
+    <pre class="prettyprint">
                   address
   Record A     &lt;&gt;----------&gt;   Record B
 CLASS=Account               CLASS=Address
   RID=5:23                     NO RID!
 </pre>
-<p>
-  <strong>Record A</strong> will contain the entire <strong>Record
-  B</strong> in the property called "address". <strong>Record
-  B</strong> can be reached only by traversing the container
-  record.
-</p>
-<p>
-  Example:
-</p>
-<pre class="prettyprint">
+    <p>
+      <strong>Record A</strong> will contain the entire <strong>Record B</strong> in the property called "address". <strong>Record B</strong> can be reached only by traversing the container record.
+    </p>
+    <p>
+      Example:
+    </p>
+    <pre class="prettyprint">
 SELECT FROM account WHERE address.city = 'Rome'
 </pre>
-<h4>
-  <a name="1-1_and_N-1_referenced_relationships"></a>1-1 and N-1
-  referenced relationships<a href=
-  "#1-1_and_N-1_referenced_relationships" class=
-  "section_anchor"></a>
-</h4>
-<p>
-  This kind of relationships are expressed using the
-  <strong>EMBEDDED</strong> type.
-</p>
-<h4>
-  <a name="1-N_and_N-M_referenced_relationships"></a>1-N and N-M
-  referenced relationships<a href=
-  "#1-N_and_N-M_referenced_relationships" class=
-  "section_anchor"></a>
-</h4>
-<p>
-  This kind of relationships are expressed using the collection of
-  links such as:
-</p>
-<ul>
-  <li>
-    <strong>EMBEDDEDLIST</strong>, as an ordered list of records
-  </li>
-  <li>
-    <strong>EMBEDDEDSET</strong>, as an unordered set of records.
-    It doesn't accepts duplicates
-  </li>
-  <li>
-    <strong>EMBEDDEDMAP</strong>, as an ordered map of records as
-    value with key a <strong>String</strong>. It doesn't accepts
-    duplicated keys
-  </li>
-</ul>
-<h3>
-  <a name="Inverse_relationships" id=
-  "Inverse_relationships"></a>Inverse relationships<a href=
-  "#Inverse_relationships" class="section_anchor"></a>
-</h3>
-<p>
-  Until support for Inverse Relationships is implemented natively,
-  the application developer is responsible for maintinaing their
-  integrity. (See issue <a href=
-  "http://code.google.com/p/orient/issues/detail?id=7" rel=
-  "nofollow">http://code.google.com/p/orient/issues/detail?id=7</a>).
-</p>
-<p>
-  For this reason when a relationship is changed, the developer
-  needs to update the referenced object by hand, removing the back
-  relationship to the original.
-</p>
-<h2>
-  <a name="Database" id="Database"></a>Database<a href="#Database"
-  class="section_anchor"></a>
-</h2>
-<p>
-  A database is an interface to access to the real <a href=
-  "#Storage">Storage</a>. The database knows all the high-level
-  concepts such as Query, Schema, Metadata, Indexes, etc. Orient
-  provides multiple database types. Take a look to the <a href=
-  "java_api.html#Database_types">Database types</a> to know more
-  about it.
-</p>
-<h3>
-  <a name="Database_URL" id="Database_URL"></a>Database URL<a href=
-  "#Database_URL" class="section_anchor"></a>
-</h3>
-<p>
-  Orient has its own <a href=
-  "http://en.wikipedia.org/wiki/Uniform_Resource_Locator" rel=
-  "nofollow">URL</a> format:
-</p>
-<p>
-  <tt>&lt;engine&gt;:&lt;db-name&gt;</tt>
-</p>
-<p>
-  Where:
-</p>
-<ul>
-  <li>
-    <strong>db-name</strong> is the database name and depends by
-    the engine used (see below)
-  </li>
-  <li>
-    <strong><a href=
-    "http://code.google.com/p/orient/wiki/JavaAPI#Engines" rel=
-    "nofollow">engine</a></strong> can be:
-  </li>
-</ul>
-<table class="zebra-striped bordered-table">
-  <tr>
-    <td>
-      <strong>Engine</strong>
-    </td>
-    <td>
-      <strong>Description</strong>
-    </td>
-    <td>
-      <strong>Example</strong>
-    </td>
-  </tr>
-  <tr>
-    <td>
-      remote
-    </td>
-    <td>
-      The storage will be opened via remote network connection. It
-      requires a Orient Server up and running. In this mode the
-      database it's shared among multiple clients. Syntax:
-      <tt>remote:&lt;server&gt;:[&lt;port&gt;]/db-name</tt>. The
-      port is optional and if not specified is 2480.
-    </td>
-    <td>
-      remote:localhost/petshop
-    </td>
-  </tr>
-  <tr>
-    <td>
-      local
-    </td>
-    <td>
-      Direct access via local File System, so the path must be a
-      path on the local file system. In this configuration OrientDB
-      runs as embedded. The database can't be opened by multiple
-      processes (if you want this you have to use "remote"
-      instead). It's the fastest access because avoid any network
-      connection and transfers
-    </td>
-    <td>
-      local:C:\temp\databases\petshop\petshop
-    </td>
-  </tr>
-  <tr>
-    <td>
-      memory
-    </td>
-    <td>
-      Open a database completely in memory
-    </td>
-    <td>
-      memory:petshop
-    </td>
-  </tr>
-</table>
-<h3>
-  <a name="Database_usage" id="Database_usage"></a>Database
-  usage<a href="#Database_usage" class="section_anchor"></a>
-</h3>
-<p>
-  The database must be always closed once you've finished with it.
-</p>
-<p>
-  NOTE: Orient closes automatically all opened storages when the
-  process dies softly (not by force killing). This assure as far as
-  the Operative System allows a graceful shutdown.
-</p>
+    <h4>
+      <a name="1-1_and_N-1_referenced_relationships"></a>1-1 and N-1 referenced relationships<a href="#1-1_and_N-1_referenced_relationships" class="section_anchor"></a>
+    </h4>
+    <p>
+      This kind of relationships are expressed using the <strong>EMBEDDED</strong> type.
+    </p>
+    <h4>
+      <a name="1-N_and_N-M_referenced_relationships"></a>1-N and N-M referenced relationships<a href="#1-N_and_N-M_referenced_relationships" class="section_anchor"></a>
+    </h4>
+    <p>
+      This kind of relationships are expressed using the collection of links such as:
+    </p>
+    <ul>
+      <li>
+        <strong>EMBEDDEDLIST</strong>, as an ordered list of records
+      </li>
+      <li>
+        <strong>EMBEDDEDSET</strong>, as an unordered set of records. It doesn't accepts duplicates
+      </li>
+      <li>
+        <strong>EMBEDDEDMAP</strong>, as an ordered map of records as value with key a <strong>String</strong>. It doesn't accepts duplicated keys
+      </li>
+    </ul>
+    <h3>
+      <a name="Inverse_relationships" id="Inverse_relationships"></a>Inverse relationships<a href="#Inverse_relationships" class="section_anchor"></a>
+    </h3>
+    <p>
+      Until support for Inverse Relationships is implemented natively, the application developer is responsible for maintinaing their integrity. (See issue <a href="http://code.google.com/p/orient/issues/detail?id=7" rel="nofollow">http://code.google.com/p/orient/issues/detail?id=7</a>).
+    </p>
+    <p>
+      For this reason when a relationship is changed, the developer needs to update the referenced object by hand, removing the back relationship to the original.
+    </p>
+    <h2>
+      <a name="Database" id="Database"></a>Database<a href="#Database" class="section_anchor"></a>
+    </h2>
+    <p>
+      A database is an interface to access to the real <a href="#Storage">Storage</a>. The database knows all the high-level concepts such as Query, Schema, Metadata, Indexes, etc. Orient provides multiple database types. Take a look to the <a href="java_api.html#Database_types">Database types</a> to know more about it.
+    </p>
+    <h3>
+      <a name="Database_URL" id="Database_URL"></a>Database URL<a href="#Database_URL" class="section_anchor"></a>
+    </h3>
+    <p>
+      Orient has its own <a href="http://en.wikipedia.org/wiki/Uniform_Resource_Locator" rel="nofollow">URL</a> format:
+    </p>
+    <p>
+      <tt>&lt;engine&gt;:&lt;db-name&gt;</tt>
+    </p>
+    <p>
+      Where:
+    </p>
+    <ul>
+      <li>
+        <strong>db-name</strong> is the database name and depends by the engine used (see below)
+      </li>
+      <li>
+        <strong><a href="http://code.google.com/p/orient/wiki/JavaAPI#Engines" rel="nofollow">engine</a></strong> can be:
+      </li>
+    </ul>
+    <p></p>
+    <table class="zebra-striped bordered-table">
+      <tr>
+        <td>
+          <strong>Engine</strong>
+        </td>
+        <td>
+          <strong>Description</strong>
+        </td>
+        <td>
+          <strong>Example</strong>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          remote
+        </td>
+        <td>
+          The storage will be opened via remote network connection. It requires a Orient Server up and running. In this mode the database it's shared among multiple clients. Syntax: <tt>remote:&lt;server&gt;:[&lt;port&gt;]/db-name</tt>. The port is optional and if not specified is 2480.
+        </td>
+        <td>
+          remote:localhost/petshop
+        </td>
+      </tr>
+      <tr>
+        <td>
+          local
+        </td>
+        <td>
+          Direct access via local File System, so the path must be a path on the local file system. In this configuration OrientDB runs as embedded. The database can't be opened by multiple processes (if you want this you have to use "remote" instead). It's the fastest access because avoid any network connection and transfers
+        </td>
+        <td>
+          local:C:\temp\databases\petshop\petshop
+        </td>
+      </tr>
+      <tr>
+        <td>
+          memory
+        </td>
+        <td>
+          Open a database completely in memory
+        </td>
+        <td>
+          memory:petshop
+        </td>
+      </tr>
+    </table>
+    <h3>
+      <a name="Database_usage" id="Database_usage"></a>Database usage<a href="#Database_usage" class="section_anchor"></a>
+    </h3>
+    <p>
+      The database must be always closed once you've finished with it.
+    </p>
+    <p>
+      NOTE: Orient closes automatically all opened storages when the process dies softly (not by force killing). This assure as far as the Operative System allows a graceful shutdown.
+    </p>
+  </body>
+</html>

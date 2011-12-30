@@ -2,227 +2,174 @@
 title: Orient KeyValue Server
 layout: default
 ---
-<p>
-  <img src=
-  "http://www.orientechnologies.com/images/orient_kv_small.png">
-</p>
-<ul>
-  <li>
-    <a href="#Introduction">Introduction</a>
-  </li>
-  <li style="list-style: none">
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<html>
+  <head>
+    <meta name="generator" content="HTML Tidy for Mac OS X (vers 31 October 2006 - Apple Inc. build 15.6), see www.w3.org">
+    <title></title>
+    <style type="text/css">
+li.c1 {list-style: none}
+    </style>
+  </head>
+  <body>
+    <p>
+      <img src="http://www.orientechnologies.com/images/orient_kv_small.png">
+    </p>
+    <p></p>
     <ul>
       <li>
-        <a href="#Bucket">Bucket</a>
+        <a href="#Introduction">Introduction</a>
       </li>
-    </ul>
-  </li>
-  <li>
-    <a href="#Cluster">Cluster</a>
-  </li>
-  <li>
-    <a href="#Start_the_server">Start the server</a>
-  </li>
-  <li style="list-style: none">
-    <ul>
-      <li>
-        <a href="#Start_a_single_node_server">Start a single node
-        server</a>
-      </li>
-      <li>
-        <a href="#Start_a_clustered_multi_node_server">Start a
-        clustered multi node server</a>
-      </li>
-    </ul>
-  </li>
-  <li>
-    <a href="#Stop_the_server">Stop the server</a>
-  </li>
-  <li>
-    <a href="#Configuration">Configuration</a>
-  </li>
-  <li style="list-style: none">
-    <ul>
-      <li>
-        <a href="#Single_machine_configuration">Single machine
-        configuration</a>
-      </li>
-      <li>
-        <a href="#Multi-nodes_configuration">Multi-nodes
-        configuration</a>
-      </li>
-      <li>
-        <a href="#Handlers">Handlers</a>
-      </li>
-      <li>
-        <a href="#Protocols">Protocols</a>
-      </li>
-      <li>
-        <a href="#Listeners">Listeners</a>
-      </li>
-      <li>
-        <a href="#Storages">Storages</a>
+      <li class="c1">
+        <ul>
+          <li>
+            <a href="#Bucket">Bucket</a>
+          </li>
+        </ul>
       </li>
       <li>
         <a href="#Cluster">Cluster</a>
       </li>
+      <li>
+        <a href="#Start_the_server">Start the server</a>
+      </li>
+      <li class="c1">
+        <ul>
+          <li>
+            <a href="#Start_a_single_node_server">Start a single node server</a>
+          </li>
+          <li>
+            <a href="#Start_a_clustered_multi_node_server">Start a clustered multi node server</a>
+          </li>
+        </ul>
+      </li>
+      <li>
+        <a href="#Stop_the_server">Stop the server</a>
+      </li>
+      <li>
+        <a href="#Configuration">Configuration</a>
+      </li>
+      <li class="c1">
+        <ul>
+          <li>
+            <a href="#Single_machine_configuration">Single machine configuration</a>
+          </li>
+          <li>
+            <a href="#Multi-nodes_configuration">Multi-nodes configuration</a>
+          </li>
+          <li>
+            <a href="#Handlers">Handlers</a>
+          </li>
+          <li>
+            <a href="#Protocols">Protocols</a>
+          </li>
+          <li>
+            <a href="#Listeners">Listeners</a>
+          </li>
+          <li>
+            <a href="#Storages">Storages</a>
+          </li>
+          <li>
+            <a href="#Cluster">Cluster</a>
+          </li>
+        </ul>
+      </li>
+      <li>
+        <a href="#Try_it">Try it</a>
+      </li>
+      <li>
+        <a href="#Download_and_install_it">Download and install it</a>
+      </li>
+      <li>
+        <a href="#Benchmarks">Benchmarks</a>
+      </li>
+      <li>
+        <a href="#Roadmap">Roadmap</a>
+      </li>
+      <li>
+        <a href="#History">History</a>
+      </li>
     </ul>
-  </li>
-  <li>
-    <a href="#Try_it">Try it</a>
-  </li>
-  <li>
-    <a href="#Download_and_install_it">Download and install it</a>
-  </li>
-  <li>
-    <a href="#Benchmarks">Benchmarks</a>
-  </li>
-  <li>
-    <a href="#Roadmap">Roadmap</a>
-  </li>
-  <li>
-    <a href="#History">History</a>
-  </li>
-</ul>
-<h2>
-  <a name="Introduction" id="Introduction"></a>Introduction<a href=
-  "#Introduction" class="section_anchor"></a>
-</h2>
-<p>
-  <img src=
-  "http://www.orientechnologies.com/images/orientkv-screenshoot-mid.png">
-</p>
-<p>
-  Orient Key/Value Server (KV-Server from now) has been built on
-  top of <a href="document_database.html">Orient Document
-  Database</a>. The KV-Server is a multi-thread Java application
-  that listen commands on a TCP/IP socket at the port 2431. The
-  port can be changed in the <a href=
-  "#Configuration">configuration</a> file.
-</p>
-<p>
-  Orient KV-Server groups key/value pairs inside buckets. If you
-  come from the Relational DBMS world and you'd like to know how to
-  use a Key/Value paradigm in place of the classic Relational one,
-  take a look to the <a href=
-  "key_value_example.html">"Bucket/Key/Value paradigm as
-  replacement of the Relational DBMS"</a>.
-</p>
-<h3>
-  <a name="Bucket" id="Bucket"></a>Bucket<a href="#Bucket" class=
-  "section_anchor"></a>
-</h3>
-<p>
-  All the entries are grouped in Buckets. Buckets are containers of
-  entries. Using different buckets you can separate logically your
-  entries in seperate containers.
-</p>
-<h2>
-  <a name="Cluster" id="Cluster"></a>Cluster<a href="#Cluster"
-  class="section_anchor"></a>
-</h2>
-<p>
-  Orient Key/Value Server scales out very well in a cluster with
-  thousands of running machines: Orient will divide the load among
-  all the nodes. Cluster, by default, works in auto-discovery mode:
-  when a node starts it attaches itself to the cluster if any. When
-  a node goes down the cluster auto rebalances itself.
-</p>
-<p>
-  <img src=
-  "http://www.orientechnologies.com/images/orientkv-cluster-ring.png">
-</p>
-<p>
-  <img src=
-  "http://www.orientechnologies.com/images/orientkv-cluster-work.png">
-</p>
-<p>
-  <img src=
-  "http://www.orientechnologies.com/images/orientkv-cluster-failover.png">
-</p>
-<p>
-  Orient uses <a href="http://www.hazelcast.com" rel=
-  "nofollow">Hazelcast</a> to handle the partitioned cluster among
-  nodes. In the partitioned version Orient delegates to Hazelcast
-  all the management of the distributed Map. Hazelcast envolves the
-  OrientDB engine in these conditions:
-</p>
-<ul>
-  <li>When an entry is not found, it <b>searches</b> the key in the
-  OrientDB.
-  </li>
-  <li>When a new entry is <b>created</b>, it saves the entry also
-  in the OrientDB. The write is synchronous.
-  </li>
-  <li>When an entry is <b>updated</b>, it saves the entry also in
-  the OrientDB. The write is synchronous.
-  </li>
-  <li>When an entry is <b>deleted</b>, it deletes the entry also in
-  the OrientDB. The delete is synchronous.
-  </li>
-</ul>
-<h2>
-  <a name="Start_the_server" id="Start_the_server"></a>Start the
-  server<a href="#Start_the_server" class="section_anchor"></a>
-</h2>
-<h3>
-  <a name="Start_a_single_node_server" id=
-  "Start_a_single_node_server"></a>Start a single node
-  server<a href="#Start_a_single_node_server" class=
-  "section_anchor"></a>
-</h3>
-<p>
-  Execute the script <tt>bin/orient-kv.sh</tt> (or
-  <tt>bin/orient-kv.bat</tt> in MS Windows systems). If the port
-  2431 is busy the next one will be taken. By default the range is
-  2431-2440 but you can change it in <a href=
-  "#Single_machine_configuration">configuration</a>.
-</p>
-<h3>
-  <a name="Start_a_clustered_multi_node_server" id=
-  "Start_a_clustered_multi_node_server"></a>Start a clustered multi
-  node server<a href="#Start_a_clustered_multi_node_server" class=
-  "section_anchor"></a>
-</h3>
-<p>
-  Execute the script <tt>bin/orient-kv-partition.sh</tt> (or
-  <tt>bin/orient-kv-partition.bat</tt> in MS Windows systems). If
-  the port 2431 is busy the next one will be taken. By default the
-  range is 2431-2440 but you can change it in <a href=
-  "#Multi-nodes_configuration">configuration</a>.
-</p>
-<p>
-  During the start, the KV-Server searches for an available cluster
-  using the configuration setted. If a cluster is found, then it
-  attaches to it and the cluster network is re-configured to use
-  the new server. If no one cluster is available, then a new
-  network cluster is created with a single node until other nodes
-  will attach to it.
-</p>
-<h2>
-  <a name="Stop_the_server" id="Stop_the_server"></a>Stop the
-  server<a href="#Stop_the_server" class="section_anchor"></a>
-</h2>
-<p>
-  CTRL+C or Soft kill of the process to be sure that the opened
-  databases close softly.
-</p>
-<h2>
-  <a name="Configuration" id=
-  "Configuration"></a>Configuration<a href="#Configuration" class=
-  "section_anchor"></a>
-</h2>
-<h3>
-  <a name="Single_machine_configuration" id=
-  "Single_machine_configuration"></a>Single machine
-  configuration<a href="#Single_machine_configuration" class=
-  "section_anchor"></a>
-</h3>
-<p>
-  This is the content of the default <b>config/orient-kv.config</b>
-  file contained in the distribution:
-</p>
-<pre class="prettyprint">
+    <h2>
+      <a name="Introduction" id="Introduction"></a>Introduction<a href="#Introduction" class="section_anchor"></a>
+    </h2>
+    <p>
+      <img src="http://www.orientechnologies.com/images/orientkv-screenshoot-mid.png">
+    </p>
+    <p>
+      Orient Key/Value Server (KV-Server from now) has been built on top of <a href="document_database.html">Orient Document Database</a>. The KV-Server is a multi-thread Java application that listen commands on a TCP/IP socket at the port 2431. The port can be changed in the <a href="#Configuration">configuration</a> file.
+    </p>
+    <p>
+      Orient KV-Server groups key/value pairs inside buckets. If you come from the Relational DBMS world and you'd like to know how to use a Key/Value paradigm in place of the classic Relational one, take a look to the <a href="key_value_example.html">"Bucket/Key/Value paradigm as replacement of the Relational DBMS"</a>.
+    </p>
+    <h3>
+      <a name="Bucket" id="Bucket"></a>Bucket<a href="#Bucket" class="section_anchor"></a>
+    </h3>
+    <p>
+      All the entries are grouped in Buckets. Buckets are containers of entries. Using different buckets you can separate logically your entries in seperate containers.
+    </p>
+    <h2>
+      <a name="Cluster" id="Cluster"></a>Cluster<a href="#Cluster" class="section_anchor"></a>
+    </h2>
+    <p>
+      Orient Key/Value Server scales out very well in a cluster with thousands of running machines: Orient will divide the load among all the nodes. Cluster, by default, works in auto-discovery mode: when a node starts it attaches itself to the cluster if any. When a node goes down the cluster auto rebalances itself.
+    </p>
+    <p>
+      <img src="http://www.orientechnologies.com/images/orientkv-cluster-ring.png">
+    </p>
+    <p>
+      <img src="http://www.orientechnologies.com/images/orientkv-cluster-work.png">
+    </p>
+    <p>
+      <img src="http://www.orientechnologies.com/images/orientkv-cluster-failover.png">
+    </p>
+    <p>
+      Orient uses <a href="http://www.hazelcast.com" rel="nofollow">Hazelcast</a> to handle the partitioned cluster among nodes. In the partitioned version Orient delegates to Hazelcast all the management of the distributed Map. Hazelcast envolves the OrientDB engine in these conditions:
+    </p>
+    <ul>
+      <li>When an entry is not found, it <b>searches</b> the key in the OrientDB.
+      </li>
+      <li>When a new entry is <b>created</b>, it saves the entry also in the OrientDB. The write is synchronous.
+      </li>
+      <li>When an entry is <b>updated</b>, it saves the entry also in the OrientDB. The write is synchronous.
+      </li>
+      <li>When an entry is <b>deleted</b>, it deletes the entry also in the OrientDB. The delete is synchronous.
+      </li>
+    </ul>
+    <h2>
+      <a name="Start_the_server" id="Start_the_server"></a>Start the server<a href="#Start_the_server" class="section_anchor"></a>
+    </h2>
+    <h3>
+      <a name="Start_a_single_node_server" id="Start_a_single_node_server"></a>Start a single node server<a href="#Start_a_single_node_server" class="section_anchor"></a>
+    </h3>
+    <p>
+      Execute the script <tt>bin/orient-kv.sh</tt> (or <tt>bin/orient-kv.bat</tt> in MS Windows systems). If the port 2431 is busy the next one will be taken. By default the range is 2431-2440 but you can change it in <a href="#Single_machine_configuration">configuration</a>.
+    </p>
+    <h3>
+      <a name="Start_a_clustered_multi_node_server" id="Start_a_clustered_multi_node_server"></a>Start a clustered multi node server<a href="#Start_a_clustered_multi_node_server" class="section_anchor"></a>
+    </h3>
+    <p>
+      Execute the script <tt>bin/orient-kv-partition.sh</tt> (or <tt>bin/orient-kv-partition.bat</tt> in MS Windows systems). If the port 2431 is busy the next one will be taken. By default the range is 2431-2440 but you can change it in <a href="#Multi-nodes_configuration">configuration</a>.
+    </p>
+    <p>
+      During the start, the KV-Server searches for an available cluster using the configuration setted. If a cluster is found, then it attaches to it and the cluster network is re-configured to use the new server. If no one cluster is available, then a new network cluster is created with a single node until other nodes will attach to it.
+    </p>
+    <h2>
+      <a name="Stop_the_server" id="Stop_the_server"></a>Stop the server<a href="#Stop_the_server" class="section_anchor"></a>
+    </h2>
+    <p>
+      CTRL+C or Soft kill of the process to be sure that the opened databases close softly.
+    </p>
+    <h2>
+      <a name="Configuration" id="Configuration"></a>Configuration<a href="#Configuration" class="section_anchor"></a>
+    </h2>
+    <h3>
+      <a name="Single_machine_configuration" id="Single_machine_configuration"></a>Single machine configuration<a href="#Single_machine_configuration" class="section_anchor"></a>
+    </h3>
+    <p>
+      This is the content of the default <b>config/orient-kv.config</b> file contained in the distribution:
+    </p>
+    <pre class="prettyprint">
 &lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;
 &lt;!-- Orient Key/Value Server configuration --&gt;
 &lt;orient-server&gt;
@@ -250,17 +197,13 @@ layout: default
         &lt;/properties&gt;
 &lt;/orient-server&gt;
 </pre>
-<h3>
-  <a name="Multi-nodes_configuration" id=
-  "Multi-nodes_configuration"></a>Multi-nodes configuration<a href=
-  "#Multi-nodes_configuration" class="section_anchor"></a>
-</h3>
-<p>
-  This is the content of the default
-  <b>config/orient-kv-partition.config</b> file contained in the
-  distribution:
-</p>
-<pre class="prettyprint">
+    <h3>
+      <a name="Multi-nodes_configuration" id="Multi-nodes_configuration"></a>Multi-nodes configuration<a href="#Multi-nodes_configuration" class="section_anchor"></a>
+    </h3>
+    <p>
+      This is the content of the default <b>config/orient-kv-partition.config</b> file contained in the distribution:
+    </p>
+    <pre class="prettyprint">
 &lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;
 &lt;!-- Orient Key/Value Server configuration --&gt;
 &lt;orient-server&gt;
@@ -293,69 +236,52 @@ layout: default
     &lt;/properties&gt;
 &lt;/orient-server&gt;
 </pre>
-<h3>
-  <a name="Handlers" id="Handlers"></a>Handlers<a href="#Handlers"
-  class="section_anchor"></a>
-</h3>
-<p>
-  Handlers between the available ones:
-</p>
-<ul>
-  <li>
-  com.orientechnologies.orient.kv.network.protocol.http.partitioned.OServerClusterMember:
-  manages the server in a cluster
-  </li>
-</ul>
-<h3>
-  <a name="Protocols" id="Protocols"></a>Protocols<a href=
-  "#Protocols" class="section_anchor"></a>
-</h3>
-<p>
-  Contains the list of protocols used by the <a href=
-  "#Listeners">listeners section</a>. The protocols supported today
-  are:
-</p>
-<ul>
-  <li>http2local: the default one for KV-Server
-  </li>
-  <li>http2partitioned: the distributed version for KV-Server
-  </li>
-  <li>binary: the raw binary protocol used by Orient DB Server
-  </li>
-</ul>
-<h3>
-  <a name="Listeners" id="Listeners"></a>Listeners<a href=
-  "#Listeners" class="section_anchor"></a>
-</h3>
-<p>
-  You can configure multiple listeners by adding items under the
-  <tt>&lt;listeners&gt;</tt> tag and selecting the ip-address and
-  TCP/IP port to bind. The protocol used must be listed in the
-  <a href="#Protocols">protocols section</a>.
-</p>
-<h3>
-  <a name="Storages" id="Storages"></a>Storages<a href="#Storages"
-  class="section_anchor"></a>
-</h3>
-<p>
-  Contains the list of the configured storages. By default the
-  petshop storage is added for testing purpose. You can use any
-  envirnoment variable in the path such the ORIENT_HOME that points
-  to the Orient installation path if defined otherwise to the root
-  directory where the KV Server starts.
-</p>
-<p>
-  The create database command enlist a new storage in this section.
-</p>
-<h3>
-  <a name="Cluster" id="Cluster"></a>Cluster<a href="#Cluster"
-  class="section_anchor"></a>
-</h3>
-<p>
-  The cluster configuration, instead, is located in the
-  <b>config/hazelcast.xml</b> file. This is the default one:
-</p>
-<pre class="prettyprint">
+    <h3>
+      <a name="Handlers" id="Handlers"></a>Handlers<a href="#Handlers" class="section_anchor"></a>
+    </h3>
+    <p>
+      Handlers between the available ones:
+    </p>
+    <ul>
+      <li>com.orientechnologies.orient.kv.network.protocol.http.partitioned.OServerClusterMember: manages the server in a cluster
+      </li>
+    </ul>
+    <h3>
+      <a name="Protocols" id="Protocols"></a>Protocols<a href="#Protocols" class="section_anchor"></a>
+    </h3>
+    <p>
+      Contains the list of protocols used by the <a href="#Listeners">listeners section</a>. The protocols supported today are:
+    </p>
+    <ul>
+      <li>http2local: the default one for KV-Server
+      </li>
+      <li>http2partitioned: the distributed version for KV-Server
+      </li>
+      <li>binary: the raw binary protocol used by Orient DB Server
+      </li>
+    </ul>
+    <h3>
+      <a name="Listeners" id="Listeners"></a>Listeners<a href="#Listeners" class="section_anchor"></a>
+    </h3>
+    <p>
+      You can configure multiple listeners by adding items under the <tt>&lt;listeners&gt;</tt> tag and selecting the ip-address and TCP/IP port to bind. The protocol used must be listed in the <a href="#Protocols">protocols section</a>.
+    </p>
+    <h3>
+      <a name="Storages" id="Storages"></a>Storages<a href="#Storages" class="section_anchor"></a>
+    </h3>
+    <p>
+      Contains the list of the configured storages. By default the petshop storage is added for testing purpose. You can use any envirnoment variable in the path such the ORIENT_HOME that points to the Orient installation path if defined otherwise to the root directory where the KV Server starts.
+    </p>
+    <p>
+      The create database command enlist a new storage in this section.
+    </p>
+    <h3>
+      <a name="Cluster" id="Cluster"></a>Cluster<a href="#Cluster" class="section_anchor"></a>
+    </h3>
+    <p>
+      The cluster configuration, instead, is located in the <b>config/hazelcast.xml</b> file. This is the default one:
+    </p>
+    <pre class="prettyprint">
 &lt;hazelcast&gt;
         &lt;group&gt;
                 &lt;name&gt;orientkv&lt;/name&gt;
@@ -455,51 +381,38 @@ layout: default
         &lt;/map&gt;
 &lt;/hazelcast&gt;
 </pre>
-<p>
-  For more information visit the <a href=
-  "http://www.hazelcast.com/documentation.jsp#Config" rel=
-  "nofollow">Hazelcast page</a>.
-</p>
-<h2>
-  <a name="Try_it" id="Try_it"></a>Try it<a href="#Try_it" class=
-  "section_anchor"></a>
-</h2>
-<p>
-  <a href="http://moobilis.com:2431" rel="nofollow">Online demo</a>
-</p>
-<h2>
-  <a name="Download_and_install_it" id=
-  "Download_and_install_it"></a>Download and install it<a href=
-  "#Download_and_install_it" class="section_anchor"></a>
-</h2>
-<p>
-  <a href=
-  "http://code.google.com/p/orient/downloads/list?can=2&amp;q=kv+latest"
-  rel="nofollow">Download latest</a> and <a href=
-  "key_value_server_install.html">install it</a>.
-</p>
-<h2>
-  <a name="Benchmarks" id="Benchmarks"></a>Benchmarks<a href=
-  "#Benchmarks" class="section_anchor"></a>
-</h2>
-<p>
-  <a href="key_value_benchmarks.html">Benchmarks</a>.
-</p>
-<h2>
-  <a name="Roadmap" id="Roadmap"></a>Roadmap<a href="#Roadmap"
-  class="section_anchor"></a>
-</h2>
-<p>
-  <a href=
-  "http://code.google.com/p/orient/issues/list?can=2&amp;q=kv&amp;colspec=ID+Type+Status+Priority+Milestone+Owner+Summary&amp;cells=tiles"
-  rel="nofollow">Roadmap</a>.
-</p>
-<h2>
-  <a name="History" id="History"></a>History<a href="#History"
-  class="section_anchor"></a>
-</h2>
-<p>
-  <a href=
-  "http://code.google.com/p/orient/source/browse/trunk/history-kv.txt"
-  rel="nofollow">Change history</a>.
-</p>
+    <p>
+      For more information visit the <a href="http://www.hazelcast.com/documentation.jsp#Config" rel="nofollow">Hazelcast page</a>.
+    </p>
+    <h2>
+      <a name="Try_it" id="Try_it"></a>Try it<a href="#Try_it" class="section_anchor"></a>
+    </h2>
+    <p>
+      <a href="http://moobilis.com:2431" rel="nofollow">Online demo</a>
+    </p>
+    <h2>
+      <a name="Download_and_install_it" id="Download_and_install_it"></a>Download and install it<a href="#Download_and_install_it" class="section_anchor"></a>
+    </h2>
+    <p>
+      <a href="http://code.google.com/p/orient/downloads/list?can=2&amp;q=kv+latest" rel="nofollow">Download latest</a> and <a href="key_value_server_install.html">install it</a>.
+    </p>
+    <h2>
+      <a name="Benchmarks" id="Benchmarks"></a>Benchmarks<a href="#Benchmarks" class="section_anchor"></a>
+    </h2>
+    <p>
+      <a href="key_value_benchmarks.html">Benchmarks</a>.
+    </p>
+    <h2>
+      <a name="Roadmap" id="Roadmap"></a>Roadmap<a href="#Roadmap" class="section_anchor"></a>
+    </h2>
+    <p>
+      <a href="http://code.google.com/p/orient/issues/list?can=2&amp;q=kv&amp;colspec=ID+Type+Status+Priority+Milestone+Owner+Summary&amp;cells=tiles" rel="nofollow">Roadmap</a>.
+    </p>
+    <h2>
+      <a name="History" id="History"></a>History<a href="#History" class="section_anchor"></a>
+    </h2>
+    <p>
+      <a href="http://code.google.com/p/orient/source/browse/trunk/history-kv.txt" rel="nofollow">Change history</a>.
+    </p>
+  </body>
+</html>

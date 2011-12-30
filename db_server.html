@@ -2,216 +2,172 @@
 title: DB Server
 layout: default
 ---
-<ul>
-  <li>
-    <a href="#Introduction">Introduction</a>
-  </li>
-  <li>
-    <a href="#Start_the_server">Start the server</a>
-  </li>
-  <li>
-    <a href="#Stop_the_server">Stop the server</a>
-  </li>
-  <li>
-    <a href="#Connect_to_the_server">Connect to the server</a>
-  </li>
-  <li style="list-style: none">
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<html>
+  <head>
+    <meta name="generator" content="HTML Tidy for Mac OS X (vers 31 October 2006 - Apple Inc. build 15.6), see www.w3.org">
+    <title></title>
+    <style type="text/css">
+li.c1 {list-style: none}
+    </style>
+  </head>
+  <body>
+    <p></p>
     <ul>
       <li>
-        <a href="#Console">Console</a>
+        <a href="#Introduction">Introduction</a>
       </li>
       <li>
-        <a href="#OrientDB_Studio">OrientDB Studio</a>
+        <a href="#Start_the_server">Start the server</a>
       </li>
       <li>
-        <a href="#Write_your_application">Write your
-        application</a>
-      </li>
-    </ul>
-  </li>
-  <li>
-    <a href="#Cluster">Cluster</a>
-  </li>
-  <li>
-    <a href="#Configuration">Configuration</a>
-  </li>
-  <li style="list-style: none">
-    <ul>
-      <li>
-        <a href="#Default_configuration">Default configuration</a>
+        <a href="#Stop_the_server">Stop the server</a>
       </li>
       <li>
-        <a href="#Disable_distributed_configuration">Disable
-        distributed configuration</a>
+        <a href="#Connect_to_the_server">Connect to the server</a>
       </li>
-      <li>
-        <a href="#Handlers">Handlers</a>
-      </li>
-      <li>
-        <a href="#Protocols">Protocols</a>
-      </li>
-      <li>
-        <a href="#Listeners">Listeners</a>
-      </li>
-      <li>
-        <a href="#Storages">Storages</a>
-      </li>
-      <li>
-        <a href="#Users">Users</a>
-      </li>
-      <li style="list-style: none">
+      <li class="c1">
         <ul>
           <li>
-            <a href="#Automatic_password_generation">Automatic
-            password generation</a>
+            <a href="#Console">Console</a>
           </li>
           <li>
-            <a href="#Resources">Resources</a>
+            <a href="#OrientDB_Studio">OrientDB Studio</a>
+          </li>
+          <li>
+            <a href="#Write_your_application">Write your application</a>
           </li>
         </ul>
       </li>
       <li>
-        <a href="#Create_new_user_with_some_privileges">Create new
-        user with some privileges</a>
+        <a href="#Cluster">Cluster</a>
       </li>
-    </ul>
-  </li>
-  <li>
-    <a href="#Extend_the_server">Extend the server</a>
-  </li>
-  <li style="list-style: none">
-    <ul>
-      <li style="list-style: none">
+      <li>
+        <a href="#Configuration">Configuration</a>
+      </li>
+      <li class="c1">
         <ul>
           <li>
-            <a href="#Include_JARS_in_the_classpath">Include JARS
-            in the classpath</a>
+            <a href="#Default_configuration">Default configuration</a>
+          </li>
+          <li>
+            <a href="#Disable_distributed_configuration">Disable distributed configuration</a>
+          </li>
+          <li>
+            <a href="#Handlers">Handlers</a>
+          </li>
+          <li>
+            <a href="#Protocols">Protocols</a>
+          </li>
+          <li>
+            <a href="#Listeners">Listeners</a>
+          </li>
+          <li>
+            <a href="#Storages">Storages</a>
+          </li>
+          <li>
+            <a href="#Users">Users</a>
+          </li>
+          <li class="c1">
+            <ul>
+              <li>
+                <a href="#Automatic_password_generation">Automatic password generation</a>
+              </li>
+              <li>
+                <a href="#Resources">Resources</a>
+              </li>
+            </ul>
+          </li>
+          <li>
+            <a href="#Create_new_user_with_some_privileges">Create new user with some privileges</a>
           </li>
         </ul>
       </li>
       <li>
-        <a href="#Creating_a_distributed_change_manager">Creating a
-        distributed change manager</a>
+        <a href="#Extend_the_server">Extend the server</a>
+      </li>
+      <li class="c1">
+        <ul>
+          <li class="c1">
+            <ul>
+              <li>
+                <a href="#Include_JARS_in_the_classpath">Include JARS in the classpath</a>
+              </li>
+            </ul>
+          </li>
+          <li>
+            <a href="#Creating_a_distributed_change_manager">Creating a distributed change manager</a>
+          </li>
+        </ul>
+      </li>
+      <li>
+        <a href="#Benchmarks">Benchmarks</a>
+      </li>
+      <li>
+        <a href="#Roadmap">Roadmap</a>
+      </li>
+      <li>
+        <a href="#History">History</a>
       </li>
     </ul>
-  </li>
-  <li>
-    <a href="#Benchmarks">Benchmarks</a>
-  </li>
-  <li>
-    <a href="#Roadmap">Roadmap</a>
-  </li>
-  <li>
-    <a href="#History">History</a>
-  </li>
-</ul>
-<h2>
-  <a name="Introduction" id="Introduction"></a>Introduction<a href=
-  "#Introduction" class="section_anchor"></a>
-</h2>
-<p>
-  OrientDB Server (DB-Server from now) is a multi-thread Java
-  application that listen remote commands and execute them against
-  the Orient databases. OrientDB Server supports both binary and
-  HTTP protocols. The first one is used by Orient native client and
-  Orient Console. The second one can be used by any languages since
-  it's based on <a href="orient_db_rest.html">HTTP RESTful API</a>.
-  The HTTP protocol is used also by the OrientDB Studio
-  application.
-</p>
-<h2>
-  <a name="Start_the_server" id="Start_the_server"></a>Start the
-  server<a href="#Start_the_server" class="section_anchor"></a>
-</h2>
-<p>
-  To start the server execute the script bin/orient-db.sh (or
-  bin/orient-db.bat in MS Windows systems). By default both
-  interfaces are active: binary and http. If you want to disable
-  one of these change the <a href="#Configuration">Server
-  configuration</a>.
-</p>
-<p>
-  When the server starts try to acquire the port 2424 for the
-  binary protocol and 2480 for the HTTP one. If some port is busy
-  the next one will be taken until the port it's free. By default
-  the range for binary protocol is 2424-2430 and 2480-2490 for the
-  http one, but you can always change these settings in <a href=
-  "#Configuration">Server configuration</a>.
-</p>
-<h2>
-  <a name="Stop_the_server" id="Stop_the_server"></a>Stop the
-  server<a href="#Stop_the_server" class="section_anchor"></a>
-</h2>
-<p>
-  To stop a running server just press CTRL+C in the open window
-  that runs the Server instance or soft kill the process to be sure
-  that the opened databases close softly. Soft kill in MS Windows
-  systems can be done by closing the window. In Unix like systems a
-  kill it's enought (Don't use kill -9 unless you want to force a
-  hard shutdown).
-</p>
-<h2>
-  <a name="Connect_to_the_server" id=
-  "Connect_to_the_server"></a>Connect to the server<a href=
-  "#Connect_to_the_server" class="section_anchor"></a>
-</h2>
-<h3>
-  <a name="Console" id="Console"></a>Console<a href="#Console"
-  class="section_anchor"></a>
-</h3>
-<p>
-  The OrientDB distribution provides the <a href=
-  "console_commands.html">Orient Console</a> tool as a console Java
-  application that uses the binary protocol to work with the
-  database.
-</p>
-<h3>
-  <a name="OrientDB_Studio" id="OrientDB_Studio"></a>OrientDB
-  Studio<a href="#OrientDB_Studio" class="section_anchor"></a>
-</h3>
-<p>
-  Starting from the release 0.9.13 Orient comes with the <a href=
-  "orient_db_studio.html">OrientDB Studio application</a>, a
-  client-side web app that uses the HTTP protocol to work with the
-  database.
-</p>
-<h3>
-  <a name="Write_your_application" id=
-  "Write_your_application"></a>Write your application<a href=
-  "#Write_your_application" class="section_anchor"></a>
-</h3>
-<p>
-  To start writing your first application with Orient you need to
-  consider the language to use. If you plan to use Java you can use
-  the <a href="java_api.html">native APIs</a>. For all the other
-  languages you can use the <a href="orient_db_rest.html">HTTP
-  RESTful protocol</a>.
-</p>
-<h2>
-  <a name="Cluster" id="Cluster"></a>Cluster<a href="#Cluster"
-  class="section_anchor"></a>
-</h2>
-<p>
-  To know more about the usage of a configuration of multiple
-  servers in cluster look at <a href=
-  "clustering.html">Clustering</a>.
-</p>
-<h2>
-  <a name="Configuration" id=
-  "Configuration"></a>Configuration<a href="#Configuration" class=
-  "section_anchor"></a>
-</h2>
-<h3>
-  <a name="Default_configuration" id=
-  "Default_configuration"></a>Default configuration<a href=
-  "#Default_configuration" class="section_anchor"></a>
-</h3>
-<p>
-  This is the content of the default
-  <b>config/orientdb-server.config</b> file contained in the
-  distribution:
-</p>
-<pre class="prettyprint">
+    <h2>
+      <a name="Introduction" id="Introduction"></a>Introduction<a href="#Introduction" class="section_anchor"></a>
+    </h2>
+    <p>
+      OrientDB Server (DB-Server from now) is a multi-thread Java application that listen remote commands and execute them against the Orient databases. OrientDB Server supports both binary and HTTP protocols. The first one is used by Orient native client and Orient Console. The second one can be used by any languages since it's based on <a href="orient_db_rest.html">HTTP RESTful API</a>. The HTTP protocol is used also by the OrientDB Studio application.
+    </p>
+    <h2>
+      <a name="Start_the_server" id="Start_the_server"></a>Start the server<a href="#Start_the_server" class="section_anchor"></a>
+    </h2>
+    <p>
+      To start the server execute the script bin/orient-db.sh (or bin/orient-db.bat in MS Windows systems). By default both interfaces are active: binary and http. If you want to disable one of these change the <a href="#Configuration">Server configuration</a>.
+    </p>
+    <p>
+      When the server starts try to acquire the port 2424 for the binary protocol and 2480 for the HTTP one. If some port is busy the next one will be taken until the port it's free. By default the range for binary protocol is 2424-2430 and 2480-2490 for the http one, but you can always change these settings in <a href="#Configuration">Server configuration</a>.
+    </p>
+    <h2>
+      <a name="Stop_the_server" id="Stop_the_server"></a>Stop the server<a href="#Stop_the_server" class="section_anchor"></a>
+    </h2>
+    <p>
+      To stop a running server just press CTRL+C in the open window that runs the Server instance or soft kill the process to be sure that the opened databases close softly. Soft kill in MS Windows systems can be done by closing the window. In Unix like systems a kill it's enought (Don't use kill -9 unless you want to force a hard shutdown).
+    </p>
+    <h2>
+      <a name="Connect_to_the_server" id="Connect_to_the_server"></a>Connect to the server<a href="#Connect_to_the_server" class="section_anchor"></a>
+    </h2>
+    <h3>
+      <a name="Console" id="Console"></a>Console<a href="#Console" class="section_anchor"></a>
+    </h3>
+    <p>
+      The OrientDB distribution provides the <a href="console_commands.html">Orient Console</a> tool as a console Java application that uses the binary protocol to work with the database.
+    </p>
+    <h3>
+      <a name="OrientDB_Studio" id="OrientDB_Studio"></a>OrientDB Studio<a href="#OrientDB_Studio" class="section_anchor"></a>
+    </h3>
+    <p>
+      Starting from the release 0.9.13 Orient comes with the <a href="orient_db_studio.html">OrientDB Studio application</a>, a client-side web app that uses the HTTP protocol to work with the database.
+    </p>
+    <h3>
+      <a name="Write_your_application" id="Write_your_application"></a>Write your application<a href="#Write_your_application" class="section_anchor"></a>
+    </h3>
+    <p>
+      To start writing your first application with Orient you need to consider the language to use. If you plan to use Java you can use the <a href="java_api.html">native APIs</a>. For all the other languages you can use the <a href="orient_db_rest.html">HTTP RESTful protocol</a>.
+    </p>
+    <h2>
+      <a name="Cluster" id="Cluster"></a>Cluster<a href="#Cluster" class="section_anchor"></a>
+    </h2>
+    <p>
+      To know more about the usage of a configuration of multiple servers in cluster look at <a href="clustering.html">Clustering</a>.
+    </p>
+    <h2>
+      <a name="Configuration" id="Configuration"></a>Configuration<a href="#Configuration" class="section_anchor"></a>
+    </h2>
+    <h3>
+      <a name="Default_configuration" id="Default_configuration"></a>Default configuration<a href="#Default_configuration" class="section_anchor"></a>
+    </h3>
+    <p>
+      This is the content of the default <b>config/orientdb-server.config</b> file contained in the distribution:
+    </p>
+    <pre class="prettyprint">
 &lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;
 &lt;orient-server&gt;
   &lt;handlers&gt;
@@ -287,23 +243,16 @@ layout: default
   &lt;/properties&gt;
 &lt;/orient-server&gt;
 </pre>
-<h3>
-  <a name="Disable_distributed_configuration" id=
-  "Disable_distributed_configuration"></a>Disable distributed
-  configuration<a href="#Disable_distributed_configuration" class=
-  "section_anchor"></a>
-</h3>
-<p>
-  If you don't want to run multiple OrientDB server instances in
-  cluster you can disable it by removing the <a href=
-  "distributed_server_manager.html">DistributedServerManager</a>
-  handler and change the default listen protocol from "distributed"
-  in "binary".
-</p>
-<p>
-  Example of single server configuration:
-</p>
-<pre class="prettyprint">
+    <h3>
+      <a name="Disable_distributed_configuration" id="Disable_distributed_configuration"></a>Disable distributed configuration<a href="#Disable_distributed_configuration" class="section_anchor"></a>
+    </h3>
+    <p>
+      If you don't want to run multiple OrientDB server instances in cluster you can disable it by removing the <a href="distributed_server_manager.html">DistributedServerManager</a> handler and change the default listen protocol from "distributed" in "binary".
+    </p>
+    <p>
+      Example of single server configuration:
+    </p>
+    <pre class="prettyprint">
 &lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;
 &lt;orient-server&gt;
  &lt;handlers&gt;
@@ -366,231 +315,160 @@ layout: default
  &lt;/properties&gt;
 &lt;/orient-server&gt;
 </pre>
-<h3>
-  <a name="Handlers" id="Handlers"></a>Handlers<a href="#Handlers"
-  class="section_anchor"></a>
-</h3>
-<p>
-  Handlers are the way the OrientDB Server can be extended.
-  Handlers are like plug-ins.
-</p>
-<p>
-  To write your own plug-in read below Extend the server.
-</p>
-<p>
-  Available handlers:
-</p>
-<ul>
-  <li>
-    <a href="automatic_backup.html">Automatic Backup</a>
-  </li>
-  <li>
-    <a href="distributed_server_manager.html">Distributed Server
-    Manager</a>
-  </li>
-</ul>
-<h3>
-  <a name="Protocols" id="Protocols"></a>Protocols<a href=
-  "#Protocols" class="section_anchor"></a>
-</h3>
-<p>
-  Contains the list of protocols used by the <a href=
-  "#Listeners">listeners section</a>. The protocols supported today
-  are:
-</p>
-<ul>
-  <li>
-    <strong>binary</strong>: the Raw binary protocol used by
-    OrientDB clients and console application.
-  </li>
-  <li>
-    <strong>http</strong>: the HTTP RESTful protocol used by
-    OrientDB Studio and direct raw access from any language and
-    browsers.
-  </li>
-</ul>
-<h3>
-  <a name="Listeners" id="Listeners"></a>Listeners<a href=
-  "#Listeners" class="section_anchor"></a>
-</h3>
-<p>
-  You can configure multiple listeners by adding items under the
-  <tt>&lt;listeners&gt;</tt> tag and selecting the ip-address and
-  TCP/IP port to bind. The protocol used must be listed in the
-  <a href="#Protocols">protocols section</a>. Listeners can be
-  configured with single port or port range. If a range of ports is
-  specified, then it will try to acquire the first port available.
-  If no such port is available, then an error is thrown. By default
-  the Server configuration activates connections from both the
-  protocols:
-</p>
-<ul>
-  <li>
-    <strong>binary</strong>: by default the binary connections are
-    listened to the port range 2424-2430.
-  </li>
-  <li>
-    <strong>http</strong>: by default the HTTP connections are
-    listened to the port range 2480-2490.
-  </li>
-</ul>
-<h3>
-  <a name="Storages" id="Storages"></a>Storages<a href="#Storages"
-  class="section_anchor"></a>
-</h3>
-<p>
-  Contains the list of the static configured storages. When the
-  server starts for each storages static configured storage
-  enlisted check if exists. If exists opens it, otherwise creates
-  it transparently.
-</p>
-<p>
-  By convention all the storages contained in the
-  $ORIENT_HOME/databases are visible from the OrientDB Server
-  instance without the need of configure them. So configure
-  storages if:
-</p>
-<ul>
-  <li>are located outside the default folder. You can use any
-  environment variable in the path such the ORIENT_HOME that points
-  to the Orient installation path if defined otherwise to the root
-  directory where the Orient Server starts.
-  </li>
-  <li>want to create/open automatically a database when the server
-  start ups
-  </li>
-</ul>
-<p>
-  By default the <strong>"temp"</strong> database is always
-  configured as in-memory storage useful to store volatile
-  information.
-</p>
-<p>
-  Example of configuration:
-</p>
-<pre class="prettyprint">
+    <h3>
+      <a name="Handlers" id="Handlers"></a>Handlers<a href="#Handlers" class="section_anchor"></a>
+    </h3>
+    <p>
+      Handlers are the way the OrientDB Server can be extended. Handlers are like plug-ins.
+    </p>
+    <p>
+      To write your own plug-in read below Extend the server.
+    </p>
+    <p>
+      Available handlers:
+    </p>
+    <ul>
+      <li>
+        <a href="automatic_backup.html">Automatic Backup</a>
+      </li>
+      <li>
+        <a href="distributed_server_manager.html">Distributed Server Manager</a>
+      </li>
+    </ul>
+    <h3>
+      <a name="Protocols" id="Protocols"></a>Protocols<a href="#Protocols" class="section_anchor"></a>
+    </h3>
+    <p>
+      Contains the list of protocols used by the <a href="#Listeners">listeners section</a>. The protocols supported today are:
+    </p>
+    <ul>
+      <li>
+        <strong>binary</strong>: the Raw binary protocol used by OrientDB clients and console application.
+      </li>
+      <li>
+        <strong>http</strong>: the HTTP RESTful protocol used by OrientDB Studio and direct raw access from any language and browsers.
+      </li>
+    </ul>
+    <h3>
+      <a name="Listeners" id="Listeners"></a>Listeners<a href="#Listeners" class="section_anchor"></a>
+    </h3>
+    <p>
+      You can configure multiple listeners by adding items under the <tt>&lt;listeners&gt;</tt> tag and selecting the ip-address and TCP/IP port to bind. The protocol used must be listed in the <a href="#Protocols">protocols section</a>. Listeners can be configured with single port or port range. If a range of ports is specified, then it will try to acquire the first port available. If no such port is available, then an error is thrown. By default the Server configuration activates connections from both the protocols:
+    </p>
+    <ul>
+      <li>
+        <strong>binary</strong>: by default the binary connections are listened to the port range 2424-2430.
+      </li>
+      <li>
+        <strong>http</strong>: by default the HTTP connections are listened to the port range 2480-2490.
+      </li>
+    </ul>
+    <h3>
+      <a name="Storages" id="Storages"></a>Storages<a href="#Storages" class="section_anchor"></a>
+    </h3>
+    <p>
+      Contains the list of the static configured storages. When the server starts for each storages static configured storage enlisted check if exists. If exists opens it, otherwise creates it transparently.
+    </p>
+    <p>
+      By convention all the storages contained in the $ORIENT_HOME/databases are visible from the OrientDB Server instance without the need of configure them. So configure storages if:
+    </p>
+    <ul>
+      <li>are located outside the default folder. You can use any environment variable in the path such the ORIENT_HOME that points to the Orient installation path if defined otherwise to the root directory where the Orient Server starts.
+      </li>
+      <li>want to create/open automatically a database when the server start ups
+      </li>
+    </ul>
+    <p>
+      By default the <strong>"temp"</strong> database is always configured as in-memory storage useful to store volatile information.
+    </p>
+    <p>
+      Example of configuration:
+    </p>
+    <pre class="prettyprint">
   &lt;storage name="mydb" path="local:C:/temp/databases/mydb"
            userName="admin" userPassword="admin"
            loaded-at-startup="true" /&gt;
 </pre>
-<p>
-  To create a new database use the <a href=
-  "http://code.google.com/p/orient/wiki/ConsoleCommandCreateDb"
-  rel="nofollow">CREATE DATABASE console command</a> or create it
-  dinamically using the <a href="java_api.html">Java API</a>.
-</p>
-<h3>
-  <a name="Users" id="Users"></a>Users<a href="#Users" class=
-  "section_anchor"></a>
-</h3>
-<p>
-  Starting from v.0.9.15 OrientDB supports per-server users in
-  order to protect sensible operations to the users. In facts the
-  creation of a new database is a server operation as much as the
-  retrieving of server statistics.
-</p>
-<h4>
-  <a name="Automatic_password_generation" id=
-  "Automatic_password_generation"></a>Automatic password
-  generation<a href="#Automatic_password_generation" class=
-  "section_anchor"></a>
-</h4>
-<p>
-  When an OrientDB server starts for the first time, a new user
-  called "admin" will be generated and saved in the server
-  configuration. This avoid security problems when, very often, the
-  passwords remain the default ones.
-</p>
-<h4>
-  <a name="Resources" id="Resources"></a>Resources<a href=
-  "#Resources" class="section_anchor"></a>
-</h4>
-<p>
-  User based authentication checks if the logged user has the
-  permission to access to the requested resource. "<strong>" means
-  access to all the resource. This is the typical setting for the
-  user "admin". Multiple resources must be separated by
-  comma.</strong>
-</p>
-<p>
-  Example to let to the "admin" user to access to all the server
-  commands:
-</p>
-<pre class="prettyprint">
+    <p>
+      To create a new database use the <a href="http://code.google.com/p/orient/wiki/ConsoleCommandCreateDb" rel="nofollow">CREATE DATABASE console command</a> or create it dinamically using the <a href="java_api.html">Java API</a>.
+    </p>
+    <h3>
+      <a name="Users" id="Users"></a>Users<a href="#Users" class="section_anchor"></a>
+    </h3>
+    <p>
+      Starting from v.0.9.15 OrientDB supports per-server users in order to protect sensible operations to the users. In facts the creation of a new database is a server operation as much as the retrieving of server statistics.
+    </p>
+    <h4>
+      <a name="Automatic_password_generation" id="Automatic_password_generation"></a>Automatic password generation<a href="#Automatic_password_generation" class="section_anchor"></a>
+    </h4>
+    <p>
+      When an OrientDB server starts for the first time, a new user called "admin" will be generated and saved in the server configuration. This avoid security problems when, very often, the passwords remain the default ones.
+    </p>
+    <h4>
+      <a name="Resources" id="Resources"></a>Resources<a href="#Resources" class="section_anchor"></a>
+    </h4>
+    <p>
+      User based authentication checks if the logged user has the permission to access to the requested resource. "<strong>" means access to all the resource. This is the typical setting for the user "admin". Multiple resources must be separated by comma.</strong>
+    </p>
+    <p>
+      Example to let to the "admin" user to access to all the server commands:
+    </p>
+    <pre class="prettyprint">
 &lt;user name="admin" resources="*" password="095F17F6488FF5416ED24E"/&gt;
 </pre>
-<p>
-  Example to let to the "guest" user to access only to the
-  "info-server" command:
-</p>
-<pre class="prettyprint">
+    <p>
+      Example to let to the "guest" user to access only to the "info-server" command:
+    </p>
+    <pre class="prettyprint">
 &lt;user name="guest" resources="info-server" password="3489438DKJDK4343UDH76"/&gt;
 </pre>
-<p>
-  Supported resources are:
-</p>
-<ul>
-  <li>
-    <tt>info-server</tt>, to obtain statistics about the server
-  </li>
-  <li>
-    <tt>database.create</tt>, to create a new database
-  </li>
-  <li>
-    <tt>database.exists</tt>, to check if a database exists
-  </li>
-  <li>
-    <tt>database.delete</tt>, to delete an existent database
-  </li>
-  <li>
-    <tt>database.share</tt>, to share a database to another
-    OrientDB Server node
-  </li>
-  <li>
-    <tt>database.passthrough</tt>, to access to the hosted
-    databases without database's authentication
-  </li>
-  <li>
-    <tt>server.config.get</tt>, to retrieve a configuration setting
-    value
-  </li>
-  <li>
-    <tt>server.config.set</tt>, to set a configuration setting
-    value
-  </li>
-</ul>
-<h3>
-  <a name="Create_new_user_with_some_privileges" id=
-  "Create_new_user_with_some_privileges"></a>Create new user with
-  some privileges<a href="#Create_new_user_with_some_privileges"
-  class="section_anchor"></a>
-</h3>
-<p>
-  To configure a new user open the
-  <strong>config/orientdb-server-config.xml</strong> file and add a
-  new XML tag under the tag <tt>&lt;users&gt;</tt>:
-</p>
-<pre class="prettyprint">
+    <p>
+      Supported resources are:
+    </p>
+    <ul>
+      <li>
+        <tt>info-server</tt>, to obtain statistics about the server
+      </li>
+      <li>
+        <tt>database.create</tt>, to create a new database
+      </li>
+      <li>
+        <tt>database.exists</tt>, to check if a database exists
+      </li>
+      <li>
+        <tt>database.delete</tt>, to delete an existent database
+      </li>
+      <li>
+        <tt>database.share</tt>, to share a database to another OrientDB Server node
+      </li>
+      <li>
+        <tt>database.passthrough</tt>, to access to the hosted databases without database's authentication
+      </li>
+      <li>
+        <tt>server.config.get</tt>, to retrieve a configuration setting value
+      </li>
+      <li>
+        <tt>server.config.set</tt>, to set a configuration setting value
+      </li>
+    </ul>
+    <h3>
+      <a name="Create_new_user_with_some_privileges" id="Create_new_user_with_some_privileges"></a>Create new user with some privileges<a href="#Create_new_user_with_some_privileges" class="section_anchor"></a>
+    </h3>
+    <p>
+      To configure a new user open the <strong>config/orientdb-server-config.xml</strong> file and add a new XML tag under the tag <tt>&lt;users&gt;</tt>:
+    </p>
+    <pre class="prettyprint">
 &lt;users&gt;
   &lt;user name="MyUser" password="MyPassword" resources="database.exists"/&gt;
   &lt;/users&gt;
 </pre>
-<h2>
-  <a name="Extend_the_server" id="Extend_the_server"></a>Extend the
-  server<a href="#Extend_the_server" class="section_anchor"></a>
-</h2>
-<p>
-  OrientDB Server can be extended with custom
-  <strong>handlers</strong>. A Handler is a class that implements
-  the <strong><a href=
-  "http://www.google.com/codesearch/p?hl=en#Q2eMNvxgD0M/trunk/server/src/main/java/com/orientechnologies/orient/server/handler/OServerHandler.java&amp;q=OServerHandler%20package:http://orient%5C.googlecode%5C.com&amp;sa=N&amp;cd=1&amp;ct=rc"
-  rel="nofollow">OServerHandler</a></strong> interface. There also
-  is the <strong><a href=
-  "http://www.google.com/codesearch/p?hl=en#Q2eMNvxgD0M/trunk/server/src/main/java/com/orientechnologies/orient/server/handler/OServerHandlerAbstract.java&amp;q=OServerHandler%20package:http://orient%5C.googlecode%5C.com&amp;d=10"
-  rel="nofollow">OServerHandlerAbstract</a></strong> abstract class
-  to extend. Example:
-</p>
-<pre class="prettyprint">
+    <h2>
+      <a name="Extend_the_server" id="Extend_the_server"></a>Extend the server<a href="#Extend_the_server" class="section_anchor"></a>
+    </h2>
+    <p>
+      OrientDB Server can be extended with custom <strong>handlers</strong>. A Handler is a class that implements the <strong><a href="http://www.google.com/codesearch/p?hl=en#Q2eMNvxgD0M/trunk/server/src/main/java/com/orientechnologies/orient/server/handler/OServerHandler.java&amp;q=OServerHandler%20package:http://orient%5C.googlecode%5C.com&amp;sa=N&amp;cd=1&amp;ct=rc" rel="nofollow">OServerHandler</a></strong> interface. There also is the <strong><a href="http://www.google.com/codesearch/p?hl=en#Q2eMNvxgD0M/trunk/server/src/main/java/com/orientechnologies/orient/server/handler/OServerHandlerAbstract.java&amp;q=OServerHandler%20package:http://orient%5C.googlecode%5C.com&amp;d=10" rel="nofollow">OServerHandlerAbstract</a></strong> abstract class to extend. Example:
+    </p>
+    <pre class="prettyprint">
 package orientdb.test;
 
 public class DistributedRecordHook extends OServerHandlerAbstract {
@@ -610,11 +488,10 @@ public class DistributedRecordHook extends OServerHandlerAbstract {
   }
 }
 </pre>
-<p>
-  Once created register it to the server configuration in
-  <strong>orientdb-server-config.xml</strong> file:
-</p>
-<pre class="prettyprint">
+    <p>
+      Once created register it to the server configuration in <strong>orientdb-server-config.xml</strong> file:
+    </p>
+    <pre class="prettyprint">
 &lt;orient-server&gt;
   &lt;handlers&gt;
     &lt;handler class="orientdb.test.DistributedRecordHook"&gt;
@@ -625,37 +502,22 @@ public class DistributedRecordHook extends OServerHandlerAbstract {
   &lt;/handlers&gt;
   ...
 </pre>
-<p>
-  Note that you can specify arbitrary parameters in form of name
-  and value. Those parameters can be read by the
-  <strong>config()</strong> method. In this example a parameter
-  "log" is read.
-</p>
-<h4>
-  <a name="Include_JARS_in_the_classpath" id=
-  "Include_JARS_in_the_classpath"></a>Include JARS in the
-  classpath<a href="#Include_JARS_in_the_classpath" class=
-  "section_anchor"></a>
-</h4>
-<p>
-  Remember to put the additional jar files under the
-  <strong>lib</strong> folder of the server installation. For
-  releases before 1.0rc4 you need to change the server.sh (or
-  server.bat under MS Windows) including your additional classpath.
-</p>
-<h3>
-  <a name="Creating_a_distributed_change_manager" id=
-  "Creating_a_distributed_change_manager"></a>Creating a
-  distributed change manager<a href=
-  "#Creating_a_distributed_change_manager" class=
-  "section_anchor"></a>
-</h3>
-<p>
-  As more complete example let's create a distributed record
-  manager by installing hooks to all the server's databases and
-  push these changes to the remote client caches.
-</p>
-<pre class="prettyprint">
+    <p>
+      Note that you can specify arbitrary parameters in form of name and value. Those parameters can be read by the <strong>config()</strong> method. In this example a parameter "log" is read.
+    </p>
+    <h4>
+      <a name="Include_JARS_in_the_classpath" id="Include_JARS_in_the_classpath"></a>Include JARS in the classpath<a href="#Include_JARS_in_the_classpath" class="section_anchor"></a>
+    </h4>
+    <p>
+      Remember to put the additional jar files under the <strong>lib</strong> folder of the server installation. For releases before 1.0rc4 you need to change the server.sh (or server.bat under MS Windows) including your additional classpath.
+    </p>
+    <h3>
+      <a name="Creating_a_distributed_change_manager" id="Creating_a_distributed_change_manager"></a>Creating a distributed change manager<a href="#Creating_a_distributed_change_manager" class="section_anchor"></a>
+    </h3>
+    <p>
+      As more complete example let's create a distributed record manager by installing hooks to all the server's databases and push these changes to the remote client caches.
+    </p>
+    <pre class="prettyprint">
 public class DistributedRecordHook extends OServerHandlerAbstract implements ORecordHook {
   private boolean log = false;
 
@@ -694,32 +556,26 @@ public class DistributedRecordHook extends OServerHandlerAbstract implements ORe
   }
 }
 </pre>
-<h2>
-  <a name="Benchmarks" id="Benchmarks"></a>Benchmarks<a href=
-  "#Benchmarks" class="section_anchor"></a>
-</h2>
-<p>
-  <a href="database_benchmarks.html">Benchmarks</a>.
-</p>
-<h2>
-  <a name="Roadmap" id="Roadmap"></a>Roadmap<a href="#Roadmap"
-  class="section_anchor"></a>
-</h2>
-<p>
-  <a href=
-  "http://code.google.com/p/orient/issues/list?can=2&amp;q=db&amp;colspec=ID+Type+Status+Priority+Milestone+Owner+Summary&amp;cells=tiles"
-  rel="nofollow">Roadmap</a>.
-</p>
-<p>
-  <a href="http://code.google.com/p/orient/wiki/Roadmap" rel=
-  "nofollow">Roadmap wiki page</a>
-</p>
-<h2>
-  <a name="History" id="History"></a>History<a href="#History"
-  class="section_anchor"></a>
-</h2>
-<p>
-  <a href=
-  "http://code.google.com/p/orient/source/browse/trunk/history-db.txt"
-  rel="nofollow">Change history</a>.
-</p>
+    <h2>
+      <a name="Benchmarks" id="Benchmarks"></a>Benchmarks<a href="#Benchmarks" class="section_anchor"></a>
+    </h2>
+    <p>
+      <a href="database_benchmarks.html">Benchmarks</a>.
+    </p>
+    <h2>
+      <a name="Roadmap" id="Roadmap"></a>Roadmap<a href="#Roadmap" class="section_anchor"></a>
+    </h2>
+    <p>
+      <a href="http://code.google.com/p/orient/issues/list?can=2&amp;q=db&amp;colspec=ID+Type+Status+Priority+Milestone+Owner+Summary&amp;cells=tiles" rel="nofollow">Roadmap</a>.
+    </p>
+    <p>
+      <a href="http://code.google.com/p/orient/wiki/Roadmap" rel="nofollow">Roadmap wiki page</a>
+    </p>
+    <h2>
+      <a name="History" id="History"></a>History<a href="#History" class="section_anchor"></a>
+    </h2>
+    <p>
+      <a href="http://code.google.com/p/orient/source/browse/trunk/history-db.txt" rel="nofollow">Change history</a>.
+    </p>
+  </body>
+</html>

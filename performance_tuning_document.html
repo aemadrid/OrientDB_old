@@ -2,53 +2,52 @@
 title: Document Database performance tuning
 layout: default
 ---
-<ul>
-  <li>
-    <a href="#Massive_Insertion">Massive Insertion</a>
-  </li>
-  <li style="list-style: none">
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<html>
+  <head>
+    <meta name="generator" content="HTML Tidy for Mac OS X (vers 31 October 2006 - Apple Inc. build 15.6), see www.w3.org">
+    <title></title>
+    <style type="text/css">
+p.c2 {font-style: italic}
+    li.c1 {list-style: none}
+    </style>
+  </head>
+  <body>
+    <p></p>
     <ul>
       <li>
-        <a href="#Avoid_document_creation">Avoid document
-        creation</a>
+        <a href="#Massive_Insertion">Massive Insertion</a>
+      </li>
+      <li class="c1">
+        <ul>
+          <li>
+            <a href="#Avoid_document_creation">Avoid document creation</a>
+          </li>
+        </ul>
       </li>
     </ul>
-  </li>
-</ul>
-<p>
-  This guide is specific for the Document Database. Please be sure
-  to read the generic guide to the <a href=
-  "performance_tuning.html">Performance Tuning</a>.
-</p>
-<h2>
-  <a name="Massive_Insertion" id="Massive_Insertion"></a>Massive
-  Insertion<a href="#Massive_Insertion" class="section_anchor"></a>
-</h2>
-<p>
-  See <a href="performance_tuning.html#Massive_Insertion">Generic
-  improvement on massive insertion</a>.
-</p>
-<h3>
-  <a name="Avoid_document_creation" id=
-  "Avoid_document_creation"></a>Avoid document creation<a href=
-  "#Avoid_document_creation" class="section_anchor"></a>
-</h3>
-<p>
-  You can avoid the creation of a new ODocument for each insertion
-  by using the ODocument.reset() method that clears the instance
-  making it ready for a new insert operation. Bear in mind that you
-  will need to assign the document with the proper class after
-  resetting as it is done in the code below.
-</p>
-<p>
-  <i>NOTE: This trick works ONLY IN NON-TRANSACTIONAL contexts,
-  because during transactions the documents could be kept in memory
-  until commit.</i>
-</p>
-<p>
-  Example:
-</p>
-<pre class="prettyprint">
+    <p>
+      This guide is specific for the Document Database. Please be sure to read the generic guide to the <a href="performance_tuning.html">Performance Tuning</a>.
+    </p>
+    <h2>
+      <a name="Massive_Insertion" id="Massive_Insertion"></a>Massive Insertion<a href="#Massive_Insertion" class="section_anchor"></a>
+    </h2>
+    <p>
+      See <a href="performance_tuning.html#Massive_Insertion">Generic improvement on massive insertion</a>.
+    </p>
+    <h3>
+      <a name="Avoid_document_creation" id="Avoid_document_creation"></a>Avoid document creation<a href="#Avoid_document_creation" class="section_anchor"></a>
+    </h3>
+    <p>
+      You can avoid the creation of a new ODocument for each insertion by using the ODocument.reset() method that clears the instance making it ready for a new insert operation. Bear in mind that you will need to assign the document with the proper class after resetting as it is done in the code below.
+    </p>
+    <p class="c2">
+      NOTE: This trick works ONLY IN NON-TRANSACTIONAL contexts, because during transactions the documents could be kept in memory until commit.
+    </p>
+    <p>
+      Example:
+    </p>
+    <pre class="prettyprint">
 db.declareIntent( new OIntentMassiveInsert() );
 
 ODocument doc = new ODocument(db);
@@ -62,3 +61,5 @@ for( int i = 0; i &lt; 1000000; ++i ){
 
 db.declareIntent( null );
 </pre>
+  </body>
+</html>

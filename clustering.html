@@ -2,145 +2,109 @@
 title: Clustering
 layout: default
 ---
-<p>
-  OrientDB can be distributed across different servers and used in
-  different ways to achieve the maximum of performance, scalability
-  and robustness.
-</p>
-<p>
-  <i>NOTE: Release 1.0rc6 had a master-slave architecture while
-  we're at good point for the new Multi-Master architecture to
-  release in 1.0.</i>
-</p>
-<h2>
-  <a name="Presentations" id=
-  "Presentations"></a>Presentations<a href="#Presentations" class=
-  "section_anchor"></a>
-</h2>
-<p>
-  <a href=
-  "http://www.slideshare.net/lvca/orientdb-distributed-architecture-11"
-  rel="nofollow">OrientDB distributed architecture 1.1</a>
-</p>
-<h2>
-  <a name="Clustering" id="Clustering"></a>Clustering<a href=
-  "#Clustering" class="section_anchor"></a>
-</h2>
-<p>
-  Clustering means to create a group of OrientDB Servers that share
-  the same database instance. In this configuration always exist a
-  <strong>master</strong> as principal node able to execute reads
-  and writes operations. <strong>Slaves</strong> nodes are
-  read-only replicas of the master database.
-</p>
-<p>
-  There are two synchronization policies configurable per slave
-  node:
-</p>
-<ul>
-  <li>
-    <strong>synchronous</strong>, the master propagates the change
-    to the slave node waiting of the OK message before to continue.
-    This works in serial for every single nodes configured in
-    synchronous mode.
-  </li>
-  <li>
-    <strong>asynchronous</strong>, the master propagates the change
-    to the slave node without waiting for the response message.
-    This is much faster than the synchronous mode. The cost of
-    having multiple asynchronous nodes is close to zero.
-  </li>
-</ul>
-<h3>
-  <a name="Load_balancing" id="Load_balancing"></a>Load
-  balancing<a href="#Load_balancing" class="section_anchor"></a>
-</h3>
-<p>
-  The simpler and most powerful way to achieve load balancing seems
-  to use some hidden properties (hidden to someone) of DNS. The
-  trick is to create a TXT record telling the list of servers.
-</p>
-<p>
-  The format is: <tt>v=opf&lt;version&gt;
-  (s=&lt;hostname[:&lt;port&gt;]&gt; )*</tt>
-</p>
-<p>
-  Example of TXT record for domain
-  <strong>test.nuvolabase.com</strong>: <tt>v=opf1
-  s=s1.nuvolabase.com s=s2.nuvolabase.com:3434</tt>
-</p>
-<p>
-  In this way if you open a database against the URL
-  <tt>remote:test.nuvolabase.com/demo</tt> the OrientDB client
-  library will try to connect to the address
-  <strong>s1.nuvolabase.com</strong> port 2424. If the connection
-  fails, then the next address <strong>s2.nuvolabase.com</strong>
-  port 3434 is tried.
-</p>
-<h3>
-  <a name="Configure_a_cluster" id=
-  "Configure_a_cluster"></a>Configure a cluster<a href=
-  "#Configure_a_cluster" class="section_anchor"></a>
-</h3>
-<p>
-  To enable the clustering between multiple servers you need to:
-</p>
-<ul>
-  <li>put all the servers in the same network reachable via
-  Multicast. If multicast is not available between nodes you can
-  setup a VPN between the node of the cluster
-  </li>
-  <li>configure the <a href=
-  "distributed_server_manager.html">Distributed Server Manager
-  handler</a> sharing the same name, algorithm and password between
-  nodes
-  </li>
-</ul>
-<h3>
-  <a name="Share_database" id="Share_database"></a>Share
-  database<a href="#Share_database" class="section_anchor"></a>
-</h3>
-<p>
-  Once the cluster is up and running you have to share a database
-  to all the participants nodes through the <a href=
-  "console_command_share_database.html">Share database console
-  command</a> choosing between <strong>synchronous</strong> or
-  <strong>asynchronous</strong> replication mode (see above).
-</p>
-<h3>
-  <a name="Fail_over" id="Fail_over"></a>Fail over<a href=
-  "#Fail_over" class="section_anchor"></a>
-</h3>
-<p>
-  <img src="http://www.orientechnologies.com/images/cluster-1.png">
-</p>
-<p>
-  <img src="http://www.orientechnologies.com/images/cluster-2.png">
-</p>
-<p>
-  <img src=
-  "http://www.orientechnologies.com/images/share-database.png">
-</p>
-<p>
-  <img src="http://www.orientechnologies.com/images/cluster-3.png">
-</p>
-<p>
-  <img src="http://www.orientechnologies.com/images/cluster-4.png">
-</p>
-<p>
-  <img src="http://www.orientechnologies.com/images/cluster-5.png">
-</p>
-<h2>
-  <a name="Sharding" id="Sharding"></a>Sharding<a href="#Sharding"
-  class="section_anchor"></a>
-</h2>
-<h2>
-  <a name="Future" id="Future"></a>Future<a href="#Future" class=
-  "section_anchor"></a>
-</h2>
-<ul>
-  <li>
-    <a href="http://code.google.com/p/orient/issues/detail?id=508"
-    rel="nofollow">Multi-master</a>
-  </li>
-</ul>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<html>
+  <head>
+    <meta name="generator" content="HTML Tidy for Mac OS X (vers 31 October 2006 - Apple Inc. build 15.6), see www.w3.org">
+    <title></title>
+    <style type="text/css">
+p.c1 {font-style: italic}
+    </style>
+  </head>
+  <body>
+    <p>
+      OrientDB can be distributed across different servers and used in different ways to achieve the maximum of performance, scalability and robustness.
+    </p>
+    <p class="c1">
+      NOTE: Release 1.0rc6 had a master-slave architecture while we're at good point for the new Multi-Master architecture to release in 1.0.
+    </p>
+    <h2>
+      <a name="Presentations" id="Presentations"></a>Presentations<a href="#Presentations" class="section_anchor"></a>
+    </h2>
+    <p>
+      <a href="http://www.slideshare.net/lvca/orientdb-distributed-architecture-11" rel="nofollow">OrientDB distributed architecture 1.1</a>
+    </p>
+    <h2>
+      <a name="Clustering" id="Clustering"></a>Clustering<a href="#Clustering" class="section_anchor"></a>
+    </h2>
+    <p>
+      Clustering means to create a group of OrientDB Servers that share the same database instance. In this configuration always exist a <strong>master</strong> as principal node able to execute reads and writes operations. <strong>Slaves</strong> nodes are read-only replicas of the master database.
+    </p>
+    <p>
+      There are two synchronization policies configurable per slave node:
+    </p>
+    <ul>
+      <li>
+        <strong>synchronous</strong>, the master propagates the change to the slave node waiting of the OK message before to continue. This works in serial for every single nodes configured in synchronous mode.
+      </li>
+      <li>
+        <strong>asynchronous</strong>, the master propagates the change to the slave node without waiting for the response message. This is much faster than the synchronous mode. The cost of having multiple asynchronous nodes is close to zero.
+      </li>
+    </ul>
+    <h3>
+      <a name="Load_balancing" id="Load_balancing"></a>Load balancing<a href="#Load_balancing" class="section_anchor"></a>
+    </h3>
+    <p>
+      The simpler and most powerful way to achieve load balancing seems to use some hidden properties (hidden to someone) of DNS. The trick is to create a TXT record telling the list of servers.
+    </p>
+    <p>
+      The format is: <tt>v=opf&lt;version&gt; (s=&lt;hostname[:&lt;port&gt;]&gt; )*</tt>
+    </p>
+    <p>
+      Example of TXT record for domain <strong>test.nuvolabase.com</strong>: <tt>v=opf1 s=s1.nuvolabase.com s=s2.nuvolabase.com:3434</tt>
+    </p>
+    <p>
+      In this way if you open a database against the URL <tt>remote:test.nuvolabase.com/demo</tt> the OrientDB client library will try to connect to the address <strong>s1.nuvolabase.com</strong> port 2424. If the connection fails, then the next address <strong>s2.nuvolabase.com</strong> port 3434 is tried.
+    </p>
+    <h3>
+      <a name="Configure_a_cluster" id="Configure_a_cluster"></a>Configure a cluster<a href="#Configure_a_cluster" class="section_anchor"></a>
+    </h3>
+    <p>
+      To enable the clustering between multiple servers you need to:
+    </p>
+    <ul>
+      <li>put all the servers in the same network reachable via Multicast. If multicast is not available between nodes you can setup a VPN between the node of the cluster
+      </li>
+      <li>configure the <a href="distributed_server_manager.html">Distributed Server Manager handler</a> sharing the same name, algorithm and password between nodes
+      </li>
+    </ul>
+    <h3>
+      <a name="Share_database" id="Share_database"></a>Share database<a href="#Share_database" class="section_anchor"></a>
+    </h3>
+    <p>
+      Once the cluster is up and running you have to share a database to all the participants nodes through the <a href="console_command_share_database.html">Share database console command</a> choosing between <strong>synchronous</strong> or <strong>asynchronous</strong> replication mode (see above).
+    </p>
+    <h3>
+      <a name="Fail_over" id="Fail_over"></a>Fail over<a href="#Fail_over" class="section_anchor"></a>
+    </h3>
+    <p>
+      <img src="http://www.orientechnologies.com/images/cluster-1.png">
+    </p>
+    <p>
+      <img src="http://www.orientechnologies.com/images/cluster-2.png">
+    </p>
+    <p>
+      <img src="http://www.orientechnologies.com/images/share-database.png">
+    </p>
+    <p>
+      <img src="http://www.orientechnologies.com/images/cluster-3.png">
+    </p>
+    <p>
+      <img src="http://www.orientechnologies.com/images/cluster-4.png">
+    </p>
+    <p>
+      <img src="http://www.orientechnologies.com/images/cluster-5.png">
+    </p>
+    <h2>
+      <a name="Sharding" id="Sharding"></a>Sharding<a href="#Sharding" class="section_anchor"></a>
+    </h2>
+    <h2>
+      <a name="Future" id="Future"></a>Future<a href="#Future" class="section_anchor"></a>
+    </h2>
+    <ul>
+      <li>
+        <a href="http://code.google.com/p/orient/issues/detail?id=508" rel="nofollow">Multi-master</a>
+      </li>
+    </ul>
+  </body>
+</html>

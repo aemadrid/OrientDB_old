@@ -1,58 +1,59 @@
 ---
 title: Create Cluster
 layout: default
+bc_1_name: console_commands
+bc_1_title: Console
 ---
-<h2>
-  <a name="Create_cluster" id="Create_cluster"></a>Create
-  cluster<a href="#Create_cluster" class="section_anchor"></a>
-</h2>
-<p>
-  Create a new cluster in the current database. The cluster can be
-  physical or logical.
-</p>
-<h3>
-  <a name="Syntax" id="Syntax"></a>Syntax<a href="#Syntax" class=
-  "section_anchor"></a>
-</h3>
-<p>
-  <tt>create cluster &lt;cluster-name&gt; &lt;cluster-type&gt;
-  &lt;position&gt;</tt>
-</p>
-<p>
-  Where:
-</p>
-<ul>
-  <li>cluster-name The name of the cluster to create
-  </li>
-  <li>cluster-type Cluster type: 'physical' or 'logical'
-  </li>
-  <li>position 'append' to add as last cluster, otherwise the empty
-  position to replace
-  </li>
-</ul>
-<h3>
-  <a name="Example" id="Example"></a>Example<a href="#Example"
-  class="section_anchor"></a>
-</h3>
-<pre class="prettyprint">
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<html>
+  <head>
+    <meta name="generator" content="HTML Tidy for Mac OS X (vers 31 October 2006 - Apple Inc. build 15.6), see www.w3.org">
+    <title></title>
+  </head>
+  <body>
+    <h2>
+      <a name="Create_cluster" id="Create_cluster"></a>Create cluster<a href="#Create_cluster" class="section_anchor"></a>
+    </h2>
+    <p>
+      Create a new cluster in the current database. The cluster can be physical or logical.
+    </p>
+    <h3>
+      <a name="Syntax" id="Syntax"></a>Syntax<a href="#Syntax" class="section_anchor"></a>
+    </h3>
+    <p>
+      <tt>create cluster &lt;cluster-name&gt; &lt;cluster-type&gt; &lt;position&gt;</tt>
+    </p>
+    <p>
+      Where:
+    </p>
+    <ul>
+      <li>cluster-name The name of the cluster to create
+      </li>
+      <li>cluster-type Cluster type: 'physical' or 'logical'
+      </li>
+      <li>position 'append' to add as last cluster, otherwise the empty position to replace
+      </li>
+    </ul>
+    <h3>
+      <a name="Example" id="Example"></a>Example<a href="#Example" class="section_anchor"></a>
+    </h3>
+    <pre class="prettyprint">
 &gt; create cluster documents physical append
 
 Creating cluster [documents] in database petshop...
 Physical cluster created correctly with id #8
 </pre>
-<h3>
-  <a name="See_also" id="See_also"></a>See also<a href="#See_also"
-  class="section_anchor"></a>
-</h3>
-<p>
-  To display all the cluster configured in the current database use
-  the command <a href="console_command_clusters.html">clusters</a>.
-</p>
-<p>
-  To delete a cluster use the command <a href=
-  "console_command_drop_cluster.html">Drop Cluster</a>.
-</p>
-<p>
-  This is a command of the Orient console. To know all the commands
-  go to <a href="console_commands.html">Console commands</a>.
-</p>
+    <h3>
+      <a name="See_also" id="See_also"></a>See also<a href="#See_also" class="section_anchor"></a>
+    </h3>
+    <p>
+      To display all the cluster configured in the current database use the command <a href="console_command_clusters.html">clusters</a>.
+    </p>
+    <p>
+      To delete a cluster use the command <a href="console_command_drop_cluster.html">Drop Cluster</a>.
+    </p>
+    <p>
+      This is a command of the Orient console. To know all the commands go to <a href="console_commands.html">Console commands</a>.
+    </p>
+  </body>
+</html>

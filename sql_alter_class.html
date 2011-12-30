@@ -1,85 +1,84 @@
 ---
 title: Alter Class
 layout: default
+bc_1_name: sql
+bc_1_title: SQL
 ---
-<h2>
-  <a name="Alter_Class" id="Alter_Class"></a>Alter Class<a href=
-  "#Alter_Class" class="section_anchor"></a>
-</h2>
-<p>
-  The <strong>SQL Alter Class</strong> command alters a class in
-  the schema.
-</p>
-<h3>
-  <a name="Syntax" id="Syntax"></a>Syntax<a href="#Syntax" class=
-  "section_anchor"></a>
-</h3>
-<p>
-  <tt>ALTER CLASS &lt;class&gt; &lt;attribute-name&gt;
-  &lt;attribute-value&gt;</tt>
-</p>
-<p>
-  Where:
-</p>
-<ul>
-  <li>
-    <strong>class</strong> is the class name to change
-  </li>
-  <li>
-    <strong>attribute-name</strong>, is the attribute name to
-    alter. Supported attribute names are:
-  </li>
-  <li style="list-style: none">
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<html>
+  <head>
+    <meta name="generator" content="HTML Tidy for Mac OS X (vers 31 October 2006 - Apple Inc. build 15.6), see www.w3.org">
+    <title></title>
+    <style type="text/css">
+li.c1 {list-style: none}
+    </style>
+  </head>
+  <body>
+    <h2>
+      <a name="Alter_Class" id="Alter_Class"></a>Alter Class<a href="#Alter_Class" class="section_anchor"></a>
+    </h2>
+    <p>
+      The <strong>SQL Alter Class</strong> command alters a class in the schema.
+    </p>
+    <h3>
+      <a name="Syntax" id="Syntax"></a>Syntax<a href="#Syntax" class="section_anchor"></a>
+    </h3>
+    <p>
+      <tt>ALTER CLASS &lt;class&gt; &lt;attribute-name&gt; &lt;attribute-value&gt;</tt>
+    </p>
+    <p>
+      Where:
+    </p>
     <ul>
       <li>
-        <strong>NAME</strong>, the class name. Accepts a string as
-        value
+        <strong>class</strong> is the class name to change
       </li>
       <li>
-        <strong>SHORTNAME</strong>, the short name. Accepts a
-        string as value
+        <strong>attribute-name</strong>, is the attribute name to alter. Supported attribute names are:
+      </li>
+      <li class="c1">
+        <ul>
+          <li>
+            <strong>NAME</strong>, the class name. Accepts a string as value
+          </li>
+          <li>
+            <strong>SHORTNAME</strong>, the short name. Accepts a string as value
+          </li>
+          <li>
+            <strong>SUPERCLASS</strong>, the superclass name to assign. Accepts a string as value
+          </li>
+          <li>
+            <strong>OVERSIZE</strong>, the oversize factor. Accepts a decimal number as value
+          </li>
+        </ul>
       </li>
       <li>
-        <strong>SUPERCLASS</strong>, the superclass name to assign.
-        Accepts a string as value
-      </li>
-      <li>
-        <strong>OVERSIZE</strong>, the oversize factor. Accepts a
-        decimal number as value
+        <strong>attribute-value</strong>, is the new attribute value to set
       </li>
     </ul>
-  </li>
-  <li>
-    <strong>attribute-value</strong>, is the new attribute value to
-    set
-  </li>
-</ul>
-<h3>
-  <a name="Examples" id="Examples"></a>Examples<a href="#Examples"
-  class="section_anchor"></a>
-</h3>
-<p>
-  Change the name of the class 'Account':
-</p>
-<p>
-  <tt>ALTER CLASS Account NAME Seller</tt>
-</p>
-<p>
-  Change the oversize factor of the class 'Account':
-</p>
-<p>
-  <tt>ALTER CLASS Account OVERSIZE 2</tt>
-</p>
-<p>
-  To create a class use the <a href="sql_create_class.html">Create
-  Class</a> command, to remove a class use the <a href=
-  "sql_remove_class.html">Drop Class</a> command.
-</p>
-<p>
-  To know more about other SQL commands look at <a href=
-  "sql.html">SQL commands</a>.
-</p>
-<p>
-  This is a command of the Orient console. To know all the commands
-  go to <a href="console_commands.html">Console commands</a>.
-</p>
+    <h3>
+      <a name="Examples" id="Examples"></a>Examples<a href="#Examples" class="section_anchor"></a>
+    </h3>
+    <p>
+      Change the name of the class 'Account':
+    </p>
+    <p>
+      <tt>ALTER CLASS Account NAME Seller</tt>
+    </p>
+    <p>
+      Change the oversize factor of the class 'Account':
+    </p>
+    <p>
+      <tt>ALTER CLASS Account OVERSIZE 2</tt>
+    </p>
+    <p>
+      To create a class use the <a href="sql_create_class.html">Create Class</a> command, to remove a class use the <a href="sql_remove_class.html">Drop Class</a> command.
+    </p>
+    <p>
+      To know more about other SQL commands look at <a href="sql.html">SQL commands</a>.
+    </p>
+    <p>
+      This is a command of the Orient console. To know all the commands go to <a href="console_commands.html">Console commands</a>.
+    </p>
+  </body>
+</html>

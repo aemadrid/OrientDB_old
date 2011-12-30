@@ -1,223 +1,184 @@
 ---
 title: Select
 layout: default
+bc_1_name: sql
+bc_1_title: SQL
 ---
-<p>
-  Orient supports the SQL language to execute queries against the
-  engine. Look at the <a href=
-  "sql_where.html#Operators">operators</a> and <a href=
-  "sql_where.html#Functions">functions</a>.
-</p>
-<h2>
-  <a name="Syntax" id="Syntax"></a>Syntax<a href="#Syntax" class=
-  "section_anchor"></a>
-</h2>
-<p>
-  <tt>SELECT [&lt;Projections&gt;] FROM &lt;Target&gt; [WHERE
-  &lt;Condition&gt;*] [ORDER BY &lt;Fields&gt;* [ASC|DESC]*] [LIMIT
-  &lt;MaxRecords&gt;]</tt>
-</p>
-<ul>
-  <li>
-    <strong><a href="#Projections">Projections</a></strong>,
-    optionals, are what you want to extract from the query as
-    result set. Look at <a href="#Projections">Projections</a>.
-    Available since 0.9.25.
-  </li>
-  <li>
-    <strong>Target</strong> can be a class, a cluster, a single
-    <a href="concepts.html#RecordID">RID</a> or a set of <a href=
-    "concepts.html#RecordID">RID</a>s. <strong>Class</strong> is
-    the class name where to execute the query, while specyfing
-    <strong>cluster</strong> with the 'cluster:' prefix is the
-    cluster name where to execute the query. Use one or more
-    <a href="concepts.html#RecordID">RID</a>s to specify one or a
-    small set of record. Useful to navigate graphs starting from
-    some root nodes
-  </li>
-  <li>
-    <strong><a href="sql_where.html">WHERE</a></strong> condition
-    is common to the other SQL commands and it's described apart.
-  </li>
-  <li>
-    <strong>ORDER BY</strong> is the same of the SQL syntax
-    specifying fields with optionally the versus (default is
-    ASCending)
-  </li>
-  <li>
-    <strong>LIMIT</strong> sets the maximum record the query can
-    return
-  </li>
-</ul>
-<p>
-  <i>NOTE: Starting from 1.0rc7 the <strong>RANGE</strong> keyword
-  has been removed. To execute range queries use the BETWEEN
-  operator against @rid as explained in <a href=
-  "pagination.html">Pagination</a>.</i>
-</p>
-<h3>
-  <a name="Projections" id="Projections"></a>Projections<a href=
-  "#Projections" class="section_anchor"></a>
-</h3>
-<p>
-  In the standard SQL projections are mandatory, but in OrientDB if
-  omitted the entire record is returned, namely the equivalent of
-  "<tt>*</tt>" keyword, but the record's identity and version are
-  preserved. Example:
-</p>
-<pre class="prettyprint">
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<html>
+  <head>
+    <meta name="generator" content="HTML Tidy for Mac OS X (vers 31 October 2006 - Apple Inc. build 15.6), see www.w3.org">
+    <title></title>
+    <style type="text/css">
+p.c1 {font-style: italic}
+    </style>
+  </head>
+  <body>
+    <p>
+      Orient supports the SQL language to execute queries against the engine. Look at the <a href="sql_where.html#Operators">operators</a> and <a href="sql_where.html#Functions">functions</a>.
+    </p>
+    <h2>
+      <a name="Syntax" id="Syntax"></a>Syntax<a href="#Syntax" class="section_anchor"></a>
+    </h2>
+    <p>
+      <tt>SELECT [&lt;Projections&gt;] FROM &lt;Target&gt; [WHERE &lt;Condition&gt;*] [ORDER BY &lt;Fields&gt;* [ASC|DESC]*] [LIMIT &lt;MaxRecords&gt;]</tt>
+    </p>
+    <ul>
+      <li>
+        <strong><a href="#Projections">Projections</a></strong>, optionals, are what you want to extract from the query as result set. Look at <a href="#Projections">Projections</a>. Available since 0.9.25.
+      </li>
+      <li>
+        <strong>Target</strong> can be a class, a cluster, a single <a href="concepts.html#RecordID">RID</a> or a set of <a href="concepts.html#RecordID">RID</a>s. <strong>Class</strong> is the class name where to execute the query, while specyfing <strong>cluster</strong> with the 'cluster:' prefix is the cluster name where to execute the query. Use one or more <a href="concepts.html#RecordID">RID</a>s to specify one or a small set of record. Useful to navigate graphs starting from some root nodes
+      </li>
+      <li>
+        <strong><a href="sql_where.html">WHERE</a></strong> condition is common to the other SQL commands and it's described apart.
+      </li>
+      <li>
+        <strong>ORDER BY</strong> is the same of the SQL syntax specifying fields with optionally the versus (default is ASCending)
+      </li>
+      <li>
+        <strong>LIMIT</strong> sets the maximum record the query can return
+      </li>
+    </ul>
+    <p class="c1">
+      NOTE: Starting from 1.0rc7 the <strong>RANGE</strong> keyword has been removed. To execute range queries use the BETWEEN operator against @rid as explained in <a href="pagination.html">Pagination</a>.
+    </p>
+    <h3>
+      <a name="Projections" id="Projections"></a>Projections<a href="#Projections" class="section_anchor"></a>
+    </h3>
+    <p>
+      In the standard SQL projections are mandatory, but in OrientDB if omitted the entire record is returned, namely the equivalent of "<tt>*</tt>" keyword, but the record's identity and version are preserved. Example:
+    </p>
+    <pre class="prettyprint">
 SELECT FROM Account
 </pre>
-<p>
-  By using the wildcard <tt>*</tt> the fields retrieved will be the
-  same but the RID and version will be lost:
-</p>
-<pre class="prettyprint">
+    <p>
+      By using the wildcard <tt>*</tt> the fields retrieved will be the same but the RID and version will be lost:
+    </p>
+    <pre class="prettyprint">
 SELECT * FROM Account
 </pre>
-<p>
-  So remember that when use projections a new temporary document is
-  created and the @rid and @version of the original record are
-  lost.
-</p>
-<p>
-  OrientDB has extended projections to allow special operators like
-  <tt>[]</tt>, example:
-</p>
-<pre class="prettyprint">
+    <p>
+      So remember that when use projections a new temporary document is created and the @rid and @version of the original record are lost.
+    </p>
+    <p>
+      OrientDB has extended projections to allow special operators like <tt>[]</tt>, example:
+    </p>
+    <pre class="prettyprint">
 SELECT items[quantity=10] FROM Order
 </pre>
-<p>
-  The convention naming for the returned document's fields are:
-</p>
-<ul>
-  <li>the field name for plain fields <tt>invoice -&gt;
-  invoice</tt>
-  </li>
-  <li>the first field name for chained fields, like
-  <tt>invoice.customer.name -&gt; invoice</tt>
-  </li>
-  <li>the name of the function for functions, like <tt>max(salary)
-  -&gt; max</tt>
-  </li>
-</ul>
-<p>
-  If the target field already exists, a progressive number is used
-  as prefix. Example:
-</p>
-<pre class="prettyprint">
+    <p>
+      The convention naming for the returned document's fields are:
+    </p>
+    <ul>
+      <li>the field name for plain fields <tt>invoice -&gt; invoice</tt>
+      </li>
+      <li>the first field name for chained fields, like <tt>invoice.customer.name -&gt; invoice</tt>
+      </li>
+      <li>the name of the function for functions, like <tt>max(salary) -&gt; max</tt>
+      </li>
+    </ul>
+    <p>
+      If the target field already exists, a progressive number is used as prefix. Example:
+    </p>
+    <pre class="prettyprint">
 SELECT max(incoming), max(cost) FROM Balance
 </pre>
-<p>
-  Will return a document with the field <tt>max</tt> and
-  <tt>max2</tt>.
-</p>
-<p>
-  To override the field name use <tt>AS</tt>. Example:
-</p>
-<pre class="prettyprint">
+    <p>
+      Will return a document with the field <tt>max</tt> and <tt>max2</tt>.
+    </p>
+    <p>
+      To override the field name use <tt>AS</tt>. Example:
+    </p>
+    <pre class="prettyprint">
 SELECT max(incoming) AS incoming, max(cost) AS costs FROM Balance
 </pre>
-<p>
-  Projections are available since 0.9.25.
-</p>
-<h2>
-  <a name="Examples" id="Examples"></a>Examples<a href="#Examples"
-  class="section_anchor"></a>
-</h2>
-<p>
-  Get all the records of type 'Person' where the name starts with
-  'Luk':
-</p>
-<p>
-  <tt>select * from Person where name like 'Luk%'</tt>
-</p>
-<p>
-  or
-</p>
-<p>
-  <tt>select * from Person where name.left(3) = 'Luk'</tt>
-</p>
-<p>
-  or
-</p>
-<p>
-  <tt>select * from Person where name.substring(0,3) = 'Luk'</tt>
-</p>
-<p>
-  Get all the records of type 'AnimalType' where the collection
-  'races' contains at least one entry where the first character of
-  the name, ignoring the case, is equals to 'e':
-</p>
-<p>
-  <tt>select * from animaltype where races contains
-  (name.toLowerCase().subString(0,1) = 'e')</tt>
-</p>
-<p>
-  Get all the records of type 'AnimalType' where the collection
-  'races' contains at least one entry with name 'European' or
-  'Asiatic':
-</p>
-<p>
-  <tt>select * from animaltype where races contains (name in
-  ['European','Asiatic'])</tt>
-</p>
-<p>
-  Get all the records of type 'Profile' where any field contains
-  the word 'danger':
-</p>
-<p>
-  <tt>select from profile where any() like '%danger%'</tt>
-</p>
-<p>
-  Get any record at any level that has the word 'danger':
-</p>
-<p>
-  <tt>select from profile where any() traverse ( any() like
-  '%danger%' )</tt>
-</p>
-<p>
-  Get all the records where up to the 3rd level of connections has
-  some field that contains the word 'danger' ignoring the case:
-</p>
-<p>
-  <tt>select from Profile where any() traverse( 0,3 ) (
-  any().toUpperCase().indexOf( 'danger' )</tt> &gt; -1 )
-</p>
-<p>
-  Order the result set by the 'name' in descending order:
-</p>
-<p>
-  <tt>select from Profile order by name desc</tt>
-</p>
-<p>
-  Traverse record starting from a root node:
-</p>
-<p>
-  <tt>select from 11:4 where any() traverse(0,10) (address.city =
-  'Rome')</tt>
-</p>
-<p>
-  Query only a set of records:
-</p>
-<p>
-  <tt>select from [#10:3, #10:4, #10:5]</tt>
-</p>
-<p>
-  Select only three fields from Profile:
-</p>
-<p>
-  <tt>select nick, followings, followers from Profile</tt>
-</p>
-<p>
-  Select the 'name' field in upper-case and the 'country name' of
-  the linked city of the linked city of the address:
-</p>
-<p>
-  <tt>select name.toUppercase(), address.city.country.name from
-  Profile</tt>
-</p>
-<p>
-  To know more about other SQL commands look at <a href=
-  "sql.html">SQL commands</a>.
-</p>
+    <p>
+      Projections are available since 0.9.25.
+    </p>
+    <h2>
+      <a name="Examples" id="Examples"></a>Examples<a href="#Examples" class="section_anchor"></a>
+    </h2>
+    <p>
+      Get all the records of type 'Person' where the name starts with 'Luk':
+    </p>
+    <p>
+      <tt>select * from Person where name like 'Luk%'</tt>
+    </p>
+    <p>
+      or
+    </p>
+    <p>
+      <tt>select * from Person where name.left(3) = 'Luk'</tt>
+    </p>
+    <p>
+      or
+    </p>
+    <p>
+      <tt>select * from Person where name.substring(0,3) = 'Luk'</tt>
+    </p>
+    <p>
+      Get all the records of type 'AnimalType' where the collection 'races' contains at least one entry where the first character of the name, ignoring the case, is equals to 'e':
+    </p>
+    <p>
+      <tt>select * from animaltype where races contains (name.toLowerCase().subString(0,1) = 'e')</tt>
+    </p>
+    <p>
+      Get all the records of type 'AnimalType' where the collection 'races' contains at least one entry with name 'European' or 'Asiatic':
+    </p>
+    <p>
+      <tt>select * from animaltype where races contains (name in ['European','Asiatic'])</tt>
+    </p>
+    <p>
+      Get all the records of type 'Profile' where any field contains the word 'danger':
+    </p>
+    <p>
+      <tt>select from profile where any() like '%danger%'</tt>
+    </p>
+    <p>
+      Get any record at any level that has the word 'danger':
+    </p>
+    <p>
+      <tt>select from profile where any() traverse ( any() like '%danger%' )</tt>
+    </p>
+    <p>
+      Get all the records where up to the 3rd level of connections has some field that contains the word 'danger' ignoring the case:
+    </p>
+    <p>
+      <tt>select from Profile where any() traverse( 0,3 ) ( any().toUpperCase().indexOf( 'danger' )</tt> &gt; -1 )
+    </p>
+    <p>
+      Order the result set by the 'name' in descending order:
+    </p>
+    <p>
+      <tt>select from Profile order by name desc</tt>
+    </p>
+    <p>
+      Traverse record starting from a root node:
+    </p>
+    <p>
+      <tt>select from 11:4 where any() traverse(0,10) (address.city = 'Rome')</tt>
+    </p>
+    <p>
+      Query only a set of records:
+    </p>
+    <p>
+      <tt>select from [#10:3, #10:4, #10:5]</tt>
+    </p>
+    <p>
+      Select only three fields from Profile:
+    </p>
+    <p>
+      <tt>select nick, followings, followers from Profile</tt>
+    </p>
+    <p>
+      Select the 'name' field in upper-case and the 'country name' of the linked city of the linked city of the address:
+    </p>
+    <p>
+      <tt>select name.toUppercase(), address.city.country.name from Profile</tt>
+    </p>
+    <p>
+      To know more about other SQL commands look at <a href="sql.html">SQL commands</a>.
+    </p>
+  </body>
+</html>

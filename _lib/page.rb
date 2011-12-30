@@ -3,6 +3,9 @@ require 'nokogiri'
 require 'tidy_ffi'
 require 'fileutils'
 
+Object.const_set(:ROOT_PATH, File.expand_path('..', File.dirname(__FILE__))) unless Object.const_defined?(:ROOT_PATH)
+require File.join ROOT_PATH, '_lib', 'menu'
+
 class Page
 
   attr_reader :original_url, :url
@@ -10,7 +13,6 @@ class Page
   attr_writer :original_html, :html
   attr_writer :original_doc, :doc, :links
 
-  ROOT_PATH = File.expand_path('..', File.dirname(__FILE__)) unless const_defined?(:ROOT_PATH)
   SITE = 'http://code.google.com' unless const_defined?(:SITE)
   MARK = '/p/orient/wiki/' unless const_defined?(:MARK)
   ROOT_URL = "#{SITE}#{MARK}Main?tm=6" unless const_defined?(:ROOT_URL)
@@ -19,14 +21,14 @@ class Page
     :numeric_entities   => 1,
     :output_html        => 1,
     :merge_divs         => 0,
-    :merge_spans        => 0,
+    #:merge_spans        => 0,
     :join_styles        => 0,
     :clean              => 1,
     :indent             => 1,
     :wrap               => 0,
     :drop_empty_paras   => 0,
     :literal_attributes => 1
-  }
+  } unless const_defined?(:TIDY_OPTIONS)
 
   def initialize(name, original_url, title = nil)
     @name         = name
@@ -81,12 +83,16 @@ class Page
     !processed?
   end
 
-  def process
+  def process(do_save = false)
     log "[#{name} : process] running [#{name}] ..."
     clean_html
     find_links
     log "[#{name} : process] processed [#{name}] ..."
     @processed = true
+    save if do_save
+  end
+
+  def save
     save_original
     save_generated
   end
@@ -170,21 +176,45 @@ class Page
     end
   end
 
+  def breadcrumbs
+    unless instance_variable_defined? :@breadcrumbs
+      @breadcrumbs = []
+      key          = name
+      until key.nil?
+        key = Menu.parents[key]
+        if key && (parent_page = self.class.all[key])
+          @breadcrumbs << [parent_page.name, parent_page.title]
+          log "[#{name} : breadcrumbs] (#{@breadcrumbs.size}) #{@breadcrumbs.last.inspect} ..."
+          key = parent_page.name
+        end
+      end
+    end
+    log "[#{name} : breadcrumbs] (final:#{@breadcrumbs.size}) #{@breadcrumbs.empty? ? 'N/A' : @breadcrumbs.map{|k,_| k}.join(" / ")} ..."
+    @breadcrumbs
+  end
+
   def save_original
-    path = File.join ROOT_PATH, "_original", "#{name}.html"
+    path = File.join ::ROOT_PATH, "_original", "#{name}.html"
     FileUtils.mkdir_p File.dirname path
-    log "Saving original : #{path} ..."
+    log "[#{name} : save_original] Saving original : #{path} ..."
     File.open(path, "w") do |f|
       f.puts original_html
     end
   end
 
   def save_generated
-    path = File.join ROOT_PATH, "_generated", "#{name}.html"
+    path = File.join ::ROOT_PATH, "_generated", "#{name}.html"
     FileUtils.mkdir_p File.dirname path
-    log "Saving generated : #{path} ..."
+    log "[#{name} : save_generated] Saving original : #{path} ..."
     File.open(path, "w") do |f|
-      f.puts "---\ntitle: #{title}\nlayout: default\n---"
+      f.puts "---"
+      f.puts "title: #{title}"
+      f.puts "layout: default"
+      breadcrumbs.each_with_index do |(name, title), idx|
+        f.puts "bc_#{idx + 1}_name: #{name}"
+        f.puts "bc_#{idx + 1}_title: #{title}"
+      end
+      f.puts "---"
       f.puts TidyFFI::Tidy.new(doc.to_html, TIDY_OPTIONS).clean
     end
   end
@@ -202,16 +232,25 @@ class Page
       cmd = "rm -rf _generated/*.html"
       puts "[CMD] #{cmd}\n#{`#{cmd}`}"
       add ROOT_URL, "Main"
-      last = true
-      while do_all && last
-        last = process_next
-      end
-      if all
+      if do_all
+        log " [ PROCESSING ALL ] ".center(120, "*")
+        log "[migrate] Processing all ..."
+        last = true
+        while last
+          log "[migrate] Processing next ..."
+          last = process_next
+        end
+        log " [ SAVING ALL ] ".center(120, "*")
+        all.each { |_, page| page.save }
+        log " [ MOVING ALL ] ".center(120, "*")
         cmd = "mv _generated/*.html ."
         puts "[CMD] #{cmd}\n#{`#{cmd}`}"
+        log " [ JEKYLL ] ".center(120, "*")
         cmd = "jekyll"
         puts "[CMD] #{cmd}\n#{`#{cmd}`}"
       end
+      log " [ THE END ] ".center(120, "*")
+      self[:main]
     end
 
     def stats
@@ -229,7 +268,7 @@ class Page
       log "[process_next : #{found.class} : #{found.size rescue 'ERR'}"
       return false if found.empty?
       log "[process_next : #{found.first.class} : #{found.first.name rescue 'ERR'} : #{found.size rescue 'ERR'}] processing ..."
-      found.first.process
+      found.first.process false
       true
     end
 

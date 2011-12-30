@@ -1,138 +1,126 @@
 ---
 title: Object to record Java binding
 layout: default
+bc_1_name: object_database
+bc_1_title: Object Database
+bc_2_name: java_api
+bc_2_title: Java APIs
 ---
-<ul>
-  <li>
-    <a href="#Introduction">Introduction</a>
-  </li>
-  <li style="list-style: none">
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<html>
+  <head>
+    <meta name="generator" content="HTML Tidy for Mac OS X (vers 31 October 2006 - Apple Inc. build 15.6), see www.w3.org">
+    <title></title>
+    <style type="text/css">
+li.c1 {list-style: none}
+    </style>
+  </head>
+  <body>
+    <p></p>
     <ul>
       <li>
-        <a href="#How_it_works?">How it works?</a>
+        <a href="#Introduction">Introduction</a>
+      </li>
+      <li class="c1">
+        <ul>
+          <li>
+            <a href="#How_it_works?">How it works?</a>
+          </li>
+          <li>
+            <a href="#Connected_mode">Connected mode</a>
+          </li>
+          <li>
+            <a href="#Detached_mode">Detached mode</a>
+          </li>
+          <li>
+            <a href="#Save_Mode">Save Mode</a>
+          </li>
+        </ul>
       </li>
       <li>
-        <a href="#Connected_mode">Connected mode</a>
+        <a href="#Requirements">Requirements</a>
+      </li>
+      <li class="c1">
+        <ul>
+          <li>
+            <a href="#Declare_persistent_classes">Declare persistent classes</a>
+          </li>
+          <li>
+            <a href="#Empty_constructor">Empty constructor</a>
+          </li>
+        </ul>
       </li>
       <li>
-        <a href="#Detached_mode">Detached mode</a>
+        <a href="#POJO_binding">POJO binding</a>
+      </li>
+      <li class="c1">
+        <ul>
+          <li>
+            <a href="#Default_binding">Default binding</a>
+          </li>
+          <li>
+            <a href="#Raw_binding">Raw binding</a>
+          </li>
+        </ul>
       </li>
       <li>
-        <a href="#Save_Mode">Save Mode</a>
+        <a href="#Read_a_POJO">Read a POJO</a>
+      </li>
+      <li class="c1">
+        <ul>
+          <li>
+            <a href="#Callbacks">Callbacks</a>
+          </li>
+        </ul>
+      </li>
+      <li>
+        <a href="#Save_a_POJO">Save a POJO</a>
+      </li>
+      <li class="c1">
+        <ul>
+          <li>
+            <a href="#Callbacks">Callbacks</a>
+          </li>
+        </ul>
+      </li>
+      <li>
+        <a href="#Fetching_strategies">Fetching strategies</a>
       </li>
     </ul>
-  </li>
-  <li>
-    <a href="#Requirements">Requirements</a>
-  </li>
-  <li style="list-style: none">
+    <h2>
+      <a name="Introduction" id="Introduction"></a>Introduction<a href="#Introduction" class="section_anchor"></a>
+    </h2>
+    <p>
+      The <a href="object_database.html">ObjectDatabase</a> implementation makes things easier for the Java developer since the binding between Objects to Records is transparentr.
+    </p>
+    <h3>
+      <a name="How_it_works?"></a>How it works?<a href="#How_it_works?" class="section_anchor"></a>
+    </h3>
+    <p>
+      OrientDB uses Java reflection and doesn't require that the POJO is enhanced in order to use it according to the <a href="http://java.sun.com/jdo" rel="nofollow">JDO standard</a> and doesn't use Proxies as do many <a href="http://java.sun.com/developer/technicalArticles/J2EE/jpa" rel="nofollow">JPA</a> implementations such as <a href="http://www.hibernate.org" rel="nofollow">Hibernate</a>. So how can you work with plain POJOs?
+    </p>
+    <p>
+      OrientDB works in two ways:
+    </p>
     <ul>
-      <li>
-        <a href="#Declare_persistent_classes">Declare persistent
-        classes</a>
+      <li>Connected mode
       </li>
-      <li>
-        <a href="#Empty_constructor">Empty constructor</a>
+      <li>Detached mode
       </li>
     </ul>
-  </li>
-  <li>
-    <a href="#POJO_binding">POJO binding</a>
-  </li>
-  <li style="list-style: none">
-    <ul>
-      <li>
-        <a href="#Default_binding">Default binding</a>
-      </li>
-      <li>
-        <a href="#Raw_binding">Raw binding</a>
-      </li>
-    </ul>
-  </li>
-  <li>
-    <a href="#Read_a_POJO">Read a POJO</a>
-  </li>
-  <li style="list-style: none">
-    <ul>
-      <li>
-        <a href="#Callbacks">Callbacks</a>
-      </li>
-    </ul>
-  </li>
-  <li>
-    <a href="#Save_a_POJO">Save a POJO</a>
-  </li>
-  <li style="list-style: none">
-    <ul>
-      <li>
-        <a href="#Callbacks">Callbacks</a>
-      </li>
-    </ul>
-  </li>
-  <li>
-    <a href="#Fetching_strategies">Fetching strategies</a>
-  </li>
-</ul>
-<h2>
-  <a name="Introduction" id="Introduction"></a>Introduction<a href=
-  "#Introduction" class="section_anchor"></a>
-</h2>
-<p>
-  The <a href="object_database.html">ObjectDatabase</a>
-  implementation makes things easier for the Java developer since
-  the binding between Objects to Records is transparentr.
-</p>
-<h3>
-  <a name="How_it_works?"></a>How it works?<a href="#How_it_works?"
-  class="section_anchor"></a>
-</h3>
-<p>
-  OrientDB uses Java reflection and doesn't require that the POJO
-  is enhanced in order to use it according to the <a href=
-  "http://java.sun.com/jdo" rel="nofollow">JDO standard</a> and
-  doesn't use Proxies as do many <a href=
-  "http://java.sun.com/developer/technicalArticles/J2EE/jpa" rel=
-  "nofollow">JPA</a> implementations such as <a href=
-  "http://www.hibernate.org" rel="nofollow">Hibernate</a>. So how
-  can you work with plain POJOs?
-</p>
-<p>
-  OrientDB works in two ways:
-</p>
-<ul>
-  <li>Connected mode
-  </li>
-  <li>Detached mode
-  </li>
-</ul>
-<h3>
-  <a name="Connected_mode" id="Connected_mode"></a>Connected
-  mode<a href="#Connected_mode" class="section_anchor"></a>
-</h3>
-<p>
-  The <a href=
-  "http://code.google.com/p/orient/source/browse/trunk/core/src/main/java/com/orientechnologies/orient/core/db/object/ODatabaseObjectTx.java"
-  rel="nofollow">ODatabaseObjectTx</a> implementation is the
-  gateway between the developer and OrientDB. <a href=
-  "http://code.google.com/p/orient/source/browse/trunk/core/src/main/java/com/orientechnologies/orient/core/db/object/ODatabaseObjectTx.java"
-  rel="nofollow">ODatabaseObjectTx</a> keeps track of the
-  relationship between the POJO and the Record.
-</p>
-<p>
-  Each POJO read from the database is created and tracked by
-  <a href=
-  "http://code.google.com/p/orient/source/browse/trunk/core/src/main/java/com/orientechnologies/orient/core/db/object/ODatabaseObjectTx.java"
-  rel="nofollow">ODatabaseObjectTx</a>. If you change the POJO and
-  call the <tt>ODatabaseObjectTx.save(pojo)</tt> method, OrientDB
-  recognizes the POJO bound with the underlying record and, before
-  saving it, will copy the POJO attributes to the loaded record.
-</p>
-<p>
-  This works with POJOs that belong to the same <a href=
-  "http://code.google.com/p/orient/source/browse/trunk/core/src/main/java/com/orientechnologies/orient/core/db/object/ODatabaseObjectTx.java"
-  rel="nofollow">ODatabaseObjectTx</a> instance. For example:
-</p>
-<pre class="prettyprint">
+    <h3>
+      <a name="Connected_mode" id="Connected_mode"></a>Connected mode<a href="#Connected_mode" class="section_anchor"></a>
+    </h3>
+    <p>
+      The <a href="http://code.google.com/p/orient/source/browse/trunk/core/src/main/java/com/orientechnologies/orient/core/db/object/ODatabaseObjectTx.java" rel="nofollow">ODatabaseObjectTx</a> implementation is the gateway between the developer and OrientDB. <a href="http://code.google.com/p/orient/source/browse/trunk/core/src/main/java/com/orientechnologies/orient/core/db/object/ODatabaseObjectTx.java" rel="nofollow">ODatabaseObjectTx</a> keeps track of the relationship between the POJO and the Record.
+    </p>
+    <p>
+      Each POJO read from the database is created and tracked by <a href="http://code.google.com/p/orient/source/browse/trunk/core/src/main/java/com/orientechnologies/orient/core/db/object/ODatabaseObjectTx.java" rel="nofollow">ODatabaseObjectTx</a>. If you change the POJO and call the <tt>ODatabaseObjectTx.save(pojo)</tt> method, OrientDB recognizes the POJO bound with the underlying record and, before saving it, will copy the POJO attributes to the loaded record.
+    </p>
+    <p>
+      This works with POJOs that belong to the same <a href="http://code.google.com/p/orient/source/browse/trunk/core/src/main/java/com/orientechnologies/orient/core/db/object/ODatabaseObjectTx.java" rel="nofollow">ODatabaseObjectTx</a> instance. For example:
+    </p>
+    <pre class="prettyprint">
 ODatabaseObjectTx db = new ODatabaseObjectTx("remote:localhost/demo");
 db.open("admin", "admin");
 
@@ -148,71 +136,39 @@ try{
   db.close;
 }
 </pre>
-<p>
-  When the <tt>db.save( c )</tt> is called, the <a href=
-  "http://code.google.com/p/orient/source/browse/trunk/core/src/main/java/com/orientechnologies/orient/core/db/object/ODatabaseObjectTx.java"
-  rel="nofollow">ODatabaseObjectTx</a> instance already knows obout
-  it because has been retrieved by using a query through the same
-  instance.
-</p>
-<h3>
-  <a name="Detached_mode" id="Detached_mode"></a>Detached
-  mode<a href="#Detached_mode" class="section_anchor"></a>
-</h3>
-<p>
-  In a typical Front-End application you need to load objects,
-  display them to the user, capture the changes and save them back
-  to the database. Usually this is implemented by using a database
-  pool in order to avoid leaving a database instance open for the
-  entire life cycle of the user session.
-</p>
-<p>
-  The database pool manages a configurable number of database
-  instances. These instances are recycled for all database
-  operations, so the list of connected POJOs is cleared at every
-  release of the database pool instance. This is why the database
-  instance doesn't know the POJO used by the application and in
-  this mode if you save a previously loaded POJO it will appear as
-  a NEW one and is therefore created as new instance in the
-  database with a new <a href=
-  "concepts.html#RecordID">RecordID</a>.
-</p>
-<p>
-  This is why OrientDB needs to store the record information inside
-  the POJO itself. This is retrieved when the POJO is saved so it
-  is known if the POJO already has own identity (has been
-  previously loaded) or not (it's new).
-</p>
-<p>
-  To save the <a href="concepts.html#RecordID">Record Identity</a>
-  you can use the <a href=
-  "http://java.sun.com/developer/technicalArticles/J2EE/jpa" rel=
-  "nofollow">JPA</a> <strong><a href=
-  "http://download.oracle.com/javaee/5/api/javax/persistence/Id.html"
-  rel="nofollow">@Id</a></strong> annotation above the property
-  interested. You can declare it as:
-</p>
-<ul>
-  <li>
-    <strong>Object</strong>, the suggested, in this case OrientDB
-    will store the ORecordId instance
-  </li>
-  <li>
-    <strong>String</strong>, in this case OrientDB will store the
-    string representation of the ORecordId
-  </li>
-  <li>
-    <strong>Long</strong>, in this case OrientDB will store the
-    right part of the <a href=
-    "concepts.html#RecordID">RecordID</a>. This works only if
-    you've a schema for the class. The left side will be rebuilt at
-    save time by getting the class id.
-  </li>
-</ul>
-<p>
-  Example:
-</p>
-<pre class="prettyprint">
+    <p>
+      When the <tt>db.save( c )</tt> is called, the <a href="http://code.google.com/p/orient/source/browse/trunk/core/src/main/java/com/orientechnologies/orient/core/db/object/ODatabaseObjectTx.java" rel="nofollow">ODatabaseObjectTx</a> instance already knows obout it because has been retrieved by using a query through the same instance.
+    </p>
+    <h3>
+      <a name="Detached_mode" id="Detached_mode"></a>Detached mode<a href="#Detached_mode" class="section_anchor"></a>
+    </h3>
+    <p>
+      In a typical Front-End application you need to load objects, display them to the user, capture the changes and save them back to the database. Usually this is implemented by using a database pool in order to avoid leaving a database instance open for the entire life cycle of the user session.
+    </p>
+    <p>
+      The database pool manages a configurable number of database instances. These instances are recycled for all database operations, so the list of connected POJOs is cleared at every release of the database pool instance. This is why the database instance doesn't know the POJO used by the application and in this mode if you save a previously loaded POJO it will appear as a NEW one and is therefore created as new instance in the database with a new <a href="concepts.html#RecordID">RecordID</a>.
+    </p>
+    <p>
+      This is why OrientDB needs to store the record information inside the POJO itself. This is retrieved when the POJO is saved so it is known if the POJO already has own identity (has been previously loaded) or not (it's new).
+    </p>
+    <p>
+      To save the <a href="concepts.html#RecordID">Record Identity</a> you can use the <a href="http://java.sun.com/developer/technicalArticles/J2EE/jpa" rel="nofollow">JPA</a> <strong><a href="http://download.oracle.com/javaee/5/api/javax/persistence/Id.html" rel="nofollow">@Id</a></strong> annotation above the property interested. You can declare it as:
+    </p>
+    <ul>
+      <li>
+        <strong>Object</strong>, the suggested, in this case OrientDB will store the ORecordId instance
+      </li>
+      <li>
+        <strong>String</strong>, in this case OrientDB will store the string representation of the ORecordId
+      </li>
+      <li>
+        <strong>Long</strong>, in this case OrientDB will store the right part of the <a href="concepts.html#RecordID">RecordID</a>. This works only if you've a schema for the class. The left side will be rebuilt at save time by getting the class id.
+      </li>
+    </ul>
+    <p>
+      Example:
+    </p>
+    <pre class="prettyprint">
 public class Customer{
   @Id
   private Object id; // DON'T CREATE GETTER/SETTER FOR IT TO PREVENT THE CHANGING BY THE USER APPLICATION, 
@@ -236,35 +192,24 @@ public class Customer{
   }
 }
 </pre>
-<p>
-  OrientDB will save the <a href="concepts.html#RecordID">Record
-  Identity</a> in the <strong>id</strong> property even if
-  getter/setter methods are not created.
-</p>
-<p>
-  If you work with transactions you also need to store the Record
-  Version in the POJO to allow MVCC. Use the <a href=
-  "http://java.sun.com/developer/technicalArticles/J2EE/jpa" rel=
-  "nofollow">JPA</a> <strong><a href=
-  "http://download.oracle.com/javaee/5/api/javax/persistence/Version.html"
-  rel="nofollow">@Version</a></strong> annotation above the
-  property interested. You can declare it as:
-</p>
-<ul>
-  <li>
-    <strong>Object</strong> or <strong>Integer</strong>, the
-    suggested, in this case OrientDB will store the version using a
-    java.lang.Integer type
-  </li>
-  <li>
-    <strong>String</strong>, in this case OrientDB will store the
-    string representation of the version
-  </li>
-</ul>
-<p>
-  Example:
-</p>
-<pre class="prettyprint">
+    <p>
+      OrientDB will save the <a href="concepts.html#RecordID">Record Identity</a> in the <strong>id</strong> property even if getter/setter methods are not created.
+    </p>
+    <p>
+      If you work with transactions you also need to store the Record Version in the POJO to allow MVCC. Use the <a href="http://java.sun.com/developer/technicalArticles/J2EE/jpa" rel="nofollow">JPA</a> <strong><a href="http://download.oracle.com/javaee/5/api/javax/persistence/Version.html" rel="nofollow">@Version</a></strong> annotation above the property interested. You can declare it as:
+    </p>
+    <ul>
+      <li>
+        <strong>Object</strong> or <strong>Integer</strong>, the suggested, in this case OrientDB will store the version using a java.lang.Integer type
+      </li>
+      <li>
+        <strong>String</strong>, in this case OrientDB will store the string representation of the version
+      </li>
+    </ul>
+    <p>
+      Example:
+    </p>
+    <pre class="prettyprint">
 public class Customer{
   @Id
   private Object id; // DON'T CREATE GETTER/SETTER FOR IT TO PREVENT THE CHANGING BY THE USER APPLICATION, 
@@ -292,143 +237,91 @@ public class Customer{
   }
 }
 </pre>
-<h3>
-  <a name="Save_Mode" id="Save_Mode"></a>Save Mode<a href=
-  "#Save_Mode" class="section_anchor"></a>
-</h3>
-<p>
-  Since OrientDB doesn't know what object is changed in a tree of
-  connected objects, by default it saves all the objects. This
-  could be very expensive for big trees. This is the reason why you
-  can control manually what is changed or not via a setting in the
-  ODatabaseObjectTx instance:
-</p>
-<pre class="prettyprint">
+    <h3>
+      <a name="Save_Mode" id="Save_Mode"></a>Save Mode<a href="#Save_Mode" class="section_anchor"></a>
+    </h3>
+    <p>
+      Since OrientDB doesn't know what object is changed in a tree of connected objects, by default it saves all the objects. This could be very expensive for big trees. This is the reason why you can control manually what is changed or not via a setting in the ODatabaseObjectTx instance:
+    </p>
+    <pre class="prettyprint">
 db.setSaveOnlyDirty(true);
 </pre>
-<p>
-  or by setting a global parameter (see <a href=
-  "http://code.google.com/p/orient/wiki/PerformanceTuning#Parameters"
-  rel="nofollow">Parameters</a>):
-</p>
-<pre class="prettyprint">
+    <p>
+      or by setting a global parameter (see <a href="http://code.google.com/p/orient/wiki/PerformanceTuning#Parameters" rel="nofollow">Parameters</a>):
+    </p>
+    <pre class="prettyprint">
 OGlobalConfiguration.OBJECT_SAVE_ONLY_DIRTY.setValue(true);
 </pre>
-<p>
-  To track what object is dirty use:
-</p>
-<pre class="prettyprint">
+    <p>
+      To track what object is dirty use:
+    </p>
+    <pre class="prettyprint">
 db.setDirty(pojo);
 </pre>
-<p>
-  To unset the dirty status of an object use:
-</p>
-<pre class="prettyprint">
+    <p>
+      To unset the dirty status of an object use:
+    </p>
+    <pre class="prettyprint">
 db.unsetDirty(pojo);
 </pre>
-<p>
-  Dirty mode doesn't affect in memory state of POJOs, so if you
-  change an object without marking it as dirty, OrientDB doesn't
-  know that the object is changed. Furthermore if you load the same
-  changed object using the same database instance, the modified
-  object is returned.
-</p>
-<h2>
-  <a name="Requirements" id="Requirements"></a>Requirements<a href=
-  "#Requirements" class="section_anchor"></a>
-</h2>
-<h3>
-  <a name="Declare_persistent_classes" id=
-  "Declare_persistent_classes"></a>Declare persistent
-  classes<a href="#Declare_persistent_classes" class=
-  "section_anchor"></a>
-</h3>
-<p>
-  In order to know which classes are persistent (between thousands
-  in your classpath), you need to tell OrientDB. Using the Java API
-  is:
-</p>
-<pre class="prettyprint">
+    <p>
+      Dirty mode doesn't affect in memory state of POJOs, so if you change an object without marking it as dirty, OrientDB doesn't know that the object is changed. Furthermore if you load the same changed object using the same database instance, the modified object is returned.
+    </p>
+    <h2>
+      <a name="Requirements" id="Requirements"></a>Requirements<a href="#Requirements" class="section_anchor"></a>
+    </h2>
+    <h3>
+      <a name="Declare_persistent_classes" id="Declare_persistent_classes"></a>Declare persistent classes<a href="#Declare_persistent_classes" class="section_anchor"></a>
+    </h3>
+    <p>
+      In order to know which classes are persistent (between thousands in your classpath), you need to tell OrientDB. Using the Java API is:
+    </p>
+    <pre class="prettyprint">
 database.getEntityManager().registerEntityClasses("com.orientechnologies.orient.test.domain");
 </pre>
-<p>
-  OrientDB saves only the final part of the class name without the
-  package. For example if you're using the class <tt>Account</tt>
-  in the package <tt>com.orientechnologies.demo</tt>, the
-  persistent class will be only "Account" and not the entire
-  <tt>com.orientechnologies.demo.Account</tt>. This means that
-  class names, in the database, are always unique and can't exist
-  two class with the same name even if declared in different
-  packages.
-</p>
-<h3>
-  <a name="Empty_constructor" id="Empty_constructor"></a>Empty
-  constructor<a href="#Empty_constructor" class=
-  "section_anchor"></a>
-</h3>
-<p>
-  All your classes must have an empty constructor to let to
-  OrientDB to create instances.
-</p>
-<h2>
-  <a name="POJO_binding" id="POJO_binding"></a>POJO binding<a href=
-  "#POJO_binding" class="section_anchor"></a>
-</h2>
-<p>
-  All the POJO attributes will be read/stored from/into the record
-  except for fields with the <i>transient</i> modifier. OrientDB
-  uses Java reflection but the discovery of POJO classes is made
-  only the first time at startup. Java Reflection information is
-  inspected only the first time to speed up the access to the
-  fields/methods.
-</p>
-<p>
-  There are 2 kinds of binding:
-</p>
-<ul>
-  <li>Default binding and
-  </li>
-  <li>Raw binding
-  </li>
-</ul>
-<h3>
-  <a name="Default_binding" id="Default_binding"></a>Default
-  binding<a href="#Default_binding" class="section_anchor"></a>
-</h3>
-<p>
-  This is the default. It tries to use the getter and setter
-  methods for the field if they exist, otherwise goes in RAW mode
-  (see below). The convention for the getter is the same as Java:
-  <tt>get&lt;field-name&gt;</tt> where field-name is capitalized.
-  The same is for setter but with 'set' as prefix instead of 'get':
-  <tt>set&lt;field-name&gt;</tt>. If the getter or setter is
-  missing, then the raw binding will be used.
-</p>
-<p>
-  Example: Field '<tt>String name</tt>' -&gt; <tt>getName()</tt>
-  and <tt>setName(String)</tt>
-</p>
-<h3>
-  <a name="Raw_binding" id="Raw_binding"></a>Raw binding<a href=
-  "#Raw_binding" class="section_anchor"></a>
-</h3>
-<p>
-  This mode acts at raw level by accessing the field directly. If
-  the field signature is <strong>private</strong> or
-  <strong>protected</strong>, then the accessibility will be
-  forced. This works generally in all the scenarios except where a
-  custom SecurityManager is defined that denies the change to the
-  accessibility of the field.
-</p>
-<p>
-  To force this behaviour, use the <a href=
-  "http://java.sun.com/developer/technicalArticles/J2EE/jpa" rel=
-  "nofollow">JPA 2</a> <strong><a href=
-  "http://download.oracle.com/javaee/6/api/javax/persistence/AccessType.html"
-  rel="nofollow">@AccessType</a></strong> annotation above the
-  relevant property. For example:
-</p>
-<pre class="prettyprint">
+    <p>
+      OrientDB saves only the final part of the class name without the package. For example if you're using the class <tt>Account</tt> in the package <tt>com.orientechnologies.demo</tt>, the persistent class will be only "Account" and not the entire <tt>com.orientechnologies.demo.Account</tt>. This means that class names, in the database, are always unique and can't exist two class with the same name even if declared in different packages.
+    </p>
+    <h3>
+      <a name="Empty_constructor" id="Empty_constructor"></a>Empty constructor<a href="#Empty_constructor" class="section_anchor"></a>
+    </h3>
+    <p>
+      All your classes must have an empty constructor to let to OrientDB to create instances.
+    </p>
+    <h2>
+      <a name="POJO_binding" id="POJO_binding"></a>POJO binding<a href="#POJO_binding" class="section_anchor"></a>
+    </h2>
+    <p>
+      All the POJO attributes will be read/stored from/into the record except for fields with the <i>transient</i> modifier. OrientDB uses Java reflection but the discovery of POJO classes is made only the first time at startup. Java Reflection information is inspected only the first time to speed up the access to the fields/methods.
+    </p>
+    <p>
+      There are 2 kinds of binding:
+    </p>
+    <ul>
+      <li>Default binding and
+      </li>
+      <li>Raw binding
+      </li>
+    </ul>
+    <h3>
+      <a name="Default_binding" id="Default_binding"></a>Default binding<a href="#Default_binding" class="section_anchor"></a>
+    </h3>
+    <p>
+      This is the default. It tries to use the getter and setter methods for the field if they exist, otherwise goes in RAW mode (see below). The convention for the getter is the same as Java: <tt>get&lt;field-name&gt;</tt> where field-name is capitalized. The same is for setter but with 'set' as prefix instead of 'get': <tt>set&lt;field-name&gt;</tt>. If the getter or setter is missing, then the raw binding will be used.
+    </p>
+    <p>
+      Example: Field '<tt>String name</tt>' -&gt; <tt>getName()</tt> and <tt>setName(String)</tt>
+    </p>
+    <h3>
+      <a name="Raw_binding" id="Raw_binding"></a>Raw binding<a href="#Raw_binding" class="section_anchor"></a>
+    </h3>
+    <p>
+      This mode acts at raw level by accessing the field directly. If the field signature is <strong>private</strong> or <strong>protected</strong>, then the accessibility will be forced. This works generally in all the scenarios except where a custom SecurityManager is defined that denies the change to the accessibility of the field.
+    </p>
+    <p>
+      To force this behaviour, use the <a href="http://java.sun.com/developer/technicalArticles/J2EE/jpa" rel="nofollow">JPA 2</a> <strong><a href="http://download.oracle.com/javaee/6/api/javax/persistence/AccessType.html" rel="nofollow">@AccessType</a></strong> annotation above the relevant property. For example:
+    </p>
+    <pre class="prettyprint">
 public class Customer{
   @AccessType(FIELD)
   private String name;
@@ -443,49 +336,33 @@ public class Customer{
   }
 }
 </pre>
-<h2>
-  <a name="Read_a_POJO" id="Read_a_POJO"></a>Read a POJO<a href=
-  "#Read_a_POJO" class="section_anchor"></a>
-</h2>
-<p>
-  You can read a POJO from the database in two ways: - by calling
-  the method <tt>load(ORID)</tt> - by executing a query
-  <tt>query(q)</tt>
-</p>
-<p>
-  When OrientDB loads the record, it creates a new POJO by calling
-  the empty constructor and filling all the fields available in the
-  source record. If a field is present only in the record and not
-  in the POJO class, then it will be ignored. Even when the POJO is
-  updated, any fields in the record that are not available in the
-  POJO class will be untouched.
-</p>
-<h3>
-  <a name="Callbacks" id="Callbacks"></a>Callbacks<a href=
-  "#Callbacks" class="section_anchor"></a>
-</h3>
-<p>
-  You can define some methods in the POJO class that are called as
-  callbacks before the record is read:
-</p>
-<ul>
-  <li>
-    <a href=
-    "http://code.google.com/p/orient/source/browse/trunk/core/src/main/java/com/orientechnologies/orient/core/annotation/OBeforeDeserialization.java"
-    rel="nofollow">@OBeforeDeserialization</a> called just BEFORE
-    unmarshalling the object from the source record
-  </li>
-  <li>
-    <a href=
-    "http://code.google.com/p/orient/source/browse/trunk/core/src/main/java/com/orientechnologies/orient/core/annotation/OAfterDeserialization.java"
-    rel="nofollow">@OAfterDeserialization</a> called just AFTER
-    unmarshalling the object from the source record
-  </li>
-</ul>
-<p>
-  Example:
-</p>
-<pre class="prettyprint">
+    <h2>
+      <a name="Read_a_POJO" id="Read_a_POJO"></a>Read a POJO<a href="#Read_a_POJO" class="section_anchor"></a>
+    </h2>
+    <p>
+      You can read a POJO from the database in two ways: - by calling the method <tt>load(ORID)</tt> - by executing a query <tt>query(q)</tt>
+    </p>
+    <p>
+      When OrientDB loads the record, it creates a new POJO by calling the empty constructor and filling all the fields available in the source record. If a field is present only in the record and not in the POJO class, then it will be ignored. Even when the POJO is updated, any fields in the record that are not available in the POJO class will be untouched.
+    </p>
+    <h3>
+      <a name="Callbacks" id="Callbacks"></a>Callbacks<a href="#Callbacks" class="section_anchor"></a>
+    </h3>
+    <p>
+      You can define some methods in the POJO class that are called as callbacks before the record is read:
+    </p>
+    <ul>
+      <li>
+        <a href="http://code.google.com/p/orient/source/browse/trunk/core/src/main/java/com/orientechnologies/orient/core/annotation/OBeforeDeserialization.java" rel="nofollow">@OBeforeDeserialization</a> called just BEFORE unmarshalling the object from the source record
+      </li>
+      <li>
+        <a href="http://code.google.com/p/orient/source/browse/trunk/core/src/main/java/com/orientechnologies/orient/core/annotation/OAfterDeserialization.java" rel="nofollow">@OAfterDeserialization</a> called just AFTER unmarshalling the object from the source record
+      </li>
+    </ul>
+    <p>
+      Example:
+    </p>
+    <pre class="prettyprint">
 public class Account{
   private String name;
   transient private String status;
@@ -496,47 +373,33 @@ public class Account{
   }
 }
 </pre>
-<p>
-  Callbacks are useful to initialize transient fields.
-</p>
-<h2>
-  <a name="Save_a_POJO" id="Save_a_POJO"></a>Save a POJO<a href=
-  "#Save_a_POJO" class="section_anchor"></a>
-</h2>
-<p>
-  You can save a POJO to the database by calling the method
-  <tt>save(pojo)</tt>. If the POJO is already known to the <a href=
-  "http://code.google.com/p/orient/source/browse/trunk/core/src/main/java/com/orientechnologies/orient/core/db/object/ODatabaseObjectTx.java"
-  rel="nofollow">ODatabaseObjectTx</a> instance, then it updates
-  the underlying record by copying all the POJO attributes to the
-  records (omitting those with <i>transient</i> modifier).
-</p>
-<h3>
-  <a name="Callbacks" id="Callbacks"></a>Callbacks<a href=
-  "#Callbacks" class="section_anchor"></a>
-</h3>
-<p>
-  You can define in the POJO class some methods called as callback
-  before the record is written:
-</p>
-<ul>
-  <li>
-    <a href=
-    "http://code.google.com/p/orient/source/browse/trunk/core/src/main/java/com/orientechnologies/orient/core/annotation/OBeforeSerialization.java"
-    rel="nofollow">@OBeforeSerialization</a> called just BEFORE
-    marshalling the object to the record
-  </li>
-  <li>
-    <a href=
-    "http://code.google.com/p/orient/source/browse/trunk/core/src/main/java/com/orientechnologies/orient/core/annotation/OAfterSerialization.java"
-    rel="nofollow">@OAfterSerialization</a> called just AFTER
-    marshalling the object to the record
-  </li>
-</ul>
-<p>
-  Example:
-</p>
-<pre class="prettyprint">
+    <p>
+      Callbacks are useful to initialize transient fields.
+    </p>
+    <h2>
+      <a name="Save_a_POJO" id="Save_a_POJO"></a>Save a POJO<a href="#Save_a_POJO" class="section_anchor"></a>
+    </h2>
+    <p>
+      You can save a POJO to the database by calling the method <tt>save(pojo)</tt>. If the POJO is already known to the <a href="http://code.google.com/p/orient/source/browse/trunk/core/src/main/java/com/orientechnologies/orient/core/db/object/ODatabaseObjectTx.java" rel="nofollow">ODatabaseObjectTx</a> instance, then it updates the underlying record by copying all the POJO attributes to the records (omitting those with <i>transient</i> modifier).
+    </p>
+    <h3>
+      <a name="Callbacks" id="Callbacks"></a>Callbacks<a href="#Callbacks" class="section_anchor"></a>
+    </h3>
+    <p>
+      You can define in the POJO class some methods called as callback before the record is written:
+    </p>
+    <ul>
+      <li>
+        <a href="http://code.google.com/p/orient/source/browse/trunk/core/src/main/java/com/orientechnologies/orient/core/annotation/OBeforeSerialization.java" rel="nofollow">@OBeforeSerialization</a> called just BEFORE marshalling the object to the record
+      </li>
+      <li>
+        <a href="http://code.google.com/p/orient/source/browse/trunk/core/src/main/java/com/orientechnologies/orient/core/annotation/OAfterSerialization.java" rel="nofollow">@OAfterSerialization</a> called just AFTER marshalling the object to the record
+      </li>
+    </ul>
+    <p>
+      Example:
+    </p>
+    <pre class="prettyprint">
 public class Account{
   private String name;
   transient private Socket s;
@@ -547,21 +410,14 @@ public class Account{
   }
 }
 </pre>
-<p>
-  Callbacks are useful to free transient resources.
-</p>
-<h2>
-  <a name="Fetching_strategies" id=
-  "Fetching_strategies"></a>Fetching strategies<a href=
-  "#Fetching_strategies" class="section_anchor"></a>
-</h2>
-<p>
-  Starting from release 0.9.20, OrientDB supports <a href=
-  "fetching_strategies.html">Fetching strategies</a> by using the
-  <strong>Fetch Plans</strong>. Fetch Plans are used to customize
-  how OrientDB must load linked records. The <a href=
-  "http://code.google.com/p/orient/source/browse/trunk/core/src/main/java/com/orientechnologies/orient/core/db/object/ODatabaseObjectTx.java"
-  rel="nofollow">ODatabaseObjectTx</a> uses the Fetch Plan also to
-  determine how to bind the linked records to the POJO by building
-  an object tree.
-</p>
+    <p>
+      Callbacks are useful to free transient resources.
+    </p>
+    <h2>
+      <a name="Fetching_strategies" id="Fetching_strategies"></a>Fetching strategies<a href="#Fetching_strategies" class="section_anchor"></a>
+    </h2>
+    <p>
+      Starting from release 0.9.20, OrientDB supports <a href="fetching_strategies.html">Fetching strategies</a> by using the <strong>Fetch Plans</strong>. Fetch Plans are used to customize how OrientDB must load linked records. The <a href="http://code.google.com/p/orient/source/browse/trunk/core/src/main/java/com/orientechnologies/orient/core/db/object/ODatabaseObjectTx.java" rel="nofollow">ODatabaseObjectTx</a> uses the Fetch Plan also to determine how to bind the linked records to the POJO by building an object tree.
+    </p>
+  </body>
+</html>

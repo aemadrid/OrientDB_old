@@ -1,53 +1,49 @@
 ---
 title: Create Database
 layout: default
+bc_1_name: console_commands
+bc_1_title: Console
 ---
-<h2>
-  <a name="Create_database" id="Create_database"></a>Create
-  database<a href="#Create_database" class="section_anchor"></a>
-</h2>
-<p>
-  Create a new database.
-</p>
-<h3>
-  <a name="Syntax" id="Syntax"></a>Syntax<a href="#Syntax" class=
-  "section_anchor"></a>
-</h3>
-<p>
-  <tt>create database &lt;database-url&gt; &lt;user&gt;
-  &lt;password&gt; &lt;storage-type&gt;</tt>
-</p>
-<p>
-  Where:
-</p>
-<ul>
-  <li>
-    <strong>database-url</strong> The url of the database to create
-    in the format '<tt>&lt;mode&gt;:&lt;path&gt;</tt>'
-  </li>
-  <li>
-    <strong>user</strong> with local database is the database's
-    user name, in remote database is the Server's administrator
-    name
-  </li>
-  <li>
-    <strong>password</strong> with local database is the server's
-    password, in remote database is the Server's administrator
-    password
-  </li>
-  <li>
-    <strong>storage-type</strong> The type of the storage between
-    'local' for disk-based database and 'memory' for in memory only
-    database.
-  </li>
-</ul>
-<h3>
-  <a name="Example:_create_a_local_database" id=
-  "Example:_create_a_local_database"></a>Example: create a local
-  database<a href="#Example:_create_a_local_database" class=
-  "section_anchor"></a>
-</h3>
-<pre class="prettyprint">
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<html>
+  <head>
+    <meta name="generator" content="HTML Tidy for Mac OS X (vers 31 October 2006 - Apple Inc. build 15.6), see www.w3.org">
+    <title></title>
+  </head>
+  <body>
+    <h2>
+      <a name="Create_database" id="Create_database"></a>Create database<a href="#Create_database" class="section_anchor"></a>
+    </h2>
+    <p>
+      Create a new database.
+    </p>
+    <h3>
+      <a name="Syntax" id="Syntax"></a>Syntax<a href="#Syntax" class="section_anchor"></a>
+    </h3>
+    <p>
+      <tt>create database &lt;database-url&gt; &lt;user&gt; &lt;password&gt; &lt;storage-type&gt;</tt>
+    </p>
+    <p>
+      Where:
+    </p>
+    <ul>
+      <li>
+        <strong>database-url</strong> The url of the database to create in the format '<tt>&lt;mode&gt;:&lt;path&gt;</tt>'
+      </li>
+      <li>
+        <strong>user</strong> with local database is the database's user name, in remote database is the Server's administrator name
+      </li>
+      <li>
+        <strong>password</strong> with local database is the server's password, in remote database is the Server's administrator password
+      </li>
+      <li>
+        <strong>storage-type</strong> The type of the storage between 'local' for disk-based database and 'memory' for in memory only database.
+      </li>
+    </ul>
+    <h3>
+      <a name="Example:_create_a_local_database" id="Example:_create_a_local_database"></a>Example: create a local database<a href="#Example:_create_a_local_database" class="section_anchor"></a>
+    </h3>
+    <pre class="prettyprint">
 &gt; create database local:/usr/local/orient/databases/demo/demo admin admin local
 
 Creating database [local:/usr/local/orient/databases/demo/demo]...
@@ -56,13 +52,10 @@ Database created successfully.
 
 Current database is: local:/usr/local/orient/databases/demo/demo
 </pre>
-<h3>
-  <a name="Example:_create_a_remote_database" id=
-  "Example:_create_a_remote_database"></a>Example: create a remote
-  database<a href="#Example:_create_a_remote_database" class=
-  "section_anchor"></a>
-</h3>
-<pre class="prettyprint">
+    <h3>
+      <a name="Example:_create_a_remote_database" id="Example:_create_a_remote_database"></a>Example: create a remote database<a href="#Example:_create_a_remote_database" class="section_anchor"></a>
+    </h3>
+    <pre class="prettyprint">
 &gt; create database remote:localhost/trick root E30DD873203AAA245952278B4306D94E423CF91D569881B7CAD7D0B6D1A20CE9 local
 
 Creating database [remote:localhost/trick ]...
@@ -71,20 +64,14 @@ Database created successfully.
 
 Current database is: remote:localhost/trick 
 </pre>
-<h3>
-  <a name="Create_a_static_database_into_the_server_configuration"
-  id=
-  "Create_a_static_database_into_the_server_configuration"></a>Create
-  a static database into the server configuration<a href=
-  "#Create_a_static_database_into_the_server_configuration" class=
-  "section_anchor"></a>
-</h3>
-<p>
-  To create a static database to use it from the server look at:
-  <a href="http://code.google.com/p/orient/wiki/DBServer#Storages"
-  rel="nofollow">Server configuration storages</a>.
-</p>
-<p>
-  This is a command of the Orient console. To know all the commands
-  go to <a href="console_commands.html">Console commands</a>.
-</p>
+    <h3>
+      <a name="Create_a_static_database_into_the_server_configuration" id="Create_a_static_database_into_the_server_configuration"></a>Create a static database into the server configuration<a href="#Create_a_static_database_into_the_server_configuration" class="section_anchor"></a>
+    </h3>
+    <p>
+      To create a static database to use it from the server look at: <a href="http://code.google.com/p/orient/wiki/DBServer#Storages" rel="nofollow">Server configuration storages</a>.
+    </p>
+    <p>
+      This is a command of the Orient console. To know all the commands go to <a href="console_commands.html">Console commands</a>.
+    </p>
+  </body>
+</html>

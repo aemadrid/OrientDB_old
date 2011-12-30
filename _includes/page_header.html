@@ -5,9 +5,16 @@
 <div class="page-header">
   <h1>
     {{ page.title }}
-    {% if title_extra %}<small>{{ title_extra }}</small>{% endif %}
-    {% if parent_title %}<small>/ <href="{{ parent_url }}">{{ parent_title }}</a></small>{% endif %}
+    {% if page.title_extra %}<small>{{ page.title_extra }}</small>{% endif %}
   </h1>
 </div>
+<ul class="breadcrumb">
+  <li><a href="index.html">Home</a> <span class="divider">/</span></li>
+  {% if page.bc_4_name %}<li><a href="{{ page.bc_4_name }}.html">{{ page.bc_4_title }}</a> <span class="divider">/</span></li>{% endif %}
+  {% if page.bc_3_name %}<li><a href="{{ page.bc_3_name }}.html">{{ page.bc_3_title }}</a> <span class="divider">/</span></li>{% endif %}
+  {% if page.bc_2_name %}<li><a href="{{ page.bc_2_name }}.html">{{ page.bc_2_title }}</a> <span class="divider">/</span></li>{% endif %}
+  {% if page.bc_1_name %}<li><a href="{{ page.bc_1_name }}.html">{{ page.bc_1_title }}</a> <span class="divider">/</span></li>{% endif %}
+  <li class="active">{{ page.title }}</li>
+</ul>
 <!-- Page Header Include END -->
 {% endif %}

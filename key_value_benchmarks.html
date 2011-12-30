@@ -2,234 +2,226 @@
 title: Benchmarks
 layout: default
 ---
-<ul>
-  <li>
-    <a href="#Introduction">Introduction</a>
-  </li>
-  <li>
-    <a href="#Scenario">Scenario</a>
-  </li>
-  <li>
-    <a href="#Summary_of_the_results">Summary of the results</a>
-  </li>
-  <li>
-    <a href="#Detail_of_the_tests">Detail of the tests</a>
-  </li>
-</ul>
-<h2>
-  <a name="Introduction" id="Introduction"></a>Introduction<a href=
-  "#Introduction" class="section_anchor"></a>
-</h2>
-<p>
-  Hey, I know. These are <b>micro benchmarks</b> and can't be taken
-  as unique meter to compare products. However it's an index of the
-  speed of the engine. Take it for what it is!
-</p>
-<h2>
-  <a name="Scenario" id="Scenario"></a>Scenario<a href="#Scenario"
-  class="section_anchor"></a>
-</h2>
-<p>
-  These benchmarks are made using <a href=
-  "http://httpd.apache.org/docs/2.0/programs/ab.html" rel=
-  "nofollow">Apache Ab utility</a> in bundle with the distribution
-  of Orient under the "benchmarks" folder.
-</p>
-<p>
-  1 DELL Notebook model XPS M1530 with Intel(r) Core Duo T7700
-  2.40Ghz, 3 GB RAM and HD 5.400rpm, O.S. MS Windows Vista, JDK 1.6
-</p>
-<h2>
-  <a name="Summary_of_the_results" id=
-  "Summary_of_the_results"></a>Summary of the results<a href=
-  "#Summary_of_the_results" class="section_anchor"></a>
-</h2>
-<table class="zebra-striped bordered-table">
-  <tr>
-    <td>
-      <strong>Test type</strong>
-    </td>
-    <td>
-      <strong>Total requests</strong>
-    </td>
-    <td>
-      <strong>Concurrent clients/threads</strong>
-    </td>
-    <td>
-      <strong>Configuration</strong>
-    </td>
-    <td>
-      <strong>Total time elapsed</strong> (less is better)
-    </td>
-    <td>
-      <strong>Requests per second</strong> (more is better)
-    </td>
-    <td>
-      <strong>Version</strong>
-    </td>
-  </tr>
-  <tr>
-    <td>
-      HTTP GET on /petshop/demo/key-1
-    </td>
-    <td>
-      100,000
-    </td>
-    <td>
-      1
-    </td>
-    <td>
-      Local Database
-    </td>
-    <td>
-      7.98 seconds
-    </td>
-    <td>
-      9,954
-    </td>
-    <td>
-      0.9.8
-    </td>
-  </tr>
-  <tr>
-    <td>
-      HTTP GET on /petshop/demo/key-1
-    </td>
-    <td>
-      100,000
-    </td>
-    <td>
-      2
-    </td>
-    <td>
-      Local Database
-    </td>
-    <td>
-      10.04 seconds
-    </td>
-    <td>
-      12,521
-    </td>
-    <td>
-      0.9.8
-    </td>
-  </tr>
-  <tr>
-    <td>
-      HTTP GET on /petshop/demo/key-1
-    </td>
-    <td>
-      100,000
-    </td>
-    <td>
-      10
-    </td>
-    <td>
-      Local Database
-    </td>
-    <td>
-      8.58 seconds
-    </td>
-    <td>
-      11,652
-    </td>
-    <td>
-      0.9.8
-    </td>
-  </tr>
-  <tr>
-    <td>
-      HTTP GET on /petshop/demo/key-1
-    </td>
-    <td>
-      100,000
-    </td>
-    <td>
-      50
-    </td>
-    <td>
-      Local Database
-    </td>
-    <td>
-      10.29 seconds
-    </td>
-    <td>
-      9,709
-    </td>
-    <td>
-      0.9.8
-    </td>
-  </tr>
-  <tr>
-    <td>
-      HTTP GET on /petshop/demo/key-1
-    </td>
-    <td>
-      100,000
-    </td>
-    <td>
-      100
-    </td>
-    <td>
-      Local Database
-    </td>
-    <td>
-      10.67 seconds
-    </td>
-    <td>
-      9,370
-    </td>
-    <td>
-      0.9.8
-    </td>
-  </tr>
-  <tr>
-    <td>
-      HTTP GET on /petshop/demo/key-1
-    </td>
-    <td>
-      100,000
-    </td>
-    <td>
-      100
-    </td>
-    <td>
-      Partitioned Database (1 node)
-    </td>
-    <td>
-      5.99 seconds
-    </td>
-    <td>
-      16,677
-    </td>
-    <td>
-      0.9.8
-    </td>
-  </tr>
-</table>
-<p>
-  As you can see:
-</p>
-<ul>
-  <li>Orient Key/Value Server uses <strong>both the
-  processors</strong> of the host machine hitting the record with 2
-  clients. The <strong>multi-threading architecture</strong> works
-  well since multiple clients outperforms the serial requests
-  (client=1).
-  </li>
-  <li>Even if the concurrent connections <strong>growth up 50
-  times</strong>, the loose of performance is minimum.
-  </li>
-</ul>
-<h2>
-  <a name="Detail_of_the_tests" id="Detail_of_the_tests"></a>Detail
-  of the tests<a href="#Detail_of_the_tests" class=
-  "section_anchor"></a>
-</h2>
-<p>
-  == HTTP GET 100.000 times, executed by 10 concurrent threads.
-</p>
-<pre class="prettyprint">
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<html>
+  <head>
+    <meta name="generator" content="HTML Tidy for Mac OS X (vers 31 October 2006 - Apple Inc. build 15.6), see www.w3.org">
+    <title></title>
+  </head>
+  <body>
+    <p></p>
+    <ul>
+      <li>
+        <a href="#Introduction">Introduction</a>
+      </li>
+      <li>
+        <a href="#Scenario">Scenario</a>
+      </li>
+      <li>
+        <a href="#Summary_of_the_results">Summary of the results</a>
+      </li>
+      <li>
+        <a href="#Detail_of_the_tests">Detail of the tests</a>
+      </li>
+    </ul>
+    <h2>
+      <a name="Introduction" id="Introduction"></a>Introduction<a href="#Introduction" class="section_anchor"></a>
+    </h2>
+    <p>
+      Hey, I know. These are <b>micro benchmarks</b> and can't be taken as unique meter to compare products. However it's an index of the speed of the engine. Take it for what it is!
+    </p>
+    <h2>
+      <a name="Scenario" id="Scenario"></a>Scenario<a href="#Scenario" class="section_anchor"></a>
+    </h2>
+    <p>
+      These benchmarks are made using <a href="http://httpd.apache.org/docs/2.0/programs/ab.html" rel="nofollow">Apache Ab utility</a> in bundle with the distribution of Orient under the "benchmarks" folder.
+    </p>
+    <p>
+      1 DELL Notebook model XPS M1530 with Intel(r) Core Duo T7700 2.40Ghz, 3 GB RAM and HD 5.400rpm, O.S. MS Windows Vista, JDK 1.6
+    </p>
+    <h2>
+      <a name="Summary_of_the_results" id="Summary_of_the_results"></a>Summary of the results<a href="#Summary_of_the_results" class="section_anchor"></a>
+    </h2>
+    <p></p>
+    <table class="zebra-striped bordered-table">
+      <tr>
+        <td>
+          <strong>Test type</strong>
+        </td>
+        <td>
+          <strong>Total requests</strong>
+        </td>
+        <td>
+          <strong>Concurrent clients/threads</strong>
+        </td>
+        <td>
+          <strong>Configuration</strong>
+        </td>
+        <td>
+          <strong>Total time elapsed</strong> (less is better)
+        </td>
+        <td>
+          <strong>Requests per second</strong> (more is better)
+        </td>
+        <td>
+          <strong>Version</strong>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          HTTP GET on /petshop/demo/key-1
+        </td>
+        <td>
+          100,000
+        </td>
+        <td>
+          1
+        </td>
+        <td>
+          Local Database
+        </td>
+        <td>
+          7.98 seconds
+        </td>
+        <td>
+          9,954
+        </td>
+        <td>
+          0.9.8
+        </td>
+      </tr>
+      <tr>
+        <td>
+          HTTP GET on /petshop/demo/key-1
+        </td>
+        <td>
+          100,000
+        </td>
+        <td>
+          2
+        </td>
+        <td>
+          Local Database
+        </td>
+        <td>
+          10.04 seconds
+        </td>
+        <td>
+          12,521
+        </td>
+        <td>
+          0.9.8
+        </td>
+      </tr>
+      <tr>
+        <td>
+          HTTP GET on /petshop/demo/key-1
+        </td>
+        <td>
+          100,000
+        </td>
+        <td>
+          10
+        </td>
+        <td>
+          Local Database
+        </td>
+        <td>
+          8.58 seconds
+        </td>
+        <td>
+          11,652
+        </td>
+        <td>
+          0.9.8
+        </td>
+      </tr>
+      <tr>
+        <td>
+          HTTP GET on /petshop/demo/key-1
+        </td>
+        <td>
+          100,000
+        </td>
+        <td>
+          50
+        </td>
+        <td>
+          Local Database
+        </td>
+        <td>
+          10.29 seconds
+        </td>
+        <td>
+          9,709
+        </td>
+        <td>
+          0.9.8
+        </td>
+      </tr>
+      <tr>
+        <td>
+          HTTP GET on /petshop/demo/key-1
+        </td>
+        <td>
+          100,000
+        </td>
+        <td>
+          100
+        </td>
+        <td>
+          Local Database
+        </td>
+        <td>
+          10.67 seconds
+        </td>
+        <td>
+          9,370
+        </td>
+        <td>
+          0.9.8
+        </td>
+      </tr>
+      <tr>
+        <td>
+          HTTP GET on /petshop/demo/key-1
+        </td>
+        <td>
+          100,000
+        </td>
+        <td>
+          100
+        </td>
+        <td>
+          Partitioned Database (1 node)
+        </td>
+        <td>
+          5.99 seconds
+        </td>
+        <td>
+          16,677
+        </td>
+        <td>
+          0.9.8
+        </td>
+      </tr>
+    </table>
+    <p>
+      As you can see:
+    </p>
+    <ul>
+      <li>Orient Key/Value Server uses <strong>both the processors</strong> of the host machine hitting the record with 2 clients. The <strong>multi-threading architecture</strong> works well since multiple clients outperforms the serial requests (client=1).
+      </li>
+      <li>Even if the concurrent connections <strong>growth up 50 times</strong>, the loose of performance is minimum.
+      </li>
+    </ul>
+    <h2>
+      <a name="Detail_of_the_tests" id="Detail_of_the_tests"></a>Detail of the tests<a href="#Detail_of_the_tests" class="section_anchor"></a>
+    </h2>
+    <p>
+      == HTTP GET 100.000 times, executed by 10 concurrent threads.
+    </p>
+    <pre class="prettyprint">
 C:\work\dev\orientechnologies\orientdb\releases\0.9.5\benchmarks&gt;ab -n100000 -k -c10 This is ApacheBench, Version 2.3 &lt;$Revision: 655654 $&gt;
 Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
 Licensed to The Apache Software Foundation, http://www.apache.org/
@@ -286,3 +278,5 @@ Percentage of the requests served within a certain time (ms)
   99%      1
  100%     18 (longest request)
 </pre>
+  </body>
+</html>

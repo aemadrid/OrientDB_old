@@ -2,453 +2,409 @@
 title: Benchmarks
 layout: default
 ---
-<ul>
-  <li>
-    <a href="#Introduction">Introduction</a>
-  </li>
-  <li>
-    <a href="#Scenario">Scenario</a>
-  </li>
-  <li style="list-style: none">
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<html>
+  <head>
+    <meta name="generator" content="HTML Tidy for Mac OS X (vers 31 October 2006 - Apple Inc. build 15.6), see www.w3.org">
+    <title></title>
+    <style type="text/css">
+p.c2 {font-style: italic}
+    li.c1 {list-style: none}
+    </style>
+  </head>
+  <body>
+    <p></p>
     <ul>
       <li>
-        <a href="#Massive_insert_of_records">Massive insert of
-        records</a>
+        <a href="#Introduction">Introduction</a>
       </li>
-      <li style="list-style: none">
+      <li>
+        <a href="#Scenario">Scenario</a>
+      </li>
+      <li class="c1">
         <ul>
           <li>
-            <a href=
-            "#Comparison_between_local,_remote_and_distributed">Comparison
-            between local, remote and distributed</a>
+            <a href="#Massive_insert_of_records">Massive insert of records</a>
+          </li>
+          <li class="c1">
+            <ul>
+              <li>
+                <a href="#Comparison_between_local,_remote_and_distributed">Comparison between local, remote and distributed</a>
+              </li>
+              <li>
+                <a href="#Comparison_between_Database_types">Comparison between Database types</a>
+              </li>
+            </ul>
           </li>
           <li>
-            <a href="#Comparison_between_Database_types">Comparison
-            between Database types</a>
+            <a href="#Massive_insert_of_pairs_key/value">Massive insert of pairs key/value</a>
           </li>
         </ul>
       </li>
-      <li>
-        <a href="#Massive_insert_of_pairs_key/value">Massive insert
-        of pairs key/value</a>
-      </li>
     </ul>
-  </li>
-</ul>
-<h2>
-  <a name="Introduction" id="Introduction"></a>Introduction<a href=
-  "#Introduction" class="section_anchor"></a>
-</h2>
-<p>
-  Hey, I know. These are <b>micro benchmarks</b> and can't be taken
-  as unique meter to compare products. However it's an index of the
-  speed of the engine. Take it for what it is!
-</p>
-<p>
-  The tests aim to demonstrate the performance of all Database
-  types.
-</p>
-<p>
-  All the speed test cases are located under the source folder:
-  <a href=
-  "http://code.google.com/p/orient/source/browse/#svn/trunk/tests/src/test/java/com/orientechnologies/orient/test/database/speed"
-  rel=
-  "nofollow">trunk/tests/src/test/java/com/orientechnologies/orient/test/database/speed</a>
-</p>
-<h2>
-  <a name="Scenario" id="Scenario"></a>Scenario<a href="#Scenario"
-  class="section_anchor"></a>
-</h2>
-<p>
-  1 DELL Notebook model XPS M1530 with Intel(r) Core Duo T7700
-  2.40Ghz, 3 GB RAM and HD 5.400rpm, O.S. MS Windows Vista, JRE
-  1.6.0_20
-</p>
-<p>
-  JRE Startup configuration: <tt>-server -XX:+UseParallelGC
-  -XX:+AggressiveOpts -XX:CompileThreshold=200</tt>
-</p>
-<p>
-  <i>NOTE: After some comparison with similar HW I found that
-  OrientDB runs better on Windows and MacOsX systems. Linux seems
-  to be slower than others because of EXT3 file system (EXT4 is
-  much more slower again!) and maybe the JVM implementation even if
-  it's the same release on the other systems</i>
-</p>
-<h3>
-  <a name="Massive_insert_of_records" id=
-  "Massive_insert_of_records"></a>Massive insert of records<a href=
-  "#Massive_insert_of_records" class="section_anchor"></a>
-</h3>
-<p>
-  This test inserts <b>1,000,000</b> (one million) of records.
-</p>
-<h4>
-  <a name=
-  "Comparison_between_local,_remote_and_distributed"></a>Comparison
-  between local, remote and distributed<a href=
-  "#Comparison_between_local,_remote_and_distributed" class=
-  "section_anchor"></a>
-</h4>
-<p>
-  <img src=
-  "http://chart.apis.google.com/chart?chxt=x,y&amp;chtt=Time+distribution+of+insertion+for+one+million+of+records&amp;cht=lc&amp;chxt=x,y&amp;chxl=&amp;chs=850x350&amp;chd=t:334,165,194,118,279,110,255,112,238,109%7C370,186,230,150,296,106,107,420,103,351%7C1209,334,338,364,351,344,340,342,382,566%7C1209,334,338,364,351,344,340,342,382,566%7C9425,7067,7205,7072,7251,7492,7166,7904,7850,7379%7C446,198,186,222,306,262,303,291,269,10747&amp;chco=AB2010,FF0000,FF0000,0000FF,ff9900,FA3455,543454&amp;chds=0,11000&amp;chl=100%2C00%7C200%2C000%7C300%2C000%7C400%2C000%7C500%2C000%7C600%2C000%7C700%2C000%7C800%2C000%7C900%2C000%7C1%2C000%2C000&amp;chxr=1,0,11000,500&amp;chdl=ODatabaseFlat+memory+no+tx%7CODatabaseFlat+memory+optimistic+tx%7CODatabaseFlat+local+no+tx%7CODatabaseFlat+local+optimistic+tx%7CODatabaseFlat+remote+no+tx%7CODatabaseFlat+remote+optimistic+tx&amp;chf=bg,s&amp;endPerImage.png">
-</p>
-<table class="zebra-striped bordered-table">
-  <tr>
-    <td>
-      <strong>Source</strong>
-    </td>
-    <td>
-      <strong>Database type</strong>
-    </td>
-    <td>
-      <strong>Database location</strong>
-    </td>
-    <td>
-      <strong>Transaction mode</strong>
-    </td>
-    <td>
-      <strong>Total time elapsed</strong> (less is better)
-    </td>
-    <td>
-      <strong>Requests per second</strong> (more is better)
-    </td>
-    <td>
-      <strong>Tested version</strong>
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <a href=
-      "http://code.google.com/p/orient/source/browse/trunk/tests/src/test/java/com/orientechnologies/orient/test/database/speed/LocalCreateFlatSpeedTest.java"
-      rel="nofollow">Source</a>
-    </td>
-    <td>
-      ODatabaseFlat
-    </td>
-    <td>
-      memory
-    </td>
-    <td>
-      no tx
-    </td>
-    <td>
-      1.91 seconds
-    </td>
-    <td>
-      510,464
-    </td>
-    <td>
-      0.9.9
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <a href=
-      "http://code.google.com/p/orient/source/browse/trunk/tests/src/test/java/com/orientechnologies/orient/test/database/speed/LocalCreateFlatSpeedTest.java"
-      rel="nofollow">Source</a>
-    </td>
-    <td>
-      ODatabaseFlat
-    </td>
-    <td>
-      memory
-    </td>
-    <td>
-      optimistic tx
-    </td>
-    <td>
-      2.31 seconds
-    </td>
-    <td>
-      422,475
-    </td>
-    <td>
-      0.9.9
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <a href=
-      "http://code.google.com/p/orient/source/browse/trunk/tests/src/test/java/com/orientechnologies/orient/test/database/speed/LocalCreateFlatSpeedTest.java"
-      rel="nofollow">Source</a>
-    </td>
-    <td>
-      ODatabaseFlat
-    </td>
-    <td>
-      local
-    </td>
-    <td>
-      no tx
-    </td>
-    <td>
-      4.72 seconds
-    </td>
-    <td>
-      209,248
-    </td>
-    <td>
-      0.9.8
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <a href=
-      "http://code.google.com/p/orient/source/browse/trunk/tests/src/test/java/com/orientechnologies/orient/test/database/speed/LocalCreateFlatSpeedTest.java"
-      rel="nofollow">Source</a>
-    </td>
-    <td>
-      ODatabaseFlat
-    </td>
-    <td>
-      local
-    </td>
-    <td>
-      optimistic tx
-    </td>
-    <td>
-      10.15 seconds
-    </td>
-    <td>
-      98,173
-    </td>
-    <td>
-      0.9.8
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <a href=
-      "http://code.google.com/p/orient/source/browse/trunk/tests/src/test/java/com/orientechnologies/orient/test/database/speed/LocalCreateFlatSpeedTest.java"
-      rel="nofollow">Source</a>
-    </td>
-    <td>
-      ODatabaseFlat
-    </td>
-    <td>
-      remote
-    </td>
-    <td>
-      no tx
-    </td>
-    <td>
-      75.82 seconds
-    </td>
-    <td>
-      13,189
-    </td>
-    <td>
-      0.9.8
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <a href=
-      "http://code.google.com/p/orient/source/browse/trunk/tests/src/test/java/com/orientechnologies/orient/test/database/speed/LocalCreateFlatSpeedTest.java"
-      rel="nofollow">Source</a>
-    </td>
-    <td>
-      ODatabaseFlat
-    </td>
-    <td>
-      remote
-    </td>
-    <td>
-      optimistic tx <tt>#1</tt>
-    </td>
-    <td>
-      13.23 seconds
-    </td>
-    <td>
-      75,437
-    </td>
-    <td>
-      0.9.8
-    </td>
-  </tr>
-</table>
-<p>
-  <tt>#1</tt> Remote connection benefits of optimistic transaction
-  since it compress all the data and send it at the commit in one
-  shot.
-</p>
-<h4>
-  <a name="Comparison_between_Database_types" id=
-  "Comparison_between_Database_types"></a>Comparison between
-  Database types<a href="#Comparison_between_Database_types" class=
-  "section_anchor"></a>
-</h4>
-<p>
-  <img src=
-  "http://chart.apis.google.com/chart?chxt=x,y&amp;chtt=Time+distribution+of+insertion+for+one+million+of+records&amp;cht=lc&amp;chxt=x,y&amp;chxl=&amp;chs=900x250&amp;chd=t:1209,334,338,364,351,344,340,342,382,566%7C2513,752,737,739,735,794,735,759,748,733%7C3123,1257,1393,1364,1298,1248,1260,1487,1250,1303&amp;chco=FF0000,0000FF,0AE443&amp;chxr=1,0,10,1&amp;chds=0,4000&amp;chxr=1,0,4000,500&amp;chl=100%2C00%7C200%2C000%7C300%2C000%7C400%2C000%7C500%2C000%7C600%2C000%7C700%2C000%7C800%2C000%7C900%2C000%7C1%2C000%2C000&amp;chdl=ODatabaseFlat+local%7CODatabaseDocumentTx+local%7CODatabaseObjectTx+local&amp;chf=bg,s&amp;endPerImage.png">
-</p>
-<table class="zebra-striped bordered-table">
-  <tr>
-    <td>
-      <strong>Source</strong>
-    </td>
-    <td>
-      <strong>Database type</strong>
-    </td>
-    <td>
-      <strong>Database location</strong>
-    </td>
-    <td>
-      <strong>Total time elapsed</strong> (less is better)
-    </td>
-    <td>
-      <strong>Requests per second</strong> (more is better)
-    </td>
-    <td>
-      <strong>Tested version</strong>
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <a href=
-      "http://code.google.com/p/orient/source/browse/trunk/tests/src/test/java/com/orientechnologies/orient/test/database/speed/LocalCreateFlatSpeedTest.java"
-      rel="nofollow">Source</a>
-    </td>
-    <td>
-      ODatabaseFlat
-    </td>
-    <td>
-      local
-    </td>
-    <td>
-      4.72 seconds
-    </td>
-    <td>
-      209,248
-    </td>
-    <td>
-      0.9.8
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <a href=
-      "http://code.google.com/p/orient/source/browse/trunk/tests/src/test/java/com/orientechnologies/orient/test/database/speed/LocalCreateDocumentSpeedTest.java"
-      rel="nofollow">Source</a>
-    </td>
-    <td>
-      ODatabaseDocumentTx
-    </td>
-    <td>
-      local
-    </td>
-    <td>
-      9.24 seconds
-    </td>
-    <td>
-      107,677
-    </td>
-    <td>
-      0.9.8
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <a href=
-      "http://code.google.com/p/orient/source/browse/trunk/tests/src/test/java/com/orientechnologies/orient/test/database/speed/LocalCreateObjectSpeedTest.java"
-      rel="nofollow">Source</a>
-    </td>
-    <td>
-      ODatabaseObjectTx
-    </td>
-    <td>
-      local
-    </td>
-    <td>
-      14.98 seconds
-    </td>
-    <td>
-      66,431
-    </td>
-    <td>
-      0.9.9
-    </td>
-  </tr>
-</table>
-<h3>
-  <a name="Massive_insert_of_pairs_key/value"></a>Massive insert of
-  pairs key/value<a href="#Massive_insert_of_pairs_key/value"
-  class="section_anchor"></a>
-</h3>
-<p>
-  This test inserts <b>1,000,000</b> (one million) of pairs
-  Key/Value. Consider that inserting pairs require much more effort
-  than inserting records since records are indexed by the key.
-</p>
-<p>
-  <img src=
-  "http://chart.apis.google.com/chart?cht=lc&amp;chd=s:GFILPTZjt9,HSSQPPNLJI&amp;chs=900x250&amp;chco=ff0000,000099&amp;chf=bg,s,ffffff&amp;chds=0,500&amp;chtt=Time+and+throughput+distribution+of+insertion+for+one+million+of+entries+Key%2FValue&amp;chdl=Elapsed+(less+is+better)%7CThroughput+as+req%2Fsec+(much+is+better)&amp;chl=100%2C00%7C200%2C000%7C300%2C000%7C400%2C000%7C500%2C000%7C600%2C000%7C700%2C000%7C800%2C000%7C900%2C000%7C1%2C000%2C000&amp;endPerImage.png">
-</p>
-<table class="zebra-striped bordered-table">
-  <tr>
-    <td>
-      <strong>Source</strong>
-    </td>
-    <td>
-      <strong>Database type</strong>
-    </td>
-    <td>
-      <strong>Database location</strong>
-    </td>
-    <td>
-      <strong>Total time elapsed</strong> (less is better)
-    </td>
-    <td>
-      <strong>Requests per second</strong> (more is better)
-    </td>
-    <td>
-      <strong>Tested version</strong>
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <a href=
-      "http://code.google.com/p/orient/source/browse/trunk/tests/src/test/java/com/orientechnologies/orient/test/database/speed/DictionaryPutSpeedTest.java"
-      rel="nofollow">Source</a>
-    </td>
-    <td>
-      ODatabaseFlat
-    </td>
-    <td>
-      memory
-    </td>
-    <td>
-      16.89 seconds
-    </td>
-    <td>
-      59,017
-    </td>
-    <td>
-      0.9.9
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <a href=
-      "http://code.google.com/p/orient/source/browse/trunk/tests/src/test/java/com/orientechnologies/orient/test/database/speed/DictionaryPutSpeedTest.java"
-      rel="nofollow">Source</a>
-    </td>
-    <td>
-      ODatabaseFlat
-    </td>
-    <td>
-      local
-    </td>
-    <td>
-      86.93 seconds
-    </td>
-    <td>
-      11,502
-    </td>
-    <td>
-      0.9.8
-    </td>
-  </tr>
-</table>
+    <h2>
+      <a name="Introduction" id="Introduction"></a>Introduction<a href="#Introduction" class="section_anchor"></a>
+    </h2>
+    <p>
+      Hey, I know. These are <b>micro benchmarks</b> and can't be taken as unique meter to compare products. However it's an index of the speed of the engine. Take it for what it is!
+    </p>
+    <p>
+      The tests aim to demonstrate the performance of all Database types.
+    </p>
+    <p>
+      All the speed test cases are located under the source folder: <a href="http://code.google.com/p/orient/source/browse/#svn/trunk/tests/src/test/java/com/orientechnologies/orient/test/database/speed" rel="nofollow">trunk/tests/src/test/java/com/orientechnologies/orient/test/database/speed</a>
+    </p>
+    <h2>
+      <a name="Scenario" id="Scenario"></a>Scenario<a href="#Scenario" class="section_anchor"></a>
+    </h2>
+    <p>
+      1 DELL Notebook model XPS M1530 with Intel(r) Core Duo T7700 2.40Ghz, 3 GB RAM and HD 5.400rpm, O.S. MS Windows Vista, JRE 1.6.0_20
+    </p>
+    <p>
+      JRE Startup configuration: <tt>-server -XX:+UseParallelGC -XX:+AggressiveOpts -XX:CompileThreshold=200</tt>
+    </p>
+    <p class="c2">
+      NOTE: After some comparison with similar HW I found that OrientDB runs better on Windows and MacOsX systems. Linux seems to be slower than others because of EXT3 file system (EXT4 is much more slower again!) and maybe the JVM implementation even if it's the same release on the other systems
+    </p>
+    <h3>
+      <a name="Massive_insert_of_records" id="Massive_insert_of_records"></a>Massive insert of records<a href="#Massive_insert_of_records" class="section_anchor"></a>
+    </h3>
+    <p>
+      This test inserts <b>1,000,000</b> (one million) of records.
+    </p>
+    <h4>
+      <a name="Comparison_between_local,_remote_and_distributed"></a>Comparison between local, remote and distributed<a href="#Comparison_between_local,_remote_and_distributed" class="section_anchor"></a>
+    </h4>
+    <p>
+      <img src="http://chart.apis.google.com/chart?chxt=x,y&amp;chtt=Time+distribution+of+insertion+for+one+million+of+records&amp;cht=lc&amp;chxt=x,y&amp;chxl=&amp;chs=850x350&amp;chd=t:334,165,194,118,279,110,255,112,238,109%7C370,186,230,150,296,106,107,420,103,351%7C1209,334,338,364,351,344,340,342,382,566%7C1209,334,338,364,351,344,340,342,382,566%7C9425,7067,7205,7072,7251,7492,7166,7904,7850,7379%7C446,198,186,222,306,262,303,291,269,10747&amp;chco=AB2010,FF0000,FF0000,0000FF,ff9900,FA3455,543454&amp;chds=0,11000&amp;chl=100%2C00%7C200%2C000%7C300%2C000%7C400%2C000%7C500%2C000%7C600%2C000%7C700%2C000%7C800%2C000%7C900%2C000%7C1%2C000%2C000&amp;chxr=1,0,11000,500&amp;chdl=ODatabaseFlat+memory+no+tx%7CODatabaseFlat+memory+optimistic+tx%7CODatabaseFlat+local+no+tx%7CODatabaseFlat+local+optimistic+tx%7CODatabaseFlat+remote+no+tx%7CODatabaseFlat+remote+optimistic+tx&amp;chf=bg,s&amp;endPerImage.png">
+    </p>
+    <p></p>
+    <table class="zebra-striped bordered-table">
+      <tr>
+        <td>
+          <strong>Source</strong>
+        </td>
+        <td>
+          <strong>Database type</strong>
+        </td>
+        <td>
+          <strong>Database location</strong>
+        </td>
+        <td>
+          <strong>Transaction mode</strong>
+        </td>
+        <td>
+          <strong>Total time elapsed</strong> (less is better)
+        </td>
+        <td>
+          <strong>Requests per second</strong> (more is better)
+        </td>
+        <td>
+          <strong>Tested version</strong>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <a href="http://code.google.com/p/orient/source/browse/trunk/tests/src/test/java/com/orientechnologies/orient/test/database/speed/LocalCreateFlatSpeedTest.java" rel="nofollow">Source</a>
+        </td>
+        <td>
+          ODatabaseFlat
+        </td>
+        <td>
+          memory
+        </td>
+        <td>
+          no tx
+        </td>
+        <td>
+          1.91 seconds
+        </td>
+        <td>
+          510,464
+        </td>
+        <td>
+          0.9.9
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <a href="http://code.google.com/p/orient/source/browse/trunk/tests/src/test/java/com/orientechnologies/orient/test/database/speed/LocalCreateFlatSpeedTest.java" rel="nofollow">Source</a>
+        </td>
+        <td>
+          ODatabaseFlat
+        </td>
+        <td>
+          memory
+        </td>
+        <td>
+          optimistic tx
+        </td>
+        <td>
+          2.31 seconds
+        </td>
+        <td>
+          422,475
+        </td>
+        <td>
+          0.9.9
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <a href="http://code.google.com/p/orient/source/browse/trunk/tests/src/test/java/com/orientechnologies/orient/test/database/speed/LocalCreateFlatSpeedTest.java" rel="nofollow">Source</a>
+        </td>
+        <td>
+          ODatabaseFlat
+        </td>
+        <td>
+          local
+        </td>
+        <td>
+          no tx
+        </td>
+        <td>
+          4.72 seconds
+        </td>
+        <td>
+          209,248
+        </td>
+        <td>
+          0.9.8
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <a href="http://code.google.com/p/orient/source/browse/trunk/tests/src/test/java/com/orientechnologies/orient/test/database/speed/LocalCreateFlatSpeedTest.java" rel="nofollow">Source</a>
+        </td>
+        <td>
+          ODatabaseFlat
+        </td>
+        <td>
+          local
+        </td>
+        <td>
+          optimistic tx
+        </td>
+        <td>
+          10.15 seconds
+        </td>
+        <td>
+          98,173
+        </td>
+        <td>
+          0.9.8
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <a href="http://code.google.com/p/orient/source/browse/trunk/tests/src/test/java/com/orientechnologies/orient/test/database/speed/LocalCreateFlatSpeedTest.java" rel="nofollow">Source</a>
+        </td>
+        <td>
+          ODatabaseFlat
+        </td>
+        <td>
+          remote
+        </td>
+        <td>
+          no tx
+        </td>
+        <td>
+          75.82 seconds
+        </td>
+        <td>
+          13,189
+        </td>
+        <td>
+          0.9.8
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <a href="http://code.google.com/p/orient/source/browse/trunk/tests/src/test/java/com/orientechnologies/orient/test/database/speed/LocalCreateFlatSpeedTest.java" rel="nofollow">Source</a>
+        </td>
+        <td>
+          ODatabaseFlat
+        </td>
+        <td>
+          remote
+        </td>
+        <td>
+          optimistic tx <tt>#1</tt>
+        </td>
+        <td>
+          13.23 seconds
+        </td>
+        <td>
+          75,437
+        </td>
+        <td>
+          0.9.8
+        </td>
+      </tr>
+    </table>
+    <p>
+      <tt>#1</tt> Remote connection benefits of optimistic transaction since it compress all the data and send it at the commit in one shot.
+    </p>
+    <h4>
+      <a name="Comparison_between_Database_types" id="Comparison_between_Database_types"></a>Comparison between Database types<a href="#Comparison_between_Database_types" class="section_anchor"></a>
+    </h4>
+    <p>
+      <img src="http://chart.apis.google.com/chart?chxt=x,y&amp;chtt=Time+distribution+of+insertion+for+one+million+of+records&amp;cht=lc&amp;chxt=x,y&amp;chxl=&amp;chs=900x250&amp;chd=t:1209,334,338,364,351,344,340,342,382,566%7C2513,752,737,739,735,794,735,759,748,733%7C3123,1257,1393,1364,1298,1248,1260,1487,1250,1303&amp;chco=FF0000,0000FF,0AE443&amp;chxr=1,0,10,1&amp;chds=0,4000&amp;chxr=1,0,4000,500&amp;chl=100%2C00%7C200%2C000%7C300%2C000%7C400%2C000%7C500%2C000%7C600%2C000%7C700%2C000%7C800%2C000%7C900%2C000%7C1%2C000%2C000&amp;chdl=ODatabaseFlat+local%7CODatabaseDocumentTx+local%7CODatabaseObjectTx+local&amp;chf=bg,s&amp;endPerImage.png">
+    </p>
+    <p></p>
+    <table class="zebra-striped bordered-table">
+      <tr>
+        <td>
+          <strong>Source</strong>
+        </td>
+        <td>
+          <strong>Database type</strong>
+        </td>
+        <td>
+          <strong>Database location</strong>
+        </td>
+        <td>
+          <strong>Total time elapsed</strong> (less is better)
+        </td>
+        <td>
+          <strong>Requests per second</strong> (more is better)
+        </td>
+        <td>
+          <strong>Tested version</strong>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <a href="http://code.google.com/p/orient/source/browse/trunk/tests/src/test/java/com/orientechnologies/orient/test/database/speed/LocalCreateFlatSpeedTest.java" rel="nofollow">Source</a>
+        </td>
+        <td>
+          ODatabaseFlat
+        </td>
+        <td>
+          local
+        </td>
+        <td>
+          4.72 seconds
+        </td>
+        <td>
+          209,248
+        </td>
+        <td>
+          0.9.8
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <a href="http://code.google.com/p/orient/source/browse/trunk/tests/src/test/java/com/orientechnologies/orient/test/database/speed/LocalCreateDocumentSpeedTest.java" rel="nofollow">Source</a>
+        </td>
+        <td>
+          ODatabaseDocumentTx
+        </td>
+        <td>
+          local
+        </td>
+        <td>
+          9.24 seconds
+        </td>
+        <td>
+          107,677
+        </td>
+        <td>
+          0.9.8
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <a href="http://code.google.com/p/orient/source/browse/trunk/tests/src/test/java/com/orientechnologies/orient/test/database/speed/LocalCreateObjectSpeedTest.java" rel="nofollow">Source</a>
+        </td>
+        <td>
+          ODatabaseObjectTx
+        </td>
+        <td>
+          local
+        </td>
+        <td>
+          14.98 seconds
+        </td>
+        <td>
+          66,431
+        </td>
+        <td>
+          0.9.9
+        </td>
+      </tr>
+    </table>
+    <h3>
+      <a name="Massive_insert_of_pairs_key/value"></a>Massive insert of pairs key/value<a href="#Massive_insert_of_pairs_key/value" class="section_anchor"></a>
+    </h3>
+    <p>
+      This test inserts <b>1,000,000</b> (one million) of pairs Key/Value. Consider that inserting pairs require much more effort than inserting records since records are indexed by the key.
+    </p>
+    <p>
+      <img src="http://chart.apis.google.com/chart?cht=lc&amp;chd=s:GFILPTZjt9,HSSQPPNLJI&amp;chs=900x250&amp;chco=ff0000,000099&amp;chf=bg,s,ffffff&amp;chds=0,500&amp;chtt=Time+and+throughput+distribution+of+insertion+for+one+million+of+entries+Key%2FValue&amp;chdl=Elapsed+(less+is+better)%7CThroughput+as+req%2Fsec+(much+is+better)&amp;chl=100%2C00%7C200%2C000%7C300%2C000%7C400%2C000%7C500%2C000%7C600%2C000%7C700%2C000%7C800%2C000%7C900%2C000%7C1%2C000%2C000&amp;endPerImage.png">
+    </p>
+    <p></p>
+    <table class="zebra-striped bordered-table">
+      <tr>
+        <td>
+          <strong>Source</strong>
+        </td>
+        <td>
+          <strong>Database type</strong>
+        </td>
+        <td>
+          <strong>Database location</strong>
+        </td>
+        <td>
+          <strong>Total time elapsed</strong> (less is better)
+        </td>
+        <td>
+          <strong>Requests per second</strong> (more is better)
+        </td>
+        <td>
+          <strong>Tested version</strong>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <a href="http://code.google.com/p/orient/source/browse/trunk/tests/src/test/java/com/orientechnologies/orient/test/database/speed/DictionaryPutSpeedTest.java" rel="nofollow">Source</a>
+        </td>
+        <td>
+          ODatabaseFlat
+        </td>
+        <td>
+          memory
+        </td>
+        <td>
+          16.89 seconds
+        </td>
+        <td>
+          59,017
+        </td>
+        <td>
+          0.9.9
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <a href="http://code.google.com/p/orient/source/browse/trunk/tests/src/test/java/com/orientechnologies/orient/test/database/speed/DictionaryPutSpeedTest.java" rel="nofollow">Source</a>
+        </td>
+        <td>
+          ODatabaseFlat
+        </td>
+        <td>
+          local
+        </td>
+        <td>
+          86.93 seconds
+        </td>
+        <td>
+          11,502
+        </td>
+        <td>
+          0.9.8
+        </td>
+      </tr>
+    </table>
+  </body>
+</html>
