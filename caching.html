@@ -1,0 +1,219 @@
+---
+title: Caching
+layout: default
+---
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<html>
+  <head>
+    <meta name="generator" content="HTML Tidy for Mac OS X (vers 31 October 2006 - Apple Inc. build 15.6), see www.w3.org">
+    <title></title>
+    <style type="text/css">
+li.c1 {list-style: none}
+    </style>
+  </head>
+  <body>
+    <p></p>
+    <ul>
+      <li>
+        <a href="#Introduction">Introduction</a>
+      </li>
+      <li>
+        <a href="#How_cache_works?">How cache works?</a>
+      </li>
+      <li>
+        <a href="#Concurrency">Concurrency</a>
+      </li>
+      <li>
+        <a href="#Manual_control">Manual control</a>
+      </li>
+      <li>
+        <a href="#Record_cache">Record cache</a>
+      </li>
+      <li class="c1">
+        <ul>
+          <li>
+            <a href="#Level_1">Level 1</a>
+          </li>
+          <li>
+            <a href="#Empty_Level-1_cache">Empty Level-1 cache</a>
+          </li>
+          <li>
+            <a href="#Level_2">Level 2</a>
+          </li>
+        </ul>
+      </li>
+    </ul>
+    <h2>
+      <a name="Introduction" id="Introduction"></a>Introduction<a href="#Introduction" class="section_anchor"></a>
+    </h2>
+    <p>
+      OrientDB has several caching mechanisms that act at different levels. Look at this picture:
+    </p>
+    <p>
+      <img src="http://www.orientechnologies.com/images/caching.png">
+    </p>
+    <ul>
+      <li>
+        <strong>Level-1 cache</strong> is one per database instance (and per thread in multi-thread environment)
+      </li>
+      <li>
+        <strong>Level-2 cache</strong> is one per storage. This means that is shared by all database instances
+      </li>
+      <li>
+        <strong><a href="concepts.html#Storage">Storage</a></strong>, depending by the implementation could cache. This is the case for the <i>Local Storage</i> (disk based) that caches file reads to reduce I/O requests
+      </li>
+      <li>
+        <strong>OS File</strong> Operative System caches I/O when using Memory Mapping techniques
+      </li>
+    </ul>
+    <h2>
+      <a name="How_cache_works?"></a>How cache works?<a href="#How_cache_works?" class="section_anchor"></a>
+    </h2>
+    <p>
+      <img src="http://www.orientechnologies.com/images/cache-flow.png">
+    </p>
+    <p>
+      When the client application asks for a record OrientDB checks:
+    </p>
+    <ul>
+      <li>if a <strong>transaction</strong> is begun searches it inside the transaction changed records and returns it if found
+      </li>
+      <li>if the <strong>Level-1</strong> cache is enabled and contains the requested record then return it
+      </li>
+      <li>if the <strong>Level-2</strong> cache is enabled and contains the requested record then move the record inside the Level-1 cache (if enabled) and return it. In this case the record will be inside Level-1 cache until the database is closed when all the not dirty records will be re-moved to the Level-2 cache to be used by other database instances
+      </li>
+      <li>at this point the record is not in cache, then ask it to the <strong>Storage</strong> (disk, memory or remote)
+      </li>
+    </ul>
+    <h2>
+      <a name="Concurrency" id="Concurrency"></a>Concurrency<a href="#Concurrency" class="section_anchor"></a>
+    </h2>
+    <p>
+      In concurrent environment caching could throw problems when you need the freshest version of a record:
+    </p>
+    <ul>
+      <li>if you have only one JVM and one thread Caches can't be unaligned so always leave them on to improve performance
+      </li>
+      <li>if you have only one JVM but multiple threads each thread owns a database instance with its Level-1 cache. Different Level-1 caches could contain different version of the same record. For this reason if you always need the last version of a record you can:
+      </li>
+      <li class="c1">
+        <ul>
+          <li>completely <a href="#Disable_Level-1_cache">Disable Level-1 cache</a>
+          </li>
+          <li>or unpin the record you don't want reside in cache using the <a href="#Manual_control">Manual control</a>
+          </li>
+          <li>or, in Java, reload the record by using the API <tt>record.reload()</tt>
+          </li>
+        </ul>
+      </li>
+      <li>if you have multiple JVMs also Level-2 cache could be unaligned. For this reason if you always need the last version of a record you can:
+      </li>
+      <li class="c1">
+        <ul>
+          <li>completely <a href="#Disable_Level-1_cache">Disable Level-1 cache</a> and <a href="#Disable_Level-2_cache">Disable Level-2 cache</a>
+          </li>
+          <li>or unpin the record you don't want reside in cache using the <a href="#Manual_control">Manual control</a>
+          </li>
+          <li>or, in Java, reload the record by using the API <tt>record.reload()</tt>
+          </li>
+        </ul>
+      </li>
+    </ul>
+    <h2>
+      <a name="Manual_control" id="Manual_control"></a>Manual control<a href="#Manual_control" class="section_anchor"></a>
+    </h2>
+    <p>
+      You can manually control which records are cached. By default all records are cachable but by calling the <tt>ORecord.unpin()</tt> method you avoid the record to be parked in any cache.
+    </p>
+    <h2>
+      <a name="Record_cache" id="Record_cache"></a>Record cache<a href="#Record_cache" class="section_anchor"></a>
+    </h2>
+    <h3>
+      <a name="Level_1" id="Level_1"></a>Level 1<a href="#Level_1" class="section_anchor"></a>
+    </h3>
+    <p>
+      Level-1 cache acts at database level. Each database instance has a Level-1 cache enabled by default. This cache keeps the used records.
+    </p>
+    <h3>
+      <a name="Empty_Level-1_cache" id="Empty_Level-1_cache"></a>Empty Level-1 cache<a href="#Empty_Level-1_cache" class="section_anchor"></a>
+    </h3>
+    <p>
+      To remove all the records in Level-1 cache you can invoke the <tt>invalidate()</tt> method:
+    </p>
+    <pre class="prettyprint">
+db.getLevel1Cache().invalidate();
+</pre>
+    <h4>
+      <a name="Disable_Level-1_cache" id="Disable_Level-1_cache"></a>Disable Level-1 cache<a href="#Disable_Level-1_cache" class="section_anchor"></a>
+    </h4>
+    <p>
+      To disable it use the system property <tt>cache.level1.enabled</tt> by setting it at startup:
+    </p>
+    <pre class="prettyprint">
+java ... -Dcache.level1.enabled=false ...
+</pre>
+    <p>
+      or via code before to open the database:
+    </p>
+    <pre class="prettyprint">
+OGlobalConfiguration.CACHE_LEVEL1_ENABLED.setValue(false);
+</pre>
+    <h4>
+      <a name="Change_size" id="Change_size"></a>Change size<a href="#Change_size" class="section_anchor"></a>
+    </h4>
+    <p>
+      Level-1 cache size is in terms of record entries. Default size is set to -1 that means no limit, but when the free Memory Heap is low then cache entries are freed automatically.
+    </p>
+    <p>
+      To change the default size use the system property <tt>cache.level1.size</tt> by setting it at startup:
+    </p>
+    <pre class="prettyprint">
+java ... -Dcache.level1.size=100 ...
+</pre>
+    <p>
+      or via code before to open the database:
+    </p>
+    <pre class="prettyprint">
+OGlobalConfiguration.CACHE_LEVEL1_SIZE.setValue(100);
+</pre>
+    <h3>
+      <a name="Level_2" id="Level_2"></a>Level 2<a href="#Level_2" class="section_anchor"></a>
+    </h3>
+    <p>
+      Level-2 cache acts at storage level and it's shared by all the database instances. Level-2 cache is enabled by default. This cache keeps the used records of all the database instances.
+    </p>
+    <h4>
+      <a name="Disable_Level-2_cache" id="Disable_Level-2_cache"></a>Disable Level-2 cache<a href="#Disable_Level-2_cache" class="section_anchor"></a>
+    </h4>
+    <p>
+      To disable it use the system property <tt>cache.level2.enabled</tt> by setting it at startup:
+    </p>
+    <pre class="prettyprint">
+java ... -Dcache.level2.enabled=false ...
+</pre>
+    <p>
+      or via code before to open the database:
+    </p>
+    <pre class="prettyprint">
+OGlobalConfiguration.CACHE_LEVEL2_ENABLED.setValue(false);
+</pre>
+    <h4>
+      <a name="Change_size" id="Change_size"></a>Change size<a href="#Change_size" class="section_anchor"></a>
+    </h4>
+    <p>
+      Level-2 cache size is in terms of record entries. Default size is set to -1 that means no limit, but when the free Memory Heap is low then cache entries are freed automatically.
+    </p>
+    <p>
+      To change the default size use the system property <tt>cache.level2.size</tt> by setting it at startup:
+    </p>
+    <pre class="prettyprint">
+java ... -Dcache.level2.size=100 ...
+</pre>
+    <p>
+      or via code before to open the database:
+    </p>
+    <pre class="prettyprint">
+OGlobalConfiguration.CACHE_LEVEL2_SIZE.setValue(100);
+</pre>
+  </body>
+</html>

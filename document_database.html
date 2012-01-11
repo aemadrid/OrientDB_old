@@ -344,8 +344,12 @@ List&lt;ODocument&gt; result = db.query(
       Prepared query are quite similar to the Prepared Statement of JDBC. Prepared queries are pre-parsed so on multiple execution of the same query are faster than classic SQL queries. Furthermore the pre-parsing doesn't allow SQL Injection.
     </p>
     <p>
-      Prepared query uses two kinds of markers to substitute parameters on execution: <strong><tt>?</tt>, as positional parameter</strong> <tt>:&lt;par&gt;</tt>, named parameter
+      Prepared query uses two kinds of markers to substitute parameters on execution:
     </p>
+    <pre class="prettyprint">
+? is positional parameter
+:&lt;par&gt; is named parameter
+</pre>
     <p>
       Example of positional parameters:
     </p>
@@ -357,7 +361,8 @@ List&lt;ODocument&gt; result = database.command(query).execute("Barack", "Obama"
       Example of named parameters:
     </p>
     <pre class="prettyprint">
-OSQLSynchQuery&lt;ODocument&gt; query = new OSQLSynchQuery&lt;ODocument&gt;("select from Profile where name = :name and surname = :surname");
+OSQLSynchQuery&lt;ODocument&gt; query = new OSQLSynchQuery&lt;ODocument&gt;("select from Profile where name = :name and 
+  surname = :surname");
 Map&lt;String,Object&gt; params = new HashMap&lt;String,Object&gt;();
 params.put("name", "Barack");
 params.put("surname", "Obama");
