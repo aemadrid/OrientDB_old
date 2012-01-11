@@ -15,6 +15,7 @@ class Page
 
   SITE = 'http://code.google.com' unless const_defined?(:SITE)
   MARK = '/p/orient/wiki/' unless const_defined?(:MARK)
+  SITEMARK = SITE + MARK unless const_defined?(:SITEMARK)
   ROOT_URL = "#{SITE}#{MARK}Main?tm=6" unless const_defined?(:ROOT_URL)
   CONTENT_ID = 'wikimaincol' unless const_defined?(:CONTENT_ID)
   TIDY_OPTIONS = {
@@ -102,10 +103,15 @@ class Page
     found = doc.css 'a'
     log "[#{name} : find_links] Found #{found.size} links ..."
     found.each_with_index do |link, idx|
-      href, title = link['href'], link.text
+      href, title = link['href'], link.content
+      if title && title.starts_with?(SITEMARK)
+        title.gsub! /^#{SITEMARK}/, ''
+        link.content = title.dup
+      end
       log " [#{name} : find_links : #{idx + 1}/#{found.size} : #{href} ] ".center(120, '-')
       if href
-        if href.starts_with? MARK
+        href.gsub!(/^#{SITE}/, '') if href.starts_with?(SITEMARK)
+        if href.starts_with?(MARK)
           log "[#{name} : find_links : link [#{link['href']}] (1) ..."
           log "[#{name} : find_links : #{idx + 1}/#{found.size}] Adding [#{href}] ..."
           links[href]      = title

@@ -171,7 +171,7 @@ edge.save();
   <a name="Manage_labels" id="Manage_labels"></a>Manage labels<a href="#Manage_labels" class="section_anchor"></a>
 </h3>
 <p>
-  <a href="http://code.google.com/p/orient/wiki/GraphDatabaseTinkerpop" rel="nofollow">TinkerPop Blueprints</a> model supports the concept of "label". You can label vertexes and edges. In OrientDB a label is just a field as any others. To create an edge with a label you can use:
+  <a href="graph_database_tinkerpop.html" rel="nofollow">TinkerPop Blueprints</a> model supports the concept of "label". You can label vertexes and edges. In OrientDB a label is just a field as any others. To create an edge with a label you can use:
 </p>
 <pre class="prettyprint">
 database.createEdge( vertex1, vertex2 ).field( "label", "ciao" );
@@ -264,7 +264,7 @@ SELECT FROM &lt;target&gt; WHERE &lt;field&gt; TRAVERSE[(&lt;minDeep&gt; [,&lt;m
     <strong>fields</strong>, optionally tells the field list to traverse. Default is any()
   </li>
   <li>
-    <strong>conditions</strong> are the conditions to check for any traversed vertex. To know more about the query syntax see <a href="http://code.google.com/p/orient/wiki/SQLWhere" rel="nofollow">SQL syntax</a>
+    <strong>conditions</strong> are the conditions to check for any traversed vertex. To know more about the query syntax see <a href="sql_where.html" rel="nofollow">SQL syntax</a>
   </li>
 </ul>
 <h4>
