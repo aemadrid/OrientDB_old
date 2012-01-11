@@ -125,22 +125,23 @@ class Page
   def clean_html
     # first empty/ul tags
     do_end = false
-    cnt = 0
+    cnt    = 0
+    ptr    = 0
+    rtnd   = []
     until do_end
       cnt += 1
-      tag = doc.children[0]
+      tag = doc.children[ptr]
       case tag.name
         when "text", "p"
-          if tag.text.strip.empty?
+          if tag.children.size == 0 && tag.text.strip.empty?
             tag.remove
             log "[#{name} : clean_html] (#{cnt}) #{tag.name.upcase} : removed : #{tag.to_html}"
+          elsif tag.children.size == 1 && tag.children[0].name == "img"
+            rtnd << tag.remove
+            log "[#{name} : clean_html] (#{cnt}) #{tag.name.upcase} : removed for later : #{tag.to_html}"
           else
-            if tag.children.size == 1 && tag.children.first.name == "img"
-              log "[#{name} : clean_html] (#{cnt}) #{tag.name.upcase} : not empty but logo : #{tag.to_html}"
-            else
-              log "[#{name} : clean_html] (#{cnt}) #{tag.name.upcase} : not empty : #{tag.to_html}"
-              do_end = true
-            end
+            log "[#{name} : clean_html] (#{cnt}) #{tag.name.upcase} : not empty : #{tag.to_html}"
+            do_end = true
           end
         when "ul"
           tag.remove
@@ -151,6 +152,7 @@ class Page
           do_end = true
       end
     end
+    doc.children.before rtnd.pop until rtnd.empty?
     # h5, h4, h3, h2, h1
     [5, 4, 3, 2, 1].each do |nr|
       nodes = doc.css "h#{nr}"
