@@ -2,94 +2,55 @@
 title: Schema APIs
 layout: default
 ---
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN">
-<html>
-  <head>
-    <meta name="generator" content="HTML Tidy for Mac OS X (vers 31 October 2006 - Apple Inc. build 15.6), see www.w3.org">
-    <title></title>
-    <style type="text/css">
-li.c1 {list-style: none}
-    </style>
-  </head>
-  <body>
-    <p></p>
-    <ul>
-      <li>
-        <a href="#Java_Schema_APIs">Java Schema APIs</a>
-      </li>
-      <li class="c1">
-        <ul>
-          <li>
-            <a href="#Create_a_new_class">Create a new class</a>
-          </li>
-          <li class="c1">
-            <ul>
-              <li>
-                <a href="#Using_a_physical_cluster">Using a physical cluster</a>
-              </li>
-            </ul>
-          </li>
-          <li>
-            <a href="#Create_a_property">Create a property</a>
-          </li>
-          <li>
-            <a href="#Full_example">Full example</a>
-          </li>
-          <li>
-            <a href="#Define_relationships">Define relationships</a>
-          </li>
-        </ul>
-      </li>
-    </ul>
-    <h2>
-      <a name="Java_Schema_APIs" id="Java_Schema_APIs"></a>Java Schema APIs<a href="#Java_Schema_APIs" class="section_anchor"></a>
-    </h2>
-    <p>
-      You must be using a database (see <a href="java_api.html#Database_types">Database types</a>) that supports schemas to use the Schema API.
-    </p>
-    <p>
-      To begin, you'll need the Schema instance of the database you're using:
-    </p>
-    <pre class="prettyprint">
+<h2>
+  <a name="Java_Schema_APIs" id="Java_Schema_APIs"></a>Java Schema APIs<a href="#Java_Schema_APIs" class="section_anchor"></a>
+</h2>
+<p>
+  You must be using a database (see <a href="java_api.html#Database_types">Database types</a>) that supports schemas to use the Schema API.
+</p>
+<p>
+  To begin, you'll need the Schema instance of the database you're using:
+</p>
+<pre class="prettyprint">
 OSchema schema = database.getMetadata().getSchema();
 </pre>
-    <p>
-      Remember to save the schema instance once you've finished making changes:
-    </p>
-    <pre class="prettyprint">
+<p>
+  Remember to save the schema instance once you've finished making changes:
+</p>
+<pre class="prettyprint">
 db.getMetadata().getSchema().save();
 </pre>
-    <h3>
-      <a name="Create_a_new_class" id="Create_a_new_class"></a>Create a new class<a href="#Create_a_new_class" class="section_anchor"></a>
-    </h3>
-    <p>
-      The method <tt>createClass(name)</tt> creates a new class using a <a href="concepts.html#Logical_Cluster">logical cluster</a>. Example:
-    </p>
-    <pre class="prettyprint">
+<h3>
+  <a name="Create_a_new_class" id="Create_a_new_class"></a>Create a new class<a href="#Create_a_new_class" class="section_anchor"></a>
+</h3>
+<p>
+  The method <tt>createClass(name)</tt> creates a new class using a <a href="concepts.html#Logical_Cluster">logical cluster</a>. Example:
+</p>
+<pre class="prettyprint">
 OClass person = database.getMetadata().getSchema().createClass("AnimalType");
 </pre>
-    <h4>
-      <a name="Using_a_physical_cluster" id="Using_a_physical_cluster"></a>Using a physical cluster<a href="#Using_a_physical_cluster" class="section_anchor"></a>
-    </h4>
-    <p>
-      To create a new class using a <a href="concepts.html#Physical_Cluster">physical cluster</a> use the method <tt>createClass(name, cluster)</tt> instead. Example:
-    </p>
-    <pre class="prettyprint">
+<h4>
+  <a name="Using_a_physical_cluster" id="Using_a_physical_cluster"></a>Using a physical cluster<a href="#Using_a_physical_cluster" class="section_anchor"></a>
+</h4>
+<p>
+  To create a new class using a <a href="concepts.html#Physical_Cluster">physical cluster</a> use the method <tt>createClass(name, cluster)</tt> instead. Example:
+</p>
+<pre class="prettyprint">
 OClass person = database.getMetadata().getSchema().createClass("Person", database.getStorage().addCluster("person"));
 </pre>
-    <h3>
-      <a name="Create_a_property" id="Create_a_property"></a>Create a property<a href="#Create_a_property" class="section_anchor"></a>
-    </h3>
-    <p>
-      Each class can have zero or more properties. To create a property use the <tt>OClass.createProperty(name, type)</tt>. Example:
-    </p>
-    <pre class="prettyprint">
+<h3>
+  <a name="Create_a_property" id="Create_a_property"></a>Create a property<a href="#Create_a_property" class="section_anchor"></a>
+</h3>
+<p>
+  Each class can have zero or more properties. To create a property use the <tt>OClass.createProperty(name, type)</tt>. Example:
+</p>
+<pre class="prettyprint">
 person.createProperty("name", OType.STRING).setMandatory(true);
 </pre>
-    <h3>
-      <a name="Full_example" id="Full_example"></a>Full example<a href="#Full_example" class="section_anchor"></a>
-    </h3>
-    <pre class="prettyprint">
+<h3>
+  <a name="Full_example" id="Full_example"></a>Full example<a href="#Full_example" class="section_anchor"></a>
+</h3>
+<pre class="prettyprint">
 OClass animal = db.getMetadata().getSchema().createClass("Animal", database.getStorage().addCluster("animal"));
 animal.createProperty("id", OType.INTEGER).setMandatory(true);
 animal.createProperty("name", OType.STRING).setMin("3").setMax("30");
@@ -100,13 +61,13 @@ animal.createProperty("price", OType.FLOAT).setMin("0");
 
 db.getMetadata().getSchema().save();
 </pre>
-    <h3>
-      <a name="Define_relationships" id="Define_relationships"></a>Define relationships<a href="#Define_relationships" class="section_anchor"></a>
-    </h3>
-    <p>
-      Example of a relationship 1-N between the class Order and OrderItem:
-    </p>
-    <pre class="prettyprint">
+<h3>
+  <a name="Define_relationships" id="Define_relationships"></a>Define relationships<a href="#Define_relationships" class="section_anchor"></a>
+</h3>
+<p>
+  Example of a relationship 1-N between the class Order and OrderItem:
+</p>
+<pre class="prettyprint">
 OClass orderItem = db.getMetadata().getSchema().createClass("OrderItem");
 orderItem.createProperty("id", OType.INTEGER);
 orderItem.createProperty("animal", OType.LINK, animal);
@@ -122,5 +83,3 @@ order.createProperty("totalPrice", OType.FLOAT);
 
 db.getMetadata().getSchema().save();
 </pre>
-  </body>
-</html>

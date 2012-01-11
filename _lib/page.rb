@@ -27,7 +27,8 @@ class Page
     :indent             => 1,
     :wrap               => 0,
     :drop_empty_paras   => 0,
-    :literal_attributes => 1
+    :literal_attributes => 1,
+    :show_body_only     => 1
   } unless const_defined?(:TIDY_OPTIONS)
 
   def initialize(name, original_url, title = nil)
@@ -122,6 +123,34 @@ class Page
   end
 
   def clean_html
+    # first empty/ul tags
+    do_end = false
+    cnt = 0
+    until do_end
+      cnt += 1
+      tag = doc.children[0]
+      case tag.name
+        when "text", "p"
+          if tag.text.strip.empty?
+            tag.remove
+            log "[#{name} : clean_html] (#{cnt}) #{tag.name.upcase} : removed : #{tag.to_html}"
+          else
+            if tag.children.size == 1 && tag.children.first.name == "img"
+              log "[#{name} : clean_html] (#{cnt}) #{tag.name.upcase} : not empty but logo : #{tag.to_html}"
+            else
+              log "[#{name} : clean_html] (#{cnt}) #{tag.name.upcase} : not empty : #{tag.to_html}"
+              do_end = true
+            end
+          end
+        when "ul"
+          tag.remove
+          log "[#{name} : clean_html] (#{cnt}) #{tag.name.upcase} : removed : #{tag.to_html}"
+          do_end = true
+        else
+          log "[#{name} : clean_html] (#{cnt}) #{tag.name.upcase} : unrecognized, finishing ..."
+          do_end = true
+      end
+    end
     # h5, h4, h3, h2, h1
     [5, 4, 3, 2, 1].each do |nr|
       nodes = doc.css "h#{nr}"
@@ -189,7 +218,7 @@ class Page
         end
       end
     end
-    log "[#{name} : breadcrumbs] (final:#{@breadcrumbs.size}) #{@breadcrumbs.empty? ? 'N/A' : @breadcrumbs.map{|k,_| k}.join(" / ")} ..."
+    log "[#{name} : breadcrumbs] (final:#{@breadcrumbs.size}) #{@breadcrumbs.empty? ? 'N/A' : @breadcrumbs.map { |k, _| k }.join(" / ")} ..."
     @breadcrumbs
   end
 
@@ -215,7 +244,13 @@ class Page
         f.puts "bc_#{idx + 1}_title: #{title}"
       end
       f.puts "---"
-      f.puts TidyFFI::Tidy.new(doc.to_html, TIDY_OPTIONS).clean
+      code_html = doc.to_html.to_s
+      log "[#{name} : save_generated] code_html : #{code_html.size} ..."
+      cleaned_html = TidyFFI::Tidy.new(code_html, Page::TIDY_OPTIONS).clean.to_s
+      log "[#{name} : save_generated] cleaned_html : #{cleaned_html.size} ..."
+      final_html = cleaned_html.size > 0 ? cleaned_html : code_html
+      log "[#{name} : save_generated] final_html : #{final_html.size} ..."
+      f.puts final_html
     end
   end
 
@@ -224,13 +259,22 @@ class Page
   end
 
   class << self
+
+    def cmd(str)
+      puts "[CMD] #{str}\n#{`#{str}`}"
+    end
+
+    def clear
+      all.clear
+      cmd "rm -rf _generated/*.html"
+    end
+
     def migrate(do_all = true)
+      time = Time.now
       log "*" * 120
       log " [ MIGRATING ] ".center(120, "*")
       log "*" * 120
-      all.clear
-      cmd = "rm -rf _generated/*.html"
-      puts "[CMD] #{cmd}\n#{`#{cmd}`}"
+      clear
       add ROOT_URL, "Main"
       if do_all
         log " [ PROCESSING ALL ] ".center(120, "*")
@@ -243,13 +287,12 @@ class Page
         log " [ SAVING ALL ] ".center(120, "*")
         all.each { |_, page| page.save }
         log " [ MOVING ALL ] ".center(120, "*")
-        cmd = "mv _generated/*.html ."
-        puts "[CMD] #{cmd}\n#{`#{cmd}`}"
+        cmd "mv _generated/*.html ."
         log " [ JEKYLL ] ".center(120, "*")
-        cmd = "jekyll"
-        puts "[CMD] #{cmd}\n#{`#{cmd}`}"
+        cmd "jekyll"
       end
-      log " [ THE END ] ".center(120, "*")
+      time = (Time.now - time).to_i
+      log " [ THE END : #{'%i seconds' % time} ] ".center(120, "*")
       self[:main]
     end
 

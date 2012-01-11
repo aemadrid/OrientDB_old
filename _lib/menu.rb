@@ -12,6 +12,7 @@ class Menu
         "graph_database_raw"                => "graph_database",
         "graph_database_native"             => "graph_database",
         "graph_database_tinkerpop"          => "graph_database",
+        "graph_ed_tutorial"                 => "graph_database",
         "java_web_apps"                     => "java_api",
         "server_management_java"            => "java_api",
         "java_multi_threading"              => "java_api",

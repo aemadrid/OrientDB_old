@@ -4,100 +4,91 @@ layout: default
 bc_1_name: sql
 bc_1_title: SQL
 ---
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN">
-<html>
-  <head>
-    <meta name="generator" content="HTML Tidy for Mac OS X (vers 31 October 2006 - Apple Inc. build 15.6), see www.w3.org">
-    <title></title>
-  </head>
-  <body>
-    <p>
-      Creates a new index. To create an automatic index bound to a schema property use section "<strong>ON</strong>" of create index command or use as name the &lt;<strong>class.property</strong>&gt; notation. But assure to have created the schema for it before the index. See the example below.
-    </p>
-    <p>
-      Indexes can be:
-    </p>
-    <ul>
-      <li>
-        <strong>UNIQUE</strong>, doesn't allow duplicated
-      </li>
-      <li>
-        <strong>NOTUNIQUE</strong>, allows duplicates
-      </li>
-      <li>
-        <strong>FULLTEXT</strong>, by indexing any single word of the text. It's used in query with the operator <a href="sql_where.html#Operators">CONTAINSTEXT</a>
-      </li>
-    </ul>
-    <h3>
-      <a name="Syntax" id="Syntax"></a>Syntax<a href="#Syntax" class="section_anchor"></a>
-    </h3>
-    <pre class="prettyprint">
+<p>
+  Creates a new index. To create an automatic index bound to a schema property use section "<strong>ON</strong>" of create index command or use as name the &lt;<strong>class.property</strong>&gt; notation. But assure to have created the schema for it before the index. See the example below.
+</p>
+<p>
+  Indexes can be:
+</p>
+<ul>
+  <li>
+    <strong>UNIQUE</strong>, doesn't allow duplicated
+  </li>
+  <li>
+    <strong>NOTUNIQUE</strong>, allows duplicates
+  </li>
+  <li>
+    <strong>FULLTEXT</strong>, by indexing any single word of the text. It's used in query with the operator <a href="sql_where.html#Operators">CONTAINSTEXT</a>
+  </li>
+</ul>
+<h3>
+  <a name="Syntax" id="Syntax"></a>Syntax<a href="#Syntax" class="section_anchor"></a>
+</h3>
+<pre class="prettyprint">
 CREATE INDEX &lt;name&gt; [ON &lt;class-name&gt; (prop-names)] &lt;type&gt; [&lt;key-type&gt;]
 </pre>
-    <p>
-      Where:
-    </p>
-    <ul>
-      <li>
-        <strong>name</strong> logical name of index. Can be <strong><tt>&lt;class&gt;.&lt;property&gt;</tt></strong> to create an automatic index bound to a schema property. In this case <strong>class</strong> is the class of the schema and <strong>property</strong>, is the property created into the class. Notice that in another case index name can't contain '.' symbol
-      </li>
-      <li>
-        <strong>class-name</strong> name of class that automatic index created for. Class with such name must already exist in database
-      </li>
-      <li>
-        <strong>prop-names</strong> comma-separated list of properties that this automatic index is created for. Property with such name must already exist in schema. If property belongs to one of the Map types (LINKMAP, EMBEDDEDMAP) you can specify will be keys or values used for index generation. Use "by key" or "by value" expressions for that, if nothing will be specified keys will be used during index creation.
-      </li>
-      <li>
-        <strong>type</strong>, between 'unique', 'notunique' and 'fulltext'
-      </li>
-      <li>
-        <strong>key-type</strong>, is the type of key (Optional). On automatic indexes is auto-determined by reading the target schema property where the index is created. If not specified for manual indexes, at run-time during the first insertion the type will be auto determined by reading the type of the class. In case of creation composite index it is a comma separated list of types.
-      </li>
-    </ul>
-    <p>
-      If "<strong>ON</strong>" and <strong>key-type</strong> sections both exist database validate types of specified properties. And if types of properties not equals to types specified in <strong>key-type</strong> list, exception will be thrown.
-    </p>
-    <p>
-      List of key types can be used for creation manual composite indexes, but such indexes don't have fully support yet.
-    </p>
-    <h3>
-      <a name="Examples" id="Examples"></a>Examples<a href="#Examples" class="section_anchor"></a>
-    </h3>
-    <p>
-      Examples of non-automatic index to store dates manually:
-    </p>
-    <pre class="prettyprint">
+<p>
+  Where:
+</p>
+<ul>
+  <li>
+    <strong>name</strong> logical name of index. Can be <strong><tt>&lt;class&gt;.&lt;property&gt;</tt></strong> to create an automatic index bound to a schema property. In this case <strong>class</strong> is the class of the schema and <strong>property</strong>, is the property created into the class. Notice that in another case index name can't contain '.' symbol
+  </li>
+  <li>
+    <strong>class-name</strong> name of class that automatic index created for. Class with such name must already exist in database
+  </li>
+  <li>
+    <strong>prop-names</strong> comma-separated list of properties that this automatic index is created for. Property with such name must already exist in schema. If property belongs to one of the Map types (LINKMAP, EMBEDDEDMAP) you can specify will be keys or values used for index generation. Use "by key" or "by value" expressions for that, if nothing will be specified keys will be used during index creation.
+  </li>
+  <li>
+    <strong>type</strong>, between 'unique', 'notunique' and 'fulltext'
+  </li>
+  <li>
+    <strong>key-type</strong>, is the type of key (Optional). On automatic indexes is auto-determined by reading the target schema property where the index is created. If not specified for manual indexes, at run-time during the first insertion the type will be auto determined by reading the type of the class. In case of creation composite index it is a comma separated list of types.
+  </li>
+</ul>
+<p>
+  If "<strong>ON</strong>" and <strong>key-type</strong> sections both exist database validate types of specified properties. And if types of properties not equals to types specified in <strong>key-type</strong> list, exception will be thrown.
+</p>
+<p>
+  List of key types can be used for creation manual composite indexes, but such indexes don't have fully support yet.
+</p>
+<h3>
+  <a name="Examples" id="Examples"></a>Examples<a href="#Examples" class="section_anchor"></a>
+</h3>
+<p>
+  Examples of non-automatic index to store dates manually:
+</p>
+<pre class="prettyprint">
 CREATE INDEX mostRecentRecords unique date
 </pre>
-    <p>
-      Examples of automatic index bound to the property "id" of class "User":
-    </p>
-    <pre class="prettyprint">
+<p>
+  Examples of automatic index bound to the property "id" of class "User":
+</p>
+<pre class="prettyprint">
 CREATE PROPERTY User.id STRING
 CREATE INDEX User.id UNIQUE
 </pre>
-    <p>
-      Examples of index for "thumbs" property of class "Movie".
-    </p>
-    <pre class="prettyprint">
+<p>
+  Examples of index for "thumbs" property of class "Movie".
+</p>
+<pre class="prettyprint">
 CREATE INDEX thumbsAuthor ON Movie (thumbs) unique;
 CREATE INDEX thumbsAuthor ON Movie (thumbs by key) unique; 
 CREATE INDEX thumbsValue ON Movie (thumbs by value) unique; 
 </pre>
-    <p>
-      Composite index example:
-    </p>
-    <pre class="prettyprint">
+<p>
+  Composite index example:
+</p>
+<pre class="prettyprint">
 CREATE PROPERTY Book.author STRING
 CREATE PROPERTY Book.title STRING
 CREATE PROPERTY Book.publicationYear INTEGER
 CREATE INDEX books ON Book (author, title, publicationYear) UNIQUE
 </pre>
-    <p>
-      For complete index guide look at <a href="indexes.html">Index guide</a>.
-    </p>
-    <p>
-      To know more about other SQL commands look at <a href="sql.html">SQL commands</a>.
-    </p>
-  </body>
-</html>
+<p>
+  For complete index guide look at <a href="indexes.html">Index guide</a>.
+</p>
+<p>
+  To know more about other SQL commands look at <a href="sql.html">SQL commands</a>.
+</p>

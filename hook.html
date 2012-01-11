@@ -4,23 +4,16 @@ layout: default
 bc_1_name: java_api
 bc_1_title: Java APIs
 ---
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN">
-<html>
-  <head>
-    <meta name="generator" content="HTML Tidy for Mac OS X (vers 31 October 2006 - Apple Inc. build 15.6), see www.w3.org">
-    <title></title>
-  </head>
-  <body>
-    <h2>
-      <a name="Introduction" id="Introduction"></a>Introduction<a href="#Introduction" class="section_anchor"></a>
-    </h2>
-    <p>
-      Starting from v. 0.9.16 OrientDB supports <strong>hooks</strong>. Hook works like a trigger. Hook lets to the user application to intercept internal events.
-    </p>
-    <p>
-      A hook is an implementation of the interface <a href="http://code.google.com/p/orient/source/browse/trunk/core/src/main/java/com/orientechnologies/orient/core/hook/ORecordHook.java" rel="nofollow">ORecordHook</a>:
-    </p>
-    <pre class="prettyprint">
+<h2>
+  <a name="Introduction" id="Introduction"></a>Introduction<a href="#Introduction" class="section_anchor"></a>
+</h2>
+<p>
+  Starting from v. 0.9.16 OrientDB supports <strong>hooks</strong>. Hook works like a trigger. Hook lets to the user application to intercept internal events.
+</p>
+<p>
+  A hook is an implementation of the interface <a href="http://code.google.com/p/orient/source/browse/trunk/core/src/main/java/com/orientechnologies/orient/core/hook/ORecordHook.java" rel="nofollow">ORecordHook</a>:
+</p>
+<pre class="prettyprint">
 public interface ORecordHook {
   public enum TYPE {
     ANY,
@@ -31,10 +24,10 @@ public interface ORecordHook {
   public void onTrigger(TYPE iType, ORecord&lt;?&gt; iRecord);
 }
 </pre>
-    <p>
-      OrientDB comes with an abstract implementation of the <a href="http://code.google.com/p/orient/source/browse/trunk/core/src/main/java/com/orientechnologies/orient/core/hook/ORecordHook.java" rel="nofollow">ORecordHook</a> interface called <a href="http://code.google.com/p/orient/source/browse/trunk/core/src/main/java/com/orientechnologies/orient/core/hook/ORecordHookAbstract.java" rel="nofollow">ORecordHookAbstract.java</a>. It switches the callback event calling seperate methods for each one:
-    </p>
-    <pre class="prettyprint">
+<p>
+  OrientDB comes with an abstract implementation of the <a href="http://code.google.com/p/orient/source/browse/trunk/core/src/main/java/com/orientechnologies/orient/core/hook/ORecordHook.java" rel="nofollow">ORecordHook</a> interface called <a href="http://code.google.com/p/orient/source/browse/trunk/core/src/main/java/com/orientechnologies/orient/core/hook/ORecordHookAbstract.java" rel="nofollow">ORecordHookAbstract.java</a>. It switches the callback event calling seperate methods for each one:
+</p>
+<pre class="prettyprint">
 public abstract class ORecordHookAbstract implements ORecordHook {
   public void onRecordBeforeCreate(ORecord&lt;?&gt; iRecord){}
   public void onRecordAfterCreate(ORecord&lt;?&gt; iRecord){}
@@ -46,10 +39,10 @@ public abstract class ORecordHookAbstract implements ORecordHook {
   public void onRecordAfterDelete(ORecord&lt;?&gt; iRecord){}
   ...
 </pre>
-    <p>
-      In this example the events "<i>before-create</i>" and "<i>after-create</i>" are called when the last line is executed.
-    </p>
-    <pre class="prettyprint">
+<p>
+  In this example the events "<i>before-create</i>" and "<i>after-create</i>" are called when the last line is executed.
+</p>
+<pre class="prettyprint">
 public class HookTest extends ORecordHookAbstract {
   public saveProfile(){
     ODatabaseObjectTx database = new ODatabaseObjectTx("remote:localhost/demo");
@@ -70,8 +63,6 @@ public class HookTest extends ORecordHookAbstract {
   }
 }  
 </pre>
-    <p>
-      For more information take a look to the <a href="http://code.google.com/p/orient/source/browse/trunk/tests/src/test/java/com/orientechnologies/orient/test/database/auto/HookTest.java" rel="nofollow">HookTest.java</a> source code.
-    </p>
-  </body>
-</html>
+<p>
+  For more information take a look to the <a href="http://code.google.com/p/orient/source/browse/trunk/tests/src/test/java/com/orientechnologies/orient/test/database/auto/HookTest.java" rel="nofollow">HookTest.java</a> source code.
+</p>

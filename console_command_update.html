@@ -4,86 +4,77 @@ layout: default
 bc_1_name: console_commands
 bc_1_title: Console
 ---
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN">
-<html>
-  <head>
-    <meta name="generator" content="HTML Tidy for Mac OS X (vers 31 October 2006 - Apple Inc. build 15.6), see www.w3.org">
-    <title></title>
-  </head>
-  <body>
-    <p>
-      Update one or more records in the current database. Remember that Orient can work also in schema-less mode, so you can create any field on the fly.
-    </p>
-    <h3>
-      <a name="Syntax" id="Syntax"></a>Syntax<a href="#Syntax" class="section_anchor"></a>
-    </h3>
-    <p>
-      <tt>update &lt;class|cluster:&lt;cluster&gt;&gt; set [[,] &lt;field-name&gt; = &lt;field-value&gt;]* [where &lt;conditions&gt;]</tt>
-    </p>
-    <p>
-      For COLLECTIONS:
-    </p>
-    <p>
-      <tt>update &lt;class|cluster:&lt;cluster&gt;&gt; [add|remove] [[,] &lt;field-name&gt; = &lt;field-value&gt;]* [where &lt;conditions&gt;]</tt>
-    </p>
-    <p>
-      For MAPS:
-    </p>
-    <p>
-      <tt>update &lt;class|cluster:&lt;cluster&gt;&gt; [put|remove] [[,] &lt;field-name&gt; = &lt;map-key&gt; [,&lt;map-value&gt;]]* [where &lt;conditions&gt;]</tt>
-    </p>
-    <p>
-      Note that <a href="concepts.html#RecordID">Concepts#RecordID</a> must be prefixed with '#'. Example: #12:3.
-    </p>
-    <p>
-      To learn more about conditions look at <a href="sql_where.html">WHERE conditions</a>.
-    </p>
-    <h3>
-      <a name="Examples" id="Examples"></a>Examples<a href="#Examples" class="section_anchor"></a>
-    </h3>
-    <h4>
-      <a name="Example_1:_change_the_value_of_a_field" id="Example_1:_change_the_value_of_a_field"></a>Example 1: change the value of a field<a href="#Example_1:_change_the_value_of_a_field" class="section_anchor"></a>
-    </h4>
-    <pre class="prettyprint">
+<p>
+  Update one or more records in the current database. Remember that Orient can work also in schema-less mode, so you can create any field on the fly.
+</p>
+<h3>
+  <a name="Syntax" id="Syntax"></a>Syntax<a href="#Syntax" class="section_anchor"></a>
+</h3>
+<p>
+  <tt>update &lt;class|cluster:&lt;cluster&gt;&gt; set [[,] &lt;field-name&gt; = &lt;field-value&gt;]* [where &lt;conditions&gt;]</tt>
+</p>
+<p>
+  For COLLECTIONS:
+</p>
+<p>
+  <tt>update &lt;class|cluster:&lt;cluster&gt;&gt; [add|remove] [[,] &lt;field-name&gt; = &lt;field-value&gt;]* [where &lt;conditions&gt;]</tt>
+</p>
+<p>
+  For MAPS:
+</p>
+<p>
+  <tt>update &lt;class|cluster:&lt;cluster&gt;&gt; [put|remove] [[,] &lt;field-name&gt; = &lt;map-key&gt; [,&lt;map-value&gt;]]* [where &lt;conditions&gt;]</tt>
+</p>
+<p>
+  Note that <a href="concepts.html#RecordID">Concepts#RecordID</a> must be prefixed with '#'. Example: #12:3.
+</p>
+<p>
+  To learn more about conditions look at <a href="sql_where.html">WHERE conditions</a>.
+</p>
+<h3>
+  <a name="Examples" id="Examples"></a>Examples<a href="#Examples" class="section_anchor"></a>
+</h3>
+<h4>
+  <a name="Example_1:_change_the_value_of_a_field" id="Example_1:_change_the_value_of_a_field"></a>Example 1: change the value of a field<a href="#Example_1:_change_the_value_of_a_field" class="section_anchor"></a>
+</h4>
+<pre class="prettyprint">
 &gt; update Profile set nick = 'Luca' where nick is null
 
 Updated 2 record(s) in 0,008000 sec(s).
 </pre>
-    <h4>
-      <a name="Example_2:_remove_a_field_from_all_the_records" id="Example_2:_remove_a_field_from_all_the_records"></a>Example 2: remove a field from all the records<a href="#Example_2:_remove_a_field_from_all_the_records" class="section_anchor"></a>
-    </h4>
-    <pre class="prettyprint">
+<h4>
+  <a name="Example_2:_remove_a_field_from_all_the_records" id="Example_2:_remove_a_field_from_all_the_records"></a>Example 2: remove a field from all the records<a href="#Example_2:_remove_a_field_from_all_the_records" class="section_anchor"></a>
+</h4>
+<pre class="prettyprint">
 &gt; update Profile remove nick
 </pre>
-    <h4>
-      <a name="Example_3:_Add_a_value_into_a_collection" id="Example_3:_Add_a_value_into_a_collection"></a>Example 3: Add a value into a collection<a href="#Example_3:_Add_a_value_into_a_collection" class="section_anchor"></a>
-    </h4>
-    <pre class="prettyprint">
+<h4>
+  <a name="Example_3:_Add_a_value_into_a_collection" id="Example_3:_Add_a_value_into_a_collection"></a>Example 3: Add a value into a collection<a href="#Example_3:_Add_a_value_into_a_collection" class="section_anchor"></a>
+</h4>
+<pre class="prettyprint">
 &gt; update Account add addresses = #12:0
 </pre>
-    <h4>
-      <a name="Example_4:_Remove_a_value_from_a_collection" id="Example_4:_Remove_a_value_from_a_collection"></a>Example 4: Remove a value from a collection<a href="#Example_4:_Remove_a_value_from_a_collection" class="section_anchor"></a>
-    </h4>
-    <pre class="prettyprint">
+<h4>
+  <a name="Example_4:_Remove_a_value_from_a_collection" id="Example_4:_Remove_a_value_from_a_collection"></a>Example 4: Remove a value from a collection<a href="#Example_4:_Remove_a_value_from_a_collection" class="section_anchor"></a>
+</h4>
+<pre class="prettyprint">
 &gt; update Account remove addresses = #12:0
 </pre>
-    <h4>
-      <a name="Example_5:_Put_a_map_entry_into_a_map" id="Example_5:_Put_a_map_entry_into_a_map"></a>Example 5: Put a map entry into a map<a href="#Example_5:_Put_a_map_entry_into_a_map" class="section_anchor"></a>
-    </h4>
-    <pre class="prettyprint">
+<h4>
+  <a name="Example_5:_Put_a_map_entry_into_a_map" id="Example_5:_Put_a_map_entry_into_a_map"></a>Example 5: Put a map entry into a map<a href="#Example_5:_Put_a_map_entry_into_a_map" class="section_anchor"></a>
+</h4>
+<pre class="prettyprint">
 &gt; update Account put addresses = 'Luca', #12:0
 </pre>
-    <h4>
-      <a name="Example_6:_Remove_a_value_from_a_map" id="Example_6:_Remove_a_value_from_a_map"></a>Example 6: Remove a value from a map<a href="#Example_6:_Remove_a_value_from_a_map" class="section_anchor"></a>
-    </h4>
-    <pre class="prettyprint">
+<h4>
+  <a name="Example_6:_Remove_a_value_from_a_map" id="Example_6:_Remove_a_value_from_a_map"></a>Example 6: Remove a value from a map<a href="#Example_6:_Remove_a_value_from_a_map" class="section_anchor"></a>
+</h4>
+<pre class="prettyprint">
 &gt; update Account remove addresses = 'Luca'
 </pre>
-    <p>
-      To learn more about the SQL syntax used by Orient take a look at: <a href="sql_query.html">SQL Query</a>.
-    </p>
-    <p>
-      This is one of the commands of the Orient console. To see all the commands go to <a href="console_commands.html">Console commands</a>.
-    </p>
-  </body>
-</html>
+<p>
+  To learn more about the SQL syntax used by Orient take a look at: <a href="sql_query.html">SQL Query</a>.
+</p>
+<p>
+  This is one of the commands of the Orient console. To see all the commands go to <a href="console_commands.html">Console commands</a>.
+</p>

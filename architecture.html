@@ -2,38 +2,29 @@
 title: Architecture
 layout: default
 ---
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN">
-<html>
-  <head>
-    <meta name="generator" content="HTML Tidy for Mac OS X (vers 31 October 2006 - Apple Inc. build 15.6), see www.w3.org">
-    <title></title>
-  </head>
-  <body>
-    <h2>
-      <a name="Introduction" id="Introduction"></a>Introduction<a href="#Introduction" class="section_anchor"></a>
-    </h2>
-    <p>
-      Orient DB is a document DBMS. The <a href="key_value_server.html">Orient KeyValue Server</a> and the <a href="object_database.html">Orient Object Database</a> are built on top of this functionality.
-    </p>
-    <p>
-      <img src="http://www.orientechnologies.com/images/orientdb-architecture.png">
-    </p>
-    <p>
-      The ODatabase class provides the main APIs an application uses. ODatabase communicates with a OStorage class implementation that stores physically the records.
-    </p>
-    <p>
-      There are three OStorage implementations:
-    </p>
-    <ul>
-      <li>
-        <strong>Local</strong>: reads and writes records on the local file system
-      </li>
-      <li>
-        <strong>Remote</strong>: acts as a proxy that sends and receives all the requests to a remote Orient DB Server instance
-      </li>
-      <li>
-        <strong>Memory</strong>: keeps all records in memory
-      </li>
-    </ul>
-  </body>
-</html>
+<h2>
+  <a name="Introduction" id="Introduction"></a>Introduction<a href="#Introduction" class="section_anchor"></a>
+</h2>
+<p>
+  Orient DB is a document DBMS. The <a href="key_value_server.html">Orient KeyValue Server</a> and the <a href="object_database.html">Orient Object Database</a> are built on top of this functionality.
+</p>
+<p>
+  <img src="http://www.orientechnologies.com/images/orientdb-architecture.png">
+</p>
+<p>
+  The ODatabase class provides the main APIs an application uses. ODatabase communicates with a OStorage class implementation that stores physically the records.
+</p>
+<p>
+  There are three OStorage implementations:
+</p>
+<ul>
+  <li>
+    <strong>Local</strong>: reads and writes records on the local file system
+  </li>
+  <li>
+    <strong>Remote</strong>: acts as a proxy that sends and receives all the requests to a remote Orient DB Server instance
+  </li>
+  <li>
+    <strong>Memory</strong>: keeps all records in memory
+  </li>
+</ul>

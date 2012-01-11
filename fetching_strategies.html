@@ -4,20 +4,13 @@ layout: default
 bc_1_name: java_api
 bc_1_title: Java APIs
 ---
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN">
-<html>
-  <head>
-    <meta name="generator" content="HTML Tidy for Mac OS X (vers 31 October 2006 - Apple Inc. build 15.6), see www.w3.org">
-    <title></title>
-  </head>
-  <body>
-    <p>
-      Starting from release 0.9.20, OrientDB supports fetching strategies by using the <strong>Fetch Plans</strong>. Fetch Plans are used to customize how OrientDB must load linked records.
-    </p>
-    <p>
-      Example:
-    </p>
-    <pre class="prettyprint">
+<p>
+  Starting from release 0.9.20, OrientDB supports fetching strategies by using the <strong>Fetch Plans</strong>. Fetch Plans are used to customize how OrientDB must load linked records.
+</p>
+<p>
+  Example:
+</p>
+<pre class="prettyprint">
 Invoice
  3:100 
    |
@@ -32,92 +25,90 @@ Invoice
    +---------&gt;* [OrderItem OrderItem OrderItem]
                 [  8:12      8:19      8:23   ]
 </pre>
-    <p>
-      By default OrientDB loads all the linked records in lazy way. So in this example the linked "customer", "city" and "orders" fields are not loaded until are traversed. If you need the entire tree it could be slow the lazy loading of every single linked records. In this case it would need 7 different loads. If the database is open on a remote server they are 7 different network calls.
-    </p>
-    <p>
-      This is the reason why OrientDB supports custom fetching strategies using the <strong>Fetch Plans</strong>. The aim of fetch plans is to pre-load connected records in one shot.
-    </p>
-    <h3>
-      <a name="Remote_connection" id="Remote_connection"></a>Remote connection<a href="#Remote_connection" class="section_anchor"></a>
-    </h3>
-    <p>
-      When a client executes a query (or load directly one single record) setting a fetch plan with level different to 0, then the server traverses all the records of the returning result set and sends them to the client in the same call.
-    </p>
-    <p>
-      The client avoid to connect directly them to the record by using always the lazy collections (i.e.: OLazyRecordList). Instead, loads all the connected records into the local client. In this ways the collections remain lazy but when you're accessing to the content, the record is early loaded from the local cache avoiding other connections.
-    </p>
-    <h3>
-      <a name="Format" id="Format"></a>Format<a href="#Format" class="section_anchor"></a>
-    </h3>
-    <p>
-      The fetch plan comes in form of a String and can be used at run-time on:
-    </p>
-    <ul>
-      <li>query
-      </li>
-      <li>record loading
-      </li>
-    </ul>
-    <p>
-      The syntax is:
-    </p>
-    <p>
-      <tt>&lt;[&lt;class&gt;.]field&gt;:&lt;depth-level&gt;*</tt>
-    </p>
-    <p>
-      Where:
-    </p>
-    <ul>
-      <li>
-        <strong>class</strong>, optional, is the class that owns the <tt>field</tt>. If not specified, then all the fields called as <tt>field</tt> of any class traversed will be subject to the rule. <strong>class</strong> follows the object oriented inheritance, so if your class extends other classes (or implements interfaces) the rules are applyied recursively traversing the object inheritance
-      </li>
-      <li>
-        <strong>field</strong>, is the field name or the wildcard <tt>*</tt> for "any" field
-      </li>
-      <li>
-        <strong>depth-level</strong>, is the deep level requested. 0 = no load (therefore lazy-loading), 1-N = load only the first connected record. -1 = unlimited
-      </li>
-    </ul>
-    <p>
-      To express multiple rules separate them by spaces.
-    </p>
-    <p>
-      Examples with the record tree above:
-    </p>
-    <ul>
-      <li>
-        <tt>"*:-1"</tt>: fetches the entire tree recursively
-      </li>
-      <li>
-        <tt>"*:-1 orders:0"</tt>: fetches all the records but the "orders". Note that "orders" has no the prefix of the class, so any field named "orders" will be not loaded
-      </li>
-      <li>
-        <tt>"*:-1 City.country:0"</tt>: fetches all the records but the country field of City class
-      </li>
-    </ul>
-    <h3>
-      <a name="Circular_dependencies" id="Circular_dependencies"></a>Circular dependencies<a href="#Circular_dependencies" class="section_anchor"></a>
-    </h3>
-    <p>
-      OrientDB handles circular dependencies avoid any loop while fetches linked records.
-    </p>
-    <h3>
-      <a name="Example_using_the_Java_APIs" id="Example_using_the_Java_APIs"></a>Example using the Java APIs<a href="#Example_using_the_Java_APIs" class="section_anchor"></a>
-    </h3>
-    <h4>
-      <a name="Execute_a_query_with_a_custom_fetch_plan" id="Execute_a_query_with_a_custom_fetch_plan"></a>Execute a query with a custom fetch plan<a href="#Execute_a_query_with_a_custom_fetch_plan" class="section_anchor"></a>
-    </h4>
-    <pre class="prettyprint">
+<p>
+  By default OrientDB loads all the linked records in lazy way. So in this example the linked "customer", "city" and "orders" fields are not loaded until are traversed. If you need the entire tree it could be slow the lazy loading of every single linked records. In this case it would need 7 different loads. If the database is open on a remote server they are 7 different network calls.
+</p>
+<p>
+  This is the reason why OrientDB supports custom fetching strategies using the <strong>Fetch Plans</strong>. The aim of fetch plans is to pre-load connected records in one shot.
+</p>
+<h3>
+  <a name="Remote_connection" id="Remote_connection"></a>Remote connection<a href="#Remote_connection" class="section_anchor"></a>
+</h3>
+<p>
+  When a client executes a query (or load directly one single record) setting a fetch plan with level different to 0, then the server traverses all the records of the returning result set and sends them to the client in the same call.
+</p>
+<p>
+  The client avoid to connect directly them to the record by using always the lazy collections (i.e.: OLazyRecordList). Instead, loads all the connected records into the local client. In this ways the collections remain lazy but when you're accessing to the content, the record is early loaded from the local cache avoiding other connections.
+</p>
+<h3>
+  <a name="Format" id="Format"></a>Format<a href="#Format" class="section_anchor"></a>
+</h3>
+<p>
+  The fetch plan comes in form of a String and can be used at run-time on:
+</p>
+<ul>
+  <li>query
+  </li>
+  <li>record loading
+  </li>
+</ul>
+<p>
+  The syntax is:
+</p>
+<p>
+  <tt>&lt;[&lt;class&gt;.]field&gt;:&lt;depth-level&gt;*</tt>
+</p>
+<p>
+  Where:
+</p>
+<ul>
+  <li>
+    <strong>class</strong>, optional, is the class that owns the <tt>field</tt>. If not specified, then all the fields called as <tt>field</tt> of any class traversed will be subject to the rule. <strong>class</strong> follows the object oriented inheritance, so if your class extends other classes (or implements interfaces) the rules are applyied recursively traversing the object inheritance
+  </li>
+  <li>
+    <strong>field</strong>, is the field name or the wildcard <tt>*</tt> for "any" field
+  </li>
+  <li>
+    <strong>depth-level</strong>, is the deep level requested. 0 = no load (therefore lazy-loading), 1-N = load only the first connected record. -1 = unlimited
+  </li>
+</ul>
+<p>
+  To express multiple rules separate them by spaces.
+</p>
+<p>
+  Examples with the record tree above:
+</p>
+<ul>
+  <li>
+    <tt>"*:-1"</tt>: fetches the entire tree recursively
+  </li>
+  <li>
+    <tt>"*:-1 orders:0"</tt>: fetches all the records but the "orders". Note that "orders" has no the prefix of the class, so any field named "orders" will be not loaded
+  </li>
+  <li>
+    <tt>"*:-1 City.country:0"</tt>: fetches all the records but the country field of City class
+  </li>
+</ul>
+<h3>
+  <a name="Circular_dependencies" id="Circular_dependencies"></a>Circular dependencies<a href="#Circular_dependencies" class="section_anchor"></a>
+</h3>
+<p>
+  OrientDB handles circular dependencies avoid any loop while fetches linked records.
+</p>
+<h3>
+  <a name="Example_using_the_Java_APIs" id="Example_using_the_Java_APIs"></a>Example using the Java APIs<a href="#Example_using_the_Java_APIs" class="section_anchor"></a>
+</h3>
+<h4>
+  <a name="Execute_a_query_with_a_custom_fetch_plan" id="Execute_a_query_with_a_custom_fetch_plan"></a>Execute a query with a custom fetch plan<a href="#Execute_a_query_with_a_custom_fetch_plan" class="section_anchor"></a>
+</h4>
+<pre class="prettyprint">
 List&lt;ODocument&gt; resultset = database.query(new OSQLSynchQuery&lt;ODocument&gt;("select * from Profile").setFetchPlan("*:-1"));
 </pre>
-    <h4>
-      <a name="Browse_objects_using_a_custom_fetch_plan" id="Browse_objects_using_a_custom_fetch_plan"></a>Browse objects using a custom fetch plan<a href="#Browse_objects_using_a_custom_fetch_plan" class="section_anchor"></a>
-    </h4>
-    <pre class="prettyprint">
+<h4>
+  <a name="Browse_objects_using_a_custom_fetch_plan" id="Browse_objects_using_a_custom_fetch_plan"></a>Browse objects using a custom fetch plan<a href="#Browse_objects_using_a_custom_fetch_plan" class="section_anchor"></a>
+</h4>
+<pre class="prettyprint">
 for (Account a : database.browseClass(Account.class).setFetchPlan("*:0 addresses:-1")) {
   System.out.println( a.getName() );
 }
 </pre>
-  </body>
-</html>

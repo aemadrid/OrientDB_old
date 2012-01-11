@@ -4,58 +4,46 @@ layout: default
 bc_1_name: sql
 bc_1_title: SQL
 ---
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN">
-<html>
-  <head>
-    <meta name="generator" content="HTML Tidy for Mac OS X (vers 31 October 2006 - Apple Inc. build 15.6), see www.w3.org">
-    <title></title>
-    <style type="text/css">
-li.c1 {list-style: none}
-    </style>
-  </head>
-  <body>
-    <p>
-      The <strong>SQL Alter Database</strong> command update database settings.
-    </p>
-    <h3>
-      <a name="Syntax" id="Syntax"></a>Syntax<a href="#Syntax" class="section_anchor"></a>
-    </h3>
-    <p>
-      <tt>ALTER DATABASE &lt;attribute-name&gt; &lt;attribute-value&gt;</tt>
-    </p>
-    <p>
-      Where:
-    </p>
+<p>
+  The <strong>SQL Alter Database</strong> command update database settings.
+</p>
+<h3>
+  <a name="Syntax" id="Syntax"></a>Syntax<a href="#Syntax" class="section_anchor"></a>
+</h3>
+<p>
+  <tt>ALTER DATABASE &lt;attribute-name&gt; &lt;attribute-value&gt;</tt>
+</p>
+<p>
+  Where:
+</p>
+<ul>
+  <li>
+    <strong>attribute-name</strong> between those supported:
+  </li>
+  <li class="c1">
     <ul>
       <li>
-        <strong>attribute-name</strong> between those supported:
+        <strong>STATUS</strong> database's status between:
       </li>
       <li class="c1">
         <ul>
           <li>
-            <strong>STATUS</strong> database's status between:
-          </li>
-          <li class="c1">
-            <ul>
-              <li>
-                <strong>IMPORTING</strong> to set importing status
-              </li>
-            </ul>
+            <strong>IMPORTING</strong> to set importing status
           </li>
         </ul>
       </li>
-      <li>
-        <strong>attribute-value</strong> attribute's value to set
-      </li>
     </ul>
-    <h3>
-      <a name="Examples" id="Examples"></a>Examples<a href="#Examples" class="section_anchor"></a>
-    </h3>
-    <pre class="prettyprint">
+  </li>
+  <li>
+    <strong>attribute-value</strong> attribute's value to set
+  </li>
+</ul>
+<h3>
+  <a name="Examples" id="Examples"></a>Examples<a href="#Examples" class="section_anchor"></a>
+</h3>
+<pre class="prettyprint">
 ALTER DATABASE STATUS importing
 </pre>
-    <p>
-      To know more about other SQL commands look at <a href="sql.html">SQL commands</a>.
-    </p>
-  </body>
-</html>
+<p>
+  To know more about other SQL commands look at <a href="sql.html">SQL commands</a>.
+</p>

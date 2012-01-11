@@ -2,53 +2,44 @@
 title: insert
 layout: default
 ---
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN">
-<html>
-  <head>
-    <meta name="generator" content="HTML Tidy for Mac OS X (vers 31 October 2006 - Apple Inc. build 15.6), see www.w3.org">
-    <title></title>
-  </head>
-  <body>
-    <h2>
-      <a name="Insert" id="Insert"></a>Insert<a href="#Insert" class="section_anchor"></a>
-    </h2>
-    <p>
-      Insert a new record into the current database. Remember that Orient can work also in schema-less mode, so you can create any field at-the-fly.
-    </p>
-    <h3>
-      <a name="Syntax" id="Syntax"></a>Syntax<a href="#Syntax" class="section_anchor"></a>
-    </h3>
-    <p>
-      <tt>insert into &lt;class|cluster:&lt;cluster&gt;&gt; (&lt;field-name&gt;*) values ( &lt;field-value&gt; )</tt>
-    </p>
-    <h3>
-      <a name="Example" id="Example"></a>Example<a href="#Example" class="section_anchor"></a>
-    </h3>
-    <p>
-      nsert a new record with name 'Jay' and surname 'Miner':
-    </p>
-    <pre class="prettyprint">
+<h2>
+  <a name="Insert" id="Insert"></a>Insert<a href="#Insert" class="section_anchor"></a>
+</h2>
+<p>
+  Insert a new record into the current database. Remember that Orient can work also in schema-less mode, so you can create any field at-the-fly.
+</p>
+<h3>
+  <a name="Syntax" id="Syntax"></a>Syntax<a href="#Syntax" class="section_anchor"></a>
+</h3>
+<p>
+  <tt>insert into &lt;class|cluster:&lt;cluster&gt;&gt; (&lt;field-name&gt;*) values ( &lt;field-value&gt; )</tt>
+</p>
+<h3>
+  <a name="Example" id="Example"></a>Example<a href="#Example" class="section_anchor"></a>
+</h3>
+<p>
+  nsert a new record with name 'Jay' and surname 'Miner':
+</p>
+<pre class="prettyprint">
 &gt; insert into Profile (name, surname) values ('Jay', 'Miner' )
 
 Inserted record in 0,060000 sec(s).
 </pre>
-    <p>
-      Insert a new record adding a relationship:
-    </p>
-    <pre class="prettyprint">
+<p>
+  Insert a new record adding a relationship:
+</p>
+<pre class="prettyprint">
 insert into Employee (name, boss) values ('jack', 11:99 )
 </pre>
-    <p>
-      Insert a new record adding a collection of relationship:
-    </p>
-    <pre class="prettyprint">
+<p>
+  Insert a new record adding a collection of relationship:
+</p>
+<pre class="prettyprint">
 insert into Profile (name, friends) values ('Luca', [10:3, 10:4] )
 </pre>
-    <p>
-      To know more about the SQL syntax used in Orient take a look to: <a href="sql_query.html">SQL Query</a>.
-    </p>
-    <p>
-      This is a command of the Orient console. To know all the commands go to <a href="console_commands.html">Console commands</a>.
-    </p>
-  </body>
-</html>
+<p>
+  To know more about the SQL syntax used in Orient take a look to: <a href="sql_query.html">SQL Query</a>.
+</p>
+<p>
+  This is a command of the Orient console. To know all the commands go to <a href="console_commands.html">Console commands</a>.
+</p>

@@ -4,47 +4,40 @@ layout: default
 bc_1_name: java_api
 bc_1_title: Java APIs
 ---
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN">
-<html>
-  <head>
-    <meta name="generator" content="HTML Tidy for Mac OS X (vers 31 October 2006 - Apple Inc. build 15.6), see www.w3.org">
-    <title></title>
-  </head>
-  <body>
-    <h2>
-      <a name="Introduction" id="Introduction"></a>Introduction<a href="#Introduction" class="section_anchor"></a>
-    </h2>
-    <p>
-      A remote server can be managed via API using the OServerAdmin class. Create it using the URL of the remote server as first parameter of the constructor.
-    </p>
-    <pre class="prettyprint">
+<h2>
+  <a name="Introduction" id="Introduction"></a>Introduction<a href="#Introduction" class="section_anchor"></a>
+</h2>
+<p>
+  A remote server can be managed via API using the OServerAdmin class. Create it using the URL of the remote server as first parameter of the constructor.
+</p>
+<pre class="prettyprint">
 OServerAdmin serverAdmin = new OServerAdmin("remote:localhost:2480");
 </pre>
-    <p>
-      You can also use the URL of the remote database:
-    </p>
-    <pre class="prettyprint">
+<p>
+  You can also use the URL of the remote database:
+</p>
+<pre class="prettyprint">
 OServerAdmin serverAdmin = new OServerAdmin("remote:localhost:2480/demo");
 </pre>
-    <h2>
-      <a name="Connect_to_a_remote_server" id="Connect_to_a_remote_server"></a>Connect to a remote server<a href="#Connect_to_a_remote_server" class="section_anchor"></a>
-    </h2>
-    <pre class="prettyprint">
+<h2>
+  <a name="Connect_to_a_remote_server" id="Connect_to_a_remote_server"></a>Connect to a remote server<a href="#Connect_to_a_remote_server" class="section_anchor"></a>
+</h2>
+<pre class="prettyprint">
 OServerAdmin serverAdmin = new OServerAdmin("remote:localhost:2480").connect("admin", "admin");
 </pre>
-    <p>
-      User and password are not the database accounts but the server users configured in <a href="db_server.html#Configuration">orientdb-server-config.xml</a> file.
-    </p>
-    <p>
-      When finished call the <tt>OServerAdmin.close()</tt> method to release the network connection.
-    </p>
-    <h2>
-      <a name="Create_a_database" id="Create_a_database"></a>Create a database<a href="#Create_a_database" class="section_anchor"></a>
-    </h2>
-    <p>
-      To create a new database in a remote server you can use the console's <a href="console_command_create_db.html">create database</a> command or via API using the <tt>OServerAdmin.createDatabase()</tt> method.
-    </p>
-    <pre class="prettyprint">
+<p>
+  User and password are not the database accounts but the server users configured in <a href="db_server.html#Configuration">orientdb-server-config.xml</a> file.
+</p>
+<p>
+  When finished call the <tt>OServerAdmin.close()</tt> method to release the network connection.
+</p>
+<h2>
+  <a name="Create_a_database" id="Create_a_database"></a>Create a database<a href="#Create_a_database" class="section_anchor"></a>
+</h2>
+<p>
+  To create a new database in a remote server you can use the console's <a href="console_command_create_db.html">create database</a> command or via API using the <tt>OServerAdmin.createDatabase()</tt> method.
+</p>
+<pre class="prettyprint">
 // CREATE A SERVER ADMIN CLIENT AGAINST A REMOTE SERVER
 OServerAdmin serverAdmin = new OServerAdmin("remote:localhost/demo").connect("admin", "admin");
 
@@ -52,13 +45,13 @@ OServerAdmin serverAdmin = new OServerAdmin("remote:localhost/demo").connect("ad
 // DROP THE DATABASE
 serverAdmin.createDatabase(null);
 </pre>
-    <h2>
-      <a name="Drop_a_database" id="Drop_a_database"></a>Drop a database<a href="#Drop_a_database" class="section_anchor"></a>
-    </h2>
-    <p>
-      To drop a database from a server you can use the console's <a href="console_command_drop_db.html">drop database</a> command or via API using the <tt>OServerAdmin.dropDatabase()</tt> method.
-    </p>
-    <pre class="prettyprint">
+<h2>
+  <a name="Drop_a_database" id="Drop_a_database"></a>Drop a database<a href="#Drop_a_database" class="section_anchor"></a>
+</h2>
+<p>
+  To drop a database from a server you can use the console's <a href="console_command_drop_db.html">drop database</a> command or via API using the <tt>OServerAdmin.dropDatabase()</tt> method.
+</p>
+<pre class="prettyprint">
 // CREATE A SERVER ADMIN CLIENT AGAINST A REMOTE SERVER
 OServerAdmin serverAdmin = new OServerAdmin("remote:localhost/demo").connect("admin", "admin");
 
@@ -66,37 +59,35 @@ OServerAdmin serverAdmin = new OServerAdmin("remote:localhost/demo").connect("ad
 // DROP THE DATABASE
 serverAdmin.dropDatabase("demo");
 </pre>
-    <h2>
-      <a name="Check_if_a_database_exists" id="Check_if_a_database_exists"></a>Check if a database exists<a href="#Check_if_a_database_exists" class="section_anchor"></a>
-    </h2>
-    <p>
-      To check if a database exists in a server via API use the <tt>OServerAdmin.existsDatabase()</tt> method.
-    </p>
-    <pre class="prettyprint">
+<h2>
+  <a name="Check_if_a_database_exists" id="Check_if_a_database_exists"></a>Check if a database exists<a href="#Check_if_a_database_exists" class="section_anchor"></a>
+</h2>
+<p>
+  To check if a database exists in a server via API use the <tt>OServerAdmin.existsDatabase()</tt> method.
+</p>
+<pre class="prettyprint">
 // CREATE A SERVER ADMIN CLIENT AGAINST A REMOTE SERVER
 OServerAdmin serverAdmin = new OServerAdmin("remote:localhost/demo").connect("admin", "admin");
 
 // DROP THE DATABASE
 serverAdmin.existsDatabase();
 </pre>
-    <h2>
-      <a name="Share_a_database_in_a_distributed_cluster" id="Share_a_database_in_a_distributed_cluster"></a>Share a database in a distributed cluster<a href="#Share_a_database_in_a_distributed_cluster" class="section_anchor"></a>
-    </h2>
-    <p>
-      To share a database from a server to another one you can use the console's <a href="console_command_share_database.html">share database</a> command or via API using this method:
-    </p>
-    <pre class="prettyprint">
+<h2>
+  <a name="Share_a_database_in_a_distributed_cluster" id="Share_a_database_in_a_distributed_cluster"></a>Share a database in a distributed cluster<a href="#Share_a_database_in_a_distributed_cluster" class="section_anchor"></a>
+</h2>
+<p>
+  To share a database from a server to another one you can use the console's <a href="console_command_share_database.html">share database</a> command or via API using this method:
+</p>
+<pre class="prettyprint">
 OServerAdmin.shareDatabase(final String iDatabaseName, final String iDatabaseUserName, final String iDatabaseUserPassword, final String iRemoteName, final boolean iSynchronousMode) throws IOException;
 </pre>
-    <p>
-      Example:
-    </p>
-    <pre class="prettyprint">
+<p>
+  Example:
+</p>
+<pre class="prettyprint">
 // CREATE A SERVER ADMIN CLIENT AGAINST A REMOTE SERVER
 OServerAdmin serverAdmin = new OServerAdmin("remote:localhost").connect("admin", "admin");
 
 // SHARE THE DATABASE
 serverAdmin.shareDatabase("demo", "admin", "admin", "remote", "127.0.0.1:2425", false);
 </pre>
-  </body>
-</html>

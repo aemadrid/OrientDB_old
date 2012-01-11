@@ -4,1293 +4,1235 @@ layout: default
 bc_1_name: sql
 bc_1_title: SQL
 ---
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN">
-<html>
-  <head>
-    <meta name="generator" content="HTML Tidy for Mac OS X (vers 31 October 2006 - Apple Inc. build 15.6), see www.w3.org">
-    <title></title>
-    <style type="text/css">
-li.c1 {list-style: none}
-    </style>
-  </head>
-  <body>
-    <p></p>
-    <ul>
-      <li>
-        <a href="#Introduction">Introduction</a>
-      </li>
-      <li>
-        <a href="#Syntax">Syntax</a>
-      </li>
-      <li>
-        <a href="#Items">Items</a>
-      </li>
-      <li class="c1">
-        <ul>
-          <li>
-            <a href="#Record_attributes">Record attributes</a>
-          </li>
-        </ul>
-      </li>
-      <li>
-        <a href="#Operators">Operators</a>
-      </li>
-      <li class="c1">
-        <ul>
-          <li>
-            <a href="#Conditional_Operators">Conditional Operators</a>
-          </li>
-          <li>
-            <a href="#Logical_Operators">Logical Operators</a>
-          </li>
-          <li>
-            <a href="#Field_Operators">Field Operators</a>
-          </li>
-        </ul>
-      </li>
-      <li>
-        <a href="#Functions">Functions</a>
-      </li>
-      <li class="c1">
-        <ul>
-          <li>
-            <a href="#Bundled_functions">Bundled functions</a>
-          </li>
-          <li>
-            <a href="#Custom_functions">Custom functions</a>
-          </li>
-        </ul>
-      </li>
-    </ul>
-    <h2>
-      <a name="Introduction" id="Introduction"></a>Introduction<a href="#Introduction" class="section_anchor"></a>
-    </h2>
-    <p>
-      The Where condition is shared among many SQL commands.
-    </p>
-    <h2>
-      <a name="Syntax" id="Syntax"></a>Syntax<a href="#Syntax" class="section_anchor"></a>
-    </h2>
-    <p>
-      <tt>[&lt;item&gt;] &lt;operator&gt; &lt;item&gt;</tt>
-    </p>
-    <h2>
-      <a name="Items" id="Items"></a>Items<a href="#Items" class="section_anchor"></a>
-    </h2>
-    <p>
-      And <tt>item</tt> can be:
-    </p>
-    <p></p>
-    <table class="zebra-striped bordered-table">
-      <tr>
-        <td>
-          <strong>What</strong>
-        </td>
-        <td>
-          <strong>Description</strong>
-        </td>
-        <td>
-          <strong>Example</strong>
-        </td>
-        <td>
-          <strong>Available since</strong>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          field
-        </td>
-        <td>
-          Document field
-        </td>
-        <td>
-          where <strong>price</strong> &gt; 1000000
-        </td>
-        <td>
-          0.9.1
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <tt>field[&lt;indexes&gt;]</tt>
-        </td>
-        <td>
-          Document field part. To know more about field part look at the full syntax: <a href="document_field_part.html">Document field part</a>
-        </td>
-        <td>
-          where <strong><tt>tags[1]</tt></strong> = 'Hi' or <strong><tt>tags[0-3]</tt></strong> IN ('Hello') and <strong><tt>employees[name='Linus']</tt></strong> IS NOT NULL
-        </td>
-        <td>
-          1.0rc5
-        </td>
-      </tr>
-      <tr>
-        <td>
-          record attribute
-        </td>
-        <td>
-          Record attribute name with @ as prefix
-        </td>
-        <td>
-          where <strong>@class</strong> = 'Profile'
-        </td>
-        <td>
-          0.9.21
-        </td>
-      </tr>
-      <tr>
-        <td>
-          column
-        </td>
-        <td>
-          The number of the column. Useful in Column Database
-        </td>
-        <td>
-          where <strong>column(1)</strong> &gt; 300
-        </td>
-        <td>
-          0.9.1
-        </td>
-      </tr>
-      <tr>
-        <td>
-          any()
-        </td>
-        <td>
-          Represents any field of the Document. The condition is true if ANY of the fields matches the condition
-        </td>
-        <td>
-          where <strong>any()</strong> like 'L%'
-        </td>
-        <td>
-          0.9.10
-        </td>
-      </tr>
-      <tr>
-        <td>
-          all()
-        </td>
-        <td>
-          Represents all the fields of the Document. The condition is true if ALL the fields match the condition
-        </td>
-        <td>
-          where <strong>all()</strong> is null
-        </td>
-        <td>
-          0.9.10
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <a href="#Functions">function</a>
-        </td>
-        <td>
-          Any <a href="#Functions">function</a> between the defined
-        </td>
-        <td>
-          where distance(x, y, 52.20472, 0.14056 ) &lt;= 30
-        </td>
-        <td>
-          0.9.25
-        </td>
-      </tr>
-    </table>
-    <h3>
-      <a name="Record_attributes" id="Record_attributes"></a>Record attributes<a href="#Record_attributes" class="section_anchor"></a>
-    </h3>
-    <p></p>
-    <table class="zebra-striped bordered-table">
-      <tr>
-        <td>
-          <strong>Name</strong>
-        </td>
-        <td>
-          <strong>Description</strong>
-        </td>
-        <td>
-          <strong>Example</strong>
-        </td>
-        <td>
-          <strong>Available since</strong>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          @this
-        </td>
-        <td>
-          returns the record it self
-        </td>
-        <td>
-          select <strong>@this.toJSON()</strong> from Account
-        </td>
-        <td>
-          0.9.25
-        </td>
-      </tr>
-      <tr>
-        <td>
-          @rid
-        </td>
-        <td>
-          returns the <a href="concepts.html#RecordID">RecordID</a> in the form <tt>&lt;cluster:position&gt;</tt>. It's null for embedded records. <i>NOTE: using @rid in where condition slow down queries. Much better to use the <a href="concepts.html#RecordID">RecordID</a> as target. Example: change this: <tt>select from Profile where @rid = #10:44</tt> with this: <tt>select from #10:44</tt></i>
-        </td>
-        <td>
-          <strong>@rid</strong> = #11:0
-        </td>
-        <td>
-          0.9.21
-        </td>
-      </tr>
-      <tr>
-        <td>
-          @class
-        </td>
-        <td>
-          returns Class name only for record of type Schema Aware. It's null for the others
-        </td>
-        <td>
-          <strong>@class</strong> = 'Profile'
-        </td>
-        <td>
-          0.9.21
-        </td>
-      </tr>
-      <tr>
-        <td>
-          @version
-        </td>
-        <td>
-          returns the record version as integer. Version starts from 0. Can't be null
-        </td>
-        <td>
-          <strong>@version</strong> &gt; 0
-        </td>
-        <td>
-          0.9.21
-        </td>
-      </tr>
-      <tr>
-        <td>
-          @size
-        </td>
-        <td>
-          returns the record size in bytes
-        </td>
-        <td>
-          <strong>@size</strong> &gt; 1024
-        </td>
-        <td>
-          0.9.21
-        </td>
-      </tr>
-      <tr>
-        <td>
-          @type
-        </td>
-        <td>
-          returns the record type between: 'document', 'column', 'flat', 'bytes'
-        </td>
-        <td>
-          <strong>@type</strong> = 'flat'
-        </td>
-        <td>
-          0.9.21
-        </td>
-      </tr>
-    </table>
-    <h2>
-      <a name="Operators" id="Operators"></a>Operators<a href="#Operators" class="section_anchor"></a>
-    </h2>
-    <h3>
-      <a name="Conditional_Operators" id="Conditional_Operators"></a>Conditional Operators<a href="#Conditional_Operators" class="section_anchor"></a>
-    </h3>
-    <p></p>
-    <table class="zebra-striped bordered-table">
-      <tr>
-        <td>
-          <strong>Apply to</strong>
-        </td>
-        <td>
-          <strong>Operator</strong>
-        </td>
-        <td>
-          <strong>Description</strong>
-        </td>
-        <td>
-          <strong>Example</strong>
-        </td>
-        <td>
-          <strong>Available since</strong>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          any
-        </td>
-        <td>
-          =
-        </td>
-        <td>
-          Equals to
-        </td>
-        <td>
-          name <strong>=</strong> 'Luke'
-        </td>
-        <td>
-          0.9.1
-        </td>
-      </tr>
-      <tr>
-        <td>
-          string
-        </td>
-        <td>
-          like
-        </td>
-        <td>
-          Similar to equals, but allow the wildcard '%' that means 'any'
-        </td>
-        <td>
-          name <strong>like</strong> 'Luk%'
-        </td>
-        <td>
-          0.9.1
-        </td>
-      </tr>
-      <tr>
-        <td>
-          any
-        </td>
-        <td>
-          &lt;
-        </td>
-        <td>
-          Less than
-        </td>
-        <td>
-          age <strong>&lt;</strong> 40
-        </td>
-        <td>
-          0.9.1
-        </td>
-      </tr>
-      <tr>
-        <td>
-          any
-        </td>
-        <td>
-          &lt;=
-        </td>
-        <td>
-          Less than or equal to
-        </td>
-        <td>
-          age <strong>&lt;=</strong> 40
-        </td>
-        <td>
-          0.9.1
-        </td>
-      </tr>
-      <tr>
-        <td>
-          any
-        </td>
-        <td>
-          &gt;
-        </td>
-        <td>
-          Greater than
-        </td>
-        <td>
-          age <strong>&gt;</strong> 40
-        </td>
-        <td>
-          0.9.1
-        </td>
-      </tr>
-      <tr>
-        <td>
-          any
-        </td>
-        <td>
-          &gt;=
-        </td>
-        <td>
-          Greater than or equal to
-        </td>
-        <td>
-          age <strong>&gt;=</strong> 40
-        </td>
-        <td>
-          0.9.1
-        </td>
-      </tr>
-      <tr>
-        <td>
-          any
-        </td>
-        <td>
-          &lt;&gt;
-        </td>
-        <td>
-          Not equals (same of !=)
-        </td>
-        <td>
-          age <strong>&lt;&gt;</strong> 40
-        </td>
-        <td>
-          0.9.1
-        </td>
-      </tr>
-      <tr>
-        <td>
-          any
-        </td>
-        <td>
-          BETWEEN
-        </td>
-        <td>
-          The value is between a range. It's equivalent to <tt>&lt;field&gt; &gt;= &lt;from-value&gt; AND &lt;field&gt; &lt;= &lt;to-value&gt;</tt>
-        </td>
-        <td>
-          price BETWEEN 10 and 30
-        </td>
-        <td>
-          1.0rc2
-        </td>
-      </tr>
-      <tr>
-        <td>
-          any
-        </td>
-        <td>
-          IS
-        </td>
-        <td>
-          Used to test if a value is NULL
-        </td>
-        <td>
-          children <strong>is</strong> null
-        </td>
-        <td>
-          0.9.6
-        </td>
-      </tr>
-      <tr>
-        <td>
-          collection
-        </td>
-        <td>
-          IN
-        </td>
-        <td>
-          contains any of the elements listed
-        </td>
-        <td>
-          values <strong>in</strong> <tt>[3,4,5]</tt>
-        </td>
-        <td>
-          0.9.6
-        </td>
-      </tr>
-      <tr>
-        <td>
-          collection
-        </td>
-        <td>
-          CONTAINS
-        </td>
-        <td>
-          true if the collection contains at least one element that satisfy the next condition. Condition can be a single item: in this case the behaviour is like the IN operator
-        </td>
-        <td>
-          children <strong>contains</strong> (name = 'Luke') - map.values() <strong>contains</strong> (name = 'Luke')
-        </td>
-        <td>
-          0.9.7
-        </td>
-      </tr>
-      <tr>
-        <td>
-          collection
-        </td>
-        <td>
-          CONTAINSALL
-        </td>
-        <td>
-          true if all the elements of the collection satisfy the next condition
-        </td>
-        <td>
-          children <strong>containsAll</strong> (name = 'Luke')
-        </td>
-        <td>
-          0.9.7
-        </td>
-      </tr>
-      <tr>
-        <td>
-          map
-        </td>
-        <td>
-          CONTAINSKEY
-        </td>
-        <td>
-          true if the map contains at least one key equals to the requested. You can also use map.keys() CONTAINS in place of it
-        </td>
-        <td>
-          connections <strong>containsKey</strong> 'Luke'
-        </td>
-        <td>
-          0.9.22
-        </td>
-      </tr>
-      <tr>
-        <td>
-          map
-        </td>
-        <td>
-          CONTAINSVALUE
-        </td>
-        <td>
-          true if the map contains at least one value equals to the requested. You can also use map.values() CONTAINS in place of it
-        </td>
-        <td>
-          connections <strong>containsValue</strong> 10:3
-        </td>
-        <td>
-          0.9.22
-        </td>
-      </tr>
-      <tr>
-        <td>
-          string
-        </td>
-        <td>
-          CONTAINSTEXT
-        </td>
-        <td>
-          used with <a href="console_command_create_index.html">Full text indexes</a>. Current limitation is that it must be the unique condition of a query
-        </td>
-        <td>
-          text <strong>containsText</strong> 'jay'
-        </td>
-        <td>
-          0.9.22
-        </td>
-      </tr>
-      <tr>
-        <td>
-          string
-        </td>
-        <td>
-          MATCHES
-        </td>
-        <td>
-          Matches the string using a <a href="http://www.regular-expressions.info/" rel="nofollow">Regular Expression</a>
-        </td>
-        <td>
-          text <strong>matches</strong> '\b[A-Z0-9.<i>%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}\b'</i>
-        </td>
-        <td>
-          0.9.22
-        </td>
-      </tr>
-      <tr>
-        <td>
-          any
-        </td>
-        <td>
-          <tt>TRAVERSE[(&lt;minDeep&gt; [,&lt;maxDeep&gt; [,&lt;fields&gt;]])]</tt>
-        </td>
-        <td>
-          true if traversing the declared field(s) at the level from <tt>&lt;minDeep&gt;</tt> to <tt>&lt;maxDeep&gt;</tt> matches the condition. A deep = 0 means the root node, maxDeep = -1 means no limit: traverse all the graph recursively. If <tt>&lt;minDeep&gt;</tt> and <tt>&lt;maxDeep&gt;</tt> are not used, then (0, -1) will be taken. If <tt>&lt;fields&gt;</tt> is not passed, than <tt>any()</tt> will be used.}}}
-        </td>
-        <td>
-          select from profile where any() <strong>traverse(0,7,'followers,followings')</strong> ( address.city.name = 'Rome' )
-        </td>
-        <td>
-          0.9.10 and 0.9.24 for <tt>&lt;fields&gt;</tt> parameter
-        </td>
-      </tr>
-    </table>
-    <h3>
-      <a name="Logical_Operators" id="Logical_Operators"></a>Logical Operators<a href="#Logical_Operators" class="section_anchor"></a>
-    </h3>
-    <p></p>
-    <table class="zebra-striped bordered-table">
-      <tr>
-        <td>
-          <strong>Operator</strong>
-        </td>
-        <td>
-          <strong>Description</strong>
-        </td>
-        <td>
-          <strong>Example</strong>
-        </td>
-        <td>
-          <strong>Available since</strong>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          AND
-        </td>
-        <td>
-          true if both the conditions are true
-        </td>
-        <td>
-          name = 'Luke' <strong>and</strong> surname like 'Sky%'
-        </td>
-        <td>
-          0.9.1
-        </td>
-      </tr>
-      <tr>
-        <td>
-          OR
-        </td>
-        <td>
-          true if at least one of the condition is true
-        </td>
-        <td>
-          name = 'Luke' <strong>or</strong> surname like 'Sky%'
-        </td>
-        <td>
-          0.9.1
-        </td>
-      </tr>
-      <tr>
-        <td>
-          NOT
-        </td>
-        <td>
-          true if the condition is false
-        </td>
-        <td>
-          <strong>not</strong> name = 'Luke'
-        </td>
-        <td>
-          Not supported yet
-        </td>
-      </tr>
-    </table>
-    <h3>
-      <a name="Field_Operators" id="Field_Operators"></a>Field Operators<a href="#Field_Operators" class="section_anchor"></a>
-    </h3>
-    <p>
-      These operators apply directly to the fields. They are beyond the SQL standard but you can use it in your queries. You can concatenate N operators in sequence. <i>Note: operators are case-insensitive.</i>
-    </p>
-    <p></p>
-    <table class="zebra-striped bordered-table">
-      <tr>
-        <td>
-          <strong>Apply to</strong>
-        </td>
-        <td>
-          <strong>Operator</strong>
-        </td>
-        <td>
-          <strong>Description</strong>
-        </td>
-        <td>
-          <strong>Example</strong>
-        </td>
-        <td>
-          <strong>Available since</strong>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          document, map, list, array
-        </td>
-        <td>
-          <tt>[&lt;string&gt;]</tt>
-        </td>
-        <td>
-          Get an item from a multi-value object like a map, a list, an array or a document. For document and maps the item must be a string, for lists and arrays the index as number
-        </td>
-        <td>
-          select from Profile where contacts<tt>[phone]</tt>.left(3) = '+39'
-        </td>
-        <td>
-          1.0rc5
-        </td>
-      </tr>
-      <tr>
-        <td>
-          string
-        </td>
-        <td>
-          <tt>.append('&lt;string&gt;')</tt>
-        </td>
-        <td>
-          Appends a string to another one
-        </td>
-        <td>
-          select name.<strong>append(' ')</strong>.<strong>append(surname)</strong> from Profile
-        </td>
-        <td>
-          1.0rc1
-        </td>
-      </tr>
-      <tr>
-        <td>
-          string, short, int, long
-        </td>
-        <td>
-          <tt>.asBoolean()</tt>
-        </td>
-        <td>
-          Transforms the field into a Boolean type. If the origin type is a string, then "true" and "false" is checked. If it's a number then 1 means TRUE while 0 means FALSE
-        </td>
-        <td>
-          online.<strong>toBoolean()</strong> = true
-        </td>
-        <td>
-          0.9.15
-        </td>
-      </tr>
-      <tr>
-        <td>
-          string, long
-        </td>
-        <td>
-          <tt>.asDate()</tt>
-        </td>
-        <td>
-          Transforms the field into a Date type
-        </td>
-        <td>
-          time.<strong>toDate()</strong> -&gt; time is stored as long type measuring milliseconds since a particular day
-        </td>
-        <td>
-          0.9.14
-        </td>
-      </tr>
-      <tr>
-        <td>
-          string, long
-        </td>
-        <td>
-          <tt>.asDateTime()</tt>
-        </td>
-        <td>
-          Transforms the field into a Date type but parsing also the time information
-        </td>
-        <td>
-          time.<strong>toDateTime()</strong> &lt; '01-01-2010 00:00:00' -&gt; time is stored as long type measuring milliseconds since a particular day. Returns all the records where time is before the year 2010
-        </td>
-        <td>
-          0.9.14
-        </td>
-      </tr>
-      <tr>
-        <td>
-          any
-        </td>
-        <td>
-          <tt>.asFloat()</tt>
-        </td>
-        <td>
-          Transforms the field into a float type
-        </td>
-        <td>
-          ray.<strong>toFloat()</strong> &gt; 3.14
-        </td>
-        <td>
-          0.9.14
-        </td>
-      </tr>
-      <tr>
-        <td>
-          any
-        </td>
-        <td>
-          <tt>.asInteger()</tt>
-        </td>
-        <td>
-          Transforms the field into an integer type
-        </td>
-        <td>
-          value.left(3).<strong>toInteger()</strong> -&gt; Converts the first 3 chars of 'value' field in an integer
-        </td>
-        <td>
-          0.9.14
-        </td>
-      </tr>
-      <tr>
-        <td>
-          any
-        </td>
-        <td>
-          <tt>.asString()</tt>
-        </td>
-        <td>
-          Transforms the field into a string type
-        </td>
-        <td>
-          salary.<strong>toString()</strong>.indexof('.') &gt; -1 -&gt; True if the salary has decimal
-        </td>
-        <td>
-          0.9.14
-        </td>
-      </tr>
-      <tr>
-        <td>
-          string
-        </td>
-        <td>
-          <tt>.charAt(&lt;pos&gt;)</tt>
-        </td>
-        <td>
-          returns the character of the original string contained in the position 'pos'. 'pos' starts from 0 to string length -1
-        </td>
-        <td>
-          name.<strong>charAt( 0 )</strong> = 'L'
-        </td>
-        <td>
-          0.9.7
-        </td>
-      </tr>
-      <tr>
-        <td>
-          any
-        </td>
-        <td>
-          <tt>.format('&lt;frmt&gt;')</tt>
-        </td>
-        <td>
-          returns the value formatted using the common "printf" syntax. For the complete reference goto <a href="http://java.sun.com/j2se/1.5.0/docs/api/java/util/Formatter.html#syntax" rel="nofollow">Java Formatter JavaDoc</a>. (Available since v0.9.5)
-        </td>
-        <td>
-          salary.<strong>format("%04d")</strong> -&gt; formats a number with 4 digits filling with 0
-        </td>
-        <td>
-          0.9.8
-        </td>
-      </tr>
-      <tr>
-        <td>
-          string
-        </td>
-        <td>
-          <tt>.indexOf('&lt;string&gt;' [, &lt;begin&gt; ])</tt>
-        </td>
-        <td>
-          returns the position of the <tt>&lt;string&gt;</tt> inside the item. It returns -1 if no occurrences are found
-        </td>
-        <td>
-          name.<strong>indexOf( 'street' )</strong> &gt; -1
-        </td>
-        <td>
-          0.9.10
-        </td>
-      </tr>
-      <tr>
-        <td>
-          maps
-        </td>
-        <td>
-          <tt>.keys()</tt>
-        </td>
-        <td>
-          Returns the map's keys as a separate set. Useful to use in conjunction with CONTAINS and CONTAINSALL operators
-        </td>
-        <td>
-          map.<strong>keys()</strong> CONTAINS 'Luke'
-        </td>
-        <td>
-          1.0rc1
-        </td>
-      </tr>
-      <tr>
-        <td>
-          string
-        </td>
-        <td>
-          <tt>.left(&lt;len&gt;)</tt>
-        </td>
-        <td>
-          returns a substring of the original cutting from the begin and getting 'len' characters.
-        </td>
-        <td>
-          name.<strong>left( 4 )</strong> = 'Luke'
-        </td>
-        <td>
-          0.9.7
-        </td>
-      </tr>
-      <tr>
-        <td>
-          string
-        </td>
-        <td>
-          <tt>.length()</tt>
-        </td>
-        <td>
-          returns the length of the string. If the string is null 0 will be returned
-        </td>
-        <td>
-          name.<strong>length()</strong> &gt; 0
-        </td>
-        <td>
-          0.9.7
-        </td>
-      </tr>
-      <tr>
-        <td>
-          string
-        </td>
-        <td>
-          <tt>.prefix('&lt;string&gt;')</tt>
-        </td>
-        <td>
-          Prefixes a string to another one
-        </td>
-        <td>
-          select name.<strong>prefix('Mr. ')</strong> from Profile
-        </td>
-        <td>
-          1.0rc1
-        </td>
-      </tr>
-      <tr>
-        <td>
-          string
-        </td>
-        <td>
-          <tt>.right(&lt;len&gt;)</tt>
-        </td>
-        <td>
-          returns a substring of the original cutting from the end of the string 'len' characters.
-        </td>
-        <td>
-          name.<strong>right( 2 )</strong> = 'ke'
-        </td>
-        <td>
-          0.9.7
-        </td>
-      </tr>
-      <tr>
-        <td>
-          collection
-        </td>
-        <td>
-          <tt>.size()</tt>
-        </td>
-        <td>
-          returns the size of the collection
-        </td>
-        <td>
-          children.<strong>size()</strong> &gt; 0
-        </td>
-        <td>
-          0.9.7
-        </td>
-      </tr>
-      <tr>
-        <td>
-          string
-        </td>
-        <td>
-          <tt>.subString(&lt;begin&gt; [, &lt;len&gt;] )</tt>
-        </td>
-        <td>
-          returns a substring of the original cutting from 'begin' and getting 'len' characters. 'begin' starts from 0 to string length -1
-        </td>
-        <td>
-          name.<strong>substring( 0,1 )</strong> = 'L'
-        </td>
-        <td>
-          0.9.7
-        </td>
-      </tr>
-      <tr>
-        <td>
-          string
-        </td>
-        <td>
-          <tt>.trim()</tt>
-        </td>
-        <td>
-          returns the original string removing white spaces from the begin and the end
-        </td>
-        <td>
-          name.<strong>trim()</strong> == 'luke'
-        </td>
-        <td>
-          0.9.7
-        </td>
-      </tr>
-      <tr>
-        <td>
-          record
-        </td>
-        <td>
-          <tt>.toJSON()</tt>
-        </td>
-        <td>
-          returns the record in JSON format
-        </td>
-        <td>
-          select @this.<strong>toJson()</strong> as json from Profile
-        </td>
-        <td>
-          0.9.8
-        </td>
-      </tr>
-      <tr>
-        <td>
-          string
-        </td>
-        <td>
-          <tt>.toUpperCase()</tt>
-        </td>
-        <td>
-          returns the string in upper case
-        </td>
-        <td>
-          name.<strong>toUpperCase()</strong> == 'LUKE'
-        </td>
-        <td>
-          0.9.7
-        </td>
-      </tr>
-      <tr>
-        <td>
-          string
-        </td>
-        <td>
-          <tt>.toLowerCase()</tt>
-        </td>
-        <td>
-          returns the string in lower case
-        </td>
-        <td>
-          name.<strong>toLowerCase()</strong> == 'luke'
-        </td>
-        <td>
-          0.9.7
-        </td>
-      </tr>
-      <tr>
-        <td>
-          maps
-        </td>
-        <td>
-          <tt>.values()</tt>
-        </td>
-        <td>
-          Returns the map's values as a separate collection. Useful to use in conjunction with CONTAINS and CONTAINSALL operators
-        </td>
-        <td>
-          map.<strong>values()</strong> CONTAINSALL ( name is not null)
-        </td>
-        <td>
-          1.0rc1
-        </td>
-      </tr>
-    </table>
-    <h2>
-      <a name="Functions" id="Functions"></a>Functions<a href="#Functions" class="section_anchor"></a>
-    </h2>
-    <h3>
-      <a name="Bundled_functions" id="Bundled_functions"></a>Bundled functions<a href="#Bundled_functions" class="section_anchor"></a>
-    </h3>
-    <p></p>
-    <table class="zebra-striped bordered-table">
-      <tr>
-        <td>
-          <strong>Name</strong>
-        </td>
-        <td>
-          <strong>Description</strong>
-        </td>
-        <td>
-          <strong>Example</strong>
-        </td>
-        <td>
-          <strong>Available since</strong>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <tt>count(&lt;field&gt;|*)</tt>
-        </td>
-        <td>
-          Counts the records that match the query condition. If <tt>*</tt> is not used as a field, then the record will be counted only if the field content is not null
-        </td>
-        <td>
-          select count(<tt>*</tt>) from Account
-        </td>
-        <td>
-          0.9.25
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <tt>min(&lt;field&gt;)</tt>
-        </td>
-        <td>
-          Returns the minimum value
-        </td>
-        <td>
-          select min(salary) from Account
-        </td>
-        <td>
-          0.9.25
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <tt>max(&lt;field&gt;)</tt>
-        </td>
-        <td>
-          Returns the maximum value
-        </td>
-        <td>
-          select max(salary) from Account
-        </td>
-        <td>
-          0.9.25
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <tt>avg(&lt;field&gt;)</tt>
-        </td>
-        <td>
-          Returns the average value
-        </td>
-        <td>
-          select avg(salary) from Account
-        </td>
-        <td>
-          0.9.25
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <tt>sum(&lt;field&gt;)</tt>
-        </td>
-        <td>
-          Returns the sum of all the values returned
-        </td>
-        <td>
-          select average(salary) from Account
-        </td>
-        <td>
-          0.9.25
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <tt>sysdate([&lt;format&gt;])</tt>
-        </td>
-        <td>
-          Returns the current date time. If no format is specified, then a Date object is returned, otherwise the date is formatted as string following these <a href="http://download.oracle.com/javase/1.4.2/docs/api/java/text/SimpleDateFormat.html" rel="nofollow">rules</a>
-        </td>
-        <td>
-          select sysdate('dd-MM-yyyy') from Account
-        </td>
-        <td>
-          0.9.25
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <tt>format(&lt;format&gt;, &lt;arg1&gt; [,&lt;argN&gt;]*)</tt>
-        </td>
-        <td>
-          Formats the values using the <a href="http://pubs.opengroup.org/onlinepubs/9699919799/functions/printf.html" rel="nofollow">printf()</a> and <a href="http://download.oracle.com/javase/1.5.0/docs/api/java/lang/String.html" rel="nofollow">String.format()</a> conventions. Look <a href="http://download.oracle.com/javase/1.5.0/docs/api/java/util/Formatter.html#syntax" rel="nofollow">here for more information</a>.
-        </td>
-        <td>
-          select format("%d - Mr. %s %s (%s)", id, name, surname, address) from Account
-        </td>
-        <td>
-          0.9.25
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <tt>distance()</tt>
-        </td>
-        <td>
-          Computes the distance between two points in the globe using the Haversine algorithm. Coordinates must be as degrees
-        </td>
-        <td>
-          where distance(x, y,52.20472, 0.14056 ) &lt;= 30
-        </td>
-        <td>
-          0.9.25
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <tt>distinct(&lt;field&gt;)</tt>
-        </td>
-        <td>
-          Retrieves only unique data entries depending on the field you have specified as argument. The main differences with standard SQL DISTINCT are that in OrientDB is a function with parenthesis and only one field can be specified
-        </td>
-        <td>
-          select distinct(name) from City
-        </td>
-        <td>
-          1.0rc2
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <tt>union(&lt;field*&gt;)</tt>
-        </td>
-        <td>
-          Works as aggregate or inline. If only one argument is passed than aggregates, otherwise executes, and returns, a UNION of the collections received as parameters. Works also with no collection values
-        </td>
-        <td>
-          select union(friends) from profile | select union(inEdges, outEdges) from OGraphVertex where label = 'test'
-        </td>
-        <td>
-          1.0rc2
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <tt>intersect(&lt;field*&gt;)</tt>
-        </td>
-        <td>
-          Works as aggregate or inline. If only one argument is passed than aggregates, otherwise executes, and returns, the INTERSECTION of the collections received as parameters
-        </td>
-        <td>
-          select intersect(friends) from profile where jobTitle = 'programmer' | select intersect(inEdges, outEdges) from OGraphVertex
-        </td>
-        <td>
-          1.0rc2
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <tt>difference(&lt;field*&gt;)</tt>
-        </td>
-        <td>
-          Works as aggregate or inline. If only one argument is passed than aggregates, otherwise executes, and returns, the DIFFERENCE between the collections received as parameters
-        </td>
-        <td>
-          select difference(tags) from book | select difference(inEdges, outEdges) from OGraphVertex
-        </td>
-        <td>
-          1.0rc2
-        </td>
-      </tr>
-    </table>
-    <h3>
-      <a name="Custom_functions" id="Custom_functions"></a>Custom functions<a href="#Custom_functions" class="section_anchor"></a>
-    </h3>
-    <p>
-      The SQL engine can be extended with custom functions. Before to use them in your queries you need to register:
-    </p>
-    <pre class="prettyprint">
+<h2>
+  <a name="Introduction" id="Introduction"></a>Introduction<a href="#Introduction" class="section_anchor"></a>
+</h2>
+<p>
+  The Where condition is shared among many SQL commands.
+</p>
+<h2>
+  <a name="Syntax" id="Syntax"></a>Syntax<a href="#Syntax" class="section_anchor"></a>
+</h2>
+<p>
+  <tt>[&lt;item&gt;] &lt;operator&gt; &lt;item&gt;</tt>
+</p>
+<h2>
+  <a name="Items" id="Items"></a>Items<a href="#Items" class="section_anchor"></a>
+</h2>
+<p>
+  And <tt>item</tt> can be:
+</p>
+<p></p>
+<table class="zebra-striped bordered-table">
+  <tr>
+    <td>
+      <strong>What</strong>
+    </td>
+    <td>
+      <strong>Description</strong>
+    </td>
+    <td>
+      <strong>Example</strong>
+    </td>
+    <td>
+      <strong>Available since</strong>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      field
+    </td>
+    <td>
+      Document field
+    </td>
+    <td>
+      where <strong>price</strong> &gt; 1000000
+    </td>
+    <td>
+      0.9.1
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <tt>field[&lt;indexes&gt;]</tt>
+    </td>
+    <td>
+      Document field part. To know more about field part look at the full syntax: <a href="document_field_part.html">Document field part</a>
+    </td>
+    <td>
+      where <strong><tt>tags[1]</tt></strong> = 'Hi' or <strong><tt>tags[0-3]</tt></strong> IN ('Hello') and <strong><tt>employees[name='Linus']</tt></strong> IS NOT NULL
+    </td>
+    <td>
+      1.0rc5
+    </td>
+  </tr>
+  <tr>
+    <td>
+      record attribute
+    </td>
+    <td>
+      Record attribute name with @ as prefix
+    </td>
+    <td>
+      where <strong>@class</strong> = 'Profile'
+    </td>
+    <td>
+      0.9.21
+    </td>
+  </tr>
+  <tr>
+    <td>
+      column
+    </td>
+    <td>
+      The number of the column. Useful in Column Database
+    </td>
+    <td>
+      where <strong>column(1)</strong> &gt; 300
+    </td>
+    <td>
+      0.9.1
+    </td>
+  </tr>
+  <tr>
+    <td>
+      any()
+    </td>
+    <td>
+      Represents any field of the Document. The condition is true if ANY of the fields matches the condition
+    </td>
+    <td>
+      where <strong>any()</strong> like 'L%'
+    </td>
+    <td>
+      0.9.10
+    </td>
+  </tr>
+  <tr>
+    <td>
+      all()
+    </td>
+    <td>
+      Represents all the fields of the Document. The condition is true if ALL the fields match the condition
+    </td>
+    <td>
+      where <strong>all()</strong> is null
+    </td>
+    <td>
+      0.9.10
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <a href="#Functions">function</a>
+    </td>
+    <td>
+      Any <a href="#Functions">function</a> between the defined
+    </td>
+    <td>
+      where distance(x, y, 52.20472, 0.14056 ) &lt;= 30
+    </td>
+    <td>
+      0.9.25
+    </td>
+  </tr>
+</table>
+<h3>
+  <a name="Record_attributes" id="Record_attributes"></a>Record attributes<a href="#Record_attributes" class="section_anchor"></a>
+</h3>
+<p></p>
+<table class="zebra-striped bordered-table">
+  <tr>
+    <td>
+      <strong>Name</strong>
+    </td>
+    <td>
+      <strong>Description</strong>
+    </td>
+    <td>
+      <strong>Example</strong>
+    </td>
+    <td>
+      <strong>Available since</strong>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      @this
+    </td>
+    <td>
+      returns the record it self
+    </td>
+    <td>
+      select <strong>@this.toJSON()</strong> from Account
+    </td>
+    <td>
+      0.9.25
+    </td>
+  </tr>
+  <tr>
+    <td>
+      @rid
+    </td>
+    <td>
+      returns the <a href="concepts.html#RecordID">RecordID</a> in the form <tt>&lt;cluster:position&gt;</tt>. It's null for embedded records. <i>NOTE: using @rid in where condition slow down queries. Much better to use the <a href="concepts.html#RecordID">RecordID</a> as target. Example: change this: <tt>select from Profile where @rid = #10:44</tt> with this: <tt>select from #10:44</tt></i>
+    </td>
+    <td>
+      <strong>@rid</strong> = #11:0
+    </td>
+    <td>
+      0.9.21
+    </td>
+  </tr>
+  <tr>
+    <td>
+      @class
+    </td>
+    <td>
+      returns Class name only for record of type Schema Aware. It's null for the others
+    </td>
+    <td>
+      <strong>@class</strong> = 'Profile'
+    </td>
+    <td>
+      0.9.21
+    </td>
+  </tr>
+  <tr>
+    <td>
+      @version
+    </td>
+    <td>
+      returns the record version as integer. Version starts from 0. Can't be null
+    </td>
+    <td>
+      <strong>@version</strong> &gt; 0
+    </td>
+    <td>
+      0.9.21
+    </td>
+  </tr>
+  <tr>
+    <td>
+      @size
+    </td>
+    <td>
+      returns the record size in bytes
+    </td>
+    <td>
+      <strong>@size</strong> &gt; 1024
+    </td>
+    <td>
+      0.9.21
+    </td>
+  </tr>
+  <tr>
+    <td>
+      @type
+    </td>
+    <td>
+      returns the record type between: 'document', 'column', 'flat', 'bytes'
+    </td>
+    <td>
+      <strong>@type</strong> = 'flat'
+    </td>
+    <td>
+      0.9.21
+    </td>
+  </tr>
+</table>
+<h2>
+  <a name="Operators" id="Operators"></a>Operators<a href="#Operators" class="section_anchor"></a>
+</h2>
+<h3>
+  <a name="Conditional_Operators" id="Conditional_Operators"></a>Conditional Operators<a href="#Conditional_Operators" class="section_anchor"></a>
+</h3>
+<p></p>
+<table class="zebra-striped bordered-table">
+  <tr>
+    <td>
+      <strong>Apply to</strong>
+    </td>
+    <td>
+      <strong>Operator</strong>
+    </td>
+    <td>
+      <strong>Description</strong>
+    </td>
+    <td>
+      <strong>Example</strong>
+    </td>
+    <td>
+      <strong>Available since</strong>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      any
+    </td>
+    <td>
+      =
+    </td>
+    <td>
+      Equals to
+    </td>
+    <td>
+      name <strong>=</strong> 'Luke'
+    </td>
+    <td>
+      0.9.1
+    </td>
+  </tr>
+  <tr>
+    <td>
+      string
+    </td>
+    <td>
+      like
+    </td>
+    <td>
+      Similar to equals, but allow the wildcard '%' that means 'any'
+    </td>
+    <td>
+      name <strong>like</strong> 'Luk%'
+    </td>
+    <td>
+      0.9.1
+    </td>
+  </tr>
+  <tr>
+    <td>
+      any
+    </td>
+    <td>
+      &lt;
+    </td>
+    <td>
+      Less than
+    </td>
+    <td>
+      age <strong>&lt;</strong> 40
+    </td>
+    <td>
+      0.9.1
+    </td>
+  </tr>
+  <tr>
+    <td>
+      any
+    </td>
+    <td>
+      &lt;=
+    </td>
+    <td>
+      Less than or equal to
+    </td>
+    <td>
+      age <strong>&lt;=</strong> 40
+    </td>
+    <td>
+      0.9.1
+    </td>
+  </tr>
+  <tr>
+    <td>
+      any
+    </td>
+    <td>
+      &gt;
+    </td>
+    <td>
+      Greater than
+    </td>
+    <td>
+      age <strong>&gt;</strong> 40
+    </td>
+    <td>
+      0.9.1
+    </td>
+  </tr>
+  <tr>
+    <td>
+      any
+    </td>
+    <td>
+      &gt;=
+    </td>
+    <td>
+      Greater than or equal to
+    </td>
+    <td>
+      age <strong>&gt;=</strong> 40
+    </td>
+    <td>
+      0.9.1
+    </td>
+  </tr>
+  <tr>
+    <td>
+      any
+    </td>
+    <td>
+      &lt;&gt;
+    </td>
+    <td>
+      Not equals (same of !=)
+    </td>
+    <td>
+      age <strong>&lt;&gt;</strong> 40
+    </td>
+    <td>
+      0.9.1
+    </td>
+  </tr>
+  <tr>
+    <td>
+      any
+    </td>
+    <td>
+      BETWEEN
+    </td>
+    <td>
+      The value is between a range. It's equivalent to <tt>&lt;field&gt; &gt;= &lt;from-value&gt; AND &lt;field&gt; &lt;= &lt;to-value&gt;</tt>
+    </td>
+    <td>
+      price BETWEEN 10 and 30
+    </td>
+    <td>
+      1.0rc2
+    </td>
+  </tr>
+  <tr>
+    <td>
+      any
+    </td>
+    <td>
+      IS
+    </td>
+    <td>
+      Used to test if a value is NULL
+    </td>
+    <td>
+      children <strong>is</strong> null
+    </td>
+    <td>
+      0.9.6
+    </td>
+  </tr>
+  <tr>
+    <td>
+      collection
+    </td>
+    <td>
+      IN
+    </td>
+    <td>
+      contains any of the elements listed
+    </td>
+    <td>
+      values <strong>in</strong> <tt>[3,4,5]</tt>
+    </td>
+    <td>
+      0.9.6
+    </td>
+  </tr>
+  <tr>
+    <td>
+      collection
+    </td>
+    <td>
+      CONTAINS
+    </td>
+    <td>
+      true if the collection contains at least one element that satisfy the next condition. Condition can be a single item: in this case the behaviour is like the IN operator
+    </td>
+    <td>
+      children <strong>contains</strong> (name = 'Luke') - map.values() <strong>contains</strong> (name = 'Luke')
+    </td>
+    <td>
+      0.9.7
+    </td>
+  </tr>
+  <tr>
+    <td>
+      collection
+    </td>
+    <td>
+      CONTAINSALL
+    </td>
+    <td>
+      true if all the elements of the collection satisfy the next condition
+    </td>
+    <td>
+      children <strong>containsAll</strong> (name = 'Luke')
+    </td>
+    <td>
+      0.9.7
+    </td>
+  </tr>
+  <tr>
+    <td>
+      map
+    </td>
+    <td>
+      CONTAINSKEY
+    </td>
+    <td>
+      true if the map contains at least one key equals to the requested. You can also use map.keys() CONTAINS in place of it
+    </td>
+    <td>
+      connections <strong>containsKey</strong> 'Luke'
+    </td>
+    <td>
+      0.9.22
+    </td>
+  </tr>
+  <tr>
+    <td>
+      map
+    </td>
+    <td>
+      CONTAINSVALUE
+    </td>
+    <td>
+      true if the map contains at least one value equals to the requested. You can also use map.values() CONTAINS in place of it
+    </td>
+    <td>
+      connections <strong>containsValue</strong> 10:3
+    </td>
+    <td>
+      0.9.22
+    </td>
+  </tr>
+  <tr>
+    <td>
+      string
+    </td>
+    <td>
+      CONTAINSTEXT
+    </td>
+    <td>
+      used with <a href="console_command_create_index.html">Full text indexes</a>. Current limitation is that it must be the unique condition of a query
+    </td>
+    <td>
+      text <strong>containsText</strong> 'jay'
+    </td>
+    <td>
+      0.9.22
+    </td>
+  </tr>
+  <tr>
+    <td>
+      string
+    </td>
+    <td>
+      MATCHES
+    </td>
+    <td>
+      Matches the string using a <a href="http://www.regular-expressions.info/" rel="nofollow">Regular Expression</a>
+    </td>
+    <td>
+      text <strong>matches</strong> '\b[A-Z0-9.<i>%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}\b'</i>
+    </td>
+    <td>
+      0.9.22
+    </td>
+  </tr>
+  <tr>
+    <td>
+      any
+    </td>
+    <td>
+      <tt>TRAVERSE[(&lt;minDeep&gt; [,&lt;maxDeep&gt; [,&lt;fields&gt;]])]</tt>
+    </td>
+    <td>
+      true if traversing the declared field(s) at the level from <tt>&lt;minDeep&gt;</tt> to <tt>&lt;maxDeep&gt;</tt> matches the condition. A deep = 0 means the root node, maxDeep = -1 means no limit: traverse all the graph recursively. If <tt>&lt;minDeep&gt;</tt> and <tt>&lt;maxDeep&gt;</tt> are not used, then (0, -1) will be taken. If <tt>&lt;fields&gt;</tt> is not passed, than <tt>any()</tt> will be used.}}}
+    </td>
+    <td>
+      select from profile where any() <strong>traverse(0,7,'followers,followings')</strong> ( address.city.name = 'Rome' )
+    </td>
+    <td>
+      0.9.10 and 0.9.24 for <tt>&lt;fields&gt;</tt> parameter
+    </td>
+  </tr>
+</table>
+<h3>
+  <a name="Logical_Operators" id="Logical_Operators"></a>Logical Operators<a href="#Logical_Operators" class="section_anchor"></a>
+</h3>
+<p></p>
+<table class="zebra-striped bordered-table">
+  <tr>
+    <td>
+      <strong>Operator</strong>
+    </td>
+    <td>
+      <strong>Description</strong>
+    </td>
+    <td>
+      <strong>Example</strong>
+    </td>
+    <td>
+      <strong>Available since</strong>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      AND
+    </td>
+    <td>
+      true if both the conditions are true
+    </td>
+    <td>
+      name = 'Luke' <strong>and</strong> surname like 'Sky%'
+    </td>
+    <td>
+      0.9.1
+    </td>
+  </tr>
+  <tr>
+    <td>
+      OR
+    </td>
+    <td>
+      true if at least one of the condition is true
+    </td>
+    <td>
+      name = 'Luke' <strong>or</strong> surname like 'Sky%'
+    </td>
+    <td>
+      0.9.1
+    </td>
+  </tr>
+  <tr>
+    <td>
+      NOT
+    </td>
+    <td>
+      true if the condition is false
+    </td>
+    <td>
+      <strong>not</strong> name = 'Luke'
+    </td>
+    <td>
+      Not supported yet
+    </td>
+  </tr>
+</table>
+<h3>
+  <a name="Field_Operators" id="Field_Operators"></a>Field Operators<a href="#Field_Operators" class="section_anchor"></a>
+</h3>
+<p>
+  These operators apply directly to the fields. They are beyond the SQL standard but you can use it in your queries. You can concatenate N operators in sequence. <i>Note: operators are case-insensitive.</i>
+</p>
+<p></p>
+<table class="zebra-striped bordered-table">
+  <tr>
+    <td>
+      <strong>Apply to</strong>
+    </td>
+    <td>
+      <strong>Operator</strong>
+    </td>
+    <td>
+      <strong>Description</strong>
+    </td>
+    <td>
+      <strong>Example</strong>
+    </td>
+    <td>
+      <strong>Available since</strong>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      document, map, list, array
+    </td>
+    <td>
+      <tt>[&lt;string&gt;]</tt>
+    </td>
+    <td>
+      Get an item from a multi-value object like a map, a list, an array or a document. For document and maps the item must be a string, for lists and arrays the index as number
+    </td>
+    <td>
+      select from Profile where contacts<tt>[phone]</tt>.left(3) = '+39'
+    </td>
+    <td>
+      1.0rc5
+    </td>
+  </tr>
+  <tr>
+    <td>
+      string
+    </td>
+    <td>
+      <tt>.append('&lt;string&gt;')</tt>
+    </td>
+    <td>
+      Appends a string to another one
+    </td>
+    <td>
+      select name.<strong>append(' ')</strong>.<strong>append(surname)</strong> from Profile
+    </td>
+    <td>
+      1.0rc1
+    </td>
+  </tr>
+  <tr>
+    <td>
+      string, short, int, long
+    </td>
+    <td>
+      <tt>.asBoolean()</tt>
+    </td>
+    <td>
+      Transforms the field into a Boolean type. If the origin type is a string, then "true" and "false" is checked. If it's a number then 1 means TRUE while 0 means FALSE
+    </td>
+    <td>
+      online.<strong>toBoolean()</strong> = true
+    </td>
+    <td>
+      0.9.15
+    </td>
+  </tr>
+  <tr>
+    <td>
+      string, long
+    </td>
+    <td>
+      <tt>.asDate()</tt>
+    </td>
+    <td>
+      Transforms the field into a Date type
+    </td>
+    <td>
+      time.<strong>toDate()</strong> -&gt; time is stored as long type measuring milliseconds since a particular day
+    </td>
+    <td>
+      0.9.14
+    </td>
+  </tr>
+  <tr>
+    <td>
+      string, long
+    </td>
+    <td>
+      <tt>.asDateTime()</tt>
+    </td>
+    <td>
+      Transforms the field into a Date type but parsing also the time information
+    </td>
+    <td>
+      time.<strong>toDateTime()</strong> &lt; '01-01-2010 00:00:00' -&gt; time is stored as long type measuring milliseconds since a particular day. Returns all the records where time is before the year 2010
+    </td>
+    <td>
+      0.9.14
+    </td>
+  </tr>
+  <tr>
+    <td>
+      any
+    </td>
+    <td>
+      <tt>.asFloat()</tt>
+    </td>
+    <td>
+      Transforms the field into a float type
+    </td>
+    <td>
+      ray.<strong>toFloat()</strong> &gt; 3.14
+    </td>
+    <td>
+      0.9.14
+    </td>
+  </tr>
+  <tr>
+    <td>
+      any
+    </td>
+    <td>
+      <tt>.asInteger()</tt>
+    </td>
+    <td>
+      Transforms the field into an integer type
+    </td>
+    <td>
+      value.left(3).<strong>toInteger()</strong> -&gt; Converts the first 3 chars of 'value' field in an integer
+    </td>
+    <td>
+      0.9.14
+    </td>
+  </tr>
+  <tr>
+    <td>
+      any
+    </td>
+    <td>
+      <tt>.asString()</tt>
+    </td>
+    <td>
+      Transforms the field into a string type
+    </td>
+    <td>
+      salary.<strong>toString()</strong>.indexof('.') &gt; -1 -&gt; True if the salary has decimal
+    </td>
+    <td>
+      0.9.14
+    </td>
+  </tr>
+  <tr>
+    <td>
+      string
+    </td>
+    <td>
+      <tt>.charAt(&lt;pos&gt;)</tt>
+    </td>
+    <td>
+      returns the character of the original string contained in the position 'pos'. 'pos' starts from 0 to string length -1
+    </td>
+    <td>
+      name.<strong>charAt( 0 )</strong> = 'L'
+    </td>
+    <td>
+      0.9.7
+    </td>
+  </tr>
+  <tr>
+    <td>
+      any
+    </td>
+    <td>
+      <tt>.format('&lt;frmt&gt;')</tt>
+    </td>
+    <td>
+      returns the value formatted using the common "printf" syntax. For the complete reference goto <a href="http://java.sun.com/j2se/1.5.0/docs/api/java/util/Formatter.html#syntax" rel="nofollow">Java Formatter JavaDoc</a>. (Available since v0.9.5)
+    </td>
+    <td>
+      salary.<strong>format("%04d")</strong> -&gt; formats a number with 4 digits filling with 0
+    </td>
+    <td>
+      0.9.8
+    </td>
+  </tr>
+  <tr>
+    <td>
+      string
+    </td>
+    <td>
+      <tt>.indexOf('&lt;string&gt;' [, &lt;begin&gt; ])</tt>
+    </td>
+    <td>
+      returns the position of the <tt>&lt;string&gt;</tt> inside the item. It returns -1 if no occurrences are found
+    </td>
+    <td>
+      name.<strong>indexOf( 'street' )</strong> &gt; -1
+    </td>
+    <td>
+      0.9.10
+    </td>
+  </tr>
+  <tr>
+    <td>
+      maps
+    </td>
+    <td>
+      <tt>.keys()</tt>
+    </td>
+    <td>
+      Returns the map's keys as a separate set. Useful to use in conjunction with CONTAINS and CONTAINSALL operators
+    </td>
+    <td>
+      map.<strong>keys()</strong> CONTAINS 'Luke'
+    </td>
+    <td>
+      1.0rc1
+    </td>
+  </tr>
+  <tr>
+    <td>
+      string
+    </td>
+    <td>
+      <tt>.left(&lt;len&gt;)</tt>
+    </td>
+    <td>
+      returns a substring of the original cutting from the begin and getting 'len' characters.
+    </td>
+    <td>
+      name.<strong>left( 4 )</strong> = 'Luke'
+    </td>
+    <td>
+      0.9.7
+    </td>
+  </tr>
+  <tr>
+    <td>
+      string
+    </td>
+    <td>
+      <tt>.length()</tt>
+    </td>
+    <td>
+      returns the length of the string. If the string is null 0 will be returned
+    </td>
+    <td>
+      name.<strong>length()</strong> &gt; 0
+    </td>
+    <td>
+      0.9.7
+    </td>
+  </tr>
+  <tr>
+    <td>
+      string
+    </td>
+    <td>
+      <tt>.prefix('&lt;string&gt;')</tt>
+    </td>
+    <td>
+      Prefixes a string to another one
+    </td>
+    <td>
+      select name.<strong>prefix('Mr. ')</strong> from Profile
+    </td>
+    <td>
+      1.0rc1
+    </td>
+  </tr>
+  <tr>
+    <td>
+      string
+    </td>
+    <td>
+      <tt>.right(&lt;len&gt;)</tt>
+    </td>
+    <td>
+      returns a substring of the original cutting from the end of the string 'len' characters.
+    </td>
+    <td>
+      name.<strong>right( 2 )</strong> = 'ke'
+    </td>
+    <td>
+      0.9.7
+    </td>
+  </tr>
+  <tr>
+    <td>
+      collection
+    </td>
+    <td>
+      <tt>.size()</tt>
+    </td>
+    <td>
+      returns the size of the collection
+    </td>
+    <td>
+      children.<strong>size()</strong> &gt; 0
+    </td>
+    <td>
+      0.9.7
+    </td>
+  </tr>
+  <tr>
+    <td>
+      string
+    </td>
+    <td>
+      <tt>.subString(&lt;begin&gt; [, &lt;len&gt;] )</tt>
+    </td>
+    <td>
+      returns a substring of the original cutting from 'begin' and getting 'len' characters. 'begin' starts from 0 to string length -1
+    </td>
+    <td>
+      name.<strong>substring( 0,1 )</strong> = 'L'
+    </td>
+    <td>
+      0.9.7
+    </td>
+  </tr>
+  <tr>
+    <td>
+      string
+    </td>
+    <td>
+      <tt>.trim()</tt>
+    </td>
+    <td>
+      returns the original string removing white spaces from the begin and the end
+    </td>
+    <td>
+      name.<strong>trim()</strong> == 'luke'
+    </td>
+    <td>
+      0.9.7
+    </td>
+  </tr>
+  <tr>
+    <td>
+      record
+    </td>
+    <td>
+      <tt>.toJSON()</tt>
+    </td>
+    <td>
+      returns the record in JSON format
+    </td>
+    <td>
+      select @this.<strong>toJson()</strong> as json from Profile
+    </td>
+    <td>
+      0.9.8
+    </td>
+  </tr>
+  <tr>
+    <td>
+      string
+    </td>
+    <td>
+      <tt>.toUpperCase()</tt>
+    </td>
+    <td>
+      returns the string in upper case
+    </td>
+    <td>
+      name.<strong>toUpperCase()</strong> == 'LUKE'
+    </td>
+    <td>
+      0.9.7
+    </td>
+  </tr>
+  <tr>
+    <td>
+      string
+    </td>
+    <td>
+      <tt>.toLowerCase()</tt>
+    </td>
+    <td>
+      returns the string in lower case
+    </td>
+    <td>
+      name.<strong>toLowerCase()</strong> == 'luke'
+    </td>
+    <td>
+      0.9.7
+    </td>
+  </tr>
+  <tr>
+    <td>
+      maps
+    </td>
+    <td>
+      <tt>.values()</tt>
+    </td>
+    <td>
+      Returns the map's values as a separate collection. Useful to use in conjunction with CONTAINS and CONTAINSALL operators
+    </td>
+    <td>
+      map.<strong>values()</strong> CONTAINSALL ( name is not null)
+    </td>
+    <td>
+      1.0rc1
+    </td>
+  </tr>
+</table>
+<h2>
+  <a name="Functions" id="Functions"></a>Functions<a href="#Functions" class="section_anchor"></a>
+</h2>
+<h3>
+  <a name="Bundled_functions" id="Bundled_functions"></a>Bundled functions<a href="#Bundled_functions" class="section_anchor"></a>
+</h3>
+<p></p>
+<table class="zebra-striped bordered-table">
+  <tr>
+    <td>
+      <strong>Name</strong>
+    </td>
+    <td>
+      <strong>Description</strong>
+    </td>
+    <td>
+      <strong>Example</strong>
+    </td>
+    <td>
+      <strong>Available since</strong>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <tt>count(&lt;field&gt;|*)</tt>
+    </td>
+    <td>
+      Counts the records that match the query condition. If <tt>*</tt> is not used as a field, then the record will be counted only if the field content is not null
+    </td>
+    <td>
+      select count(<tt>*</tt>) from Account
+    </td>
+    <td>
+      0.9.25
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <tt>min(&lt;field&gt;)</tt>
+    </td>
+    <td>
+      Returns the minimum value
+    </td>
+    <td>
+      select min(salary) from Account
+    </td>
+    <td>
+      0.9.25
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <tt>max(&lt;field&gt;)</tt>
+    </td>
+    <td>
+      Returns the maximum value
+    </td>
+    <td>
+      select max(salary) from Account
+    </td>
+    <td>
+      0.9.25
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <tt>avg(&lt;field&gt;)</tt>
+    </td>
+    <td>
+      Returns the average value
+    </td>
+    <td>
+      select avg(salary) from Account
+    </td>
+    <td>
+      0.9.25
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <tt>sum(&lt;field&gt;)</tt>
+    </td>
+    <td>
+      Returns the sum of all the values returned
+    </td>
+    <td>
+      select average(salary) from Account
+    </td>
+    <td>
+      0.9.25
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <tt>sysdate([&lt;format&gt;])</tt>
+    </td>
+    <td>
+      Returns the current date time. If no format is specified, then a Date object is returned, otherwise the date is formatted as string following these <a href="http://download.oracle.com/javase/1.4.2/docs/api/java/text/SimpleDateFormat.html" rel="nofollow">rules</a>
+    </td>
+    <td>
+      select sysdate('dd-MM-yyyy') from Account
+    </td>
+    <td>
+      0.9.25
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <tt>format(&lt;format&gt;, &lt;arg1&gt; [,&lt;argN&gt;]*)</tt>
+    </td>
+    <td>
+      Formats the values using the <a href="http://pubs.opengroup.org/onlinepubs/9699919799/functions/printf.html" rel="nofollow">printf()</a> and <a href="http://download.oracle.com/javase/1.5.0/docs/api/java/lang/String.html" rel="nofollow">String.format()</a> conventions. Look <a href="http://download.oracle.com/javase/1.5.0/docs/api/java/util/Formatter.html#syntax" rel="nofollow">here for more information</a>.
+    </td>
+    <td>
+      select format("%d - Mr. %s %s (%s)", id, name, surname, address) from Account
+    </td>
+    <td>
+      0.9.25
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <tt>distance()</tt>
+    </td>
+    <td>
+      Computes the distance between two points in the globe using the Haversine algorithm. Coordinates must be as degrees
+    </td>
+    <td>
+      where distance(x, y,52.20472, 0.14056 ) &lt;= 30
+    </td>
+    <td>
+      0.9.25
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <tt>distinct(&lt;field&gt;)</tt>
+    </td>
+    <td>
+      Retrieves only unique data entries depending on the field you have specified as argument. The main differences with standard SQL DISTINCT are that in OrientDB is a function with parenthesis and only one field can be specified
+    </td>
+    <td>
+      select distinct(name) from City
+    </td>
+    <td>
+      1.0rc2
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <tt>union(&lt;field*&gt;)</tt>
+    </td>
+    <td>
+      Works as aggregate or inline. If only one argument is passed than aggregates, otherwise executes, and returns, a UNION of the collections received as parameters. Works also with no collection values
+    </td>
+    <td>
+      select union(friends) from profile | select union(inEdges, outEdges) from OGraphVertex where label = 'test'
+    </td>
+    <td>
+      1.0rc2
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <tt>intersect(&lt;field*&gt;)</tt>
+    </td>
+    <td>
+      Works as aggregate or inline. If only one argument is passed than aggregates, otherwise executes, and returns, the INTERSECTION of the collections received as parameters
+    </td>
+    <td>
+      select intersect(friends) from profile where jobTitle = 'programmer' | select intersect(inEdges, outEdges) from OGraphVertex
+    </td>
+    <td>
+      1.0rc2
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <tt>difference(&lt;field*&gt;)</tt>
+    </td>
+    <td>
+      Works as aggregate or inline. If only one argument is passed than aggregates, otherwise executes, and returns, the DIFFERENCE between the collections received as parameters
+    </td>
+    <td>
+      select difference(tags) from book | select difference(inEdges, outEdges) from OGraphVertex
+    </td>
+    <td>
+      1.0rc2
+    </td>
+  </tr>
+</table>
+<h3>
+  <a name="Custom_functions" id="Custom_functions"></a>Custom functions<a href="#Custom_functions" class="section_anchor"></a>
+</h3>
+<p>
+  The SQL engine can be extended with custom functions. Before to use them in your queries you need to register:
+</p>
+<pre class="prettyprint">
 // REGISTER 'BIGGER' FUNCTION WITH FIXED 2 PARAMETERS (MIN/MAX=2)
 OSQLEngine.getInstance().registerFunction("bigger", new OSQLFunctionAbstract("bigger", 2, 2) {
   public String getSyntax() {
@@ -1318,11 +1260,9 @@ OSQLEngine.getInstance().registerFunction("bigger", new OSQLFunctionAbstract("bi
   }
 });
 </pre>
-    <p>
-      Now you can execute it:
-    </p>
-    <pre class="prettyprint">
+<p>
+  Now you can execute it:
+</p>
+<pre class="prettyprint">
 List&lt;ODocument&gt; result = database.command(new OSQLSynchQuery&lt;ODocument&gt;("select from Account where bigger( salary, 10 ) &gt; 10")).execute();
 </pre>
-  </body>
-</html>

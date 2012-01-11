@@ -2,163 +2,151 @@
 title: Language Bindings (supported programming languages)
 layout: default
 ---
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN">
-<html>
-  <head>
-    <meta name="generator" content="HTML Tidy for Mac OS X (vers 31 October 2006 - Apple Inc. build 15.6), see www.w3.org">
-    <title></title>
-    <style type="text/css">
-li.c1 {list-style: none}
-    </style>
-  </head>
-  <body>
-    <h2>
-      <a name="Language_bindings" id="Language_bindings"></a>Language bindings<a href="#Language_bindings" class="section_anchor"></a>
-    </h2>
-    <p>
-      We've 3 kinds of drivers:
-    </p>
+<h2>
+  <a name="Language_bindings" id="Language_bindings"></a>Language bindings<a href="#Language_bindings" class="section_anchor"></a>
+</h2>
+<p>
+  We've 3 kinds of drivers:
+</p>
+<ul>
+  <li>
+    <strong>Native binary remote</strong>, that talks directly against the TCP/IP socket using the binary protocol specified in <a href="http://code.google.com/p/orient/wiki/NetworkBinaryProtocol" rel="nofollow">http://code.google.com/p/orient/wiki/NetworkBinaryProtocol</a>
+  </li>
+  <li>
+    <strong>HTTP REST/JSON</strong>, that talks directly against the TCP/IP socket using the HTTP protocol specified in <a href="http://code.google.com/p/orient/wiki/OrientDB_REST" rel="nofollow">http://code.google.com/p/orient/wiki/OrientDB_REST</a>
+  </li>
+  <li>
+    <strong>Java wrapped</strong>, as a layer that links in some way the native Java driver. This is pretty easy for languages that run into the JVM like Scala, Groovy and JRuby
+  </li>
+</ul>
+<p>
+  This is the list of the known drivers to use OrientDB through different languages:
+</p>
+<ul>
+  <li>
+    <strong>JAVA</strong>
+  </li>
+  <li class="c1">
     <ul>
       <li>
-        <strong>Native binary remote</strong>, that talks directly against the TCP/IP socket using the binary protocol specified in <a href="http://code.google.com/p/orient/wiki/NetworkBinaryProtocol" rel="nofollow">http://code.google.com/p/orient/wiki/NetworkBinaryProtocol</a>
-      </li>
-      <li>
-        <strong>HTTP REST/JSON</strong>, that talks directly against the TCP/IP socket using the HTTP protocol specified in <a href="http://code.google.com/p/orient/wiki/OrientDB_REST" rel="nofollow">http://code.google.com/p/orient/wiki/OrientDB_REST</a>
-      </li>
-      <li>
-        <strong>Java wrapped</strong>, as a layer that links in some way the native Java driver. This is pretty easy for languages that run into the JVM like Scala, Groovy and JRuby
+        <a href="java_api.html">Java (native) API</a>
       </li>
     </ul>
-    <p>
-      This is the list of the known drivers to use OrientDB through different languages:
-    </p>
+  </li>
+  <li>
+    <strong>Javascript</strong>
+  </li>
+  <li class="c1">
     <ul>
       <li>
-        <strong>JAVA</strong>
-      </li>
-      <li class="c1">
-        <ul>
-          <li>
-            <a href="java_api.html">Java (native) API</a>
-          </li>
-        </ul>
-      </li>
-      <li>
-        <strong>Javascript</strong>
-      </li>
-      <li class="c1">
-        <ul>
-          <li>
-            <a href="javascript_api.html">Javascript Driver</a> HTTP protocol
-          </li>
-        </ul>
-      </li>
-      <li>
-        <strong>Scala</strong>
-      </li>
-      <li class="c1">
-        <ul>
-          <li>Scala runs on top of JVM and it's fully compatible with Java applications like OrientDB. <a href="scala_language.html">Scala page</a> offers suggestions and examples to use it without pains
-          </li>
-          <li>
-            <a href="https://github.com/eptx/OrientDBScala" rel="nofollow">Scala utilities and tests</a> to help Scala developers using OrientDB
-          </li>
-        </ul>
-      </li>
-      <li>
-        <strong>C</strong> Language binding
-      </li>
-      <li class="c1">
-        <ul>
-          <li>
-            <a href="https://github.com/dam2k/liborient" rel="nofollow">LibOrient</a> Binary protocol compatibles with C++ and other languages that supports C calls
-          </li>
-          <li>
-            <a href="http://github.com/tglman/orientdb-c" rel="nofollow">OrientDB-C</a> Another project in development as binary protocol
-          </li>
-        </ul>
-      </li>
-      <li>
-        <strong>PHP</strong>
-      </li>
-      <li class="c1">
-        <ul>
-          <li>
-            <a href="https://github.com/AntonTerekhov/OrientDB-PHP" rel="nofollow">OrientDB-PHP</a> binary protocol
-          </li>
-          <li>
-            <a href="https://github.com/congow/Orient" rel="nofollow">Orient CONGOW</a> High level framework to use OrientDB from PHP
-          </li>
-        </ul>
-      </li>
-      <li>
-        <strong>Ruby</strong>
-      </li>
-      <li class="c1">
-        <ul>
-          <li>
-            <a href="https://github.com/aemadrid/orientdb-jruby" rel="nofollow">OrientDB-JRuby</a> through Java driver,
-          </li>
-          <li>Ruby, soon public available
-          </li>
-        </ul>
+        <a href="javascript_api.html">Javascript Driver</a> HTTP protocol
       </li>
     </ul>
+  </li>
+  <li>
+    <strong>Scala</strong>
+  </li>
+  <li class="c1">
+    <ul>
+      <li>Scala runs on top of JVM and it's fully compatible with Java applications like OrientDB. <a href="scala_language.html">Scala page</a> offers suggestions and examples to use it without pains
+      </li>
+      <li>
+        <a href="https://github.com/eptx/OrientDBScala" rel="nofollow">Scala utilities and tests</a> to help Scala developers using OrientDB
+      </li>
+    </ul>
+  </li>
+  <li>
+    <strong>C</strong> Language binding
+  </li>
+  <li class="c1">
     <ul>
       <li>
-        <strong>.NET</strong>
+        <a href="https://github.com/dam2k/liborient" rel="nofollow">LibOrient</a> Binary protocol compatibles with C++ and other languages that supports C calls
       </li>
-      <li class="c1">
-        <ul>
-          <li>
-            <a href="dot_net.html">.NET Native driver</a> ported from the Java API using <a href="http://www.ikvm.net" rel="nofollow">IKVM tool</a>
-          </li>
-          <li>
-            <a href="http://netorientdb.codeplex.com/" rel="nofollow">.NET HTTP protocol</a>
-          </li>
-        </ul>
+      <li>
+        <a href="http://github.com/tglman/orientdb-c" rel="nofollow">OrientDB-C</a> Another project in development as binary protocol
       </li>
     </ul>
+  </li>
+  <li>
+    <strong>PHP</strong>
+  </li>
+  <li class="c1">
     <ul>
       <li>
-        <strong>Python</strong>
+        <a href="https://github.com/AntonTerekhov/OrientDB-PHP" rel="nofollow">OrientDB-PHP</a> binary protocol
       </li>
-      <li class="c1">
-        <ul>
-          <li>
-            <a href="http://bulbflow.com" rel="nofollow">Bulbflow project</a> uses <a href="https://github.com/tinkerpop/rexster/wiki" rel="nofollow">Rexter</a> Graph HTTP Server to access to OrientDB database. <a href="https://github.com/tinkerpop/rexster/wiki/Rexster-Configuration" rel="nofollow">Configure Rexster for OrientDB</a>
-          </li>
-          <li>
-            <a href="https://github.com/emehrkay/Compass" rel="nofollow">Python</a> HTTP protocol
-          </li>
-        </ul>
+      <li>
+        <a href="https://github.com/congow/Orient" rel="nofollow">Orient CONGOW</a> High level framework to use OrientDB from PHP
       </li>
     </ul>
+  </li>
+  <li>
+    <strong>Ruby</strong>
+  </li>
+  <li class="c1">
     <ul>
       <li>
-        <strong>Clojure</strong>
+        <a href="https://github.com/aemadrid/orientdb-jruby" rel="nofollow">OrientDB-JRuby</a> through Java driver,
       </li>
-      <li class="c1">
-        <ul>
-          <li>
-            <a href="https://github.com/eduardoejp/clj-orient" rel="nofollow">Clojure binding</a> through Java driver
-          </li>
-        </ul>
+      <li>Ruby, soon public available
       </li>
     </ul>
-    <h2>
-      <a name="Standard_supported" id="Standard_supported"></a>Standard supported<a href="#Standard_supported" class="section_anchor"></a>
-    </h2>
-    <p>
-      This is the list of the library to use OrientDB by using such standard:
-    </p>
+  </li>
+</ul>
+<ul>
+  <li>
+    <strong>.NET</strong>
+  </li>
+  <li class="c1">
     <ul>
       <li>
-        <strong><a href="https://github.com/tinkerpop/blueprints/wiki" rel="nofollow">TinkerPop Blueprints</a></strong>, the standard for Graph Databases. OrientDB is 100% compliant with latest version
+        <a href="dot_net.html">.NET Native driver</a> ported from the Java API using <a href="http://www.ikvm.net" rel="nofollow">IKVM tool</a>
       </li>
       <li>
-        <strong><a href="http://www.oracle.com/technetwork/java/index-jsp-135919.html" rel="nofollow">JDO 2.2</a></strong> and <strong><a href="http://www.oracle.com/technetwork/articles/javaee/jpa-137156.html" rel="nofollow">JPA 2</a></strong> by using the <strong><a href="http://www.datanucleus.org" rel="nofollow">Data Nucleus</a></strong> adapter: <a href="https://github.com/luigidellaquila/datanucleus-store-orientdb/" rel="nofollow">https://github.com/luigidellaquila/datanucleus-store-orientdb/</a>
+        <a href="http://netorientdb.codeplex.com/" rel="nofollow">.NET HTTP protocol</a>
       </li>
     </ul>
-  </body>
-</html>
+  </li>
+</ul>
+<ul>
+  <li>
+    <strong>Python</strong>
+  </li>
+  <li class="c1">
+    <ul>
+      <li>
+        <a href="http://bulbflow.com" rel="nofollow">Bulbflow project</a> uses <a href="https://github.com/tinkerpop/rexster/wiki" rel="nofollow">Rexter</a> Graph HTTP Server to access to OrientDB database. <a href="https://github.com/tinkerpop/rexster/wiki/Rexster-Configuration" rel="nofollow">Configure Rexster for OrientDB</a>
+      </li>
+      <li>
+        <a href="https://github.com/emehrkay/Compass" rel="nofollow">Python</a> HTTP protocol
+      </li>
+    </ul>
+  </li>
+</ul>
+<ul>
+  <li>
+    <strong>Clojure</strong>
+  </li>
+  <li class="c1">
+    <ul>
+      <li>
+        <a href="https://github.com/eduardoejp/clj-orient" rel="nofollow">Clojure binding</a> through Java driver
+      </li>
+    </ul>
+  </li>
+</ul>
+<h2>
+  <a name="Standard_supported" id="Standard_supported"></a>Standard supported<a href="#Standard_supported" class="section_anchor"></a>
+</h2>
+<p>
+  This is the list of the library to use OrientDB by using such standard:
+</p>
+<ul>
+  <li>
+    <strong><a href="https://github.com/tinkerpop/blueprints/wiki" rel="nofollow">TinkerPop Blueprints</a></strong>, the standard for Graph Databases. OrientDB is 100% compliant with latest version
+  </li>
+  <li>
+    <strong><a href="http://www.oracle.com/technetwork/java/index-jsp-135919.html" rel="nofollow">JDO 2.2</a></strong> and <strong><a href="http://www.oracle.com/technetwork/articles/javaee/jpa-137156.html" rel="nofollow">JPA 2</a></strong> by using the <strong><a href="http://www.datanucleus.org" rel="nofollow">Data Nucleus</a></strong> adapter: <a href="https://github.com/luigidellaquila/datanucleus-store-orientdb/" rel="nofollow">https://github.com/luigidellaquila/datanucleus-store-orientdb/</a>
+  </li>
+</ul>
